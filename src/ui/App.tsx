@@ -1346,7 +1346,7 @@ export default function App() {
                       checked={p.showDetect !== false}
                       onChange={(e) => patch({ showDetect: e.target.checked })}
                     />
-                    Show Detect and UB1000 features
+                    Show Detect features
                   </label>
                 </div>
               </details>
@@ -2574,7 +2574,12 @@ export default function App() {
           </button>
         </div>
       )}
-      {showLessons && <VideoLibrary onClose={() => setShowLessons(false)} />}
+      {showLessons && (
+        <VideoLibrary
+          showDetect={p.showDetect !== false}
+          onClose={() => setShowLessons(false)}
+        />
+      )}
       {showDetails && (
         <div className="modal-backdrop" onClick={() => setShowDetails(false)}>
           <section
@@ -2666,8 +2671,10 @@ export default function App() {
             <p>
               Qualified solid stresses and capacity, validated knot response,
               splitting, thin-wall buckling, nonlinear timber failure,
-              calibrated soil response, physical calibration, actual UB1000
-              inference and official Safe to Climb decisions. Hand-sketched
+              calibrated soil response and physical calibration.
+              {p.showDetect !== false &&
+                " Actual instrument inference and official Safe to Climb decisions remain undeveloped."}{" "}
+              Hand-sketched
               synthetic pockets are available. Photo registration remains
               reserved; a single section photo cannot establish the full decay
               length.
