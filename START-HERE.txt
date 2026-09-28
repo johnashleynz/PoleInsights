@@ -1,0 +1,49 @@
+POLE INSIGHTS - P27 DEV
+Based on Carl Rathbone's Pole Laboratory P26
+Updated 29 September 2026
+
+RUN LOCALLY
+1. Install Node.js 22.13 or newer.
+2. Open PowerShell in this repository directory.
+3. Run:
+     npm ci
+     npm run dev
+4. Open http://127.0.0.1:5190/ and keep the terminal open.
+
+On Windows, Start-Pole-Lab.ps1 performs the same launch. In the complete local
+handoff, the workspace-level START-WINDOWS.cmd also launches this DEV source.
+
+The interface must show "Pole Insights" and the footer
+"P27 DEV - P26 base - Local review". If it shows Pole Laboratory or only P26,
+close the older server before starting this version again.
+
+Do not open index.html directly. Calculations use web workers and require the
+local HTTP server. Local startup does not publish or deploy the application.
+
+DOCUMENTATION
+- docs\Requirements.md: requirement status and implementation variations.
+- docs\TODO.md: original supplied requirements, unchanged.
+- docs\About this model.md: origin from Carl Rathbone's P26 model.
+- docs\DEPLOYMENT.md: isolated Cloudflare staging procedure.
+
+TEST AND BUILD
+  npm test
+  npm run build
+
+The checked build runs the inherited P01-P26 verification chain, the P27
+requirement checks and the Vite production build. Output is written to dist\.
+
+BRANCHES
+- main: original P26 baseline.
+- dev: Pole Insights P27 development and review candidate.
+
+CLOUDFLARE STAGING
+Staging uses the isolated pole-insights-staging Cloudflare Pages project. No
+production site or DNS should be changed. Authenticate Wrangler and confirm the
+Cloudflare Access email/domain allow-list before running:
+  npm run deploy:staging
+
+MODEL SCOPE
+Pole Insights remains an illustrative prototype, not an engineering-qualified
+design tool, fracture prediction, measured UB1000 interpretation or climbing
+clearance. Historical P26 films and records retain their original names.
