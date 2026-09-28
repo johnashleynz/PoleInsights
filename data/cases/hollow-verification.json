@@ -1,0 +1,79 @@
+{
+  "format": "innerview-pole-lab",
+  "version": 1,
+  "cases": [
+    {
+      "schemaVersion": 1,
+      "id": "A",
+      "name": "Pole A",
+      "length": 10,
+      "embedment": 2,
+      "diameters": {
+        "butt": 0.3,
+        "ground": 0.3,
+        "tip": 0.3
+      },
+      "species": "radiata-pine",
+      "material": {
+        "E": 8000000000,
+        "tension": 35000000,
+        "compression": 25000000,
+        "basis": "illustrative"
+      },
+      "soil": "Fixed",
+      "loadKN": 2,
+      "bearing": 90,
+      "regions": []
+    },
+    {
+      "schemaVersion": 1,
+      "id": "B",
+      "name": "Pole B",
+      "length": 10,
+      "embedment": 2,
+      "diameters": {
+        "butt": 0.3,
+        "ground": 0.3,
+        "tip": 0.3
+      },
+      "species": "radiata-pine",
+      "material": {
+        "E": 8000000000,
+        "tension": 35000000,
+        "compression": 25000000,
+        "basis": "illustrative"
+      },
+      "soil": "Fixed",
+      "loadKN": 2,
+      "bearing": 90,
+      "regions": [
+        {
+          "id": "known-bore",
+          "name": "80% diameter central hollow",
+          "kind": "void",
+          "zMin": -2,
+          "zMax": 8,
+          "severity": 1,
+          "shape": {
+            "type": "ellipse",
+            "centreX": 0,
+            "centreY": 0,
+            "radiusX": 0.12,
+            "radiusY": 0.12,
+            "angle": 0,
+            "profile": "constant"
+          },
+          "provenance": "synthetic"
+        }
+      ]
+    }
+  ],
+  "active": 1,
+  "compare": true,
+  "view": "Stresses",
+  "stressDisplay": "utilisation",
+  "sections": [
+    1,
+    1
+  ]
+}

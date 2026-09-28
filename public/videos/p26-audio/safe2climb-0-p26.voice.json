@@ -1,0 +1,10 @@
+{
+  "provider": "edge_tts",
+  "voice": "en-GB-RyanNeural",
+  "rate": "-8%",
+  "volume": "+0%",
+  "pitch": "+0Hz",
+  "text": "A pre-climb inspection needs a clear sequence and a record of what happened.  Safe2Climb guides the inspector through the pole, attachments, setting, movement and base condition. Each step keeps observations connected to the inspection, making the process easier to review.",
+  "unit": "one chapter per call",
+  "fingerprint": "a0d317d33edbc753f86a9c0e72f9475d0551e6c36ea586db115b770c6b7300f0"
+}

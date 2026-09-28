@@ -1,0 +1,46 @@
+[
+  {
+    "id": "where-poles-break",
+    "durationSeconds": 72.44,
+    "bytes": 2777896,
+    "sha256": "d2c5032776debe42f16a3ae36e05637bf00d87d9c5b479ee2497a3550cfc5884",
+    "decoded": true,
+    "video": "H.264 1280x720",
+    "audio": "AAC with New Zealand synthetic narration",
+    "maxVolumeDB": -1.4,
+    "captions": true
+  },
+  {
+    "id": "decay-and-strength",
+    "durationSeconds": 69.35,
+    "bytes": 4155919,
+    "sha256": "5817638313886ac8388be22d8dfd16219d772d36e78007addbff476f607e288d",
+    "decoded": true,
+    "video": "H.264 1280x720",
+    "audio": "AAC with New Zealand synthetic narration",
+    "maxVolumeDB": -1.3,
+    "captions": true
+  },
+  {
+    "id": "ultrasonic-detection",
+    "durationSeconds": 81.27,
+    "bytes": 6596719,
+    "sha256": "a818f038792da8b3215dfdaa0cac91155442a1987e23c4adb496ead44f05d330",
+    "decoded": true,
+    "video": "H.264 1280x720",
+    "audio": "AAC with New Zealand synthetic narration",
+    "maxVolumeDB": -1.3,
+    "captions": true
+  },
+  {
+    "id": "before-climbing",
+    "durationSeconds": 77.4,
+    "bytes": 4867640,
+    "sha256": "d75f3ac3a4f26c278262745b49053d7826bd6520de7593df1d888c4389e23bf0",
+    "decoded": true,
+    "video": "H.264 1280x720",
+    "audio": "AAC with New Zealand synthetic narration",
+    "maxVolumeDB": -1.4,
+    "captions": true
+  }
+]

@@ -1,0 +1,10 @@
+{
+  "provider": "edge_tts",
+  "voice": "en-GB-RyanNeural",
+  "rate": "-8%",
+  "volume": "+0%",
+  "pitch": "+0Hz",
+  "text": "A lean record can retain a photograph and an indicated pole alignment.  Movement observations can include a recorded amount and a note. Together, these records make the observation clearer for another person. This prototype uses an image angle and manually entered movement.",
+  "unit": "one chapter per call",
+  "fingerprint": "133447eb6297474f38f6bf291362f62cc8add0a7cd14879080af7603c655f57c"
+}

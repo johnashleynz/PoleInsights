@@ -1,0 +1,10 @@
+{
+  "provider": "edge_tts",
+  "voice": "en-GB-RyanNeural",
+  "rate": "-8%",
+  "volume": "+0%",
+  "pitch": "+0Hz",
+  "text": "The Axonic Analyser prototype organises the inspection around a pole and its scans.  The scan view brings the devices and acquisition workflow together. In this demonstration, example signals drive the display. No connected instrument or measured field result is implied.",
+  "unit": "one chapter per call",
+  "fingerprint": "d63add07c9ca3c6eb5e701ebea4fab6ee79a4158652eca47b51cd9c42fb92629"
+}

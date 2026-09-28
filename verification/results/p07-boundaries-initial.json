@@ -1,0 +1,58 @@
+{
+  "boundary": [
+    {
+      "marginDiameters": 1,
+      "error": "Curved element Jacobian changes sign."
+    },
+    {
+      "marginDiameters": 2,
+      "probeMPa": [
+        -2.3409272421971394,
+        -0.2839947648008528,
+        -0.2864125898933714,
+        2.130503284330662,
+        -1.9846989025131796
+      ],
+      "ms": 10945.017800000001
+    },
+    {
+      "marginDiameters": 3,
+      "probeMPa": [
+        -2.3576146031468292,
+        -0.39717190938246894,
+        -0.378958703424215,
+        2.134306911866077,
+        -1.9564398867070154
+      ],
+      "ms": 8109.023699999991
+    }
+  ],
+  "probes": [
+    [
+      0.115,
+      0,
+      1.9
+    ],
+    [
+      0.04,
+      0,
+      1.58
+    ],
+    [
+      0.04,
+      0,
+      2.22
+    ],
+    [
+      -0.115,
+      0,
+      1.9
+    ],
+    [
+      0.09,
+      0,
+      1.75
+    ]
+  ],
+  "note": "Remeshing accompanies boundary change; not a controlled pure boundary experiment."
+}

@@ -1,0 +1,19 @@
+{
+  "metrics": {
+    "displacementRelativeL2": 1.9905011349169303e-07,
+    "stressRelativeL2": 1.0132484161511237e-05,
+    "energyRelativeDifference": 1.7900146555382876e-08,
+    "loadRelativeL2": 4.0877750126235673e-16,
+    "freeResidualN": 3.963350536650978e-09,
+    "seconds": 5.125679969787598
+  },
+  "gates": {
+    "displacementRelativeL2": 0.0001,
+    "stressRelativeL2": 0.001,
+    "energyRelativeDifference": 0.0001,
+    "loadRelativeL2": 1e-10,
+    "freeResidualN": 0.0001
+  },
+  "passed": true,
+  "scope": "Independent curved outer geometry; same mesh/material/BC, higher quadrature. Numerical verification only."
+}

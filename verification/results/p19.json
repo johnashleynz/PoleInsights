@@ -1,0 +1,201 @@
+{
+  "scope": "Material provenance, bending criterion, legacy compatibility and film label timing; not physical validation",
+  "checks": [
+    {
+      "name": "Legacy P18 cases preserve their teaching material",
+      "pass": true
+    },
+    {
+      "name": "Radiata pine: explicit reference or no invented properties",
+      "pass": true
+    },
+    {
+      "name": "Douglas fir · NZ grown: explicit reference or no invented properties",
+      "pass": true
+    },
+    {
+      "name": "European larch · NZ grown: explicit reference or no invented properties",
+      "pass": true
+    },
+    {
+      "name": "Southern plantation pines: explicit reference or no invented properties",
+      "pass": true
+    },
+    {
+      "name": "Hoop pine: explicit reference or no invented properties",
+      "pass": true
+    },
+    {
+      "name": "Radiata pine · Australian grown: explicit reference or no invented properties",
+      "pass": true
+    },
+    {
+      "name": "Slash pine: explicit reference or no invented properties",
+      "pass": true
+    },
+    {
+      "name": "Coast grey box: explicit reference or no invented properties",
+      "pass": true
+    },
+    {
+      "name": "Maritime pine: explicit reference or no invented properties",
+      "pass": true
+    },
+    {
+      "name": "Grey ironbark: explicit reference or no invented properties",
+      "pass": true
+    },
+    {
+      "name": "Grey gum: explicit reference or no invented properties",
+      "pass": true
+    },
+    {
+      "name": "Spotted gum: explicit reference or no invented properties",
+      "pass": true
+    },
+    {
+      "name": "Blackbutt: explicit reference or no invented properties",
+      "pass": true
+    },
+    {
+      "name": "Tallowwood: explicit reference or no invented properties",
+      "pass": true
+    },
+    {
+      "name": "Gympie messmate: explicit reference or no invented properties",
+      "pass": true
+    },
+    {
+      "name": "Grey box: explicit reference or no invented properties",
+      "pass": true
+    },
+    {
+      "name": "Red ironbark: explicit reference or no invented properties",
+      "pass": true
+    },
+    {
+      "name": "Narrow-leaved red ironbark: explicit reference or no invented properties",
+      "pass": true
+    },
+    {
+      "name": "Forest red gum: explicit reference or no invented properties",
+      "pass": true
+    },
+    {
+      "name": "Jarrah: explicit reference or no invented properties",
+      "pass": true
+    },
+    {
+      "name": "Scots pine: explicit reference or no invented properties",
+      "pass": true
+    },
+    {
+      "name": "Douglas fir · European: explicit reference or no invented properties",
+      "pass": true
+    },
+    {
+      "name": "Douglas fir · coastal: explicit reference or no invented properties",
+      "pass": true
+    },
+    {
+      "name": "Western larch: explicit reference or no invented properties",
+      "pass": true
+    },
+    {
+      "name": "Southern pine group: explicit reference or no invented properties",
+      "pass": true
+    },
+    {
+      "name": "Western red cedar: explicit reference or no invented properties",
+      "pass": true
+    },
+    {
+      "name": "Lodgepole pine: explicit reference or no invented properties",
+      "pass": true
+    },
+    {
+      "name": "Red / Norway pine: explicit reference or no invented properties",
+      "pass": true
+    },
+    {
+      "name": "ANSI bending reference reproduces cantilever Fb Z / H",
+      "pass": true,
+      "data": {
+        "actual": 15.904312808689232,
+        "expected": 15.904312808798325
+      }
+    },
+    {
+      "name": "Bending reference does not invent direct fibre strengths",
+      "pass": true
+    },
+    {
+      "name": "Doubling Fb doubles bending capacity without changing movement",
+      "pass": true
+    },
+    {
+      "name": "Stiffness changes deflection, not sound fixed-cantilever capacity",
+      "pass": true
+    },
+    {
+      "name": "Through-bored Douglas fir uses published 5 percent reduction",
+      "pass": true
+    },
+    {
+      "name": "Edited published data cannot retain a published-reference label",
+      "pass": true
+    },
+    {
+      "name": "Unknown species and incomplete custom properties are rejected",
+      "pass": true
+    },
+    {
+      "name": "Australian species accept explicitly supplied data",
+      "pass": true
+    },
+    {
+      "name": "Eccentric cavity reduces sourced-reference capacity",
+      "pass": true,
+      "data": {
+        "sound": 15.904312808689232,
+        "damaged": 11.755031335844437
+      }
+    },
+    {
+      "name": "Stress sign still selects the appropriate defect factor",
+      "pass": true
+    },
+    {
+      "name": "Section utilisation and height chart share new strength basis",
+      "pass": true
+    },
+    {
+      "name": "Inspection MPa conversion uses selected bending reference",
+      "pass": true
+    },
+    {
+      "name": "Pole Fb cannot qualify local direct-stress capacity",
+      "pass": true
+    },
+    {
+      "name": "Label screen side and location do not follow projected pole x",
+      "pass": true
+    },
+    {
+      "name": "Labels disappear after a short window",
+      "pass": true
+    },
+    {
+      "name": "Label fade is continuous and bounded",
+      "pass": true
+    },
+    {
+      "name": "Walkthrough critical section displays the actual solved critical height",
+      "pass": true
+    },
+    {
+      "name": "Fifth walkthrough has six narrated and captioned chapters",
+      "pass": true
+    }
+  ]
+}

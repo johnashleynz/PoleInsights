@@ -1,0 +1,10 @@
+{
+  "provider": "edge_tts",
+  "voice": "en-GB-RyanNeural",
+  "rate": "-8%",
+  "volume": "+0%",
+  "pitch": "+0Hz",
+  "text": "Records connect the inspection activity with the pole being assessed.  Keep that evidence alongside material, geometry and structural information. The demonstration shows the workflow, while the laboratory uses a separate bending model. Neither the animation nor these example screens grants climbing clearance.",
+  "unit": "one chapter per call",
+  "fingerprint": "3076e9f536b22ba7b6f49cc59ba5e1e0eeb990ddbb6d1a65b1a01ee2e1636c0a"
+}

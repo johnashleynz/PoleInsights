@@ -1,0 +1,84 @@
+{
+  "checks": [
+    {
+      "name": "Fixed section scale",
+      "detail": 0.18
+    },
+    {
+      "name": "Tip face shrinks to half butt diameter",
+      "detail": "ratio 0.5"
+    },
+    {
+      "name": "Taper side maps to actual height -1",
+      "detail": -1
+    },
+    {
+      "name": "Taper side maps to actual height 0.7",
+      "detail": 0.7
+    },
+    {
+      "name": "Taper side maps to actual height 5",
+      "detail": 5
+    },
+    {
+      "name": "Taper side maps to actual height 8",
+      "detail": 8
+    },
+    {
+      "name": "No projected side at butt",
+      "detail": "null"
+    },
+    {
+      "name": "Duffy quadrature volume",
+      "detail": "reference tetrahedron"
+    },
+    {
+      "name": "Straight geometry stiffness parity",
+      "detail": "P05 four point vs P06 64 point"
+    },
+    {
+      "name": "Curved physical affine patch",
+      "detail": 2.6020852139652106e-18
+    },
+    {
+      "name": "Curved element quadrature sensitivity",
+      "detail": 3.903332782850106e-7
+    },
+    {
+      "name": "Curved face transferred force",
+      "detail": [
+        999.9999999999995,
+        0,
+        -1.000444171950221e-11
+      ]
+    },
+    {
+      "name": "Curved face transferred moment",
+      "detail": [
+        5.684341886080802e-14,
+        9199.999999999998,
+        1.0658141036401503e-14
+      ]
+    },
+    {
+      "name": "Curved solve balance",
+      "detail": 0.000002596356296180602
+    },
+    {
+      "name": "Energy/work",
+      "detail": 15.313103920068261
+    },
+    {
+      "name": "Eight-sector curved area within 0.1%",
+      "detail": 0.0007782941797916942
+    },
+    {
+      "name": "Eight-sector curved second moment within 0.2%",
+      "detail": 0.0015557276308405532
+    }
+  ],
+  "areaError": 0.0007782941797916942,
+  "momentError": 0.0015557276308405532,
+  "elapsedMs": 1112.0889,
+  "scope": "Curved outer boundary research only; P05 remains the displayed solid model."
+}

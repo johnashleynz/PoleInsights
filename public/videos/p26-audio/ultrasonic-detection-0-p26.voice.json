@@ -1,0 +1,10 @@
+{
+  "provider": "edge_tts",
+  "voice": "en-GB-RyanNeural",
+  "rate": "-8%",
+  "volume": "+0%",
+  "pitch": "+0Hz",
+  "text": "Where should we inspect?  The U B one thousand pair sits opposite each other at one height. One transmits; the other receives. This scene shows the arrangement. The next view shows the simulated pulse.",
+  "unit": "one chapter per call",
+  "fingerprint": "674df385250bdb53138ca8439c12b054d50ffce6665910dd003ba86c1f7f1366"
+}

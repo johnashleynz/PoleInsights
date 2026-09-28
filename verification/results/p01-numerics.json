@@ -1,0 +1,390 @@
+{
+  "version": "P01",
+  "date": "2026-09-28T21:26:39.086Z",
+  "checks": 56,
+  "scope": "Numerical checks only. No physical timber, soil, decay or UB1000 validation.",
+  "results": [
+    {
+      "name": "Uniform cantilever deflection: independent closed form",
+      "actual": 0.05365420962206649,
+      "expected": 0.0536542096217616,
+      "relativeError": 5.68246296782872e-12,
+      "tolerance": 0.001
+    },
+    {
+      "name": "Uniform cantilever peak stress: independent closed form",
+      "actual": 3018049.2912382907,
+      "expected": 3018049.29122409,
+      "relativeError": 4.7052931372029095e-12,
+      "tolerance": 0.001
+    },
+    {
+      "name": "Uniform cantilever compression limit",
+      "actual": 8.283496254543484,
+      "expected": 8.28349625458246,
+      "relativeError": 4.7051443273991654e-12,
+      "tolerance": 0.001
+    },
+    {
+      "name": "Uniform cantilever critical section is groundline",
+      "passed": true
+    },
+    {
+      "name": "Circular pole invariance 0 degrees",
+      "actual": 0.05365420962206649,
+      "expected": 0.05365420962206649,
+      "relativeError": 0,
+      "tolerance": 0.00001
+    },
+    {
+      "name": "Circular pole capacity invariance 0",
+      "actual": 8.283496254543484,
+      "expected": 8.283496254543484,
+      "relativeError": 0,
+      "tolerance": 0.002
+    },
+    {
+      "name": "Circular pole invariance 37 degrees",
+      "actual": 0.05365420962206647,
+      "expected": 0.05365420962206649,
+      "relativeError": 3.879785362295293e-16,
+      "tolerance": 0.00001
+    },
+    {
+      "name": "Circular pole capacity invariance 37",
+      "actual": 8.29061783980624,
+      "expected": 8.283496254543484,
+      "relativeError": 0.000859731814190068,
+      "tolerance": 0.002
+    },
+    {
+      "name": "Circular pole invariance 90 degrees",
+      "actual": 0.05365420962206649,
+      "expected": 0.05365420962206649,
+      "relativeError": 0,
+      "tolerance": 0.00001
+    },
+    {
+      "name": "Circular pole capacity invariance 90",
+      "actual": 8.283496254543484,
+      "expected": 8.283496254543484,
+      "relativeError": 0,
+      "tolerance": 0.002
+    },
+    {
+      "name": "Circular pole invariance 180 degrees",
+      "actual": 0.05365420962206649,
+      "expected": 0.05365420962206649,
+      "relativeError": 0,
+      "tolerance": 0.00001
+    },
+    {
+      "name": "Circular pole capacity invariance 180",
+      "actual": 8.283496254543484,
+      "expected": 8.283496254543484,
+      "relativeError": 0,
+      "tolerance": 0.002
+    },
+    {
+      "name": "Circular pole invariance 271 degrees",
+      "actual": 0.05365420962206649,
+      "expected": 0.05365420962206649,
+      "relativeError": 0,
+      "tolerance": 0.00001
+    },
+    {
+      "name": "Circular pole capacity invariance 271",
+      "actual": 8.284758063324675,
+      "expected": 8.283496254543484,
+      "relativeError": 0.00015232804391005368,
+      "tolerance": 0.002
+    },
+    {
+      "name": "Zero load returns zero movement and stress",
+      "passed": true
+    },
+    {
+      "name": "Zero load retains unit-pattern limit",
+      "actual": 8.283496254543484,
+      "expected": 8.283496254543484,
+      "relativeError": 0,
+      "tolerance": 1e-8
+    },
+    {
+      "name": "Annulus area: independent exact section",
+      "actual": 0.05301437602932757,
+      "expected": 0.053014376029327764,
+      "relativeError": 3.664836669999114e-15,
+      "tolerance": 0.001
+    },
+    {
+      "name": "Annulus second moment: independent exact section",
+      "actual": 0.00037275733145621115,
+      "expected": 0.0003727573314562108,
+      "relativeError": 8.725801595235986e-16,
+      "tolerance": 0.001
+    },
+    {
+      "name": "Eccentric void elastic centroid",
+      "actual": -0.005007711384323025,
+      "expected": -0.005,
+      "relativeError": 0.0015422768646050633,
+      "tolerance": 0.015
+    },
+    {
+      "name": "Eccentric void second moment",
+      "actual": 0.00037851768718333593,
+      "expected": 0.00037856191475757006,
+      "relativeError": 0.00011683049062781163,
+      "tolerance": 0.01
+    },
+    {
+      "name": "Soft: integrated soil horizontal force X",
+      "actual": -601.8150261515563,
+      "expected": -601.8150231520483,
+      "relativeError": 4.984102822960344e-9,
+      "tolerance": 0.000001
+    },
+    {
+      "name": "Soft: integrated soil horizontal force Y",
+      "actual": -798.6355140277582,
+      "expected": -798.6355100472929,
+      "relativeError": 4.984082530998893e-9,
+      "tolerance": 0.000001
+    },
+    {
+      "name": "Soft: integrated soil moment X",
+      "actual": 7347.446690707881,
+      "expected": 7347.446692435094,
+      "relativeError": 2.35076532772709e-10,
+      "tolerance": 0.000001
+    },
+    {
+      "name": "Soft: integrated soil moment Y",
+      "actual": -5536.698211697272,
+      "expected": -5536.698212998844,
+      "relativeError": 2.3508081010963293e-10,
+      "tolerance": 0.000001
+    },
+    {
+      "name": "Soft: equilibrium residual gate",
+      "passed": true
+    },
+    {
+      "name": "Soft: isotropic support rotation",
+      "actual": 0.18445091538275055,
+      "expected": 0.1844509153827505,
+      "relativeError": 3.009535144678882e-16,
+      "tolerance": 0.000001
+    },
+    {
+      "name": "Medium: integrated soil horizontal force X",
+      "actual": -601.8150218293171,
+      "expected": -601.8150231520483,
+      "relativeError": 2.1979033185540766e-9,
+      "tolerance": 0.000001
+    },
+    {
+      "name": "Medium: integrated soil horizontal force Y",
+      "actual": -798.6355082919526,
+      "expected": -798.6355100472929,
+      "relativeError": 2.197924101481207e-9,
+      "tolerance": 0.000001
+    },
+    {
+      "name": "Medium: integrated soil moment X",
+      "actual": 7347.446693069709,
+      "expected": 7347.446692435094,
+      "relativeError": 8.637223461932547e-11,
+      "tolerance": 0.000001
+    },
+    {
+      "name": "Medium: integrated soil moment Y",
+      "actual": -5536.698213477059,
+      "expected": -5536.698212998844,
+      "relativeError": 8.637188163038693e-11,
+      "tolerance": 0.000001
+    },
+    {
+      "name": "Medium: equilibrium residual gate",
+      "passed": true
+    },
+    {
+      "name": "Medium: isotropic support rotation",
+      "actual": 0.14636366332956038,
+      "expected": 0.14636366332956038,
+      "relativeError": 0,
+      "tolerance": 0.000001
+    },
+    {
+      "name": "Hard: integrated soil horizontal force X",
+      "actual": -601.815022830998,
+      "expected": -601.8150231520483,
+      "relativeError": 5.334700084458972e-10,
+      "tolerance": 0.000001
+    },
+    {
+      "name": "Hard: integrated soil horizontal force Y",
+      "actual": -798.6355096212405,
+      "expected": -798.6355100472929,
+      "relativeError": 5.334753250239872e-10,
+      "tolerance": 0.000001
+    },
+    {
+      "name": "Hard: integrated soil moment X",
+      "actual": 7347.44669260604,
+      "expected": 7347.446692435094,
+      "relativeError": 2.326615112864205e-11,
+      "tolerance": 0.000001
+    },
+    {
+      "name": "Hard: integrated soil moment Y",
+      "actual": -5536.698213127649,
+      "expected": -5536.698212998844,
+      "relativeError": 2.3263931533559697e-11,
+      "tolerance": 0.000001
+    },
+    {
+      "name": "Hard: equilibrium residual gate",
+      "passed": true
+    },
+    {
+      "name": "Hard: isotropic support rotation",
+      "actual": 0.13316491604238176,
+      "expected": 0.13316491604238173,
+      "relativeError": 2.0843009135225442e-16,
+      "tolerance": 0.000001
+    },
+    {
+      "name": "Higher ground stiffness reduces tip movement",
+      "passed": true
+    },
+    {
+      "name": "Nearly rigid pole: independent soil-bed equilibrium",
+      "actual": 0.011752457432606927,
+      "expected": 0.01167909604519774,
+      "relativeError": 0.00628142684376265,
+      "tolerance": 0.01
+    },
+    {
+      "name": "Exact live load scaling at 0 kN",
+      "actual": 0,
+      "expected": 0,
+      "relativeError": 0,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "Live demand scaling at 0 kN",
+      "actual": 0,
+      "expected": 0,
+      "relativeError": 0,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "Exact live load scaling at 0.1 kN",
+      "actual": 0.014636366332956036,
+      "expected": 0.014636366332956036,
+      "relativeError": 0,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "Live demand scaling at 0.1 kN",
+      "actual": 0.061754872158653044,
+      "expected": 0.061754872158653044,
+      "relativeError": 0,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "Exact live load scaling at 2 kN",
+      "actual": 0.2927273266591207,
+      "expected": 0.2927273266591207,
+      "relativeError": 0,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "Live demand scaling at 2 kN",
+      "actual": 1.2350974431730608,
+      "expected": 1.2350974431730608,
+      "relativeError": 0,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "Exact live load scaling at 9 kN",
+      "actual": 1.3172729699660433,
+      "expected": 1.3172729699660433,
+      "relativeError": 0,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "Live demand scaling at 9 kN",
+      "actual": 5.5579384942787735,
+      "expected": 5.5579384942787735,
+      "relativeError": 0,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "Rotate eccentric defect and force together",
+      "actual": 0.054585989043600236,
+      "expected": 0.054585989043522395,
+      "relativeError": 1.4260163308934027e-12,
+      "tolerance": 0.002
+    },
+    {
+      "name": "Internal hollow lowers the timber bending limit",
+      "passed": true
+    },
+    {
+      "name": "Deeper embedment reduces deflection for the declared presets",
+      "passed": true
+    },
+    {
+      "name": "Mesh: 48 to 72 elements tip displacement",
+      "actual": 0.14636365359403714,
+      "expected": 0.14636376739409582,
+      "relativeError": 7.775152328211493e-7,
+      "tolerance": 0.02
+    },
+    {
+      "name": "Mesh: 48 to 72 elements first limit",
+      "actual": 1.6467776286018383,
+      "expected": 1.6283811580105294,
+      "relativeError": 0.011297398339946852,
+      "tolerance": 0.05
+    },
+    {
+      "name": "Missing diameter linear interpolation",
+      "actual": 0.32,
+      "expected": 0.32,
+      "relativeError": 0,
+      "tolerance": 1e-12
+    },
+    {
+      "name": "Unsupported photo contours are rejected",
+      "passed": true
+    },
+    {
+      "name": "Impossible geometry is rejected",
+      "passed": true
+    }
+  ],
+  "mesh": [
+    {
+      "nodes": 33,
+      "tipMovement": 0.14636357073571335,
+      "limitKN": 1.6538826875441524,
+      "elapsedMs": 13.685899999999947
+    },
+    {
+      "nodes": 57,
+      "tipMovement": 0.14636365359403714,
+      "limitKN": 1.6467776286018383,
+      "elapsedMs": 20.06639999999993
+    },
+    {
+      "nodes": 81,
+      "tipMovement": 0.14636376739409582,
+      "limitKN": 1.6283811580105294,
+      "elapsedMs": 18.711400000000026
+    }
+  ]
+}

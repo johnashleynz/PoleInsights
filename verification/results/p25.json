@@ -1,0 +1,373 @@
+{
+  "checks": [
+    {
+      "name": "axonic popup: fixed local child, correct entry route",
+      "pass": true
+    },
+    {
+      "name": "axonic popup: launch snapshot and session forwarded exactly",
+      "pass": true
+    },
+    {
+      "name": "axonic popup: relay rejects origin",
+      "pass": true
+    },
+    {
+      "name": "axonic popup: relay rejects source",
+      "pass": true
+    },
+    {
+      "name": "axonic popup: relay rejects token",
+      "pass": true
+    },
+    {
+      "name": "axonic popup: relay rejects app",
+      "pass": true
+    },
+    {
+      "name": "axonic popup: relay rejects type",
+      "pass": true
+    },
+    {
+      "name": "axonic popup: relay rejects running",
+      "pass": true
+    },
+    {
+      "name": "axonic popup: relay rejects run",
+      "pass": true
+    },
+    {
+      "name": "axonic popup: relay rejects longRun",
+      "pass": true
+    },
+    {
+      "name": "axonic popup: relay rejects height",
+      "pass": true
+    },
+    {
+      "name": "axonic popup: relay rejects null",
+      "pass": true
+    },
+    {
+      "name": "axonic popup: real child idle crosses wrapper",
+      "pass": true
+    },
+    {
+      "name": "axonic popup: real capture reaches lab validator",
+      "pass": true
+    },
+    {
+      "name": "axonic popup: heartbeat preserves scan identity",
+      "pass": true
+    },
+    {
+      "name": "axonic popup: completion pauses",
+      "pass": true
+    },
+    {
+      "name": "axonic popup: retest keeps new identity and height",
+      "pass": true
+    },
+    {
+      "name": "axonic popup: inner app exit pauses",
+      "pass": true
+    },
+    {
+      "name": "axonic popup: wrapper exit pauses",
+      "pass": true
+    },
+    {
+      "name": "axonic popup: exact outgoing origin",
+      "pass": true
+    },
+    {
+      "name": "axonic embedded: fixed local child, correct entry route",
+      "pass": true
+    },
+    {
+      "name": "axonic embedded: launch snapshot and session forwarded exactly",
+      "pass": true
+    },
+    {
+      "name": "axonic embedded: relay rejects origin",
+      "pass": true
+    },
+    {
+      "name": "axonic embedded: relay rejects source",
+      "pass": true
+    },
+    {
+      "name": "axonic embedded: relay rejects token",
+      "pass": true
+    },
+    {
+      "name": "axonic embedded: relay rejects app",
+      "pass": true
+    },
+    {
+      "name": "axonic embedded: relay rejects type",
+      "pass": true
+    },
+    {
+      "name": "axonic embedded: relay rejects running",
+      "pass": true
+    },
+    {
+      "name": "axonic embedded: relay rejects run",
+      "pass": true
+    },
+    {
+      "name": "axonic embedded: relay rejects longRun",
+      "pass": true
+    },
+    {
+      "name": "axonic embedded: relay rejects height",
+      "pass": true
+    },
+    {
+      "name": "axonic embedded: relay rejects null",
+      "pass": true
+    },
+    {
+      "name": "axonic embedded: real child idle crosses wrapper",
+      "pass": true
+    },
+    {
+      "name": "axonic embedded: real capture reaches lab validator",
+      "pass": true
+    },
+    {
+      "name": "axonic embedded: heartbeat preserves scan identity",
+      "pass": true
+    },
+    {
+      "name": "axonic embedded: completion pauses",
+      "pass": true
+    },
+    {
+      "name": "axonic embedded: retest keeps new identity and height",
+      "pass": true
+    },
+    {
+      "name": "axonic embedded: inner app exit pauses",
+      "pass": true
+    },
+    {
+      "name": "axonic embedded: wrapper exit pauses",
+      "pass": true
+    },
+    {
+      "name": "axonic embedded: exact outgoing origin",
+      "pass": true
+    },
+    {
+      "name": "safe2climb popup: fixed local child, correct entry route",
+      "pass": true
+    },
+    {
+      "name": "safe2climb popup: launch snapshot and session forwarded exactly",
+      "pass": true
+    },
+    {
+      "name": "safe2climb popup: relay rejects origin",
+      "pass": true
+    },
+    {
+      "name": "safe2climb popup: relay rejects source",
+      "pass": true
+    },
+    {
+      "name": "safe2climb popup: relay rejects token",
+      "pass": true
+    },
+    {
+      "name": "safe2climb popup: relay rejects app",
+      "pass": true
+    },
+    {
+      "name": "safe2climb popup: relay rejects type",
+      "pass": true
+    },
+    {
+      "name": "safe2climb popup: relay rejects running",
+      "pass": true
+    },
+    {
+      "name": "safe2climb popup: relay rejects run",
+      "pass": true
+    },
+    {
+      "name": "safe2climb popup: relay rejects longRun",
+      "pass": true
+    },
+    {
+      "name": "safe2climb popup: relay rejects height",
+      "pass": true
+    },
+    {
+      "name": "safe2climb popup: relay rejects null",
+      "pass": true
+    },
+    {
+      "name": "safe2climb popup: real child idle crosses wrapper",
+      "pass": true
+    },
+    {
+      "name": "safe2climb popup: real capture reaches lab validator",
+      "pass": true
+    },
+    {
+      "name": "safe2climb popup: heartbeat preserves scan identity",
+      "pass": true
+    },
+    {
+      "name": "safe2climb popup: completion pauses",
+      "pass": true
+    },
+    {
+      "name": "safe2climb popup: retest keeps new identity and height",
+      "pass": true
+    },
+    {
+      "name": "safe2climb popup: inner app exit pauses",
+      "pass": true
+    },
+    {
+      "name": "safe2climb popup: wrapper exit pauses",
+      "pass": true
+    },
+    {
+      "name": "safe2climb popup: exact outgoing origin",
+      "pass": true
+    },
+    {
+      "name": "safe2climb embedded: fixed local child, correct entry route",
+      "pass": true
+    },
+    {
+      "name": "safe2climb embedded: launch snapshot and session forwarded exactly",
+      "pass": true
+    },
+    {
+      "name": "safe2climb embedded: relay rejects origin",
+      "pass": true
+    },
+    {
+      "name": "safe2climb embedded: relay rejects source",
+      "pass": true
+    },
+    {
+      "name": "safe2climb embedded: relay rejects token",
+      "pass": true
+    },
+    {
+      "name": "safe2climb embedded: relay rejects app",
+      "pass": true
+    },
+    {
+      "name": "safe2climb embedded: relay rejects type",
+      "pass": true
+    },
+    {
+      "name": "safe2climb embedded: relay rejects running",
+      "pass": true
+    },
+    {
+      "name": "safe2climb embedded: relay rejects run",
+      "pass": true
+    },
+    {
+      "name": "safe2climb embedded: relay rejects longRun",
+      "pass": true
+    },
+    {
+      "name": "safe2climb embedded: relay rejects height",
+      "pass": true
+    },
+    {
+      "name": "safe2climb embedded: relay rejects null",
+      "pass": true
+    },
+    {
+      "name": "safe2climb embedded: real child idle crosses wrapper",
+      "pass": true
+    },
+    {
+      "name": "safe2climb embedded: real capture reaches lab validator",
+      "pass": true
+    },
+    {
+      "name": "safe2climb embedded: heartbeat preserves scan identity",
+      "pass": true
+    },
+    {
+      "name": "safe2climb embedded: completion pauses",
+      "pass": true
+    },
+    {
+      "name": "safe2climb embedded: retest keeps new identity and height",
+      "pass": true
+    },
+    {
+      "name": "safe2climb embedded: inner app exit pauses",
+      "pass": true
+    },
+    {
+      "name": "safe2climb embedded: wrapper exit pauses",
+      "pass": true
+    },
+    {
+      "name": "safe2climb embedded: exact outgoing origin",
+      "pass": true
+    },
+    {
+      "name": "axonic: phone chrome restored",
+      "pass": true
+    },
+    {
+      "name": "axonic: one launcher, no premature child",
+      "pass": true
+    },
+    {
+      "name": "axonic: phone fits 478x910",
+      "pass": true
+    },
+    {
+      "name": "axonic: phone fits 356x700",
+      "pass": true
+    },
+    {
+      "name": "axonic: phone fits 280x400",
+      "pass": true
+    },
+    {
+      "name": "axonic: phone fits 700x280",
+      "pass": true
+    },
+    {
+      "name": "safe2climb: phone chrome restored",
+      "pass": true
+    },
+    {
+      "name": "safe2climb: one launcher, no premature child",
+      "pass": true
+    },
+    {
+      "name": "safe2climb: phone fits 478x910",
+      "pass": true
+    },
+    {
+      "name": "safe2climb: phone fits 356x700",
+      "pass": true
+    },
+    {
+      "name": "safe2climb: phone fits 280x400",
+      "pass": true
+    },
+    {
+      "name": "safe2climb: phone fits 700x280",
+      "pass": true
+    }
+  ],
+  "scope": "Phone wrapper transport, hostile message rejection, launch metadata and responsive fit. Not UB1000 inference or device certification."
+}

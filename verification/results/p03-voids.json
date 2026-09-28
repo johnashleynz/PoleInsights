@@ -1,0 +1,93 @@
+{
+  "version": "P03",
+  "date": "2026-09-28T21:26:39.473Z",
+  "scope": "Numerical beam/section verification, not local 3D stress concentration or physical validation.",
+  "checks": [
+    {
+      "name": "Hollow pole deflection ratio matches exact annulus EI",
+      "actual": 1.6937669376653977,
+      "expected": 1.693766937669377,
+      "error": 2.349355909814221e-12,
+      "tolerance": 0.003
+    },
+    {
+      "name": "Hollow pole outer-fibre stress ratio matches M/Z",
+      "actual": 1.6937669376664766,
+      "expected": 1.693766937669377,
+      "error": 1.7123646500749599e-12,
+      "tolerance": 0.003
+    },
+    {
+      "name": "Hollow pole timber capacity ratio matches exact Z",
+      "actual": 0.5904000000004948,
+      "expected": 0.5903999999999999,
+      "error": 8.381205997212607e-13,
+      "tolerance": 0.003
+    },
+    {
+      "name": "Remaining wood area equals exact annulus area fraction",
+      "actual": 0.3600000000000017,
+      "expected": 0.3599999999999999,
+      "error": 5.088522196198636e-15,
+      "tolerance": 0.003
+    },
+    {
+      "name": "Void interior is no stress, not zero-stress timber",
+      "passed": true
+    },
+    {
+      "name": "Void interior has no utilisation",
+      "passed": true
+    },
+    {
+      "name": "Compression utilisation uses compression strength",
+      "actual": 0.1789155237012627,
+      "expected": 0.1789155237012627,
+      "error": 0,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "Tension utilisation uses tension strength",
+      "actual": 0.12779680264375906,
+      "expected": 0.12779680264375906,
+      "error": 0,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "Local decay utilisation includes local reduced strength",
+      "actual": 0.06754253722475778,
+      "expected": 0.06754253722475778,
+      "error": 0,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "Zero load retains hollow and gives zero utilisation in wood",
+      "passed": true
+    },
+    {
+      "name": "Local hollow stress matches independent section M/Z",
+      "actual": -4313142.088872879,
+      "expected": -4313142.089211255,
+      "error": 7.845243507253575e-11,
+      "tolerance": 0.003
+    },
+    {
+      "name": "Above local hollow, moment stress returns to solid M/Z",
+      "actual": -1886280.8068737525,
+      "expected": -1886280.807015056,
+      "error": 7.491117977989568e-11,
+      "tolerance": 0.003
+    },
+    {
+      "name": "Eccentric hollow stress follows shifted neutral axis",
+      "actual": -2869938.851347494,
+      "expected": -2866109.7635635925,
+      "error": 0.0013359878370954538,
+      "tolerance": 0.02
+    },
+    {
+      "name": "Eccentric hollow changes directional bending response",
+      "passed": true
+    }
+  ]
+}

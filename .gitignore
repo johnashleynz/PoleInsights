@@ -1,0 +1,15 @@
+node_modules/
+.npm-cache/
+dist/
+coverage/
+.vite-*/
+*.tsbuildinfo
+.env
+.env.*
+!.env.example
+*.log
+
+.media-deps/
+.media-work/
+.wrangler/
+.dev.vars

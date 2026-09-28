@@ -1,0 +1,31 @@
+import {writeFileSync} from 'node:fs';
+import {defaultCase,newRegion} from '../src/domain/model.ts';
+import {measurementMM,diameterFromMM} from '../src/domain/measurements.ts';
+import {placeholderAssessment,PROBE_LENGTH,PROBE_DIAMETER} from '../src/inspection/placeholder.ts';
+const checks=[],check=(name,pass,data)=>{checks.push({name,pass,data});if(!pass)throw Error(name+JSON.stringify(data));},close=(name,a,b,tol=1e-10)=>check(name,Math.abs(a-b)<tol,{a,b});
+close('320 mm diameter converts to circumference',measurementMM(.32,'circumference'),Math.PI*320);
+close('Circumference input converts to metres diameter',diameterFromMM(Math.PI*320,'circumference'),.32);
+for(const mode of ['diameter','circumference']){
+ check(`Missing ${mode} remains estimated`,measurementMM(null,mode)===null&&diameterFromMM(null,mode)===null);
+ close(`${mode} round trip retains geometry`,diameterFromMM(measurementMM(.28764,mode),mode),.28764);
+}
+const p=defaultCase(),sound=placeholderAssessment(p,.3);
+close('Sound section fibre strength is 100%',sound.fibreStrength,1);
+close('Sound section reduction is zero',sound.capacityReduction,0);
+const d=newRegion(p);d.shape={type:'ellipse',centreX:0,centreY:0,radiusX:1,radiusY:1,angle:0,profile:'constant'};d.zMin=0;d.zMax=1;d.severity=.5;p.regions=[d];
+const decay=placeholderAssessment(p,.3);
+close('Uniform decay recovers the prescribed strength factor',decay.fibreStrength,1-.95*.5);
+close('Uniform decay reduction recovers prescribed loss',decay.capacityReduction,.95*.5);
+close('Assessment follows inspection height',placeholderAssessment(p,2).capacityReduction,0);
+d.kind='void';d.shape.radiusX=d.shape.radiusY=.08;p.diameters={butt:.32,ground:.32,tip:.32};
+const cavity=placeholderAssessment(p,.3);
+close('Cavity does not weaken surviving sound fibres',cavity.fibreStrength,1);
+close('Quarter-area cavity produces quarter capacity-proxy reduction',cavity.capacityReduction,.25,.011);
+close('Remaining area matches the annulus',cavity.woodRemaining,.75,.011);
+d.shape.radiusX=d.shape.radiusY=1;const empty=placeholderAssessment(p,.3);
+check('No fibres reports unavailable fibre strength',empty.fibreStrength===null);
+close('No timber gives complete proxy loss',empty.capacityReduction,1);
+close('Probe length follows owner dimensions in metres',PROBE_LENGTH,.160);
+close('Probe diameter follows owner dimensions in metres',PROBE_DIAMETER,.060);
+writeFileSync('verification/results/p12.json',JSON.stringify({scope:'Unit conversion and explicitly uncalibrated sandbox summary, not UB1000 inference',checks},null,2));
+console.log(`${checks.length} P12 measurement and placeholder checks passed.`);

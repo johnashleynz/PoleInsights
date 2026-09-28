@@ -1,0 +1,40 @@
+{
+  "checks": [
+    {
+      "name": "Unaveraged field sampling vs element recovery (Pa)",
+      "value": 3.864988684654236e-8,
+      "limit": 0.00001
+    },
+    {
+      "name": "Hollow has no stress",
+      "value": 0,
+      "limit": 0
+    },
+    {
+      "name": "Outside submodel unavailable",
+      "value": 0,
+      "limit": 0
+    },
+    {
+      "name": "Cached field load scaling",
+      "value": 0,
+      "limit": 1e-8
+    },
+    {
+      "name": "Zero stress without zero-load division",
+      "value": 0,
+      "limit": 0
+    },
+    {
+      "name": "Sign-dependent local utilisation",
+      "value": 0,
+      "limit": 1e-12
+    },
+    {
+      "name": "Rigid rotation of mesh, material symmetry and load",
+      "value": 1.2858977959992984e-13,
+      "limit": 0.000001
+    }
+  ],
+  "scope": "Linear field, indexing, load scaling and orientation checks; not physical validation."
+}

@@ -1,0 +1,97 @@
+WEBVTT
+
+00:00:00.900 --> 00:00:03.060
+What does the test arrangement assume?
+
+00:00:05.502 --> 00:00:08.872
+In Setup, open Ground, then Reference option.
+
+00:00:09.809 --> 00:00:13.451
+Select Ideal fixed groundline for a restrained cantilever.
+
+00:00:14.388 --> 00:00:16.263
+The model loads the physical tip.
+
+00:00:17.201 --> 00:00:21.209
+Match that fixture; a three-point bending test needs a different model.
+
+00:00:23.067 --> 00:00:25.145
+Under Pole, open Properties.
+
+00:00:26.087 --> 00:00:28.153
+Choose a source appropriate to the timber.
+
+00:00:29.090 --> 00:00:33.574
+Here, eight gigapascals and forty megapascals are example assumptions,
+
+00:00:33.832 --> 00:00:34.973
+not measured data.
+
+00:00:36.711 --> 00:00:40.773
+Enter length, embedment and the three diameters or circumferences.
+
+00:00:41.711 --> 00:00:43.735
+Keep the property source with the case.
+
+00:00:46.200 --> 00:00:48.836
+In Defects, choose a type and press Add.
+
+00:00:49.778 --> 00:00:52.617
+Set its height, length, width and depth.
+
+00:00:53.555 --> 00:00:56.924
+Position and shape controls place this cavity off centre.
+
+00:00:58.662 --> 00:01:00.211
+It removes wood completely.
+
+00:01:01.148 --> 00:01:05.442
+Decay instead leaves weakened material, with an illustrative severity-to-strength
+
+00:01:05.455 --> 00:01:06.284
+relationship.
+
+00:01:07.933 --> 00:01:10.746
+Choose Stresses and Capacity in kilonewtons.
+
+00:01:11.688 --> 00:01:15.343
+Keep Specified load direction, then press Critical section.
+
+00:01:17.080 --> 00:01:19.526
+Timber bending limit is the whole-pole estimate.
+
+00:01:20.463 --> 00:01:24.499
+The height curve shows section capacities; its lowest value locates
+
+00:01:24.512 --> 00:01:27.393
+the first bending limit, possibly above ground.
+
+00:01:30.267 --> 00:01:32.658
+The compass controls the load direction.
+
+00:01:34.400 --> 00:01:38.326
+Load applied in worst direction searches for a weaker orientation.
+
+00:01:39.264 --> 00:01:41.682
+Off-centre damage makes direction important.
+
+00:01:42.620 --> 00:01:46.750
+The comparison also depends on entered dimensions and material strength;
+
+00:01:46.981 --> 00:01:50.229
+credible input ranges are part of interpreting this estimate.
+
+00:01:52.300 --> 00:01:56.267
+Open Menu and Compare A and B to set up matching cases.
+
+00:01:57.209 --> 00:02:02.128
+Hold geometry, material and direction constant when comparing deterioration.
+
+00:02:03.065 --> 00:02:06.109
+Save case preserves the inputs and property source.
+
+00:02:07.846 --> 00:02:12.466
+This beam first-limit estimate is not a validated fracture load; comparison
+
+00:02:12.479 --> 00:02:14.613
+with measured tests remains necessary.

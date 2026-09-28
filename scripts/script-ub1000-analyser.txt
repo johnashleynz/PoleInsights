@@ -1,0 +1,11 @@
+Place the pair
+{CAM:devices}Hidden timber condition needs inspection evidence. [P0.8] The {LABEL:UB1000 pair}U B one thousand uses opposed devices to send and receive ultrasound through the pole. {CAM:devicesClose}Here they mark one inspection plane. The laboratory animation is illustrative; it is not a calibrated instrument reading.
+
+Open the analyser
+{CAM:analyserHome}The {LABEL:Axonic Analyser}Axonic Analyser prototype organises the inspection around a pole and its scans. [P0.8] {CAM:analyserScan}The scan view brings the devices and acquisition workflow together. In this demonstration, example signals drive the display. No connected instrument or measured field result is implied.
+
+Read the evidence
+{CAM:analyserResult}A scan produces evidence to examine, rather than a picture of the exact decay shape. [P0.8] {CAM:analyserDetail}{LABEL:Recorded scan}The analyser keeps scan information available for review. Signal behaviour needs an approved interpretation; a single peak is not a direct measurement of pole bending capacity.
+
+Keep the assessment connected
+{CAM:analyserRecords}Records connect the inspection activity with the pole being assessed. [P0.8] {CAM:analyserHome}Keep that evidence alongside material, geometry and structural information. The demonstration shows the workflow, while the laboratory uses a separate bending model. Neither the animation nor these example screens grants climbing clearance.

@@ -1,0 +1,10 @@
+{
+  "provider": "edge_tts",
+  "voice": "en-GB-RyanNeural",
+  "rate": "-8%",
+  "volume": "+0%",
+  "pitch": "+0Hz",
+  "text": "The load now points in another direction.  Follow the arrow. An off-centre defect can respond differently when bending changes direction.  These are beam bending estimates. Splitting, shell instability and real fracture need separate assessment.",
+  "unit": "one chapter per call",
+  "fingerprint": "3f01b773fd4f81c876557d7f24f24ccd60f0ff089c9ee9189acba12ea8dccf53"
+}

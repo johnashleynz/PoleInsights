@@ -1,0 +1,173 @@
+{
+  "scope": "Source transcription, material modifiers, reference integrity and solver propagation; not full code or physical validation",
+  "checks": [
+    {
+      "name": "NZ normal row E 8.7 and Fb 38",
+      "pass": true
+    },
+    {
+      "name": "NZ high row E 12.1 and Fb 52",
+      "pass": true
+    },
+    {
+      "name": "NZ default peeled and steamed factors",
+      "pass": true
+    },
+    {
+      "name": "NZ shaving and steaming compound correctly",
+      "pass": true
+    },
+    {
+      "name": "NZ larch shares category without using US western-larch values",
+      "pass": true
+    },
+    {
+      "name": "NZ standard example validates; legacy examples preserved",
+      "pass": true
+    },
+    {
+      "name": "radiata-pine reference and current geometry validate",
+      "pass": true
+    },
+    {
+      "name": "douglas-fir-nz reference and current geometry validate",
+      "pass": true
+    },
+    {
+      "name": "european-larch-nz reference and current geometry validate",
+      "pass": true
+    },
+    {
+      "name": "hoop-pine reference and current geometry validate",
+      "pass": true
+    },
+    {
+      "name": "radiata-pine-australia reference and current geometry validate",
+      "pass": true
+    },
+    {
+      "name": "slash-pine-australia reference and current geometry validate",
+      "pass": true
+    },
+    {
+      "name": "coast-grey-box reference and current geometry validate",
+      "pass": true
+    },
+    {
+      "name": "grey-ironbark reference and current geometry validate",
+      "pass": true
+    },
+    {
+      "name": "grey-gum reference and current geometry validate",
+      "pass": true
+    },
+    {
+      "name": "spotted-gum reference and current geometry validate",
+      "pass": true
+    },
+    {
+      "name": "blackbutt reference and current geometry validate",
+      "pass": true
+    },
+    {
+      "name": "tallowwood reference and current geometry validate",
+      "pass": true
+    },
+    {
+      "name": "gympie-messmate reference and current geometry validate",
+      "pass": true
+    },
+    {
+      "name": "red-ironbark reference and current geometry validate",
+      "pass": true
+    },
+    {
+      "name": "narrow-leaved-red-ironbark reference and current geometry validate",
+      "pass": true
+    },
+    {
+      "name": "forest-red-gum reference and current geometry validate",
+      "pass": true
+    },
+    {
+      "name": "jarrah reference and current geometry validate",
+      "pass": true
+    },
+    {
+      "name": "grey-ironbark standard group and F-grade mapping",
+      "pass": true
+    },
+    {
+      "name": "spotted-gum standard group and F-grade mapping",
+      "pass": true
+    },
+    {
+      "name": "forest-red-gum standard group and F-grade mapping",
+      "pass": true
+    },
+    {
+      "name": "jarrah standard group and F-grade mapping",
+      "pass": true
+    },
+    {
+      "name": "slash-pine-australia standard group and F-grade mapping",
+      "pass": true
+    },
+    {
+      "name": "hoop-pine standard group and F-grade mapping",
+      "pass": true
+    },
+    {
+      "name": "Australian softwood immaturity acts on E and Fb",
+      "pass": true
+    },
+    {
+      "name": "Between table diameters use conservative lower band",
+      "pass": true
+    },
+    {
+      "name": "Australian shaved softwood bending and E factors remain distinct",
+      "pass": true
+    },
+    {
+      "name": "Geometry edits recompute and store immaturity diameter",
+      "pass": true
+    },
+    {
+      "name": "Stale geometry-dependent properties rejected",
+      "pass": true
+    },
+    {
+      "name": "Tampered reference strengths rejected",
+      "pass": true
+    },
+    {
+      "name": "Missing reference options rejected",
+      "pass": true
+    },
+    {
+      "name": "Diameter below verified Australian table range unavailable",
+      "pass": true
+    },
+    {
+      "name": "Hybrid southern plantation pine, maritime pine and ambiguous grey-box remain unsourced",
+      "pass": true
+    },
+    {
+      "name": "Modified characteristic Fb drives solved pole capacity",
+      "pass": true,
+      "data": {
+        "actual": 8.375695171225757,
+        "expected": 8.375695169416076
+      }
+    },
+    {
+      "name": "High density increases capacity and reduces movement by independent expected ratios",
+      "pass": true
+    },
+    {
+      "name": "Detect MPa reference follows selected modified material",
+      "pass": true
+    }
+  ]
+}

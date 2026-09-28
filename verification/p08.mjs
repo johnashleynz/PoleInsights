@@ -1,0 +1,36 @@
+import assert from 'node:assert/strict';
+import {writeFileSync} from 'node:fs';
+import {defaultCase,newRegion,conditionAt,diameterAt,validateCase,hankinson,decaySeverity} from '../src/domain/model.ts';
+import {sectionProperties,solvePole,stationAt,utilisationAt,scaleUnitResult} from '../src/analysis/beam.ts';
+import {eligibleRegion} from '../src/analysis/solid/mesh.ts';
+import {SectionCache} from '../src/scene/sectionCache.ts';
+import {stressSurface} from '../src/scene/stressSurface.ts';
+const checks=[];function test(name,pass,data){checks.push({name,pass,data});assert.ok(pass,name);}function close(name,value,reference,tolerance){test(name,Math.abs(value-reference)<=tolerance*Math.max(1e-12,Math.abs(reference)),{value,reference,tolerance});}
+const p=defaultCase();p.length=10;p.embedment=2;p.soil='Fixed';p.diameters={butt:.3,ground:.3,tip:.3};p.loadKN=1;
+const sound=solvePole(p),I=Math.PI*.15**4/4;
+const drill=newRegion(p,'drilling');p.regions=[drill];test('Default radial drilling validates',validateCase(p).length===0);close('Default drill diameter 3/8 inch',drill.drilling.diameter,.0254*3/8,1e-12);close('Default drill depth one-third diameter',drill.drilling.depth,.1,1e-12);
+drill.drilling.bearing=90;const z=.3,R=.15,w=drill.drilling.diameter/2,lo=R-drill.drilling.depth;
+test('Drill centre is missing timber',conditionAt(p,.1,0,z).voided);test('Blind end retains timber',!conditionAt(p,.045,0,z).voided);test('Beside drill retains timber',!conditionAt(p,.1,w*1.1,z).voided);test('Above bore retains timber',!conditionAt(p,.1,0,z+w*1.1).voided);
+const area=2*(.5*(w*Math.sqrt(R*R-w*w)+R*R*Math.asin(w/R))-lo*w),properties=sectionProperties(p,z);
+close('Bore section loss against circular-segment integral',Math.PI*R*R-properties.area,area,2e-6);
+test('Drill reduces bending inertia',properties.xx<I);test('Drill shifts stiffness centroid away',properties.cx<0);
+const drilling=solvePole(p);test('Narrow bore beam equilibrium',drilling.balance<1e-6,drilling.balance);test('Bore slightly increases movement',drilling.tipMovement>sound.tipMovement,{sound:sound.tipMovement,bore:drilling.tipMovement});
+const large=structuredClone(p);large.regions[0].drilling.diameter=.0127;large.regions[0].zMin=z-.0127/2;large.regions[0].zMax=z+.0127/2;test('Half-inch bore removes more timber',sectionProperties(large,z).area<properties.area);
+const rotated=structuredClone(p);rotated.regions[0].drilling.bearing=0;const rp=sectionProperties(rotated,z);close('Radial drilling rotates inertia',rp.yy,properties.xx,1e-10);close('Radial drilling rotates centroid',rp.cy,properties.cx,1e-10);
+const duplicate=structuredClone(p);duplicate.regions.push({...structuredClone(drill),id:'second'});close('Overlapping drilling is not removed twice',sectionProperties(duplicate,z).area,properties.area,1e-12);
+const invalid=structuredClone(p);invalid.regions[0].drilling.depth=.4;test('Drill depth beyond diameter rejected',validateCase(invalid).length>0);test('Local solid rejects unsupported drill',(()=>{try{eligibleRegion(p);return false;}catch{return true;}})());
+const knot=newRegion(p,'knot');knot.zMin=.2;knot.zMax=.8;knot.shape.centreX=.115;knot.shape.radiusX=.034;knot.shape.radiusY=.04;p.regions=[knot];
+close('Hankinson parallel-grain endpoint',hankinson(0,.1),1,1e-12);close('Hankinson transverse endpoint',hankinson(90,.1),.1,1e-12);
+const kc=conditionAt(p,.115,0,.5);test('Knot affects stiffness and signed strength',kc.e<1&&kc.tension<kc.compression&&kc.compression<1,kc);test('Knot retains physical wood',!kc.voided);close('Knot retains section area',sectionProperties(p,.5).remaining,1,1e-10);
+const knotted=solvePole(p);test('Knot increases movement',knotted.tipMovement>sound.tipMovement);test('Knot reduces first timber limit',knotted.timberLimitKN<sound.timberLimitKN,{sound:sound.timberLimitKN,knot:knotted.timberLimitKN});const tensionPole={...p,bearing:270},tensionKnot=solvePole(tensionPole),tensionSound=solvePole({...tensionPole,regions:[]});test('Knot increases tensile utilisation at its centre',utilisationAt(tensionPole,stationAt(tensionKnot,.5),.115,0)>utilisationAt({...tensionPole,regions:[]},stationAt(tensionSound,.5),.115,0));
+knot.knot.grainAngle=0;close('Zero deviation restores sound stiffness',sectionProperties(p,.5).xx,I,.001);close('Zero deviation restores sound response',solvePole(p).tipMovement,sound.tipMovement,.001);
+const rot=newRegion(p);rot.zMin=.1;rot.zMax=2.1;rot.shape.centreX=0;rot.shape.centreY=0;rot.shape.radiusX=.09;rot.shape.radiusY=.09;rot.decay={pattern:'heart',progression:'source',sourceZ:1.1,exponent:2,shellDepth:.03};rot.severity=.7;p.regions=[rot];
+close('Decay source has specified severity',conditionAt(p,0,0,1.1).severity,.7,1e-12);test('Severity diminishes radially',conditionAt(p,0,0,1.1).severity>conditionAt(p,.04,0,1.1).severity&&conditionAt(p,.04,0,1.1).severity>conditionAt(p,.08,0,1.1).severity);test('Severity diminishes axially',conditionAt(p,0,0,1.1).severity>conditionAt(p,0,0,1.6).severity);close('Source law reaches zero at boundary',decaySeverity(rot,1,1.1),0,1e-12);
+rot.decay.pattern='shell';test('Shell leaves core sound',conditionAt(p,0,0,1.1).severity===0);test('Shell deteriorates exterior',conditionAt(p,.149,0,1.1).severity>0);test('Shell severity decreases inward',conditionAt(p,.149,0,1.1).severity>conditionAt(p,.13,0,1.1).severity);
+rot.decay.progression='uniform';rot.shape.profile='constant';const shell=sectionProperties(p,1.1,160,512),inner=R-.03,expectedI=(Math.PI*inner**4/4)+(1-.85*.7)*Math.PI*(R**4-inner**4)/4;close('Uniform shell stiffness against concentric annulus',shell.xx,expectedI,.001);
+test('Local solid rejects graded/shell decay',(()=>{try{eligibleRegion(p);return false;}catch{return true;}})());
+const unit=solvePole(p),scaled=scaleUnitResult(unit,3),direct=solvePole({...p,loadKN:3});close('Load scaling with new defects',scaled.tipMovement,direct.tipMovement,1e-10);
+const cache=new SectionCache(2*64*64*4);cache.put(.1,64,'one');cache.put(.2,64,'two');test('Exact height cache',cache.get(.1,64)==='one'&&cache.get(.11,64)===undefined);cache.put(.3,64,'three');test('Cache bounded with LRU eviction',cache.bytes<=cache.budget&&cache.get(.2,64)===undefined&&cache.get(.1,64)==='one');cache.clear();test('Case changes clear all cached sections',cache.count===0&&cache.bytes===0);
+const displayPole={...p,regions:[]},surface=stressSurface(displayPole,sound,0,'stress',null,false),positions=surface.children[0].geometry.getAttribute('position'),angles=new Set();for(let i=0;i<positions.count;i++)angles.add(Math.round(Math.atan2(-positions.getZ(i),positions.getX(i))*100));test('Stress renderer covers circumference, not two planes',angles.size>=90,{angles:angles.size});
+writeFileSync('verification/results/p08.json',JSON.stringify({scope:'Numerical and software verification; illustrative knot/decay laws, no physical validation or local drill/knot qualification',checks},null,2));console.log(checks.length+' P08 checks passed.');
+

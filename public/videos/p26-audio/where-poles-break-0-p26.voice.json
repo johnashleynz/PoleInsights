@@ -1,0 +1,10 @@
+{
+  "provider": "edge_tts",
+  "voice": "en-GB-RyanNeural",
+  "rate": "-8%",
+  "volume": "+0%",
+  "pitch": "+0Hz",
+  "text": "Where might this pole break?  Start with the sideways load at its physical tip.  Bending demand increases down the pole. The section on the right shows the timber available to resist it.",
+  "unit": "one chapter per call",
+  "fingerprint": "80d3958ebd6b260bd3dc7b8f9b66b16e02a4542bf45a54f229f9786d1186fbdc"
+}

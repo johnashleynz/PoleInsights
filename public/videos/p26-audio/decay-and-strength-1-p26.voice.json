@@ -1,0 +1,10 @@
+{
+  "provider": "edge_tts",
+  "voice": "en-GB-RyanNeural",
+  "rate": "-8%",
+  "volume": "+0%",
+  "pitch": "+0Hz",
+  "text": "Decay weakens wood without leaving a hole.  This section has central decay, becoming less severe away from its source.  The distribution is prescribed: an illustrative material penalty, not a forecast of decay growth.",
+  "unit": "one chapter per call",
+  "fingerprint": "f7d29d2d2038ccc79de9689fcf2c4598751a745209d3392ffb0a7227608189b7"
+}

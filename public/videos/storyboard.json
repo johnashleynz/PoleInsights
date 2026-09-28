@@ -1,0 +1,780 @@
+[
+  {
+    "id": "where-poles-break",
+    "title": "Where poles break",
+    "subtitle": "Load, taper and the weakest section",
+    "chapters": [
+      {
+        "title": "Follow the load",
+        "view": "Setup",
+        "camera": "whole",
+        "text": "{CAM:whole}Where might this pole break? [P1.5] Start with the {CAM:tip}{LABEL:Tip load}sideways load at its physical tip. [P0.8] {CAM:returnWide}Bending demand increases down the pole. The section on the right shows the timber available to resist it.",
+        "motion": "reveal",
+        "callout": "Tip load",
+        "gapAfter": 0.8,
+        "shots": [
+          {
+            "id": "whole",
+            "framing": "whole",
+            "transition": "move",
+            "easing": "easeOutCubic"
+          },
+          {
+            "id": "tip",
+            "framing": "tip",
+            "transition": "move",
+            "easing": "easeOutCubic"
+          },
+          {
+            "id": "returnWide",
+            "framing": "whole",
+            "transition": "move",
+            "easing": "easeInOutQuad"
+          }
+        ]
+      },
+      {
+        "title": "Demand meets resistance",
+        "view": "Stresses",
+        "camera": "whole",
+        "text": "{CAM:whole}The pole also thickens towards the ground. Demand is only half the story. [P0.4] Here, {CAM:section}{LABEL:Beam utilisation}green and blue show utilisation below the assumed timber strength. [P0.8] Applied stress, material strength and their ratio are different quantities.",
+        "motion": "orbit",
+        "callout": "Bending demand",
+        "gapAfter": 1.4,
+        "shots": [
+          {
+            "id": "whole",
+            "framing": "whole",
+            "transition": "move",
+            "easing": "easeInOutQuad"
+          },
+          {
+            "id": "section",
+            "framing": "section",
+            "transition": "move",
+            "easing": "easeInOutQuad"
+          }
+        ]
+      },
+      {
+        "title": "A local weakness",
+        "view": "Innerview",
+        "camera": "detail",
+        "text": "{CAM:whole}This pole has a weakened region above ground. [P0.8] {CAM:detail}{LABEL:Remaining timber}Look at the remaining timber. It still carries load. A defect can change the governing height; this close view does not identify it.",
+        "motion": "push",
+        "callout": "Hidden weakness",
+        "gapAfter": 0.6,
+        "shots": [
+          {
+            "id": "whole",
+            "framing": "whole",
+            "transition": "move",
+            "easing": "easeOutCubic"
+          },
+          {
+            "id": "detail",
+            "framing": "detail",
+            "transition": "move",
+            "easing": "easeOutCubic"
+          }
+        ]
+      },
+      {
+        "title": "Turn the load",
+        "view": "Stresses",
+        "camera": "front",
+        "text": "{CAM:whole}The load now points in another direction. [P0.8] Follow the {CAM:tip}{LABEL:Load direction}arrow. An off-centre defect can respond differently when bending changes direction. [P0.4] These are beam bending estimates. Splitting, shell instability and real fracture need separate assessment.",
+        "motion": "sweep",
+        "callout": "Load direction",
+        "gapAfter": 1.8,
+        "shots": [
+          {
+            "id": "whole",
+            "framing": "whole",
+            "transition": "move",
+            "easing": "easeInOutQuad"
+          },
+          {
+            "id": "tip",
+            "framing": "tipnorth",
+            "transition": "move",
+            "easing": "easeInOutQuad"
+          }
+        ]
+      }
+    ],
+    "revision": "P26",
+    "audioRevision": "p26",
+    "uiBuild": "P26 authoring / P25 model"
+  },
+  {
+    "id": "decay-and-strength",
+    "title": "Decay and pole strength",
+    "subtitle": "Material, location and the remaining shell",
+    "chapters": [
+      {
+        "title": "Begin with sound timber",
+        "view": "Setup",
+        "camera": "whole",
+        "text": "{CAM:whole}An intact surface can conceal deterioration. [P0.8] {CAM:detail}{LABEL:Sound timber}Here the cut face contains sound timber. In bending, fibres farther from the centre have greater leverage. The location of damage therefore matters, as well as its size.",
+        "motion": "reveal",
+        "callout": "Outer fibres",
+        "gapAfter": 0.8,
+        "shots": [
+          {
+            "id": "whole",
+            "framing": "whole",
+            "transition": "move",
+            "easing": "easeOutCubic"
+          },
+          {
+            "id": "detail",
+            "framing": "detail",
+            "transition": "move",
+            "easing": "easeOutCubic"
+          }
+        ]
+      },
+      {
+        "title": "Decay is not always a cavity",
+        "view": "Innerview",
+        "camera": "detail",
+        "text": "{CAM:whole}Decay weakens wood without leaving a hole. [P0.4] {CAM:detail}{LABEL:Prescribed decay}This section has central decay, becoming less severe away from its source. [P0.8] The distribution is prescribed: an illustrative material penalty, not a forecast of decay growth.",
+        "motion": "push",
+        "callout": "Graded decay",
+        "gapAfter": 1.4,
+        "shots": [
+          {
+            "id": "whole",
+            "framing": "whole",
+            "transition": "move",
+            "easing": "easeInOutQuad"
+          },
+          {
+            "id": "detail",
+            "framing": "detail",
+            "transition": "move",
+            "easing": "easeInOutQuad"
+          }
+        ]
+      },
+      {
+        "title": "Location changes the response",
+        "view": "Stresses",
+        "camera": "detail",
+        "text": "{CAM:whole}The weakened region is now nearer the outside. [P0.8] {CAM:detail}{LABEL:Off-centre decay}The coloured section shows beam utilisation in the remaining material. This case is fixed. Position changes the bending response; this view cannot demonstrate every damage pattern.",
+        "motion": "orbitDetail",
+        "callout": "Remaining timber",
+        "gapAfter": 0.6,
+        "shots": [
+          {
+            "id": "whole",
+            "framing": "whole",
+            "transition": "move",
+            "easing": "easeOutCubic"
+          },
+          {
+            "id": "detail",
+            "framing": "detail",
+            "transition": "move",
+            "easing": "easeOutCubic"
+          }
+        ]
+      },
+      {
+        "title": "A hollow leaves a shell",
+        "view": "Setup",
+        "camera": "detail",
+        "text": "{CAM:whole}A cavity removes wood completely. [P0.8] {CAM:detail}{LABEL:Remaining shell}The cut face shows the shell left around the opening. Its size and position affect resistance. Thin shells may split or buckle; those failure mechanisms are not predicted by this beam bending model.",
+        "motion": "topDetail",
+        "callout": "Cavity",
+        "gapAfter": 1.8,
+        "shots": [
+          {
+            "id": "whole",
+            "framing": "whole",
+            "transition": "move",
+            "easing": "easeInOutQuad"
+          },
+          {
+            "id": "detail",
+            "framing": "detail",
+            "transition": "move",
+            "easing": "easeInOutQuad"
+          }
+        ]
+      }
+    ],
+    "revision": "P26",
+    "audioRevision": "p26",
+    "uiBuild": "P26 authoring / P25 model"
+  },
+  {
+    "id": "ultrasonic-detection",
+    "title": "Listening inside a pole",
+    "subtitle": "A conceptual UB1000 inspection",
+    "chapters": [
+      {
+        "title": "Choose an inspection plane",
+        "view": "Setup",
+        "camera": "detail",
+        "text": "{CAM:whole}Where should we inspect? [P1.5] {CAM:detail}{LABEL:Opposed devices}The U B one thousand pair sits opposite each other at one height. One transmits; the other receives. This scene shows the arrangement. The next view shows the simulated pulse.",
+        "motion": "orbitDetail",
+        "callout": "Inspection pair",
+        "gapAfter": 0.8,
+        "shots": [
+          {
+            "id": "whole",
+            "framing": "whole",
+            "transition": "move",
+            "easing": "easeOutCubic"
+          },
+          {
+            "id": "detail",
+            "framing": "detail",
+            "transition": "move",
+            "easing": "easeOutCubic"
+          }
+        ]
+      },
+      {
+        "title": "Watch the pulse travel",
+        "view": "Detect",
+        "camera": "detail",
+        "text": "{CAM:whole}A simulated pulse crosses sound wood. [P0.8] {CAM:detail}{LABEL:Received signal}Below, the trace shows the receiver response while the animation repeats. Later waves reflect around the section. Acoustic parameters are illustrative; the colour scale stays the same.",
+        "motion": "push",
+        "callout": "Transmitted pulse",
+        "gapAfter": 1.4,
+        "shots": [
+          {
+            "id": "whole",
+            "framing": "whole",
+            "transition": "move",
+            "easing": "easeInOutQuad"
+          },
+          {
+            "id": "detail",
+            "framing": "detail",
+            "transition": "move",
+            "easing": "easeInOutQuad"
+          }
+        ]
+      },
+      {
+        "title": "Defects alter the signal",
+        "view": "Detect",
+        "camera": "detail",
+        "text": "{CAM:whole}Decay changes this simulated response. [P0.8] {CAM:detail}{LABEL:Sound reference}Compare the section trace with the sound reference below. Reflection, scattering and damping can affect the waveform. A large peak alone does not establish strength: overlapping waves can reinforce one another.",
+        "motion": "orbitDetail",
+        "callout": "Decay changes the wave",
+        "gapAfter": 0.6,
+        "shots": [
+          {
+            "id": "whole",
+            "framing": "whole",
+            "transition": "move",
+            "easing": "easeOutCubic"
+          },
+          {
+            "id": "detail",
+            "framing": "detail",
+            "transition": "move",
+            "easing": "easeOutCubic"
+          }
+        ]
+      },
+      {
+        "title": "From measurement to assessment",
+        "view": "Stresses",
+        "camera": "whole",
+        "text": "{CAM:whole}This number is a {LABEL:Timber bending estimate}timber bending estimate. [P0.8] It uses geometry, material inputs and defects in a separate structural model. {CAM:section}The acoustic animation cannot measure fibre strength. Approved device calibration and interpretation remain separate requirements.",
+        "motion": "reveal",
+        "callout": "Timber bending estimate",
+        "gapAfter": 1.8,
+        "shots": [
+          {
+            "id": "whole",
+            "framing": "whole",
+            "transition": "move",
+            "easing": "easeInOutQuad"
+          },
+          {
+            "id": "section",
+            "framing": "section",
+            "transition": "move",
+            "easing": "easeInOutQuad"
+          }
+        ]
+      }
+    ],
+    "revision": "P26",
+    "audioRevision": "p26",
+    "uiBuild": "P26 authoring / P25 model"
+  },
+  {
+    "id": "before-climbing",
+    "title": "Before anyone climbs",
+    "subtitle": "Condition, demands and an approved decision rule",
+    "chapters": [
+      {
+        "title": "Look beyond appearance",
+        "view": "Setup",
+        "camera": "whole",
+        "text": "{CAM:whole}A pole can look sound while hiding deterioration. [P0.8] Appearance is only part of inspection. {CAM:detail}{LABEL:Surface appearance}These outside and cut-face images are model views, not field evidence. A pre-climb assessment must consider more.",
+        "motion": "reveal",
+        "callout": "Surface appearance",
+        "gapAfter": 0.8,
+        "shots": [
+          {
+            "id": "whole",
+            "framing": "whole",
+            "transition": "move",
+            "easing": "easeOutCubic"
+          },
+          {
+            "id": "detail",
+            "framing": "detail",
+            "transition": "move",
+            "easing": "easeOutCubic"
+          }
+        ]
+      },
+      {
+        "title": "Inspect the hidden condition",
+        "view": "Innerview",
+        "camera": "detail",
+        "text": "{CAM:whole}This transparent model exposes entered decay. [P0.8] {CAM:detail}{LABEL:Entered condition}The section shows its position and remaining wood. Ultrasound contributes evidence in practice, requiring reliable measurements and validated interpretation. This geometry is prescribed, not measured acoustically.",
+        "motion": "push",
+        "callout": "Hidden deterioration",
+        "gapAfter": 1.4,
+        "shots": [
+          {
+            "id": "whole",
+            "framing": "whole",
+            "transition": "move",
+            "easing": "easeInOutQuad"
+          },
+          {
+            "id": "detail",
+            "framing": "detail",
+            "transition": "move",
+            "easing": "easeInOutQuad"
+          }
+        ]
+      },
+      {
+        "title": "Consider the demands",
+        "view": "Stresses",
+        "camera": "whole",
+        "text": "{CAM:whole}The red arrow represents a simple {CAM:tip}{LABEL:Applied load}sideways tip load. [P0.8] It does not depict a climber or all the forces from their equipment. A real assessment must include actual work loads, the planned procedure and ground conditions.",
+        "motion": "sweep",
+        "callout": "Applied load",
+        "gapAfter": 0.6,
+        "shots": [
+          {
+            "id": "whole",
+            "framing": "whole",
+            "transition": "move",
+            "easing": "easeOutCubic"
+          },
+          {
+            "id": "tip",
+            "framing": "tip",
+            "transition": "move",
+            "easing": "easeOutCubic"
+          }
+        ]
+      },
+      {
+        "title": "Use the approved procedure",
+        "view": "Detect",
+        "camera": "detail",
+        "text": "{CAM:whole}Inspection evidence supports an approved work procedure. [P0.8] {CAM:detail}{LABEL:Simulated inspection}This repeating ultrasound view is a teaching simulation. The laboratory has no validated climb decision rules and cannot give clearance. Follow the complete inspection and escalation process.",
+        "motion": "orbitDetail",
+        "callout": "Inspection evidence",
+        "gapAfter": 1.8,
+        "shots": [
+          {
+            "id": "whole",
+            "framing": "whole",
+            "transition": "move",
+            "easing": "easeInOutQuad"
+          },
+          {
+            "id": "detail",
+            "framing": "detail",
+            "transition": "move",
+            "easing": "easeInOutQuad"
+          }
+        ]
+      }
+    ],
+    "revision": "P26",
+    "audioRevision": "p26",
+    "uiBuild": "P26 authoring / P25 model"
+  },
+  {
+    "id": "predict-pole-test",
+    "title": "Estimate a pole test load",
+    "subtitle": "A practical walkthrough: species, dimensions, deterioration and the critical section",
+    "revision": "P26",
+    "audioRevision": "p26",
+    "chapters": [
+      {
+        "title": "Start with the test arrangement",
+        "view": "Setup",
+        "camera": "whole",
+        "motion": "reveal",
+        "callout": "Groundline restraint",
+        "text": "{CAM:ground}What does the test arrangement assume? [P1.5] In Setup, open Ground, then Reference option. Select {LABEL:Ideal fixed groundline}Ideal fixed groundline for a restrained cantilever. {CAM:tip}The model loads the physical tip. Match that fixture; a three-point bending test needs a different model.",
+        "gapAfter": 0.8,
+        "shots": [
+          {
+            "id": "ground",
+            "framing": "ground",
+            "transition": "cut",
+            "easing": "easeOutCubic"
+          },
+          {
+            "id": "tip",
+            "framing": "tip",
+            "transition": "cut",
+            "easing": "easeOutCubic"
+          }
+        ]
+      },
+      {
+        "title": "Choose the timber and measurements",
+        "view": "Setup",
+        "camera": "whole",
+        "motion": "orbit",
+        "callout": "Measured taper",
+        "text": "{CAM:properties}Under Pole, open {LABEL:Properties}Properties. Choose a source appropriate to the timber. {CAM:entered}Here, eight gigapascals and forty megapascals are example assumptions, not measured data. [P0.8] {CAM:dimensions}{LABEL:Entered dimensions}Enter length, embedment and the three diameters or circumferences. Keep the property source with the case.",
+        "gapAfter": 1.4,
+        "shots": [
+          {
+            "id": "properties",
+            "framing": "properties",
+            "transition": "cut",
+            "easing": "easeInOutQuad"
+          },
+          {
+            "id": "entered",
+            "framing": "entered",
+            "transition": "cut",
+            "easing": "easeInOutQuad"
+          },
+          {
+            "id": "dimensions",
+            "framing": "dimensions",
+            "transition": "cut",
+            "easing": "easeInOutQuad"
+          }
+        ]
+      },
+      {
+        "title": "Describe the known deterioration",
+        "view": "Innerview",
+        "camera": "detail",
+        "motion": "push",
+        "callout": "Known cavity",
+        "text": "{CAM:defects}In Defects, choose a type and press {LABEL:Add}Add. {CAM:cavity}Set its height, length, width and depth. Position and shape controls place this cavity off centre. [P0.8] It removes wood completely. Decay instead leaves weakened material, with an illustrative severity-to-strength relationship.",
+        "gapAfter": 0.6,
+        "shots": [
+          {
+            "id": "defects",
+            "framing": "defects",
+            "transition": "cut",
+            "easing": "easeOutCubic"
+          },
+          {
+            "id": "cavity",
+            "framing": "cavity",
+            "transition": "cut",
+            "easing": "easeOutCubic"
+          }
+        ]
+      },
+      {
+        "title": "Read the timber bending estimate",
+        "view": "Stresses",
+        "camera": "whole",
+        "motion": "orbit",
+        "callout": "Critical section",
+        "text": "{CAM:capacity}Choose Stresses and {LABEL:Capacity (kN)}Capacity in kilonewtons. Keep Specified load direction, then press {CAM:critical}{LABEL:Critical section}Critical section. [P0.8] Timber bending limit is the whole-pole estimate. The height curve shows section capacities; its lowest value locates the first bending limit, possibly above ground.",
+        "gapAfter": 1.8,
+        "shots": [
+          {
+            "id": "capacity",
+            "framing": "capacity",
+            "transition": "cut",
+            "easing": "easeInOutQuad"
+          },
+          {
+            "id": "critical",
+            "framing": "critical",
+            "transition": "cut",
+            "easing": "easeInOutQuad"
+          }
+        ]
+      },
+      {
+        "title": "Explore direction and uncertainty",
+        "view": "Stresses",
+        "camera": "whole",
+        "motion": "sweep",
+        "callout": "Load direction",
+        "text": "{CAM:direction}The compass controls the load direction. [P0.8] {CAM:worst}{LABEL:Worst direction}Load applied in worst direction searches for a weaker orientation. Off-centre damage makes direction important. The comparison also depends on entered dimensions and material strength; credible input ranges are part of interpreting this estimate.",
+        "gapAfter": 1,
+        "shots": [
+          {
+            "id": "direction",
+            "framing": "direction",
+            "transition": "cut",
+            "easing": "easeOutCubic"
+          },
+          {
+            "id": "worst",
+            "framing": "worst",
+            "transition": "cut",
+            "easing": "easeOutCubic"
+          }
+        ]
+      },
+      {
+        "title": "Compare, save and check against a test",
+        "view": "Stresses",
+        "camera": "detail",
+        "motion": "topDetail",
+        "callout": "Remaining timber",
+        "text": "{CAM:menu}Open Menu and {LABEL:Compare A/B}Compare A and B to set up matching cases. {CAM:compare}Hold geometry, material and direction constant when comparing deterioration. {CAM:save}Save case preserves the inputs and property source. [P0.8] This beam first-limit estimate is not a validated fracture load; comparison with measured tests remains necessary.",
+        "gapAfter": 1.2,
+        "shots": [
+          {
+            "id": "menu",
+            "framing": "menu",
+            "transition": "cut",
+            "easing": "easeInOutQuad"
+          },
+          {
+            "id": "compare",
+            "framing": "compare",
+            "transition": "cut",
+            "easing": "easeInOutQuad"
+          },
+          {
+            "id": "save",
+            "framing": "save",
+            "transition": "cut",
+            "easing": "easeInOutQuad"
+          }
+        ]
+      }
+    ],
+    "uiBuild": "P25"
+  },
+  {
+    "id": "ub1000-analyser",
+    "title": "UB1000 and the analyser",
+    "subtitle": "From an inspection plane to a recorded scan",
+    "audioRevision": "p26",
+    "revision": "P26",
+    "uiBuild": "P25",
+    "chapters": [
+      {
+        "title": "Place the pair",
+        "text": "{CAM:devices}Hidden timber condition needs inspection evidence. [P0.8] The {LABEL:UB1000 pair}U B one thousand uses opposed devices to send and receive ultrasound through the pole. {CAM:devicesClose}Here they mark one inspection plane. The laboratory animation is illustrative; it is not a calibrated instrument reading.",
+        "view": "Detect",
+        "camera": "whole",
+        "motion": "reveal",
+        "callout": "",
+        "gapAfter": 1.2,
+        "shots": [
+          {
+            "id": "devices",
+            "framing": "devices",
+            "transition": "cut",
+            "easing": "easeOutCubic"
+          },
+          {
+            "id": "devicesClose",
+            "framing": "devicesClose",
+            "transition": "cut",
+            "easing": "easeOutCubic"
+          }
+        ]
+      },
+      {
+        "title": "Open the analyser",
+        "text": "{CAM:analyserHome}The {LABEL:Axonic Analyser}Axonic Analyser prototype organises the inspection around a pole and its scans. [P0.8] {CAM:analyserScan}The scan view brings the devices and acquisition workflow together. In this demonstration, example signals drive the display. No connected instrument or measured field result is implied.",
+        "view": "Detect",
+        "camera": "whole",
+        "motion": "reveal",
+        "callout": "",
+        "gapAfter": 0.8,
+        "shots": [
+          {
+            "id": "analyserHome",
+            "framing": "analyserHome",
+            "transition": "cut",
+            "easing": "easeOutCubic"
+          },
+          {
+            "id": "analyserScan",
+            "framing": "analyserScan",
+            "transition": "cut",
+            "easing": "easeOutCubic"
+          }
+        ]
+      },
+      {
+        "title": "Read the evidence",
+        "text": "{CAM:analyserResult}A scan produces evidence to examine, rather than a picture of the exact decay shape. [P0.8] {CAM:analyserDetail}{LABEL:Recorded scan}The analyser keeps scan information available for review. Signal behaviour needs an approved interpretation; a single peak is not a direct measurement of pole bending capacity.",
+        "view": "Detect",
+        "camera": "whole",
+        "motion": "reveal",
+        "callout": "",
+        "gapAfter": 1.6,
+        "shots": [
+          {
+            "id": "analyserResult",
+            "framing": "analyserResult",
+            "transition": "cut",
+            "easing": "easeOutCubic"
+          },
+          {
+            "id": "analyserDetail",
+            "framing": "analyserDetail",
+            "transition": "cut",
+            "easing": "easeOutCubic"
+          }
+        ]
+      },
+      {
+        "title": "Keep the assessment connected",
+        "text": "{CAM:analyserRecords}Records connect the inspection activity with the pole being assessed. [P0.8] {CAM:analyserHome}Keep that evidence alongside material, geometry and structural information. The demonstration shows the workflow, while the laboratory uses a separate bending model. Neither the animation nor these example screens grants climbing clearance.",
+        "view": "Detect",
+        "camera": "whole",
+        "motion": "reveal",
+        "callout": "",
+        "gapAfter": 1,
+        "shots": [
+          {
+            "id": "analyserRecords",
+            "framing": "analyserRecords",
+            "transition": "cut",
+            "easing": "easeOutCubic"
+          },
+          {
+            "id": "analyserHome",
+            "framing": "analyserHome",
+            "transition": "cut",
+            "easing": "easeOutCubic"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "safe2climb",
+    "title": "Introducing Safe2Climb",
+    "subtitle": "A structured inspection and an auditable record",
+    "audioRevision": "p26",
+    "revision": "P26",
+    "uiBuild": "P25",
+    "chapters": [
+      {
+        "title": "Structure the inspection",
+        "text": "{CAM:safeHome}A pre-climb inspection needs a clear sequence and a record of what happened. [P0.8] {CAM:safeChecks}{LABEL:Structured checks}Safe2Climb guides the inspector through the pole, attachments, setting, movement and base condition. Each step keeps observations connected to the inspection, making the process easier to review.",
+        "view": "Detect",
+        "camera": "whole",
+        "motion": "reveal",
+        "callout": "",
+        "gapAfter": 1.2,
+        "shots": [
+          {
+            "id": "safeHome",
+            "framing": "safeHome",
+            "transition": "cut",
+            "easing": "easeOutCubic"
+          },
+          {
+            "id": "safeChecks",
+            "framing": "safeChecks",
+            "transition": "cut",
+            "easing": "easeOutCubic"
+          }
+        ]
+      },
+      {
+        "title": "Add another safety layer",
+        "text": "{CAM:safeUB}The {LABEL:UB1000 check}U B one thousand check adds another layer of inspection evidence. [P0.8] It supplements the physical checks. {CAM:safeScan}The prototype demonstrates acquisition and follow-up states with example results. Those examples are not live measurements, and they do not replace an approved climbing decision procedure.",
+        "view": "Detect",
+        "camera": "whole",
+        "motion": "reveal",
+        "callout": "",
+        "gapAfter": 0.8,
+        "shots": [
+          {
+            "id": "safeUB",
+            "framing": "safeUB",
+            "transition": "cut",
+            "easing": "easeOutCubic"
+          },
+          {
+            "id": "safeScan",
+            "framing": "safeScan",
+            "transition": "cut",
+            "easing": "easeOutCubic"
+          }
+        ]
+      },
+      {
+        "title": "Record lean and movement",
+        "text": "{CAM:safeLean}{LABEL:Lean record}A lean record can retain a photograph and an indicated pole alignment. [P0.8] {CAM:safeMovement}{LABEL:Movement record}Movement observations can include a recorded amount and a note. Together, these records make the observation clearer for another person. This prototype uses an image angle and manually entered movement.",
+        "view": "Detect",
+        "camera": "whole",
+        "motion": "reveal",
+        "callout": "",
+        "gapAfter": 1.6,
+        "shots": [
+          {
+            "id": "safeLean",
+            "framing": "safeLean",
+            "transition": "cut",
+            "easing": "easeOutCubic"
+          },
+          {
+            "id": "safeMovement",
+            "framing": "safeMovement",
+            "transition": "cut",
+            "easing": "easeOutCubic"
+          }
+        ]
+      },
+      {
+        "title": "Make issues visible",
+        "text": "{CAM:safeIssues}When something causes concern, record the reason and supporting evidence. [P0.8] {CAM:safeRecords}{LABEL:Inspection record}Inspection history keeps issues visible for review and handover, with the pole and inspection context. That creates an auditable record. This local prototype demonstrates the workflow; it does not send a live network notification.",
+        "view": "Detect",
+        "camera": "whole",
+        "motion": "reveal",
+        "callout": "",
+        "gapAfter": 1,
+        "shots": [
+          {
+            "id": "safeIssues",
+            "framing": "safeIssues",
+            "transition": "cut",
+            "easing": "easeOutCubic"
+          },
+          {
+            "id": "safeRecords",
+            "framing": "safeRecords",
+            "transition": "cut",
+            "easing": "easeOutCubic"
+          }
+        ]
+      }
+    ]
+  }
+]

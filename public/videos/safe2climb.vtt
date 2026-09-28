@@ -1,0 +1,64 @@
+WEBVTT
+
+00:00:00.900 --> 00:00:04.962
+A pre-climb inspection needs a clear sequence and a record of what happened.
+
+00:00:06.704 --> 00:00:10.943
+Safe2Climb guides the inspector through the pole, attachments, setting,
+
+00:00:11.229 --> 00:00:12.859
+movement and base condition.
+
+00:00:13.797 --> 00:00:17.560
+Each step keeps observations connected to the inspection, making the
+
+00:00:17.574 --> 00:00:19.232
+process easier to review.
+
+00:00:21.500 --> 00:00:25.304
+The U B one thousand check adds another layer of inspection evidence.
+
+00:00:27.046 --> 00:00:29.071
+It supplements the physical checks.
+
+00:00:30.008 --> 00:00:34.071
+The prototype demonstrates acquisition and follow-up states with example
+
+00:00:34.084 --> 00:00:34.682
+results.
+
+00:00:35.620 --> 00:00:39.329
+Those examples are not live measurements, and they do not replace an
+
+00:00:39.342 --> 00:00:41.462
+approved climbing decision procedure.
+
+00:00:43.333 --> 00:00:47.341
+A lean record can retain a photograph and an indicated pole alignment.
+
+00:00:49.083 --> 00:00:52.453
+Movement observations can include a recorded amount and a note.
+
+00:00:53.390 --> 00:00:57.480
+Together, these records make the observation clearer for another person.
+
+00:00:58.418 --> 00:01:02.113
+This prototype uses an image angle and manually entered movement.
+
+00:01:04.767 --> 00:01:09.128
+When something causes concern, record the reason and supporting evidence.
+
+00:01:10.870 --> 00:01:14.905
+Inspection history keeps issues visible for review and handover, with
+
+00:01:14.919 --> 00:01:16.875
+the pole and inspection context.
+
+00:01:17.813 --> 00:01:19.892
+That creates an auditable record.
+
+00:01:20.829 --> 00:01:25.095
+This local prototype demonstrates the workflow; it does not send a live
+
+00:01:25.109 --> 00:01:26.604
+network notification.

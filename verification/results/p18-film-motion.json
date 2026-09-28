@@ -1,0 +1,98 @@
+[
+  {
+    "film": "where-poles-break",
+    "chapter": 1,
+    "mainPoleAreaChangedFraction": 0.07613595706618963,
+    "pass": true
+  },
+  {
+    "film": "where-poles-break",
+    "chapter": 2,
+    "mainPoleAreaChangedFraction": 0.06668157423971377,
+    "pass": true
+  },
+  {
+    "film": "where-poles-break",
+    "chapter": 3,
+    "mainPoleAreaChangedFraction": 0.4599016100178891,
+    "pass": true
+  },
+  {
+    "film": "where-poles-break",
+    "chapter": 4,
+    "mainPoleAreaChangedFraction": 0.0679964221824687,
+    "pass": true
+  },
+  {
+    "film": "decay-and-strength",
+    "chapter": 1,
+    "mainPoleAreaChangedFraction": 0.07262969588550984,
+    "pass": true
+  },
+  {
+    "film": "decay-and-strength",
+    "chapter": 2,
+    "mainPoleAreaChangedFraction": 0.5262790697674419,
+    "pass": true
+  },
+  {
+    "film": "decay-and-strength",
+    "chapter": 3,
+    "mainPoleAreaChangedFraction": 0.64195885509839,
+    "pass": true
+  },
+  {
+    "film": "decay-and-strength",
+    "chapter": 4,
+    "mainPoleAreaChangedFraction": 0.5106529516994633,
+    "pass": true
+  },
+  {
+    "film": "ultrasonic-detection",
+    "chapter": 1,
+    "mainPoleAreaChangedFraction": 0.6378354203935599,
+    "pass": true
+  },
+  {
+    "film": "ultrasonic-detection",
+    "chapter": 2,
+    "mainPoleAreaChangedFraction": 0.4484257602862254,
+    "pass": true
+  },
+  {
+    "film": "ultrasonic-detection",
+    "chapter": 3,
+    "mainPoleAreaChangedFraction": 0.6341949910554562,
+    "pass": true
+  },
+  {
+    "film": "ultrasonic-detection",
+    "chapter": 4,
+    "mainPoleAreaChangedFraction": 0.06866726296958856,
+    "pass": true
+  },
+  {
+    "film": "before-climbing",
+    "chapter": 1,
+    "mainPoleAreaChangedFraction": 0.0726654740608229,
+    "pass": true
+  },
+  {
+    "film": "before-climbing",
+    "chapter": 2,
+    "mainPoleAreaChangedFraction": 0.4959570661896243,
+    "pass": true
+  },
+  {
+    "film": "before-climbing",
+    "chapter": 3,
+    "mainPoleAreaChangedFraction": 0.0657871198568873,
+    "pass": true
+  },
+  {
+    "film": "before-climbing",
+    "chapter": 4,
+    "mainPoleAreaChangedFraction": 0.6413953488372093,
+    "pass": true
+  }
+]

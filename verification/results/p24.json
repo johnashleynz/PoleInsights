@@ -1,0 +1,69 @@
+{
+  "checks": [
+    {
+      "name": "Sound matches reference envelope",
+      "pass": true
+    },
+    {
+      "name": "Sound peak ratio is one",
+      "pass": true
+    },
+    {
+      "name": "Sound energy ratio is one",
+      "pass": true
+    },
+    {
+      "name": "Half amplitude remains half, not self-normalised",
+      "pass": true
+    },
+    {
+      "name": "Half amplitude has quarter energy proxy",
+      "pass": true
+    },
+    {
+      "name": "Interference above sound scale is retained",
+      "pass": true
+    },
+    {
+      "name": "Envelope non-negative and finite",
+      "pass": true
+    },
+    {
+      "name": "Arrival is raw threshold sample, not RMS pre-echo",
+      "pass": true
+    },
+    {
+      "name": "No received signal: no arrival and zero proxies",
+      "pass": true
+    },
+    {
+      "name": "Missing reference is unavailable, not valid percentage",
+      "pass": true
+    },
+    {
+      "name": "Two separated envelope peaks found",
+      "pass": true
+    },
+    {
+      "name": "Reject invalid length",
+      "pass": true
+    },
+    {
+      "name": "Reject invalid mismatch",
+      "pass": true
+    },
+    {
+      "name": "Reject invalid duration",
+      "pass": true
+    },
+    {
+      "name": "Reject invalid frequency",
+      "pass": true
+    },
+    {
+      "name": "Reject invalid nonfinite",
+      "pass": true
+    }
+  ],
+  "scope": "Display-only RMS envelope and signal statistics, not UB1000 calibration."
+}

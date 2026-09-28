@@ -1,0 +1,80 @@
+{
+  "format": "innerview-pole-lab",
+  "version": 1,
+  "cases": [
+    {
+      "schemaVersion": 1,
+      "id": "A",
+      "name": "Pole A",
+      "length": 11,
+      "embedment": 1.8,
+      "diameters": {
+        "butt": 0.36,
+        "ground": 0.32,
+        "tip": 0.18
+      },
+      "species": "radiata-pine",
+      "material": {
+        "E": 8000000000,
+        "tension": 35000000,
+        "compression": 25000000,
+        "basis": "illustrative"
+      },
+      "soil": "Medium",
+      "loadKN": 1,
+      "bearing": 90,
+      "regions": []
+    },
+    {
+      "schemaVersion": 1,
+      "id": "B",
+      "name": "Pole B",
+      "length": 11,
+      "embedment": 1.8,
+      "diameters": {
+        "butt": 0.36,
+        "ground": 0.32,
+        "tip": 0.18
+      },
+      "species": "radiata-pine",
+      "material": {
+        "E": 8000000000,
+        "tension": 35000000,
+        "compression": 25000000,
+        "basis": "illustrative"
+      },
+      "soil": "Medium",
+      "loadKN": 1,
+      "bearing": 90,
+      "regions": [
+        {
+          "id": "333d20ae-e2af-476c-a5d4-fd7b2de07d0e",
+          "name": "Internal decay",
+          "kind": "decay",
+          "zMin": -0.6,
+          "zMax": 1.4,
+          "severity": 0.7,
+          "shape": {
+            "type": "ellipse",
+            "centreX": 0.02,
+            "centreY": 0,
+            "radiusX": 0.0864,
+            "radiusY": 0.0736,
+            "angle": 0,
+            "profile": "rounded"
+          },
+          "provenance": "synthetic"
+        }
+      ]
+    }
+  ],
+  "view": "Innerview",
+  "section": 0.4,
+  "sections": [
+    0.4,
+    0.4
+  ],
+  "active": 1,
+  "compare": true,
+  "qualification": "Synthetic example. Illustrative properties. No device measurements."
+}

@@ -1,0 +1,10 @@
+{
+  "provider": "edge_tts",
+  "voice": "en-GB-RyanNeural",
+  "rate": "-8%",
+  "volume": "+0%",
+  "pitch": "+0Hz",
+  "text": "When something causes concern, record the reason and supporting evidence.  Inspection history keeps issues visible for review and handover, with the pole and inspection context. That creates an auditable record. This local prototype demonstrates the workflow; it does not send a live network notification.",
+  "unit": "one chapter per call",
+  "fingerprint": "72667ca23fc8f6bf8b1ee04c3cf8b9d537999c281bf88d9619c4801d9d5befcc"
+}

@@ -1,0 +1,10 @@
+{
+  "provider": "edge_tts",
+  "voice": "en-GB-RyanNeural",
+  "rate": "-8%",
+  "volume": "+0%",
+  "pitch": "+0Hz",
+  "text": "What does the test arrangement assume?  In Setup, open Ground, then Reference option. Select Ideal fixed groundline for a restrained cantilever. The model loads the physical tip. Match that fixture; a three-point bending test needs a different model.",
+  "unit": "one chapter per call",
+  "fingerprint": "e7e6e0da5b11c204acab9f3e941c9fbe4f3b784705532c913eaae51b221a026b"
+}

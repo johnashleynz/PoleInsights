@@ -1,0 +1,31 @@
+{
+  "name": "innerview-pole-laboratory",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "node tools/build.mjs",
+    "test": "node --experimental-strip-types verification/verify.mjs",
+    "deploy:staging": "npm run build && wrangler pages deploy dist --project-name pole-insights-staging"
+  },
+  "dependencies": {
+    "lucide-react": "1.31.0",
+    "react": "19.2.6",
+    "react-dom": "19.2.6",
+    "three": "0.185.1"
+  },
+  "devDependencies": {
+    "@types/node": "22.19.19",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "@types/three": "0.185.4",
+    "@vitejs/plugin-react": "6.0.2",
+    "typescript": "5.9.3",
+    "vite": "^8.3.1",
+    "wrangler": "^4.143.0"
+  },
+  "engines": {
+    "node": ">=22.13"
+  }
+}

@@ -1,0 +1,57 @@
+[
+  {
+    "id": "where-poles-break",
+    "durationSeconds": 61.12,
+    "bytes": 4480767,
+    "sha256": "768946a494c180d5394b3b4e7fcbd560eb3d1e2fcdd5e7981518317ae36695f6",
+    "decoded": true,
+    "video": "H.264 1280x720",
+    "audio": "AAC with UK synthetic narration",
+    "maxVolumeDB": -1.3,
+    "captions": true
+  },
+  {
+    "id": "decay-and-strength",
+    "durationSeconds": 60.12,
+    "bytes": 6863343,
+    "sha256": "4717e71a20b3211ed4fa97e0bc0ee1b90fa4b02ea55b3a65e8df02c680d8bd3e",
+    "decoded": true,
+    "video": "H.264 1280x720",
+    "audio": "AAC with UK synthetic narration",
+    "maxVolumeDB": -1.3,
+    "captions": true
+  },
+  {
+    "id": "ultrasonic-detection",
+    "durationSeconds": 64.05,
+    "bytes": 7640742,
+    "sha256": "9a62cc8ecb4812a5eb370d306b2b93e530c0d93e66eb7a4ed85710bacffdee48",
+    "decoded": true,
+    "video": "H.264 1280x720",
+    "audio": "AAC with UK synthetic narration",
+    "maxVolumeDB": -1.3,
+    "captions": true
+  },
+  {
+    "id": "before-climbing",
+    "durationSeconds": 62.75,
+    "bytes": 6249410,
+    "sha256": "25c49d043c79613e9247984bd205e30f5840c0535500bace9fdab095a06ff483",
+    "decoded": true,
+    "video": "H.264 1280x720",
+    "audio": "AAC with UK synthetic narration",
+    "maxVolumeDB": -1.3,
+    "captions": true
+  },
+  {
+    "id": "predict-pole-test",
+    "durationSeconds": 127.19,
+    "bytes": 6083455,
+    "sha256": "178872c398305d0f2c325a8ba125bafd2d3874755ed8dcdb445d3b6fd4b1e486",
+    "decoded": true,
+    "video": "H.264 1280x720",
+    "audio": "AAC with UK synthetic narration",
+    "maxVolumeDB": -1.3,
+    "captions": true
+  }
+]

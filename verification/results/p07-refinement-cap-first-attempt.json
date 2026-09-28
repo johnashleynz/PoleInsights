@@ -1,0 +1,112 @@
+{
+  "case": {
+    "schemaVersion": 1,
+    "id": "A",
+    "name": "Pole A",
+    "length": 11,
+    "embedment": 1.8,
+    "diameters": {
+      "butt": 0.3,
+      "ground": 0.3,
+      "tip": 0.3
+    },
+    "species": "radiata-pine",
+    "material": {
+      "E": 8000000000,
+      "tension": 35000000,
+      "compression": 25000000,
+      "basis": "illustrative"
+    },
+    "soil": "Fixed",
+    "loadKN": 1,
+    "bearing": 90,
+    "regions": [
+      {
+        "id": "cavity",
+        "name": "Enclosed hollow",
+        "kind": "void",
+        "zMin": 1.6,
+        "zMax": 2.2,
+        "severity": 1,
+        "shape": {
+          "type": "ellipse",
+          "centreX": 0.02,
+          "centreY": 0,
+          "radiusX": 0.06,
+          "radiusY": 0.07,
+          "angle": 0,
+          "profile": "rounded"
+        },
+        "provenance": "synthetic"
+      }
+    ]
+  },
+  "probes": [
+    [
+      0.115,
+      0,
+      1.9
+    ],
+    [
+      0.04,
+      0,
+      1.58
+    ],
+    [
+      0.04,
+      0,
+      2.22
+    ],
+    [
+      -0.115,
+      0,
+      1.9
+    ],
+    [
+      0.09,
+      0,
+      1.75
+    ]
+  ],
+  "rows": [
+    {
+      "level": "coarse",
+      "nodes": 3130,
+      "elements": 1872,
+      "energy": 15.405587371937127,
+      "diagnosticPeakMPa": 2.7435283507333734,
+      "probeMPa": [
+        -2.3409048846851954,
+        -0.2554578545498389,
+        -0.2664522614382771,
+        2.1304550544104104,
+        -1.984566731926167
+      ],
+      "solveMs": 4418.5629,
+      "sampling64Ms": 22.756199999999808
+    },
+    {
+      "level": "medium",
+      "nodes": 7630,
+      "elements": 4896,
+      "energy": 15.416022769686716,
+      "diagnosticPeakMPa": 2.831738317501637,
+      "probeMPa": [
+        -2.318722112991524,
+        -0.11520598559108304,
+        -0.13771113765254786,
+        2.118097625001746,
+        -1.995620789927456
+      ],
+      "solveMs": 12951.2618,
+      "sampling64Ms": 18.10280000000057
+    },
+    {
+      "level": "fine",
+      "error": "Maximum call stack size exceeded"
+    }
+  ],
+  "assessment": {
+    "qualified": false
+  }
+}

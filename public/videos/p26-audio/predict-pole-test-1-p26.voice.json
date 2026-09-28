@@ -1,0 +1,10 @@
+{
+  "provider": "edge_tts",
+  "voice": "en-GB-RyanNeural",
+  "rate": "-8%",
+  "volume": "+0%",
+  "pitch": "+0Hz",
+  "text": "Under Pole, open Properties. Choose a source appropriate to the timber. Here, eight gigapascals and forty megapascals are example assumptions, not measured data.  Enter length, embedment and the three diameters or circumferences. Keep the property source with the case.",
+  "unit": "one chapter per call",
+  "fingerprint": "34291320976f2d0183d0f3b3a1b3ce4dd717928f591ff1e423c8c5b56f31e8b7"
+}

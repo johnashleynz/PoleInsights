@@ -1,0 +1,6 @@
+{
+  "voice": "en-GB-RyanNeural",
+  "rate": "+0%",
+  "text": "Use Menu, Compare A and B, to compare a sound baseline with the damaged pole. Keep their material, geometry and load direction the same. Save the case with its property source. This is a bending-limit estimate, not a calibrated fracture prediction. Compare it with measured failure loads to learn where the model needs improvement.",
+  "fingerprint": "f7919c952fc9fa4c5a57be42bceaa8e958daf9b7d182176021a6cb84aa8341cf"
+}

@@ -1,0 +1,27 @@
+import {writeFileSync,readFileSync} from 'node:fs';
+import {defaultCase,validateCase} from '../src/domain/model.ts';
+import {solvePole,scaleUnitResult} from '../src/analysis/beam.ts';
+import {solveNonlinearPole,loadPath,resetHistoryOnGeometry} from '../src/analysis/nonlinear.ts';
+const checks=[],check=(name,pass,data)=>{checks.push({name,pass,data});if(!pass)throw Error(name+JSON.stringify(data));},close=(name,a,b,t)=>check(name,Math.abs(a-b)<t,{a,b});
+const p={...defaultCase(),soilResponse:'yielding',loadKN:3,bearing:90,diameters:{butt:.32,ground:.32,tip:.32}},r=solveNonlinearPole(p),unloaded=solveNonlinearPole({...p,loadKN:0,soilHistory:r.nonlinear.path}),reset=solveNonlinearPole({...p,loadKN:0,soilHistory:[]}),elastic=solvePole({...p,loadKN:1});
+check('Actual-load nonlinear metadata',r.version==='beam-p16'&&r.nonlinear.referenceLimits);
+check('Ground yields and moves beyond elastic scaling',r.nonlinear.plasticDepths.length>0&&r.tipMovement>3*elastic.tipMovement*1.03);
+check('Unload preserves plastic deformation',unloaded.tipMovement>.01&&unloaded.nonlinear.residualTip===unloaded.tipMovement);
+close('Reset removes residual movement',reset.tipMovement,0,1e-10);
+close('Reference timber capacity remains explicitly elastic',r.timberLimitKN,elastic.timberLimitKN,1e-9);
+for(const [name,q] of [['loaded',r],['unloaded',unloaded]]){check(`${name} physical balance`,Math.hypot(q.reactionX+(name==='loaded'?3000:0),q.reactionY)<.001);check(`${name} finite stress field`,q.stations.every(s=>[s.ux,s.uy,s.kx,s.ky,s.stressMax,s.stressMin,s.usage].every(Number.isFinite)));}
+const top=r.stations.at(-1);close('Stress field displacement is solved tip',top.ux,r.tipX,1e-9);
+check('Residual stresses remain below ground',unloaded.stations.some(s=>s.z<0&&s.usage>0));
+check('Same committed target does not duplicate history',loadPath({...p,soilHistory:r.nonlinear.path}).length===r.nonlinear.path.length);
+check('Geometry edit clears ground history',resetHistoryOnGeometry({...p,soilHistory:[[3000,0]]},{...p,length:12,soilHistory:[[3000,0]]}).soilHistory.length===0);
+check('Load edit retains ground history',resetHistoryOnGeometry({...p,soilHistory:[[3000,0]]},{...p,loadKN:2,soilHistory:[[3000,0]]}).soilHistory.length===1);
+let rejected=false;try{scaleUnitResult(r,2)}catch{rejected=true;}check('Nonlinear solution cannot be scaled as a unit result',rejected);
+const replay=solveNonlinearPole(JSON.parse(JSON.stringify({...p,loadKN:0,soilHistory:unloaded.nonlinear.path})));close('Saved history replays residual movement',replay.tipMovement,unloaded.tipMovement,1e-10);
+check('Malformed history is rejected',validateCase({...p,soilHistory:[[NaN,0]]}).length>0);
+const regression=JSON.parse(readFileSync('verification/p16-case.json','utf8')),combined=solveNonlinearPole(regression),combinedUnload=solveNonlinearPole({...regression,loadKN:0,soilHistory:combined.nonlinear.path});
+check('Mixed drilling/knot/rot/sketch case converges',combined.nonlinear.plasticDepths.length>0);
+check('Mixed defect residual movement',combinedUnload.tipMovement>.014&&combinedUnload.tipMovement<.016);
+check('Mixed defect independent force balance',Math.hypot(combined.reactionX+3000*Math.sin(359*Math.PI/180),combined.reactionY+3000*Math.cos(359*Math.PI/180))<.001);
+check('Mixed defect unloaded force balance',Math.hypot(combinedUnload.reactionX,combinedUnload.reactionY)<.001);
+const linearMixed=solvePole({...regression,loadKN:1});check('Short drilling-span linear reference converges',linearMixed.balance<1e-6);
+writeFileSync('verification/results/p16.json',JSON.stringify({checks,loaded:r,unloaded,mixed:{combined,combinedUnload,linearMixed},scope:'Production adapter, actual-load stress/displacement consistency, load-history replay, reset and explicit elastic capacity references. No nonlinear timber failure qualification or site-specific soil calibration.'},null,2));console.log(`${checks.length} P16 ground integration checks passed.`);

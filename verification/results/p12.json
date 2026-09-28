@@ -1,0 +1,137 @@
+{
+  "scope": "Unit conversion and explicitly uncalibrated sandbox summary, not UB1000 inference",
+  "checks": [
+    {
+      "name": "320 mm diameter converts to circumference",
+      "pass": true,
+      "data": {
+        "a": 1005.3096491487338,
+        "b": 1005.3096491487338
+      }
+    },
+    {
+      "name": "Circumference input converts to metres diameter",
+      "pass": true,
+      "data": {
+        "a": 0.32,
+        "b": 0.32
+      }
+    },
+    {
+      "name": "Missing diameter remains estimated",
+      "pass": true
+    },
+    {
+      "name": "diameter round trip retains geometry",
+      "pass": true,
+      "data": {
+        "a": 0.28764,
+        "b": 0.28764
+      }
+    },
+    {
+      "name": "Missing circumference remains estimated",
+      "pass": true
+    },
+    {
+      "name": "circumference round trip retains geometry",
+      "pass": true,
+      "data": {
+        "a": 0.28764,
+        "b": 0.28764
+      }
+    },
+    {
+      "name": "Sound section fibre strength is 100%",
+      "pass": true,
+      "data": {
+        "a": 1,
+        "b": 1
+      }
+    },
+    {
+      "name": "Sound section reduction is zero",
+      "pass": true,
+      "data": {
+        "a": 0,
+        "b": 0
+      }
+    },
+    {
+      "name": "Uniform decay recovers the prescribed strength factor",
+      "pass": true,
+      "data": {
+        "a": 0.5250000000000457,
+        "b": 0.525
+      }
+    },
+    {
+      "name": "Uniform decay reduction recovers prescribed loss",
+      "pass": true,
+      "data": {
+        "a": 0.47499999999995435,
+        "b": 0.475
+      }
+    },
+    {
+      "name": "Assessment follows inspection height",
+      "pass": true,
+      "data": {
+        "a": 0,
+        "b": 0
+      }
+    },
+    {
+      "name": "Cavity does not weaken surviving sound fibres",
+      "pass": true,
+      "data": {
+        "a": 1,
+        "b": 1
+      }
+    },
+    {
+      "name": "Quarter-area cavity produces quarter capacity-proxy reduction",
+      "pass": true,
+      "data": {
+        "a": 0.25,
+        "b": 0.25
+      }
+    },
+    {
+      "name": "Remaining area matches the annulus",
+      "pass": true,
+      "data": {
+        "a": 0.75,
+        "b": 0.75
+      }
+    },
+    {
+      "name": "No fibres reports unavailable fibre strength",
+      "pass": true
+    },
+    {
+      "name": "No timber gives complete proxy loss",
+      "pass": true,
+      "data": {
+        "a": 1,
+        "b": 1
+      }
+    },
+    {
+      "name": "Probe length follows owner dimensions in metres",
+      "pass": true,
+      "data": {
+        "a": 0.16,
+        "b": 0.16
+      }
+    },
+    {
+      "name": "Probe diameter follows owner dimensions in metres",
+      "pass": true,
+      "data": {
+        "a": 0.06,
+        "b": 0.06
+      }
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "provider": "edge_tts",
+  "voice": "en-GB-RyanNeural",
+  "rate": "-8%",
+  "volume": "+0%",
+  "pitch": "+0Hz",
+  "text": "The U B one thousand check adds another layer of inspection evidence.  It supplements the physical checks. The prototype demonstrates acquisition and follow-up states with example results. Those examples are not live measurements, and they do not replace an approved climbing decision procedure.",
+  "unit": "one chapter per call",
+  "fingerprint": "1f02160ebda3ee5046e339652c9317eea0c123336df651b3ee7d3787288a35ca"
+}

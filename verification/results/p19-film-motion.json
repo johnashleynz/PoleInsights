@@ -1,0 +1,134 @@
+[
+  {
+    "film": "where-poles-break",
+    "chapter": 1,
+    "mainPoleAreaChangedFraction": 0.07001788908765653,
+    "pass": true
+  },
+  {
+    "film": "where-poles-break",
+    "chapter": 2,
+    "mainPoleAreaChangedFraction": 0.06449910554561718,
+    "pass": true
+  },
+  {
+    "film": "where-poles-break",
+    "chapter": 3,
+    "mainPoleAreaChangedFraction": 0.45948121645796064,
+    "pass": true
+  },
+  {
+    "film": "where-poles-break",
+    "chapter": 4,
+    "mainPoleAreaChangedFraction": 0.05854203935599284,
+    "pass": true
+  },
+  {
+    "film": "decay-and-strength",
+    "chapter": 1,
+    "mainPoleAreaChangedFraction": 0.07032200357781754,
+    "pass": true
+  },
+  {
+    "film": "decay-and-strength",
+    "chapter": 2,
+    "mainPoleAreaChangedFraction": 0.5238372093023256,
+    "pass": true
+  },
+  {
+    "film": "decay-and-strength",
+    "chapter": 3,
+    "mainPoleAreaChangedFraction": 0.6324955277280858,
+    "pass": true
+  },
+  {
+    "film": "decay-and-strength",
+    "chapter": 4,
+    "mainPoleAreaChangedFraction": 0.5058586762075135,
+    "pass": true
+  },
+  {
+    "film": "ultrasonic-detection",
+    "chapter": 1,
+    "mainPoleAreaChangedFraction": 0.6332737030411449,
+    "pass": true
+  },
+  {
+    "film": "ultrasonic-detection",
+    "chapter": 2,
+    "mainPoleAreaChangedFraction": 0.4464221824686941,
+    "pass": true
+  },
+  {
+    "film": "ultrasonic-detection",
+    "chapter": 3,
+    "mainPoleAreaChangedFraction": 0.6298837209302326,
+    "pass": true
+  },
+  {
+    "film": "ultrasonic-detection",
+    "chapter": 4,
+    "mainPoleAreaChangedFraction": 0.06717352415026834,
+    "pass": true
+  },
+  {
+    "film": "before-climbing",
+    "chapter": 1,
+    "mainPoleAreaChangedFraction": 0.07107334525939177,
+    "pass": true
+  },
+  {
+    "film": "before-climbing",
+    "chapter": 2,
+    "mainPoleAreaChangedFraction": 0.4966279069767442,
+    "pass": true
+  },
+  {
+    "film": "before-climbing",
+    "chapter": 3,
+    "mainPoleAreaChangedFraction": 0.061001788908765654,
+    "pass": true
+  },
+  {
+    "film": "before-climbing",
+    "chapter": 4,
+    "mainPoleAreaChangedFraction": 0.6293828264758498,
+    "pass": true
+  },
+  {
+    "film": "predict-pole-test",
+    "chapter": 1,
+    "mainPoleAreaChangedFraction": 0.07155635062611806,
+    "pass": true
+  },
+  {
+    "film": "predict-pole-test",
+    "chapter": 2,
+    "mainPoleAreaChangedFraction": 0.06897137745974956,
+    "pass": true
+  },
+  {
+    "film": "predict-pole-test",
+    "chapter": 3,
+    "mainPoleAreaChangedFraction": 0.43804114490161,
+    "pass": true
+  },
+  {
+    "film": "predict-pole-test",
+    "chapter": 4,
+    "mainPoleAreaChangedFraction": 0.058864042933810375,
+    "pass": true
+  },
+  {
+    "film": "predict-pole-test",
+    "chapter": 5,
+    "mainPoleAreaChangedFraction": 0.05671735241502683,
+    "pass": true
+  },
+  {
+    "film": "predict-pole-test",
+    "chapter": 6,
+    "mainPoleAreaChangedFraction": 0.3415474060822898,
+    "pass": true
+  }
+]

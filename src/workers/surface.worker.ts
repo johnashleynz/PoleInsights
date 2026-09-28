@@ -1,0 +1,3 @@
+import {stressSurface} from '../scene/stressSurface.ts';
+import type {Mesh,BufferGeometry} from 'three';
+self.onmessage=e=>{try{const {pole,result,scale,display,solid,reveal,utilisationMax}=e.data,group=stressSurface(pole,result,scale,display,solid,reveal,utilisationMax),g=(group.children[0] as Mesh<BufferGeometry>).geometry,position=g.getAttribute('position').array as Float32Array,colour=g.getAttribute('color').array as Float32Array,normal=g.getAttribute('normal').array as Float32Array;self.postMessage({position,colour,normal},{transfer:[position.buffer,colour.buffer,normal.buffer]});}catch(error){self.postMessage({error:String(error)});}};

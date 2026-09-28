@@ -1,0 +1,24 @@
+{
+  "preservedP23P24Archives": [
+    "InnerView-Pole-Lab-P23-build.zip",
+    "InnerView-Pole-Lab-P23-source.zip",
+    "InnerView-Pole-Lab-P24-build.zip",
+    "InnerView-Pole-Lab-P24-source.zip"
+  ],
+  "originalSourceHashesMatch": true,
+  "originalP23SourceHashesMatch": true,
+  "changedSourceAndPublicFiles": [
+    "src/ui/App.tsx",
+    "src/ui/detectApps.css",
+    "src/ui/DetectApps.tsx",
+    "public/mockups/labBridge.js"
+  ],
+  "addedSourceAndPublicFiles": [
+    "public/mockups/phoneBridge.js",
+    "public/mockups/axonic/phone.html",
+    "public/mockups/axonic/phone.js",
+    "public/mockups/safe2climb/phone.html",
+    "public/mockups/safe2climb/phone.js"
+  ],
+  "otherP24SourceAndPublicFilesUnchanged": true
+}

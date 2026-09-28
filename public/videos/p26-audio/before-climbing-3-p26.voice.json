@@ -1,0 +1,10 @@
+{
+  "provider": "edge_tts",
+  "voice": "en-GB-RyanNeural",
+  "rate": "-8%",
+  "volume": "+0%",
+  "pitch": "+0Hz",
+  "text": "Inspection evidence supports an approved work procedure.  This repeating ultrasound view is a teaching simulation. The laboratory has no validated climb decision rules and cannot give clearance. Follow the complete inspection and escalation process.",
+  "unit": "one chapter per call",
+  "fingerprint": "ded9d8153d2dd41d0598c0008c7b53e31752935c49cfa0fa4d01792d9523a789"
+}

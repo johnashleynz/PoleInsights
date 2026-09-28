@@ -1,0 +1,134 @@
+{
+  "case": {
+    "schemaVersion": 1,
+    "id": "A",
+    "name": "Pole A",
+    "length": 11,
+    "embedment": 1.8,
+    "diameters": {
+      "butt": 0.3,
+      "ground": 0.3,
+      "tip": 0.3
+    },
+    "species": "radiata-pine",
+    "material": {
+      "E": 8000000000,
+      "tension": 35000000,
+      "compression": 25000000,
+      "basis": "illustrative"
+    },
+    "soil": "Fixed",
+    "loadKN": 1,
+    "bearing": 90,
+    "regions": [
+      {
+        "id": "cavity",
+        "name": "Enclosed hollow",
+        "kind": "void",
+        "zMin": 1.6,
+        "zMax": 2.2,
+        "severity": 1,
+        "shape": {
+          "type": "ellipse",
+          "centreX": 0.02,
+          "centreY": 0,
+          "radiusX": 0.06,
+          "radiusY": 0.07,
+          "angle": 0,
+          "profile": "rounded"
+        },
+        "provenance": "synthetic"
+      }
+    ]
+  },
+  "probes": [
+    [
+      0.115,
+      0,
+      1.9
+    ],
+    [
+      0.04,
+      0,
+      1.58
+    ],
+    [
+      0.04,
+      0,
+      2.22
+    ],
+    [
+      -0.115,
+      0,
+      1.9
+    ],
+    [
+      0.09,
+      0,
+      1.75
+    ]
+  ],
+  "rows": [
+    {
+      "level": "coarse",
+      "nodes": 2650,
+      "elements": 1584,
+      "energy": 15.404335004741451,
+      "diagnosticPeakMPa": 2.743678607628521,
+      "probeMPa": [
+        -2.3409272421971394,
+        -0.2839947648008528,
+        -0.2864125898933714,
+        2.130503284330662,
+        -1.9846989025131796
+      ],
+      "solveMs": 4993.776,
+      "sampling64Ms": 78.13810000000012
+    },
+    {
+      "level": "medium",
+      "nodes": 5838,
+      "elements": 3744,
+      "energy": 15.414860935014358,
+      "diagnosticPeakMPa": 2.831668680454073,
+      "probeMPa": [
+        -2.318692505375178,
+        -0.17982772310906345,
+        -0.19280779549968188,
+        2.1181399147118367,
+        -1.9957071177830326
+      ],
+      "solveMs": 29868.0646,
+      "sampling64Ms": 67.15350000000035
+    },
+    {
+      "level": "fine",
+      "nodes": 16434,
+      "elements": 10944,
+      "energy": 15.41872241920531,
+      "diagnosticPeakMPa": 2.899193572048644,
+      "probeMPa": [
+        -2.322960803254126,
+        -0.14256622952679004,
+        -0.15337417275821844,
+        2.113313122426549,
+        -2.0013440423937015
+      ],
+      "solveMs": 71218.0612,
+      "sampling64Ms": 55.82719999999972
+    }
+  ],
+  "assessment": {
+    "energyChange": 0.00025050399139048274,
+    "probeChanges": [
+      0.0018408210097082822,
+      0.2072066138527191,
+      0.20452296879006904,
+      0.0022787882196838583,
+      0.002824524981867471
+    ],
+    "energyGate": 0.02,
+    "probeGate": 0.05,
+    "qualified": false
+  }
+}

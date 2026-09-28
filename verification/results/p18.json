@@ -1,0 +1,69 @@
+{
+  "scope": "Inspection capacity provenance and camera paths; no new physical qualification",
+  "checks": [
+    {
+      "name": "A current valid result supplies a positive whole-pole timber estimate",
+      "pass": true,
+      "data": {
+        "capacityKN": 8.168643935498613,
+        "governingHeight": 3.3062500000000004,
+        "bearing": 90,
+        "basis": "whole-pole-elastic-timber-reference-v1",
+        "excludesSoilLimit": true,
+        "nonlinearFailure": false
+      }
+    },
+    {
+      "name": "Soil first limit does not cap the inspection timber estimate",
+      "pass": true
+    },
+    {
+      "name": "Pending or failed result has no stale capacity",
+      "pass": true
+    },
+    {
+      "name": "Nonfinite capacity is withheld",
+      "pass": true
+    },
+    {
+      "name": "Known section loss lowers the structural capacity",
+      "pass": true,
+      "data": {
+        "sound": 8.168643935498613,
+        "damaged": 6.995995753018037
+      }
+    },
+    {
+      "name": "Capacity is not current-load utilisation or an amplitude-scaled estimate",
+      "pass": true
+    },
+    {
+      "name": "History-dependent response remains labelled an elastic reference",
+      "pass": true
+    },
+    {
+      "name": "reveal: finite static default framing",
+      "pass": true
+    },
+    {
+      "name": "orbit: finite static default framing",
+      "pass": true
+    },
+    {
+      "name": "push: finite static default framing",
+      "pass": true
+    },
+    {
+      "name": "sweep: finite static default framing",
+      "pass": true
+    },
+    {
+      "name": "orbitDetail: finite static default framing",
+      "pass": true
+    },
+    {
+      "name": "topDetail: finite static default framing",
+      "pass": true
+    }
+  ]
+}

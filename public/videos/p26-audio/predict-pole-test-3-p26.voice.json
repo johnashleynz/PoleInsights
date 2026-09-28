@@ -1,0 +1,10 @@
+{
+  "provider": "edge_tts",
+  "voice": "en-GB-RyanNeural",
+  "rate": "-8%",
+  "volume": "+0%",
+  "pitch": "+0Hz",
+  "text": "Choose Stresses and Capacity in kilonewtons. Keep Specified load direction, then press Critical section.  Timber bending limit is the whole-pole estimate. The height curve shows section capacities; its lowest value locates the first bending limit, possibly above ground.",
+  "unit": "one chapter per call",
+  "fingerprint": "fccff0286225a26086a591bd995bc3571b855709d71b76c0bdb14c18027f5b8c"
+}

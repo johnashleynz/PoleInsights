@@ -1,0 +1,28 @@
+{
+  "method": "Independent scipy solve_bvp, two connected continuous beam domains, monotonic capped soil law",
+  "rows": [
+    {
+      "loadN": 1000,
+      "tipM": 0.10026558815417383,
+      "meshNodes": 301,
+      "maxResidual": 6.416907547676714e-11
+    },
+    {
+      "loadN": 2000,
+      "tipM": 0.20235740828435692,
+      "meshNodes": 349,
+      "maxResidual": 3.824528345189806e-09
+    },
+    {
+      "loadN": 3000,
+      "tipM": 0.3223506007791151,
+      "meshNodes": 437,
+      "maxResidual": 7.290917241961921e-09
+    }
+  ],
+  "fineFETipM": 0.32235781780218153,
+  "relativeTipError": 2.2388737756395827e-05,
+  "gate": 0.01,
+  "passed": true,
+  "limits": "Uniform sound pole, monotonic one-direction foundation response only. No physical calibration or timber failure."
+}

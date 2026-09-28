@@ -1,0 +1,11 @@
+Look beyond appearance
+{CAM:whole}A pole can look sound while hiding deterioration. [P0.8] Appearance is only part of inspection. {CAM:detail}{LABEL:Surface appearance}These outside and cut-face images are model views, not field evidence. A pre-climb assessment must consider more.
+
+Inspect the hidden condition
+{CAM:whole}This transparent model exposes entered decay. [P0.8] {CAM:detail}{LABEL:Entered condition}The section shows its position and remaining wood. Ultrasound contributes evidence in practice, requiring reliable measurements and validated interpretation. This geometry is prescribed, not measured acoustically.
+
+Consider the demands
+{CAM:whole}The red arrow represents a simple {CAM:tip}{LABEL:Applied load}sideways tip load. [P0.8] It does not depict a climber or all the forces from their equipment. A real assessment must include actual work loads, the planned procedure and ground conditions.
+
+Use the approved procedure
+{CAM:whole}Inspection evidence supports an approved work procedure. [P0.8] {CAM:detail}{LABEL:Simulated inspection}This repeating ultrasound view is a teaching simulation. The laboratory has no validated climb decision rules and cannot give clearance. Follow the complete inspection and escalation process.

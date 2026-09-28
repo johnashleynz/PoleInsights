@@ -1,0 +1,56 @@
+# InnerView Pole Lab continuation
+
+Read README.md, DEVELOPMENT-PROMPT.md and docs/ROADMAP-AND-REVIEW.md before edits. Read docs/ENGINEERING-PLAN.md and docs/SOURCES-AND-DATA.md before calculations or UB1000 content.
+
+- P01 is the first local prototype. Read docs/P01-REVIEW.md for implemented scope, numerical evidence and remaining gaps. No physical validation or manufacturer calibration is claimed.
+- P02 is the owner's visual revision: white grid, full-height scene, no tan styling, no logos or decorative icons, and a photographic-style treated-pine exterior. Read docs/P02-VISUAL-REVIEW.md. This does not complete engineering qualification.
+- P03 adds grass at groundline and organic-brown soil fading at 300 mm, a sawn top, attached section/load drag handles, load-scaled arrow length and stress/utilisation display. The owner removed the pole-cut option and section slider. Read docs/P03-REVIEW.md. Brown soil is explicitly requested and supersedes the earlier ban on tan styling only for that material.
+- Keep work within this project. Preserve the parent Crossarm and Conductors applications, existing modifications, checkpoints, lockfile and hosting configuration.
+- The owner authorised initial development. Routine reversible implementation proceeds within the authorised milestone without repeated permission requests.
+- Preserve the future registered-contour/photo-input contract; read docs/FUTURE-PHOTO-INPUT.md. Never silently approximate unsupported measured geometry as a supported ellipse.
+- Never deploy unless the owner requests publication. Do not infer publishing permission from local development.
+- Keep one authoritative pole geometry/defect definition across visual, structural and section views.
+- Keep simulated internal condition, simulated acoustic response and actual UB1000 evidence distinct. Do not invent proprietary algorithms, RSV definitions or Safe to Climb thresholds.
+- Distinguish beam-recovered stresses, local solid FE results, elastic limit estimates, fracture predictions and factored design capacities.
+- No overlapping stiffness, incompatible stress addition or cosmetic smoothing that changes solved quantities. Unsolved, unsupported, stale and nonconverged results must remain identifiable.
+- Source material/soil properties and strength factors. Illustrative presets cannot become engineering presets simply by changing a mode selector.
+- Preserve evidence and limits. A numerical benchmark is not physical validation, and photorealism is not measurement evidence.
+- Each implemented review milestone needs a changelog, reproducible checks and its remaining gaps. Use P01, P02, etc. to distinguish this project from Crossarm R revisions.
+
+- P04 replaces handle boxes with leader/circle controls and deferred gesture commits, shares the view selector, and refines transparent interiors/ground. Read docs/P04-REVIEW.md. Internal stress slices sample the beam field; local solid concentrations remain outstanding.
+
+- P05 adds an opt-in one-way T10 solid preview for one enclosed above-ground rounded region. Read docs/P05-REVIEW.md. The energy refinement gate fails; coarse geometry stress bias is material. Keep capacity and global movement beam-based. Never remove preview qualification or add solid/beam stresses.
+
+- P06 changes tapered sections/load gestures/crisp grass and adds isolated curved T10 research. Read docs/P06-REVIEW.md. The app still uses P05 local fields. Preserve the passing outer-boundary study without claiming cavity/failure qualification; do not feed curved geometry into affine field recovery.
+
+- P07 uses curved T10 fields in the opt-in preview, with exact curved point recovery and a section-rendering worker. Read docs/P07-REVIEW.md. The chosen cavity mesh study passes, but the boundary study remains confounded by remeshing and capacity stays beam-based. Preserve original/failed study evidence.
+
+- P08 replaces intersecting stress sheets with sampled timber/cavity surfaces and adds cached full-resolution sections, photographic defect textures, collapsed forms, source-graded heart/shell rot, radial drilling and illustrative beam knot mechanics. Read docs/P08-REVIEW.md and docs/P08-ASSETS.md. The owner removed section grass. Knot/drill/graded-decay solid models remain unsupported; preserve explicit rejection and do not claim calibrated capacity. Compare framing and lessons now include camera transitions and a credited remote UB1000 image.
+
+- P09 adds synthetic sketch polygons, section-height charts and local knot/graded-decay/bore solids. Read docs/P09-REVIEW.md. Preserve exact Hermite boundary transfer, pointwise material recovery, the passed fixed-mesh cavity boundary study and all failed/intermediate evidence. Selected mesh checks do not qualify failure capacity; the chart and limits stay beam-based. Left drag pans, right drag rotates. Do not restore blank placeholders during uncached scrubbing.
+
+- P10 moves the shared Setup / Defects / Stresses controls and Menu to the left rail, the analysis selector to the right, and adds direct movement for all supported defects. Read docs/P10-REVIEW.md. Wheel-over-section changes height, not zoom. Keep the saved Innerview identifier compatible, optional shell offsets defaulting to zero, and radial drilling attached to the pole. Commit geometry/load drag gestures on release.
+
+- P11 replaces Analysis with Stress / Utilisation / Capacity and a separate specified/worst direction selector. Read docs/P11-REVIEW.md. Worst capacity is the minimum directional beam section capacity. Each height can govern at a different bearing; the detailed field is one consistent solve at the selected section's reported worst beam bearing. Capacity maps remain explicitly labelled current-load utilisation. Preserve exact utilisation stops at 0/40/60/80/100% and a shared dynamic purple endpoint above 100%; this display range does not qualify local-solid peaks or failure capacity.
+
+- P12 adds circumference entry and a fourth Test tab. Read docs/P12-REVIEW.md. The owner authorised placeholder assessments and supplied approximate probe dimensions of 160 mm long × 60 mm diameter. Preserve one diameter geometry internally, nullable estimates, opposed devices visible only in Test, and the explicit sandbox-placeholder-v1 distinction from actual ultrasonic inference. Its area–strength proxy must not be labelled bending capacity, RSV or a real UB1000 reading.
+
+- P13 visibly renames Test to Detect while preserving saved-case compatibility. Read docs/P13-REVIEW.md. Elastic waves are computed independently from bending FE; their acoustic parameters are illustrative. Preserve free cavity boundaries, shared source/reference scales, worker cancellation, cache limits and the retained prior-field status. The input GIFs contain one frame each: playback timing is a stated teaching default, not matched evidence. First-arrival and kernel checks pass; full late-waveform convergence does not. Never relabel these results as calibrated UB1000 inference or use them to validate the separate fibre-strength placeholder.
+
+- P14 adds MPa reference conversion, a collapsed Detect drawer and complete stress surfaces by default. Read docs/P14-REVIEW.md and docs/STRUCTURAL-QUALIFICATION-PROGRAMME.md. The soilYield research module is NOT production: never scale its history-dependent results or merge it into the beam's directional envelopes without replacing those assumptions. Preserve the independent continuum comparison, fixed-local knot/decay boundary studies and all stated scope limits. Neither study qualifies timber failure capacity.
+
+- P17 integrates actual-load ground yielding with history, unloading and physical balance gates; read docs/P17-REVIEW.md. Never scale nonlinear histories. Capacity curves remain elastic references. Local tensor/fibre screening is preliminary, not qualified solid capacity.
+- P18 uses UK narration and directed app-camera films, and adds whole-pole timber capacity in Detect. Read docs/P18-REVIEW.md. This number reuses the structural timber estimate; never derive it from acoustic amplitude or the area-strength placeholder. Pending/failed results remain unavailable. Preserve P17 review archives.
+- P19 adds fixed, brief film annotations, a six-chapter pole-test workflow and a regional material catalogue. Read docs/P19-REVIEW.md and docs/P19-MATERIAL-SOURCES.md. Pole Fb is not direct tension/compression strength: local solid utilisation/normal-strength ratios are withheld for bending-only materials. Preserve legacy teaching cases. Do not populate pending NZ/Australian properties from species averages or unverified tables, or use ANSI's Chile-restricted radiata values for NZ poles. The app loads the physical tip, not an arbitrary test fixture. Preserve P18 archives.
+- P20 applies available material presets immediately and separates regional species. Read docs/P20-REVIEW.md. Unpopulated species remain explicit drafts until valid data are supplied; never treat the draft name as the material of the active results. NZ European larch is not US western larch. Preserve P19 archives.
+- P21 fixes Setup cavity sidewalls and exterior back-face visibility. Read docs/P21-REVIEW.md. Keep clipped cavity mouths open; do not clamp cavity vertices onto the pole skin. Stress field sampling and engineering qualification are unchanged. Preserve P20 archives.
+
+- P22 uses owner-supplied standards. Read docs/P22-REVIEW.md and verification/results/p22-sources.json. NZ ZZ6 replaces AS section 6; density-category references are conditional on pole grade. AU diameter factors must refresh after geometry edits. Preserve mean/characteristic distinctions, legacy imports and original browser-case backup. Do not ship original PDFs/page images. Remaining solid and code-design limitations still apply.
+
+- P23 bundles copies of the owner's existing Safe2Climb and Axonic workflows. Read docs/P23-REVIEW.md. Only acquisition state and valid scan-start height control Detect; fixture outcomes must never become lab predictions or real climb clearance. Preserve original mockup projects, separate session storage, exact source/origin/token checks and restoration of local playback when the app closes. Preserve P22 review archives.
+
+- P24 adds a display-only RMS signal envelope. Read docs/P24-REVIEW.md. Preserve shared sound-reference scaling, raw-sample arrival timing, stale-height labels and explicit energy-proxy wording. Peak markers are not heart/shell paths; do not invent device filter/energy definitions from the screenshot. Videos are unchanged; the Claude review prompt is docs/CLAUDE-VIDEO-REVIEW.md. Preserve P23 archives.
+
+- P25 restores the original inspection phone wrappers, presented as Samsung Galaxy S21 Ultra. Read docs/P25-REVIEW.md. The owner explicitly removed P23’s added workflow banner; do not restore it. Preserve the validated child-to-phone-to-lab relay, native prototype/about wording and fixture/calculation separation. Keep P23/P24 archives and original mockup projects unchanged.
+
+- P26 reworks the five films and adds UB1000/Analyser and Safe2Climb introductions. Read docs/P26-REVIEW.md. Preserve Ryan voice, word-timed HOLD/MOVE direction, P25 UI capture provenance, raw voice timing evidence and the distinction between prototype recordings and field clearance. Preserve P25 archives.

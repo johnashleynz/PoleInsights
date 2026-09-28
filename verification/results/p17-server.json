@@ -1,0 +1,38 @@
+[
+  {
+    "check": "index",
+    "status": 200,
+    "bytes": 558,
+    "pass": true
+  },
+  {
+    "check": "video head",
+    "status": 200,
+    "bytes": 0,
+    "pass": true
+  },
+  {
+    "check": "seek range",
+    "status": 206,
+    "bytes": 1000,
+    "pass": true
+  },
+  {
+    "check": "suffix range",
+    "status": 206,
+    "bytes": 100,
+    "pass": true
+  },
+  {
+    "check": "bad range",
+    "status": 416,
+    "bytes": 0,
+    "pass": true
+  },
+  {
+    "check": "captions",
+    "status": 200,
+    "bytes": 1391,
+    "pass": true
+  }
+]

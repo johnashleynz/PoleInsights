@@ -1,0 +1,10 @@
+{
+  "provider": "edge_tts",
+  "voice": "en-GB-RyanNeural",
+  "rate": "-8%",
+  "volume": "+0%",
+  "pitch": "+0Hz",
+  "text": "A simulated pulse crosses sound wood.  Below, the trace shows the receiver response while the animation repeats. Later waves reflect around the section. Acoustic parameters are illustrative; the colour scale stays the same.",
+  "unit": "one chapter per call",
+  "fingerprint": "cb557583403d1622d374f6998fa4fbd9564852486e2209e2f04e1006ec0487b4"
+}

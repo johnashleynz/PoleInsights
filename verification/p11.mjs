@@ -1,0 +1,21 @@
+import {writeFileSync} from 'node:fs';
+import {profileFromBasis} from '../src/analysis/heightProfile.ts';
+import {utilisationColour} from '../src/scene/utilisationPalette.ts';
+const checks=[],check=(name,pass,data)=>{checks.push({name,pass,data});if(!pass)throw Error(name+JSON.stringify(data));},close=(name,a,b)=>check(name,Math.abs(a-b)<1e-10,{a,b});
+// Two independently prescribed stress vectors, unequal tensile/compressive strengths.
+const basis=[{z:1,points:[[2,0,4,1],[0,1,4,1]]}],r=profileFromBasis(basis,0,3)[0];
+close('Specified-direction peak stress is in MPa',r.stressApplied,3e-6);
+close('All-direction peak stress is vector amplitude',r.stressWorst,6e-6);
+close('Worst capacity uses weakest direction',r.capacityWorst,.5);
+close('Specified capacity retains strength sign',r.capacityApplied,4);
+close('Worst direction selects compression when weaker',r.worstBearing,270);
+close('Solving at worst bearing reproduces envelope',profileFromBasis(basis,r.worstBearing,3)[0].usageApplied,r.usageWorst);
+close('Solving at worst stress bearing reproduces stress envelope',profileFromBasis(basis,r.stressWorstBearing,3)[0].stressApplied,r.stressWorst);
+close('Zero load retains capacity',profileFromBasis(basis,0,0)[0].capacityWorst,.5);
+const fast=profileFromBasis(basis,0,3,false)[0];check('Skipping unused best-direction search preserves selected results',['capacityApplied','capacityWorst','usageApplied','usageWorst','stressApplied','stressWorst','worstBearing','stressWorstBearing'].every(key=>fast[key]===r[key]));
+check('Worst capacity never exceeds specified capacity',Array.from({length:72},(_,i)=>profileFromBasis(basis,i*5,3)[0]).every(row=>row.capacityWorst<=row.capacityApplied+1e-12));
+for(const [v,rgb] of [[0,[39,153,83]],[.4,[45,116,214]],[.6,[247,220,48]],[.8,[242,143,38]],[1,[215,42,42]]])check(`Fixed utilisation colour at ${v*100}%`,JSON.stringify(utilisationColour(v,2.3))===JSON.stringify(rgb));
+check('Current maximum above 100% is dark purple',JSON.stringify(utilisationColour(2.3,2.3))===JSON.stringify([74,16,105]));
+check('100% stays red when maximum changes',JSON.stringify(utilisationColour(1,1.2))===JSON.stringify(utilisationColour(1,3)));
+check('Overrun colour graduates rather than jumps',utilisationColour(1.15,1.3)[0]>74&&utilisationColour(1.15,1.3)[0]<215);
+writeFileSync('verification/results/p11.json',JSON.stringify({scope:'Directional section envelopes and display palette; not physical qualification',checks},null,2));console.log(`${checks.length} P11 direction and palette checks passed.`);

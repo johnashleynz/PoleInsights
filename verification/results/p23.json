@@ -1,0 +1,261 @@
+{
+  "checks": [
+    {
+      "name": "Valid acquisition accepted",
+      "pass": true
+    },
+    {
+      "name": "Reject invalid token",
+      "pass": true
+    },
+    {
+      "name": "Reject invalid kind",
+      "pass": true
+    },
+    {
+      "name": "Reject invalid type",
+      "pass": true
+    },
+    {
+      "name": "Reject invalid boolean",
+      "pass": true
+    },
+    {
+      "name": "Reject invalid height",
+      "pass": true
+    },
+    {
+      "name": "Reject invalid run",
+      "pass": true
+    },
+    {
+      "name": "Reject invalid null",
+      "pass": true
+    },
+    {
+      "name": "Idle with no scan height accepted",
+      "pass": true
+    },
+    {
+      "name": "Popup initial idle",
+      "pass": true
+    },
+    {
+      "name": "Starts at requested section",
+      "pass": true
+    },
+    {
+      "name": "Render heartbeat does not restart or lose height",
+      "pass": true
+    },
+    {
+      "name": "Scan completion pauses",
+      "pass": true
+    },
+    {
+      "name": "Retest has new run and height",
+      "pass": true
+    },
+    {
+      "name": "Heartbeat retains scan state",
+      "pass": true
+    },
+    {
+      "name": "Leaving mockup stops animation",
+      "pass": true
+    },
+    {
+      "name": "Messages use exact origin",
+      "pass": true
+    },
+    {
+      "name": "No added workflow banner",
+      "pass": true
+    },
+    {
+      "name": "Frame initial idle",
+      "pass": true
+    },
+    {
+      "name": "Starts at requested section",
+      "pass": true
+    },
+    {
+      "name": "Render heartbeat does not restart or lose height",
+      "pass": true
+    },
+    {
+      "name": "Scan completion pauses",
+      "pass": true
+    },
+    {
+      "name": "Retest has new run and height",
+      "pass": true
+    },
+    {
+      "name": "Heartbeat retains scan state",
+      "pass": true
+    },
+    {
+      "name": "Leaving mockup stops animation",
+      "pass": true
+    },
+    {
+      "name": "Messages use exact origin",
+      "pass": true
+    },
+    {
+      "name": "No added workflow banner",
+      "pass": true
+    },
+    {
+      "name": "axonic no service-worker bundle",
+      "pass": true
+    },
+    {
+      "name": "axonic/acquisition.js isolated storage and no SW registration",
+      "pass": true
+    },
+    {
+      "name": "axonic/acquisition.js import ./domain.js exists",
+      "pass": true
+    },
+    {
+      "name": "axonic/app.js isolated storage and no SW registration",
+      "pass": true
+    },
+    {
+      "name": "axonic/app.js import ../labBridge.js exists",
+      "pass": true
+    },
+    {
+      "name": "axonic/app.js import ./domain.js exists",
+      "pass": true
+    },
+    {
+      "name": "axonic/app.js import ./capture-ui.js exists",
+      "pass": true
+    },
+    {
+      "name": "axonic/app.js import ./photos.js exists",
+      "pass": true
+    },
+    {
+      "name": "axonic/app.js import ./survey-location.js exists",
+      "pass": true
+    },
+    {
+      "name": "axonic/app.js import ./acquisition.js exists",
+      "pass": true
+    },
+    {
+      "name": "axonic/capture-ui.js isolated storage and no SW registration",
+      "pass": true
+    },
+    {
+      "name": "axonic/capture-ui.js import ./domain.js exists",
+      "pass": true
+    },
+    {
+      "name": "axonic/capture-ui.js import ./scan-animation.js exists",
+      "pass": true
+    },
+    {
+      "name": "axonic/domain.js isolated storage and no SW registration",
+      "pass": true
+    },
+    {
+      "name": "axonic/phone.js isolated storage and no SW registration",
+      "pass": true
+    },
+    {
+      "name": "axonic/phone.js import ../phoneBridge.js exists",
+      "pass": true
+    },
+    {
+      "name": "axonic/photos.js isolated storage and no SW registration",
+      "pass": true
+    },
+    {
+      "name": "axonic/scan-animation.js isolated storage and no SW registration",
+      "pass": true
+    },
+    {
+      "name": "axonic/survey-location.js isolated storage and no SW registration",
+      "pass": true
+    },
+    {
+      "name": "axonic actual acquisition hook",
+      "pass": true
+    },
+    {
+      "name": "safe2climb no service-worker bundle",
+      "pass": true
+    },
+    {
+      "name": "safe2climb/app.js isolated storage and no SW registration",
+      "pass": true
+    },
+    {
+      "name": "safe2climb/app.js import ../labBridge.js exists",
+      "pass": true
+    },
+    {
+      "name": "safe2climb/app.js import ./camera.js exists",
+      "pass": true
+    },
+    {
+      "name": "safe2climb/app.js import ./flow.js exists",
+      "pass": true
+    },
+    {
+      "name": "safe2climb/app.js import ./handover.js exists",
+      "pass": true
+    },
+    {
+      "name": "safe2climb/app.js import ./model.js exists",
+      "pass": true
+    },
+    {
+      "name": "safe2climb/app.js import ./store.js exists",
+      "pass": true
+    },
+    {
+      "name": "safe2climb/camera.js isolated storage and no SW registration",
+      "pass": true
+    },
+    {
+      "name": "safe2climb/flow.js isolated storage and no SW registration",
+      "pass": true
+    },
+    {
+      "name": "safe2climb/handover.js isolated storage and no SW registration",
+      "pass": true
+    },
+    {
+      "name": "safe2climb/model.js isolated storage and no SW registration",
+      "pass": true
+    },
+    {
+      "name": "safe2climb/model.js import ./flow.js exists",
+      "pass": true
+    },
+    {
+      "name": "safe2climb/phone.js isolated storage and no SW registration",
+      "pass": true
+    },
+    {
+      "name": "safe2climb/phone.js import ../phoneBridge.js exists",
+      "pass": true
+    },
+    {
+      "name": "safe2climb/store.js isolated storage and no SW registration",
+      "pass": true
+    },
+    {
+      "name": "safe2climb actual acquisition hook",
+      "pass": true
+    }
+  ],
+  "scope": "Workflow playback transport and bundle integrity; not UB1000 calibration or safety validation."
+}

@@ -1,0 +1,61 @@
+{
+  "checks": [
+    {
+      "name": "All curved interior points located",
+      "value": 0
+    },
+    {
+      "name": "Bernstein bounds contain curved samples",
+      "value": 0
+    },
+    {
+      "name": "Polynomial recovery matches B-matrix recovery",
+      "value": 0.0017847043927758932
+    },
+    {
+      "name": "Spatial locator matches element recovery",
+      "value": 0.0017847043927758932
+    },
+    {
+      "name": "No material in hollow",
+      "value": "null"
+    },
+    {
+      "name": "Outside solid not extrapolated",
+      "value": "null"
+    },
+    {
+      "name": "Outside axial domain unavailable",
+      "value": "null"
+    },
+    {
+      "name": "Cached magnitude scales exactly",
+      "value": -16437564.620244246
+    },
+    {
+      "name": "Zero load",
+      "value": 0
+    },
+    {
+      "name": "Decay increases elastic compliance",
+      "value": [
+        15.022995414684289,
+        15.16061520906829,
+        15.283030697804744
+      ]
+    },
+    {
+      "name": "Decayed core retains a solved stress",
+      "value": -229613.53993291702
+    },
+    {
+      "name": "Unsupported knot is rejected",
+      "value": true
+    }
+  ],
+  "sampleMs": 45.0605000000005,
+  "samples": 3096,
+  "nodes": 870,
+  "elements": 432,
+  "solveMs": 1337.5479
+}

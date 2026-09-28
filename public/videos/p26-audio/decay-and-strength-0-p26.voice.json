@@ -1,0 +1,10 @@
+{
+  "provider": "edge_tts",
+  "voice": "en-GB-RyanNeural",
+  "rate": "-8%",
+  "volume": "+0%",
+  "pitch": "+0Hz",
+  "text": "An intact surface can conceal deterioration.  Here the cut face contains sound timber. In bending, fibres farther from the centre have greater leverage. The location of damage therefore matters, as well as its size.",
+  "unit": "one chapter per call",
+  "fingerprint": "5a21aab3272865f9b6e36025eb882609532e81e52c68ba4cb308079f0efab481"
+}

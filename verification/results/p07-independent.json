@@ -1,0 +1,21 @@
+{
+  "metrics": {
+    "pointStressMaxRelative": 2.323742238887479e-05,
+    "displacementRelativeL2": 1.979778275678758e-06,
+    "stressRelativeL2": 2.1286906408534e-05,
+    "energyRelativeDifference": 3.6835755046761274e-06,
+    "loadRelativeL2": 1.0327874151321818e-15,
+    "freeResidualN": 4.6566128730773926e-09,
+    "seconds": 4.147611856460571
+  },
+  "gates": {
+    "pointStressMaxRelative": 0.001,
+    "displacementRelativeL2": 0.0001,
+    "stressRelativeL2": 0.001,
+    "energyRelativeDifference": 0.0001,
+    "loadRelativeL2": 1e-10,
+    "freeResidualN": 0.0001
+  },
+  "passed": true,
+  "scope": "Independent curved outer and cavity geometry; same mesh/material/BC, higher quadrature. Numerical verification only."
+}

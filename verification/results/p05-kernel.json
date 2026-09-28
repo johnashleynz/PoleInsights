@@ -1,0 +1,157 @@
+{
+  "records": [
+    {
+      "name": "Element symmetry",
+      "value": 0,
+      "limit": 1e-13,
+      "pass": true
+    },
+    {
+      "name": "Rigid mode 1",
+      "value": 4.1649857769807915e-16,
+      "limit": 1e-12,
+      "pass": true
+    },
+    {
+      "name": "Rigid mode 2",
+      "value": 1.561869666367797e-16,
+      "limit": 1e-12,
+      "pass": true
+    },
+    {
+      "name": "Rigid mode 3",
+      "value": 4.99798293237695e-16,
+      "limit": 1e-12,
+      "pass": true
+    },
+    {
+      "name": "Rigid mode 4",
+      "value": 1.7863884309081677e-16,
+      "limit": 1e-12,
+      "pass": true
+    },
+    {
+      "name": "Rigid mode 5",
+      "value": 4.151970196427727e-16,
+      "limit": 1e-12,
+      "pass": true
+    },
+    {
+      "name": "Rigid mode 6",
+      "value": 2.4078824023170203e-17,
+      "limit": 1e-12,
+      "pass": true
+    },
+    {
+      "name": "Affine strain and signed stress",
+      "value": 1.629957785973182e-14,
+      "limit": 1e-11,
+      "pass": true
+    },
+    {
+      "name": "Affine strain and signed stress",
+      "value": 1.0979576752736017e-14,
+      "limit": 1e-11,
+      "pass": true
+    },
+    {
+      "name": "Mesh face ownership",
+      "value": 0,
+      "limit": 0,
+      "pass": true
+    },
+    {
+      "name": "Physical boundary faces",
+      "value": 0,
+      "limit": 0,
+      "pass": true
+    },
+    {
+      "name": "Transferred force",
+      "value": 2.9558577807620166e-15,
+      "limit": 1e-12,
+      "pass": true
+    },
+    {
+      "name": "Transferred moment",
+      "value": 3.638438479772137e-16,
+      "limit": 1e-12,
+      "pass": true
+    },
+    {
+      "name": "External force balance",
+      "value": 7.924627683049042e-10,
+      "limit": 0.000001,
+      "pass": true
+    },
+    {
+      "name": "External moment balance",
+      "value": 5.854720293106713e-11,
+      "limit": 0.000001,
+      "pass": true
+    },
+    {
+      "name": "Energy / work",
+      "value": 3.558877712455032e-12,
+      "limit": 1e-7,
+      "pass": true
+    },
+    {
+      "name": "Load reversal",
+      "value": 0,
+      "limit": 1e-12,
+      "pass": true
+    },
+    {
+      "name": "Zero load",
+      "value": 0,
+      "limit": 0,
+      "pass": true
+    },
+    {
+      "name": "Exact quadratic bending displacement",
+      "value": 7.032102116620089e-10,
+      "limit": 0.000002,
+      "pass": true
+    },
+    {
+      "name": "Exact longitudinal bending stress",
+      "value": 1.8349254144898925e-8,
+      "limit": 0.000002,
+      "pass": true
+    },
+    {
+      "name": "Reject knot",
+      "value": 0,
+      "limit": 0,
+      "pass": true
+    },
+    {
+      "name": "Reject multiple",
+      "value": 0,
+      "limit": 0,
+      "pass": true
+    },
+    {
+      "name": "Reject surface",
+      "value": 0,
+      "limit": 0,
+      "pass": true
+    },
+    {
+      "name": "Reject ground",
+      "value": 0,
+      "limit": 0,
+      "pass": true
+    },
+    {
+      "name": "Reject nonconvergence",
+      "value": 0,
+      "limit": 0,
+      "pass": true
+    }
+  ],
+  "elapsedMs": 396.8392,
+  "iterations": 185,
+  "scope": "Kernel verification, not peak convergence or physical validation."
+}

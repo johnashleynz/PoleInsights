@@ -1,0 +1,270 @@
+{
+  "scope": "Numerical and software verification; illustrative knot/decay laws, no physical validation or local drill/knot qualification",
+  "checks": [
+    {
+      "name": "Default radial drilling validates",
+      "pass": true
+    },
+    {
+      "name": "Default drill diameter 3/8 inch",
+      "pass": true,
+      "data": {
+        "value": 0.009525,
+        "reference": 0.009524999999999999,
+        "tolerance": 1e-12
+      }
+    },
+    {
+      "name": "Default drill depth one-third diameter",
+      "pass": true,
+      "data": {
+        "value": 0.09999999999999999,
+        "reference": 0.1,
+        "tolerance": 1e-12
+      }
+    },
+    {
+      "name": "Drill centre is missing timber",
+      "pass": true
+    },
+    {
+      "name": "Blind end retains timber",
+      "pass": true
+    },
+    {
+      "name": "Beside drill retains timber",
+      "pass": true
+    },
+    {
+      "name": "Above bore retains timber",
+      "pass": true
+    },
+    {
+      "name": "Bore section loss against circular-segment integral",
+      "pass": true,
+      "data": {
+        "value": 0.0009522599774420826,
+        "reference": 0.0009522599188070764,
+        "tolerance": 0.000002
+      }
+    },
+    {
+      "name": "Drill reduces bending inertia",
+      "pass": true
+    },
+    {
+      "name": "Drill shifts stiffness centroid away",
+      "pass": true
+    },
+    {
+      "name": "Narrow bore beam equilibrium",
+      "pass": true,
+      "data": 1.3600336387753486e-8
+    },
+    {
+      "name": "Bore slightly increases movement",
+      "pass": true,
+      "data": {
+        "sound": 0.05365420962206649,
+        "bore": 0.05365796305373479
+      }
+    },
+    {
+      "name": "Half-inch bore removes more timber",
+      "pass": true
+    },
+    {
+      "name": "Radial drilling rotates inertia",
+      "pass": true,
+      "data": {
+        "value": 0.00038716997218588,
+        "reference": 0.00038716997218588,
+        "tolerance": 1e-10
+      }
+    },
+    {
+      "name": "Radial drilling rotates centroid",
+      "pass": true,
+      "data": {
+        "value": -0.001365396832576332,
+        "reference": -0.001365396832576332,
+        "tolerance": 1e-10
+      }
+    },
+    {
+      "name": "Overlapping drilling is not removed twice",
+      "pass": true,
+      "data": {
+        "value": 0.06973357472832827,
+        "reference": 0.06973357472832827,
+        "tolerance": 1e-12
+      }
+    },
+    {
+      "name": "Drill depth beyond diameter rejected",
+      "pass": true
+    },
+    {
+      "name": "Local solid rejects unsupported drill",
+      "pass": true
+    },
+    {
+      "name": "Hankinson parallel-grain endpoint",
+      "pass": true,
+      "data": {
+        "value": 1,
+        "reference": 1,
+        "tolerance": 1e-12
+      }
+    },
+    {
+      "name": "Hankinson transverse endpoint",
+      "pass": true,
+      "data": {
+        "value": 0.1,
+        "reference": 0.1,
+        "tolerance": 1e-12
+      }
+    },
+    {
+      "name": "Knot affects stiffness and signed strength",
+      "pass": true,
+      "data": {
+        "e": 0.18181818181818185,
+        "strength": 0.09523809523809526,
+        "tension": 0.09523809523809526,
+        "compression": 0.4000000000000001,
+        "severity": 0,
+        "voided": false,
+        "knot": true,
+        "drilled": false
+      }
+    },
+    {
+      "name": "Knot retains physical wood",
+      "pass": true
+    },
+    {
+      "name": "Knot retains section area",
+      "pass": true,
+      "data": {
+        "value": 0.9999999999999992,
+        "reference": 1,
+        "tolerance": 1e-10
+      }
+    },
+    {
+      "name": "Knot increases movement",
+      "pass": true
+    },
+    {
+      "name": "Knot reduces first timber limit",
+      "pass": true,
+      "data": {
+        "sound": 8.283496254543484,
+        "knot": 7.903449103360545
+      }
+    },
+    {
+      "name": "Knot increases tensile utilisation at its centre",
+      "pass": true
+    },
+    {
+      "name": "Zero deviation restores sound stiffness",
+      "pass": true,
+      "data": {
+        "value": 0.0003976078202199588,
+        "reference": 0.00039760782021995816,
+        "tolerance": 0.001
+      }
+    },
+    {
+      "name": "Zero deviation restores sound response",
+      "pass": true,
+      "data": {
+        "value": 0.05365420962205707,
+        "reference": 0.05365420962206649,
+        "tolerance": 0.001
+      }
+    },
+    {
+      "name": "Decay source has specified severity",
+      "pass": true,
+      "data": {
+        "value": 0.7,
+        "reference": 0.7,
+        "tolerance": 1e-12
+      }
+    },
+    {
+      "name": "Severity diminishes radially",
+      "pass": true
+    },
+    {
+      "name": "Severity diminishes axially",
+      "pass": true
+    },
+    {
+      "name": "Source law reaches zero at boundary",
+      "pass": true,
+      "data": {
+        "value": 0,
+        "reference": 0,
+        "tolerance": 1e-12
+      }
+    },
+    {
+      "name": "Shell leaves core sound",
+      "pass": true
+    },
+    {
+      "name": "Shell deteriorates exterior",
+      "pass": true
+    },
+    {
+      "name": "Shell severity decreases inward",
+      "pass": true
+    },
+    {
+      "name": "Uniform shell stiffness against concentric annulus",
+      "pass": true,
+      "data": {
+        "value": 0.0002579329642705234,
+        "reference": 0.0002579329642705295,
+        "tolerance": 0.001
+      }
+    },
+    {
+      "name": "Local solid rejects graded/shell decay",
+      "pass": true
+    },
+    {
+      "name": "Load scaling with new defects",
+      "pass": true,
+      "data": {
+        "value": 0.20993441614041497,
+        "reference": 0.20993441614041497,
+        "tolerance": 1e-10
+      }
+    },
+    {
+      "name": "Exact height cache",
+      "pass": true
+    },
+    {
+      "name": "Cache bounded with LRU eviction",
+      "pass": true
+    },
+    {
+      "name": "Case changes clear all cached sections",
+      "pass": true
+    },
+    {
+      "name": "Stress renderer covers circumference, not two planes",
+      "pass": true,
+      "data": {
+        "angles": 96
+      }
+    }
+  ]
+}

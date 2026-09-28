@@ -1,0 +1,11 @@
+Choose an inspection plane
+{CAM:whole}Where should we inspect? [P1.5] {CAM:detail}{LABEL:Opposed devices}The U B one thousand pair sits opposite each other at one height. One transmits; the other receives. This scene shows the arrangement. The next view shows the simulated pulse.
+
+Watch the pulse travel
+{CAM:whole}A simulated pulse crosses sound wood. [P0.8] {CAM:detail}{LABEL:Received signal}Below, the trace shows the receiver response while the animation repeats. Later waves reflect around the section. Acoustic parameters are illustrative; the colour scale stays the same.
+
+Defects alter the signal
+{CAM:whole}Decay changes this simulated response. [P0.8] {CAM:detail}{LABEL:Sound reference}Compare the section trace with the sound reference below. Reflection, scattering and damping can affect the waveform. A large peak alone does not establish strength: overlapping waves can reinforce one another.
+
+From measurement to assessment
+{CAM:whole}This number is a {LABEL:Timber bending estimate}timber bending estimate. [P0.8] It uses geometry, material inputs and defects in a separate structural model. {CAM:section}The acoustic animation cannot measure fibre strength. Approved device calibration and interpretation remain separate requirements.

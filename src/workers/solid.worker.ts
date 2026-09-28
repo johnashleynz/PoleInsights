@@ -1,0 +1,4 @@
+import {assessSolid} from '../analysis/solid/assessment.ts';
+import {solveDetailed} from '../analysis/solid/extendedField.ts';
+import type {PoleCase} from '../domain/model.ts';
+self.onmessage=(event:MessageEvent<{id:number;cases:PoleCase[];resolution:string}>)=>{const {id,cases,resolution}=event.data;const results=cases.map(p=>{try{const result=solveDetailed(p,resolution);result.assessment=assessSolid(p,result);return {result,error:null};}catch(e){const message=e instanceof Error?e.message:'The detailed solve failed.';return {result:null,error:/Curved element|Degenerate curved/.test(message)?(resolution==='coarse'?'This geometry needs a finer mesh. Try Refined mesh; beam results remain available.':'A suitable 3D mesh could not be generated for this geometry. Beam results remain available.'):message};}});self.postMessage({id,results});};

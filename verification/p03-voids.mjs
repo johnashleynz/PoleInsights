@@ -1,0 +1,30 @@
+import assert from 'node:assert/strict';
+import {writeFileSync} from 'node:fs';
+import {defaultCase,conditionAt} from '../src/domain/model.ts';
+import {solvePole,stationAt,stressAt,utilisationAt} from '../src/analysis/beam.ts';
+const checks=[];
+function close(name,actual,expected,tolerance=.003){const error=Math.abs(actual-expected)/Math.max(Math.abs(expected),1e-12);assert.ok(error<tolerance,`${name}: ${actual} vs ${expected}`);checks.push({name,actual,expected,error,tolerance});}
+function test(name,condition){assert.ok(condition,name);checks.push({name,passed:true});}
+const p={...defaultCase(),soil:'Fixed',length:10,embedment:2,diameters:{butt:.3,ground:.3,tip:.3},loadKN:1};
+const hollow={id:'hole',name:'Known annulus',kind:'void',zMin:-2,zMax:8,severity:1,shape:{type:'ellipse',centreX:0,centreY:0,radiusX:.12,radiusY:.12,angle:0,profile:'constant'},provenance:'synthetic'};
+const q={...p,regions:[hollow]},solid=solvePole(p),voided=solvePole(q),ratio=1/(1-(.12/.15)**4),s=stationAt(voided,1),ref=stationAt(solid,1);
+close('Hollow pole deflection ratio matches exact annulus EI',voided.tipMovement/solid.tipMovement,ratio);
+close('Hollow pole outer-fibre stress ratio matches M/Z',stressAt(q,s,.15,0)/stressAt(p,ref,.15,0),ratio);
+close('Hollow pole timber capacity ratio matches exact Z',voided.timberLimitKN/solid.timberLimitKN,1/ratio);
+close('Remaining wood area equals exact annulus area fraction',s.remaining,1-(.12/.15)**2);
+test('Void interior is no stress, not zero-stress timber',stressAt(q,s,0,0)===null);
+test('Void interior has no utilisation',utilisationAt(q,s,0,0)===null);
+close('Compression utilisation uses compression strength',utilisationAt(q,s,.15,0),Math.abs(stressAt(q,s,.15,0))/p.material.compression,1e-10);
+close('Tension utilisation uses tension strength',utilisationAt(q,s,-.15,0),Math.abs(stressAt(q,s,-.15,0))/p.material.tension,1e-10);
+const decayed={...p,regions:[{...hollow,kind:'decay',severity:.7}]},r=solvePole(decayed),ds=stationAt(r,1),x=.06,c=conditionAt(decayed,x,0,1),stress=stressAt(decayed,ds,x,0);
+close('Local decay utilisation includes local reduced strength',utilisationAt(decayed,ds,x,0),Math.abs(stress)/((stress<0?p.material.compression:p.material.tension)*c.strength),1e-10);
+const zero=solvePole({...q,loadKN:0});test('Zero load retains hollow and gives zero utilisation in wood',utilisationAt(q,stationAt(zero,1),.15,0)===0&&utilisationAt(q,stationAt(zero,1),0,0)===null);
+const local={...p,regions:[{...hollow,zMin:.5,zMax:2}]},localResult=solvePole(local);
+const annularI=Math.PI*(.15**4-.12**4)/4,solidI=Math.PI*.15**4/4;
+close('Local hollow stress matches independent section M/Z',stressAt(local,stationAt(localResult,1.25),.15,0),-1000*(8-1.25)*.15/annularI);
+close('Above local hollow, moment stress returns to solid M/Z',stressAt(local,stationAt(localResult,3),.15,0),-1000*(8-3)*.15/solidI);
+const asymmetric={...p,regions:[{...hollow,shape:{...hollow.shape,centreX:.04,radiusX:.05,radiusY:.05}}]},asymResult=solvePole(asymmetric),A=Math.PI*.15**2,a=Math.PI*.05**2,cx=-a*.04/(A-a),second=solidI-Math.PI*.05**4/4-a*.04**2-(A-a)*cx**2;
+close('Eccentric hollow stress follows shifted neutral axis',stressAt(asymmetric,stationAt(asymResult,1),.15,0),-7000*(.15-cx)/second,.02);
+test('Eccentric hollow changes directional bending response',Math.abs(asymResult.timberLimitKN-solvePole({...asymmetric,bearing:0}).timberLimitKN)>.01);
+writeFileSync(new URL('results/p03-voids.json',import.meta.url),JSON.stringify({version:'P03',date:new Date().toISOString(),scope:'Numerical beam/section verification, not local 3D stress concentration or physical validation.',checks},null,2));
+console.log(`${checks.length} P03 hollow-section/utilisation checks passed. Annular stress increase: ${((ratio-1)*100).toFixed(1)}%.`);

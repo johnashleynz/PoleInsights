@@ -1,0 +1,131 @@
+{
+  "scope": "Elastic-lattice consistency, independent dispersion and planar reflection references; not physical wood/UB1000 validation",
+  "checks": [
+    {
+      "name": "Compression mode matches independent lattice dispersion",
+      "pass": true,
+      "data": {
+        "projection": -0.3057246589827568,
+        "exact": -0.30506551826902245
+      }
+    },
+    {
+      "name": "Compression long-wave speed agrees with continuum",
+      "pass": true
+    },
+    {
+      "name": "Shear mode matches independent lattice dispersion",
+      "pass": true,
+      "data": {
+        "projection": -0.3176288694488101,
+        "exact": -0.31740975812538996
+      }
+    },
+    {
+      "name": "Shear long-wave speed agrees with continuum",
+      "pass": true
+    },
+    {
+      "name": "Rigid translation generates no elastic strain",
+      "pass": true
+    },
+    {
+      "name": "Internal elastic forces conserve linear momentum",
+      "pass": true,
+      "data": {
+        "mx": -1.917682592583736e-18,
+        "my": 2.270048298641525e-19
+      }
+    },
+    {
+      "name": "Undamped integration stays bounded",
+      "pass": true,
+      "data": {
+        "ratio": 1.4283093411194847
+      }
+    },
+    {
+      "name": "Viscous absorption matches exponential rigid-velocity decay",
+      "pass": true,
+      "data": {
+        "ratio": 0.7503150230872465,
+        "exact": 0.7503150230872362
+      }
+    },
+    {
+      "name": "Interface reflection agrees with impedance coefficient",
+      "pass": true,
+      "data": {
+        "reflected": 0.33276294698855646,
+        "expected": 0.3333333333333333
+      }
+    },
+    {
+      "name": "Interface transmission agrees with impedance coefficient",
+      "pass": true,
+      "data": {
+        "transmitted": 1.3321058883005719,
+        "expected": 1.3333333333333333
+      }
+    },
+    {
+      "name": "Sound specimen and independent sound run have identical receiver trace",
+      "pass": true
+    },
+    {
+      "name": "Wave sequence evolves from rest",
+      "pass": true
+    },
+    {
+      "name": "Recorded times and samples are finite",
+      "pass": true
+    },
+    {
+      "name": "Chosen pulse has at least sixteen cells per sound wavelength",
+      "pass": true
+    },
+    {
+      "name": "Cavity has no mass or stiffness-bearing nodes",
+      "pass": true
+    },
+    {
+      "name": "Cavity has zero wave displacement in every frame",
+      "pass": true
+    },
+    {
+      "name": "Cavity changes received waveform",
+      "pass": true
+    },
+    {
+      "name": "Decay reduces speed and increases absorption independently of structural E",
+      "pass": true
+    },
+    {
+      "name": "Decay produces a distinct finite response",
+      "pass": true
+    },
+    {
+      "name": "Under-resolved drilling is explicitly identified",
+      "pass": true
+    },
+    {
+      "name": "First-arrival estimate stable within 10 microseconds under refinement",
+      "pass": true,
+      "data": {
+        "coarse": 0.00025410887620278796,
+        "fine": 0.0002555736262345672
+      }
+    }
+  ],
+  "refinement": {
+    "firstArrivalCoarse": 0.00025410887620278796,
+    "firstArrivalFine": 0.0002555736262345672,
+    "relativeFullTraceL2": 0.8244099334137914,
+    "lateWaveformQualified": false
+  },
+  "timing": {
+    "soundMs": 455.1006,
+    "cavityMs": 615.9106,
+    "decayMs": 712.6587999999999
+  }
+}

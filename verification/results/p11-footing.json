@@ -1,0 +1,25 @@
+{
+  "scope": "Separate timber capacity and soil strength limits; soil stiffness is retained",
+  "checks": [
+    {
+      "name": "Soil strength change alters soil limit by the expected factor",
+      "pass": true,
+      "data": {
+        "original": 1.6161615991010367,
+        "weak": 0.016161615991010368
+      }
+    },
+    {
+      "name": "Specified and worst timber capacity profiles are independent of soil strength",
+      "pass": true
+    },
+    {
+      "name": "Timber capacity remains above a weaker footing limit rather than being capped",
+      "pass": true,
+      "data": {
+        "sectionCapacity": 8.299431278120005,
+        "soilLimit": 0.016161615991010368
+      }
+    }
+  ]
+}

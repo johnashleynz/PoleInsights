@@ -1,0 +1,10 @@
+{
+  "provider": "edge_tts",
+  "voice": "en-GB-RyanNeural",
+  "rate": "-8%",
+  "volume": "+0%",
+  "pitch": "+0Hz",
+  "text": "In Defects, choose a type and press Add. Set its height, length, width and depth. Position and shape controls place this cavity off centre.  It removes wood completely. Decay instead leaves weakened material, with an illustrative severity-to-strength relationship.",
+  "unit": "one chapter per call",
+  "fingerprint": "e40b8b9d618f18549ca52a2d1c65dad7cb993243261645ee4d718ef5b0f8b874"
+}

@@ -1,0 +1,11 @@
+export type Point2=[number,number];
+export function polygonArea(points:Point2[]){return Math.abs(points.reduce((s,a,i)=>{const b=points[(i+1)%points.length];return s+a[0]*b[1]-a[1]*b[0];},0))/2;}
+export function insidePolygon(points:Point2[],x:number,y:number){let inside=false;for(let i=0,j=points.length-1;i<points.length;j=i++){const a=points[i],b=points[j];if((a[1]>y)!==(b[1]>y)&&x<(b[0]-a[0])*(y-a[1])/(b[1]-a[1])+a[0])inside=!inside;}return inside;}
+/** Distance-based interior progression supports concave shapes without filling their notches. */
+export function polygonDistance(points:Point2[],x:number,y:number){let distance=Infinity;for(let i=0;i<points.length;i++){const a=points[i],b=points[(i+1)%points.length],dx=b[0]-a[0],dy=b[1]-a[1],t=Math.max(0,Math.min(1,((x-a[0])*dx+(y-a[1])*dy)/(dx*dx+dy*dy||1)));distance=Math.min(distance,Math.hypot(x-a[0]-t*dx,y-a[1]-t*dy));}if(distance<1e-9)return 1;if(!insidePolygon(points,x,y))return Infinity;return Math.max(0,1-distance);}
+export function simplePolygon(points:Point2[]){
+ if(!Array.isArray(points)||points.length<3||points.length>128||points.some(p=>!Array.isArray(p)||p.length!==2||!p.every(Number.isFinite))||polygonArea(points)<1e-5)return false;
+ const cross=(a:Point2,b:Point2,c:Point2)=>(b[0]-a[0])*(c[1]-a[1])-(b[1]-a[1])*(c[0]-a[0]);
+ for(let i=0;i<points.length;i++)for(let j=i+2;j<points.length;j++){if(i===0&&j===points.length-1)continue;const a=points[i],b=points[(i+1)%points.length],c=points[j],d=points[(j+1)%points.length];if(cross(a,b,c)*cross(a,b,d)<=0&&cross(c,d,a)*cross(c,d,b)<=0&&[0,1].every(k=>Math.max(Math.min(a[k],b[k]),Math.min(c[k],d[k]))<=Math.min(Math.max(a[k],b[k]),Math.max(c[k],d[k]))))return false;}return true;
+}
+export function normaliseSketch(points:Point2[]){const xs=points.map(p=>p[0]),ys=points.map(p=>p[1]),centreX=(Math.min(...xs)+Math.max(...xs))/2,centreY=(Math.min(...ys)+Math.max(...ys))/2,radiusX=(Math.max(...xs)-Math.min(...xs))/2,radiusY=(Math.max(...ys)-Math.min(...ys))/2;if(radiusX<.0025||radiusY<.0025)throw Error('Draw a shape at least 5 mm across.');const outline=points.map(([x,y])=>[(x-centreX)/radiusX,(y-centreY)/radiusY] as Point2);if(!simplePolygon(outline))throw Error('Draw one closed outline without crossing its edges.');return {type:'sketch' as const,centreX,centreY,radiusX,radiusY,outline,angle:0,profile:'constant' as const};}

@@ -1,0 +1,10 @@
+{
+  "provider": "edge_tts",
+  "voice": "en-GB-RyanNeural",
+  "rate": "-8%",
+  "volume": "+0%",
+  "pitch": "+0Hz",
+  "text": "This number is a timber bending estimate.  It uses geometry, material inputs and defects in a separate structural model. The acoustic animation cannot measure fibre strength. Approved device calibration and interpretation remain separate requirements.",
+  "unit": "one chapter per call",
+  "fingerprint": "e00bdbd81ca961d84ea957bd368028ae66548e127d5056d6d174f2281fe10322"
+}

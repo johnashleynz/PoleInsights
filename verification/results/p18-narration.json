@@ -1,0 +1,30 @@
+[
+  {
+    "film": "where-poles-break",
+    "voice": "en-GB-RyanNeural",
+    "duration": 61.1,
+    "captionsWithinAudio": true,
+    "exactScriptVoiceMatch": true
+  },
+  {
+    "film": "decay-and-strength",
+    "voice": "en-GB-RyanNeural",
+    "duration": 60.06666666666667,
+    "captionsWithinAudio": true,
+    "exactScriptVoiceMatch": true
+  },
+  {
+    "film": "ultrasonic-detection",
+    "voice": "en-GB-RyanNeural",
+    "duration": 64.03333333333333,
+    "captionsWithinAudio": true,
+    "exactScriptVoiceMatch": true
+  },
+  {
+    "film": "before-climbing",
+    "voice": "en-GB-RyanNeural",
+    "duration": 62.733333333333334,
+    "captionsWithinAudio": true,
+    "exactScriptVoiceMatch": true
+  }
+]

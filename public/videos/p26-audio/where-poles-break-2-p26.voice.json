@@ -1,0 +1,10 @@
+{
+  "provider": "edge_tts",
+  "voice": "en-GB-RyanNeural",
+  "rate": "-8%",
+  "volume": "+0%",
+  "pitch": "+0Hz",
+  "text": "This pole has a weakened region above ground.  Look at the remaining timber. It still carries load. A defect can change the governing height; this close view does not identify it.",
+  "unit": "one chapter per call",
+  "fingerprint": "1c2a27396b3193fafe262e3a750b933ed91c2782a81a665ae8c56f0afe5e9ad5"
+}

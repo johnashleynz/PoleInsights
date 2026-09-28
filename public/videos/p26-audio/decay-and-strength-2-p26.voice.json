@@ -1,0 +1,10 @@
+{
+  "provider": "edge_tts",
+  "voice": "en-GB-RyanNeural",
+  "rate": "-8%",
+  "volume": "+0%",
+  "pitch": "+0Hz",
+  "text": "The weakened region is now nearer the outside.  The coloured section shows beam utilisation in the remaining material. This case is fixed. Position changes the bending response; this view cannot demonstrate every damage pattern.",
+  "unit": "one chapter per call",
+  "fingerprint": "6203d4d67357df53e242728c4e21431edb05e3b323fe43e745f6923daf17de06"
+}

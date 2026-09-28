@@ -1,0 +1,197 @@
+{
+  "scope": "Display geometry and ray intersections, not structural validation",
+  "checks": [
+    {
+      "name": "Clipped walls stay within the tapered pole",
+      "pass": true
+    },
+    {
+      "name": "Opening ray hits the cavity back wall, not a cap across its mouth",
+      "pass": true
+    },
+    {
+      "name": "Oblique opening view -20 degrees finds an interior wall",
+      "pass": true
+    },
+    {
+      "name": "Oblique opening view -10 degrees finds an interior wall",
+      "pass": true
+    },
+    {
+      "name": "Oblique opening view 0 degrees finds an interior wall",
+      "pass": true
+    },
+    {
+      "name": "Oblique opening view 10 degrees finds an interior wall",
+      "pass": true
+    },
+    {
+      "name": "Oblique opening view 20 degrees finds an interior wall",
+      "pass": true
+    },
+    {
+      "name": "Enclosed cavity has a wall at orbit angle 0",
+      "pass": true
+    },
+    {
+      "name": "Enclosed cavity has a wall at orbit angle 10",
+      "pass": true
+    },
+    {
+      "name": "Enclosed cavity has a wall at orbit angle 20",
+      "pass": true
+    },
+    {
+      "name": "Enclosed cavity has a wall at orbit angle 30",
+      "pass": true
+    },
+    {
+      "name": "Enclosed cavity has a wall at orbit angle 40",
+      "pass": true
+    },
+    {
+      "name": "Enclosed cavity has a wall at orbit angle 50",
+      "pass": true
+    },
+    {
+      "name": "Enclosed cavity has a wall at orbit angle 60",
+      "pass": true
+    },
+    {
+      "name": "Enclosed cavity has a wall at orbit angle 70",
+      "pass": true
+    },
+    {
+      "name": "Enclosed cavity has a wall at orbit angle 80",
+      "pass": true
+    },
+    {
+      "name": "Enclosed cavity has a wall at orbit angle 90",
+      "pass": true
+    },
+    {
+      "name": "Enclosed cavity has a wall at orbit angle 100",
+      "pass": true
+    },
+    {
+      "name": "Enclosed cavity has a wall at orbit angle 110",
+      "pass": true
+    },
+    {
+      "name": "Enclosed cavity has a wall at orbit angle 120",
+      "pass": true
+    },
+    {
+      "name": "Enclosed cavity has a wall at orbit angle 130",
+      "pass": true
+    },
+    {
+      "name": "Enclosed cavity has a wall at orbit angle 140",
+      "pass": true
+    },
+    {
+      "name": "Enclosed cavity has a wall at orbit angle 150",
+      "pass": true
+    },
+    {
+      "name": "Enclosed cavity has a wall at orbit angle 160",
+      "pass": true
+    },
+    {
+      "name": "Enclosed cavity has a wall at orbit angle 170",
+      "pass": true
+    },
+    {
+      "name": "Enclosed cavity has a wall at orbit angle 180",
+      "pass": true
+    },
+    {
+      "name": "Enclosed cavity has a wall at orbit angle 190",
+      "pass": true
+    },
+    {
+      "name": "Enclosed cavity has a wall at orbit angle 200",
+      "pass": true
+    },
+    {
+      "name": "Enclosed cavity has a wall at orbit angle 210",
+      "pass": true
+    },
+    {
+      "name": "Enclosed cavity has a wall at orbit angle 220",
+      "pass": true
+    },
+    {
+      "name": "Enclosed cavity has a wall at orbit angle 230",
+      "pass": true
+    },
+    {
+      "name": "Enclosed cavity has a wall at orbit angle 240",
+      "pass": true
+    },
+    {
+      "name": "Enclosed cavity has a wall at orbit angle 250",
+      "pass": true
+    },
+    {
+      "name": "Enclosed cavity has a wall at orbit angle 260",
+      "pass": true
+    },
+    {
+      "name": "Enclosed cavity has a wall at orbit angle 270",
+      "pass": true
+    },
+    {
+      "name": "Enclosed cavity has a wall at orbit angle 280",
+      "pass": true
+    },
+    {
+      "name": "Enclosed cavity has a wall at orbit angle 290",
+      "pass": true
+    },
+    {
+      "name": "Enclosed cavity has a wall at orbit angle 300",
+      "pass": true
+    },
+    {
+      "name": "Enclosed cavity has a wall at orbit angle 310",
+      "pass": true
+    },
+    {
+      "name": "Enclosed cavity has a wall at orbit angle 320",
+      "pass": true
+    },
+    {
+      "name": "Enclosed cavity has a wall at orbit angle 330",
+      "pass": true
+    },
+    {
+      "name": "Enclosed cavity has a wall at orbit angle 340",
+      "pass": true
+    },
+    {
+      "name": "Enclosed cavity has a wall at orbit angle 350",
+      "pass": true
+    },
+    {
+      "name": "Rounded cavity closes at axial end -1",
+      "pass": true
+    },
+    {
+      "name": "Rounded cavity closes at axial end 1",
+      "pass": true
+    },
+    {
+      "name": "Constant cavity has end wall -1",
+      "pass": true
+    },
+    {
+      "name": "Constant cavity has end wall 1",
+      "pass": true
+    },
+    {
+      "name": "Concave sketched cavity triangulates",
+      "pass": true
+    }
+  ]
+}

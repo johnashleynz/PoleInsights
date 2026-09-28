@@ -1,0 +1,10 @@
+{
+  "provider": "edge_tts",
+  "voice": "en-GB-RyanNeural",
+  "rate": "-8%",
+  "volume": "+0%",
+  "pitch": "+0Hz",
+  "text": "The compass controls the load direction.  Load applied in worst direction searches for a weaker orientation. Off-centre damage makes direction important. The comparison also depends on entered dimensions and material strength; credible input ranges are part of interpreting this estimate.",
+  "unit": "one chapter per call",
+  "fingerprint": "97cda52467b98ee35eaa363d43bd581ec4547f411229e20b691951d12c82e73a"
+}

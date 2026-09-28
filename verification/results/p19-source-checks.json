@@ -1,0 +1,24 @@
+{
+  "date": "2026-09-26",
+  "sources": [
+    {
+      "id": "us",
+      "url": "https://woodpoles.org/wp-content/uploads/TB_Pole_MOE.pdf",
+      "pageVisuallyChecked": 3,
+      "sha256": "d71236dcbc80d79de70a78944934165b35654bc76f6b378acc932fa80b1564b4"
+    },
+    {
+      "id": "uk-pine",
+      "url": "https://www.scanpole.com/files/sites/3/2025/01/spas_ilseng_declaration-of-performance_2023.pdf",
+      "pageVisuallyChecked": 3,
+      "sha256": "e3f510849d7b23be7919b3245c31c6ffd3dbe434458526939110a14904d0b86e"
+    },
+    {
+      "id": "uk-fir",
+      "url": "https://www.scanpole.com/files/sites/6/2025/01/bbhltd_declaration-of-performance_2023.pdf",
+      "pageVisuallyChecked": 2,
+      "sha256": "6a31c689df2c946ff523f57268d2ed7db2ceb1ff1320d807f2d5e0660e091362"
+    }
+  ],
+  "limits": "NZ/Australian standard grade tables remain unverified; no default values assigned."
+}

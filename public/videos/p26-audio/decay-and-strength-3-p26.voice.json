@@ -1,0 +1,10 @@
+{
+  "provider": "edge_tts",
+  "voice": "en-GB-RyanNeural",
+  "rate": "-8%",
+  "volume": "+0%",
+  "pitch": "+0Hz",
+  "text": "A cavity removes wood completely.  The cut face shows the shell left around the opening. Its size and position affect resistance. Thin shells may split or buckle; those failure mechanisms are not predicted by this beam bending model.",
+  "unit": "one chapter per call",
+  "fingerprint": "45c46c453b68a7ff76d0327b2bcc9b5ffd6993b9bafbf25407b6763b2d854055"
+}

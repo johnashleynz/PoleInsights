@@ -1,0 +1,14 @@
+import {writeFileSync} from 'node:fs';
+import {defaultCase,newRegion,conditionAt,validateCase,diameterAt} from '../src/domain/model.ts';
+import {moveDefectHeight,moveDefectSection,defectSectionLoops} from '../src/domain/defectEditing.ts';
+const checks=[],check=(name,pass)=>{checks.push({name,pass});if(!pass)throw Error(name);},close=(a,b)=>Math.abs(a-b)<1e-9;
+const p=defaultCase(),r=newRegion(p);r.zMin=1;r.zMax=2;r.decay={pattern:'heart',progression:'source',sourceZ:1.2,exponent:2,shellDepth:.03};
+const moved={...r,...moveDefectHeight(p,r,3)};check('Vertical drag preserves length',close(moved.zMax-moved.zMin,1));check('Vertical drag preserves relative decay source',close(moved.decay.sourceZ-moved.zMin,.2));
+const top={...r,...moveDefectHeight(p,r,100)},butt={...r,...moveDefectHeight(p,r,-100)};check('Vertical extent clamps at pole ends',close(top.zMax,p.length-p.embedment)&&close(butt.zMin,-p.embedment));
+const knot=newRegion(p,'knot'),shifted={...knot,...moveDefectSection(p,knot,.02,-.015)};check('Knot drag moves physical centre',close(shifted.shape.centreX-knot.shape.centreX,.02)&&close(shifted.shape.centreY-knot.shape.centreY,-.015));check('Knot fibre properties unchanged',JSON.stringify(shifted.knot)===JSON.stringify(knot.knot));
+const drill=newRegion(p,'drilling');drill.drilling.bearing=0;const radial=diameterAt(p,.3)/2-drill.drilling.depth/2,turned={...drill,...moveDefectSection(p,drill,radial,-radial)};check('Bore drag rotates attached radial hole',close(turned.drilling.bearing,90));check('Tangential bore move preserves depth',close(turned.drilling.depth,drill.drilling.depth));p.regions=[turned];check('Moved bore uses actual material removal',conditionAt(p,radial,0,.3).drilled&&!conditionAt(p,0,radial,.3).drilled);
+check('Bore outline reflects cut through circular hole',defectSectionLoops(p,drill,drill.zMax)[0].every(q=>Math.abs(q[0])<1e-9));
+const shell={...r,decay:{...r.decay,pattern:'shell',progression:'uniform'},shape:{...r.shape,centreX:.04}},R=diameterAt(p,1.5)/2;p.regions=[shell];check('Legacy shell stays concentric without optional offsets',conditionAt(p,R-.01,0,1.5).severity===conditionAt(p,-R+.01,0,1.5).severity);
+const eccentric={...shell,...moveDefectSection(p,shell,.025,0)};p.regions=[eccentric];check('Shell drag changes decay location consistently',conditionAt(p,-R+.02,0,1.5).severity>0&&conditionAt(p,R-.02,0,1.5).severity===0);check('Moved shell retains valid saved geometry',validateCase(JSON.parse(JSON.stringify(p))).length===0);
+p.regions=[{...eccentric,decay:{...eccentric.decay,offsetX:NaN}}];check('Invalid shell offset rejected',validateCase(p).length>0);
+writeFileSync('verification/results/p10.json',JSON.stringify({scope:'Defect gesture geometry and backward compatibility; no new FE qualification',checks},null,2));console.log(`${checks.length} P10 gesture geometry checks passed.`);

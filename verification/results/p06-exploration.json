@@ -1,0 +1,10 @@
+{
+  "rejected": [
+    {
+      "test": "Warped element stiffness quadrature 27 vs 64 points",
+      "relativeDifference": 0.0002601225940960589,
+      "gate": 0.0001,
+      "action": "Use 64 points; compare to 125 independently."
+    }
+  ]
+}

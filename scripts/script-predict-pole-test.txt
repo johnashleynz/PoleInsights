@@ -1,0 +1,17 @@
+Start with the test arrangement
+{CAM:ground}What does the test arrangement assume? [P1.5] In Setup, open Ground, then Reference option. Select {LABEL:Ideal fixed groundline}Ideal fixed groundline for a restrained cantilever. {CAM:tip}The model loads the physical tip. Match that fixture; a three-point bending test needs a different model.
+
+Choose the timber and measurements
+{CAM:properties}Under Pole, open {LABEL:Properties}Properties. Choose a source appropriate to the timber. {CAM:entered}Here, eight gigapascals and forty megapascals are example assumptions, not measured data. [P0.8] {CAM:dimensions}{LABEL:Entered dimensions}Enter length, embedment and the three diameters or circumferences. Keep the property source with the case.
+
+Describe the known deterioration
+{CAM:defects}In Defects, choose a type and press {LABEL:Add}Add. {CAM:cavity}Set its height, length, width and depth. Position and shape controls place this cavity off centre. [P0.8] It removes wood completely. Decay instead leaves weakened material, with an illustrative severity-to-strength relationship.
+
+Read the timber bending estimate
+{CAM:capacity}Choose Stresses and {LABEL:Capacity (kN)}Capacity in kilonewtons. Keep Specified load direction, then press {CAM:critical}{LABEL:Critical section}Critical section. [P0.8] Timber bending limit is the whole-pole estimate. The height curve shows section capacities; its lowest value locates the first bending limit, possibly above ground.
+
+Explore direction and uncertainty
+{CAM:direction}The compass controls the load direction. [P0.8] {CAM:worst}{LABEL:Worst direction}Load applied in worst direction searches for a weaker orientation. Off-centre damage makes direction important. The comparison also depends on entered dimensions and material strength; credible input ranges are part of interpreting this estimate.
+
+Compare, save and check against a test
+{CAM:menu}Open Menu and {LABEL:Compare A/B}Compare A and B to set up matching cases. {CAM:compare}Hold geometry, material and direction constant when comparing deterioration. {CAM:save}Save case preserves the inputs and property source. [P0.8] This beam first-limit estimate is not a validated fracture load; comparison with measured tests remains necessary.

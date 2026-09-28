@@ -1,0 +1,6 @@
+{
+  "voice": "en-GB-RyanNeural",
+  "rate": "+0%",
+  "text": "Let's build an estimate for a pole test. In Setup, open Ground and select Ideal fixed groundline for a restrained cantilever. This model loads the physical tip. Match the fixture and load position before comparing it with a test; a three-point bending test needs a different model.",
+  "fingerprint": "18893db4ea04e76867ca3fe4c1b11af859f3c78bb9e7ed7d471b0ec302fdc85b"
+}

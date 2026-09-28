@@ -1,0 +1,2 @@
+import {simulateWaves} from '../inspection/waveSimulation.ts';
+self.onmessage=e=>{try{const {pole,z,bearing,n}=e.data,result=simulateWaves(pole,z,bearing,n,progress=>self.postMessage({progress}));self.postMessage({result},{transfer:[result.field.buffer,result.mask.buffer,result.condition.buffer,result.trace.buffer,result.reference.buffer]});}catch(error){self.postMessage({error:error instanceof Error?error.message:'Wave simulation failed.'});}};

@@ -1,0 +1,381 @@
+{
+  "checks": [
+    {
+      "name": "Curved affine tensor component 0 at 0.25,0.25,0.25,0.25",
+      "pass": true,
+      "data": {
+        "a": 771870.6047819984,
+        "b": 771870.6047819972
+      }
+    },
+    {
+      "name": "Located tensor component 0 at 0.25,0.25,0.25,0.25",
+      "pass": true,
+      "data": {
+        "a": 771870.6047819984,
+        "b": 771870.6047819972
+      }
+    },
+    {
+      "name": "Curved affine tensor component 1 at 0.25,0.25,0.25,0.25",
+      "pass": true,
+      "data": {
+        "a": 149648.3825597766,
+        "b": 149648.38255977497
+      }
+    },
+    {
+      "name": "Located tensor component 1 at 0.25,0.25,0.25,0.25",
+      "pass": true,
+      "data": {
+        "a": 149648.3825597766,
+        "b": 149648.38255977497
+      }
+    },
+    {
+      "name": "Curved affine tensor component 2 at 0.25,0.25,0.25,0.25",
+      "pass": true,
+      "data": {
+        "a": 5316455.696202541,
+        "b": 5316455.696202531
+      }
+    },
+    {
+      "name": "Located tensor component 2 at 0.25,0.25,0.25,0.25",
+      "pass": true,
+      "data": {
+        "a": 5316455.696202541,
+        "b": 5316455.696202531
+      }
+    },
+    {
+      "name": "Curved affine tensor component 3 at 0.25,0.25,0.25,0.25",
+      "pass": true,
+      "data": {
+        "a": 124444.44444444517,
+        "b": 124444.44444444442
+      }
+    },
+    {
+      "name": "Located tensor component 3 at 0.25,0.25,0.25,0.25",
+      "pass": true,
+      "data": {
+        "a": 124444.44444444517,
+        "b": 124444.44444444442
+      }
+    },
+    {
+      "name": "Curved affine tensor component 4 at 0.25,0.25,0.25,0.25",
+      "pass": true,
+      "data": {
+        "a": 509600.00000000064,
+        "b": 509599.99999999994
+      }
+    },
+    {
+      "name": "Located tensor component 4 at 0.25,0.25,0.25,0.25",
+      "pass": true,
+      "data": {
+        "a": 509600.00000000064,
+        "b": 509599.99999999994
+      }
+    },
+    {
+      "name": "Curved affine tensor component 5 at 0.25,0.25,0.25,0.25",
+      "pass": true,
+      "data": {
+        "a": 364000.00000000047,
+        "b": 364000
+      }
+    },
+    {
+      "name": "Located tensor component 5 at 0.25,0.25,0.25,0.25",
+      "pass": true,
+      "data": {
+        "a": 364000.00000000047,
+        "b": 364000
+      }
+    },
+    {
+      "name": "Curved affine tensor component 0 at 0.1,0.3,0.4,0.2",
+      "pass": true,
+      "data": {
+        "a": 771870.6047819982,
+        "b": 771870.6047819972
+      }
+    },
+    {
+      "name": "Located tensor component 0 at 0.1,0.3,0.4,0.2",
+      "pass": true,
+      "data": {
+        "a": 771870.6047819982,
+        "b": 771870.6047819972
+      }
+    },
+    {
+      "name": "Curved affine tensor component 1 at 0.1,0.3,0.4,0.2",
+      "pass": true,
+      "data": {
+        "a": 149648.38255977657,
+        "b": 149648.38255977497
+      }
+    },
+    {
+      "name": "Located tensor component 1 at 0.1,0.3,0.4,0.2",
+      "pass": true,
+      "data": {
+        "a": 149648.38255977657,
+        "b": 149648.38255977497
+      }
+    },
+    {
+      "name": "Curved affine tensor component 2 at 0.1,0.3,0.4,0.2",
+      "pass": true,
+      "data": {
+        "a": 5316455.696202542,
+        "b": 5316455.696202531
+      }
+    },
+    {
+      "name": "Located tensor component 2 at 0.1,0.3,0.4,0.2",
+      "pass": true,
+      "data": {
+        "a": 5316455.696202542,
+        "b": 5316455.696202531
+      }
+    },
+    {
+      "name": "Curved affine tensor component 3 at 0.1,0.3,0.4,0.2",
+      "pass": true,
+      "data": {
+        "a": 124444.44444444506,
+        "b": 124444.44444444442
+      }
+    },
+    {
+      "name": "Located tensor component 3 at 0.1,0.3,0.4,0.2",
+      "pass": true,
+      "data": {
+        "a": 124444.44444444506,
+        "b": 124444.44444444442
+      }
+    },
+    {
+      "name": "Curved affine tensor component 4 at 0.1,0.3,0.4,0.2",
+      "pass": true,
+      "data": {
+        "a": 509600.0000000007,
+        "b": 509599.99999999994
+      }
+    },
+    {
+      "name": "Located tensor component 4 at 0.1,0.3,0.4,0.2",
+      "pass": true,
+      "data": {
+        "a": 509600.0000000007,
+        "b": 509599.99999999994
+      }
+    },
+    {
+      "name": "Curved affine tensor component 5 at 0.1,0.3,0.4,0.2",
+      "pass": true,
+      "data": {
+        "a": 364000.0000000003,
+        "b": 364000
+      }
+    },
+    {
+      "name": "Located tensor component 5 at 0.1,0.3,0.4,0.2",
+      "pass": true,
+      "data": {
+        "a": 364000.0000000004,
+        "b": 364000
+      }
+    },
+    {
+      "name": "Along fibre normal traction",
+      "pass": true,
+      "data": {
+        "a": 30,
+        "b": 30
+      }
+    },
+    {
+      "name": "Fibre shear traction magnitude",
+      "pass": true,
+      "data": {
+        "a": 7.810249675906656,
+        "b": 7.810249675906656
+      }
+    },
+    {
+      "name": "Transverse principal maximum",
+      "pass": true,
+      "data": {
+        "a": 21.40312423743285,
+        "b": 21.40312423743285
+      }
+    },
+    {
+      "name": "Hydrostatic stress rotation invariant",
+      "pass": true,
+      "data": {
+        "a": 12,
+        "b": 12
+      }
+    },
+    {
+      "name": "Hydrostatic stress has zero fibre shear",
+      "pass": true,
+      "data": {
+        "a": 0,
+        "b": 0
+      }
+    },
+    {
+      "name": "Prescribed knot axis rotates 45 degrees",
+      "pass": true,
+      "data": {
+        "a": 0.7071067811865476,
+        "b": 0.7071067811865476
+      }
+    },
+    {
+      "name": "Spatial knot tensor 0",
+      "pass": true,
+      "data": {
+        "a": 1102672.292545712,
+        "b": 1102672.2925457102
+      }
+    },
+    {
+      "name": "Spatial knot tensor 1",
+      "pass": true,
+      "data": {
+        "a": 213783.40365682374,
+        "b": 213783.4036568214
+      }
+    },
+    {
+      "name": "Spatial knot tensor 2",
+      "pass": true,
+      "data": {
+        "a": 7594936.708860773,
+        "b": 7594936.70886076
+      }
+    },
+    {
+      "name": "Spatial knot tensor 3",
+      "pass": true,
+      "data": {
+        "a": 177777.77777777883,
+        "b": 177777.77777777775
+      }
+    },
+    {
+      "name": "Spatial knot tensor 4",
+      "pass": true,
+      "data": {
+        "a": 728000.0000000009,
+        "b": 728000
+      }
+    },
+    {
+      "name": "Spatial knot tensor 5",
+      "pass": true,
+      "data": {
+        "a": 520000.0000000007,
+        "b": 520000
+      }
+    },
+    {
+      "name": "Beam-only transverse stress is unavailable",
+      "pass": true
+    },
+    {
+      "name": "Assessment records sampled governing location",
+      "pass": true
+    },
+    {
+      "name": "Assessment never promotes capacity",
+      "pass": true
+    },
+    {
+      "name": "Unprovided shear criterion remains unassessed",
+      "pass": true
+    },
+    {
+      "name": "Actual-load field is not scaled again",
+      "pass": true,
+      "data": {
+        "a": 5316455.696202541,
+        "b": 5316455.696202541
+      }
+    },
+    {
+      "name": "Unit field retains exact load scaling",
+      "pass": true,
+      "data": {
+        "a": 15949367.088607622,
+        "b": 15949367.088607622
+      }
+    }
+  ],
+  "assessment": {
+    "status": "preliminary",
+    "capacityQualified": false,
+    "sampleCount": 1,
+    "governing": {
+      "mode": "Across-fibre tension",
+      "ratioAtUnitLoad": 0.6496623795948582,
+      "point": [
+        0.03,
+        0.031249999999999993,
+        0.95
+      ]
+    },
+    "peaks": {
+      "poleAxis": {
+        "paAtUnitLoad": 7594936.708860773,
+        "point": [
+          0.03,
+          0.031249999999999993,
+          0.95
+        ]
+      },
+      "longitudinal": {
+        "paAtUnitLoad": 7594936.708860773,
+        "point": [
+          0.03,
+          0.031249999999999993,
+          0.95
+        ]
+      },
+      "transverse": {
+        "paAtUnitLoad": 1136909.1642910019,
+        "point": [
+          0.03,
+          0.031249999999999993,
+          0.95
+        ]
+      },
+      "shear": {
+        "paAtUnitLoad": 894641.8277724343,
+        "point": [
+          0.03,
+          0.031249999999999993,
+          0.95
+        ]
+      }
+    },
+    "unassessed": [
+      "Shear strength criterion",
+      "Splitting and interface fracture",
+      "Wall instability",
+      "Ultimate failure",
+      "Physical knot/decay calibration"
+    ],
+    "basis": "Element-interior maximum-stress screening. Along-fibre references use the case tension/compression values; across-fibre references use the existing illustrative 0.05 / 0.25 ratios. These ratios are assumptions, not approved pole data. No solid capacity is issued."
+  },
+  "scope": "Tensor recovery, fibre transformation and preliminary screening. Not physical capacity qualification."
+}

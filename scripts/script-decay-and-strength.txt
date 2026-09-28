@@ -1,0 +1,11 @@
+Begin with sound timber
+{CAM:whole}An intact surface can conceal deterioration. [P0.8] {CAM:detail}{LABEL:Sound timber}Here the cut face contains sound timber. In bending, fibres farther from the centre have greater leverage. The location of damage therefore matters, as well as its size.
+
+Decay is not always a cavity
+{CAM:whole}Decay weakens wood without leaving a hole. [P0.4] {CAM:detail}{LABEL:Prescribed decay}This section has central decay, becoming less severe away from its source. [P0.8] The distribution is prescribed: an illustrative material penalty, not a forecast of decay growth.
+
+Location changes the response
+{CAM:whole}The weakened region is now nearer the outside. [P0.8] {CAM:detail}{LABEL:Off-centre decay}The coloured section shows beam utilisation in the remaining material. This case is fixed. Position changes the bending response; this view cannot demonstrate every damage pattern.
+
+A hollow leaves a shell
+{CAM:whole}A cavity removes wood completely. [P0.8] {CAM:detail}{LABEL:Remaining shell}The cut face shows the shell left around the opening. Its size and position affect resistance. Thin shells may split or buckle; those failure mechanisms are not predicted by this beam bending model.

@@ -1,0 +1,309 @@
+{
+  "scope": "Numerical verification; local peak/boundary and physical qualification remain separate",
+  "checks": [
+    {
+      "name": "Synthetic sketch accepted",
+      "pass": true
+    },
+    {
+      "name": "Self intersection rejected",
+      "pass": true
+    },
+    {
+      "name": "Concave notch stays sound",
+      "pass": true
+    },
+    {
+      "name": "Sketch centre is void",
+      "pass": true
+    },
+    {
+      "name": "Outside sketch is timber",
+      "pass": true
+    },
+    {
+      "name": "Sketch removed area against rectangle",
+      "pass": true,
+      "data": {
+        "v": 0.009589322966613394,
+        "target": 0.0096,
+        "tol": 0.0001
+      }
+    },
+    {
+      "name": "Dragging changes geometry",
+      "pass": true
+    },
+    {
+      "name": "Sketch round trip",
+      "pass": true
+    },
+    {
+      "name": "Fibre identity preserves stiffness",
+      "pass": true,
+      "data": {
+        "v": 9.5367431640625e-7,
+        "target": 0,
+        "tol": 0.000002
+      }
+    },
+    {
+      "name": "90 degree fibre swaps axial stiffness",
+      "pass": true,
+      "data": {
+        "v": 8227848101.265824,
+        "target": 8227848101.265823,
+        "tol": 0.00001
+      }
+    },
+    {
+      "name": "Rotated constitutive reciprocity",
+      "pass": true,
+      "data": {
+        "v": 2.384185791015625e-7,
+        "target": 0,
+        "tol": 0.00001
+      }
+    },
+    {
+      "name": "Rotation agrees with independent strain energy",
+      "pass": true,
+      "data": {
+        "v": 1,
+        "target": 1,
+        "tol": 1e-12
+      }
+    },
+    {
+      "name": "Height chart uniform circular cantilever limit",
+      "pass": true,
+      "data": {
+        "v": 7.20304022134912,
+        "target": 7.203040221376052,
+        "tol": 0.07203040221376053
+      }
+    },
+    {
+      "name": "Any-direction envelope on round sound pole",
+      "pass": true,
+      "data": {
+        "v": 0.13883026739682727,
+        "target": 0.13883026739682724,
+        "tol": 0.002
+      }
+    },
+    {
+      "name": "Chart linear load scaling",
+      "pass": true,
+      "data": {
+        "v": 0.41649080219048173,
+        "target": 0.41649080219048173,
+        "tol": 1e-12
+      }
+    },
+    {
+      "name": "Zero load keeps capacity",
+      "pass": true
+    },
+    {
+      "name": "Zero load has zero usage",
+      "pass": true
+    },
+    {
+      "name": "Knot creates normal-shear coupling",
+      "pass": true
+    },
+    {
+      "name": "Graded material varies at query point",
+      "pass": true
+    },
+    {
+      "name": "Exact displacement transfer agrees with cantilever",
+      "pass": true,
+      "data": {
+        "v": 0.0010600865125560916,
+        "target": 0.001060086512551049,
+        "tol": 1e-9
+      }
+    },
+    {
+      "name": "Exact rotation transfer agrees with cantilever",
+      "pass": true,
+      "data": {
+        "v": 0.0023973214346682875,
+        "target": 0.0023973214346556097,
+        "tol": 1e-9
+      }
+    },
+    {
+      "name": "Exact curvature transfer agrees with cantilever",
+      "pass": true,
+      "data": {
+        "v": 0.002618786520424219,
+        "target": 0.0026187865204059025,
+        "tol": 1e-9
+      }
+    },
+    {
+      "name": "Unit scaling preserves exact rotation",
+      "pass": true,
+      "data": {
+        "v": 0.0071919643040048616,
+        "target": 0.007191964304004862,
+        "tol": 1e-12
+      }
+    },
+    {
+      "name": "Quadratic material stiffness is symmetric",
+      "pass": true
+    },
+    {
+      "name": "Affine displacement has positive energy",
+      "pass": true
+    },
+    {
+      "name": "Quadrature graded elasticity agrees with affine volume integral",
+      "pass": true,
+      "data": {
+        "v": 1.0284775906501082,
+        "target": 1.0284775906502257,
+        "tol": 1e-11
+      }
+    },
+    {
+      "name": "Blind drill has free bore and constrained remote cuts",
+      "pass": true
+    },
+    {
+      "name": "Bore removes material without zero-stiffness elements",
+      "pass": true
+    },
+    {
+      "name": "knot solid converges",
+      "pass": true,
+      "data": {
+        "nodes": 7257,
+        "elements": 4800,
+        "ms": 17146.1647,
+        "energy": 14.985722919179405,
+        "residual": 9.930703703435856e-10
+      }
+    },
+    {
+      "name": "knot external force and moment balance",
+      "pass": true,
+      "data": {
+        "forceBalanceN": 0.000005467802918885281,
+        "momentBalanceNm": 0.0000020525711532811462,
+        "relativeWorkError": 2.1099517128304504e-14
+      }
+    },
+    {
+      "name": "knot strain energy equals boundary/load work",
+      "pass": true,
+      "data": {
+        "forceBalanceN": 0.000005467802918885281,
+        "momentBalanceNm": 0.0000020525711532811462,
+        "relativeWorkError": 2.1099517128304504e-14
+      }
+    },
+    {
+      "name": "knot has recovered solved stress",
+      "pass": true,
+      "data": {
+        "point": [
+          0.1,
+          0,
+          1
+        ],
+        "MPa": -0.49565420298082746
+      }
+    },
+    {
+      "name": "graded solid converges",
+      "pass": true,
+      "data": {
+        "nodes": 7257,
+        "elements": 4800,
+        "ms": 15536.808400000002,
+        "energy": 20.69155683629748,
+        "residual": 9.293001872040842e-10
+      }
+    },
+    {
+      "name": "graded external force and moment balance",
+      "pass": true,
+      "data": {
+        "forceBalanceN": 0.000003916029519744937,
+        "momentBalanceNm": 0.0000016670399013492043,
+        "relativeWorkError": 1.2578647714512429e-12
+      }
+    },
+    {
+      "name": "graded strain energy equals boundary/load work",
+      "pass": true,
+      "data": {
+        "forceBalanceN": 0.000003916029519744937,
+        "momentBalanceNm": 0.0000016670399013492043,
+        "relativeWorkError": 1.2578647714512429e-12
+      }
+    },
+    {
+      "name": "graded has recovered solved stress",
+      "pass": true,
+      "data": {
+        "point": [
+          0.1,
+          0,
+          1.5
+        ],
+        "MPa": -1.9487979399548438
+      }
+    },
+    {
+      "name": "drilling solid converges",
+      "pass": true,
+      "data": {
+        "nodes": 4347,
+        "elements": 2700,
+        "ms": 7235.654699999999,
+        "energy": 0.8360490468078704,
+        "residual": 8.879599006507827e-10
+      }
+    },
+    {
+      "name": "drilling external force and moment balance",
+      "pass": true,
+      "data": {
+        "forceBalanceN": 0.00004713906372988093,
+        "momentBalanceNm": 0.000049655141458137865,
+        "relativeWorkError": 3.5721587718382926e-14
+      }
+    },
+    {
+      "name": "drilling strain energy equals boundary/load work",
+      "pass": true,
+      "data": {
+        "forceBalanceN": 0.00004713906372988093,
+        "momentBalanceNm": 0.000049655141458137865,
+        "relativeWorkError": 3.5721587718382926e-14
+      }
+    },
+    {
+      "name": "drilling has recovered solved stress",
+      "pass": true,
+      "data": {
+        "point": [
+          0.08,
+          -0.06,
+          1.52
+        ],
+        "MPa": -1.6073013609043885
+      }
+    },
+    {
+      "name": "No recovered material inside bore",
+      "pass": true
+    }
+  ]
+}

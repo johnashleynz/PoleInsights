@@ -1,0 +1,11 @@
+Structure the inspection
+{CAM:safeHome}A pre-climb inspection needs a clear sequence and a record of what happened. [P0.8] {CAM:safeChecks}{LABEL:Structured checks}Safe2Climb guides the inspector through the pole, attachments, setting, movement and base condition. Each step keeps observations connected to the inspection, making the process easier to review.
+
+Add another safety layer
+{CAM:safeUB}The {LABEL:UB1000 check}U B one thousand check adds another layer of inspection evidence. [P0.8] It supplements the physical checks. {CAM:safeScan}The prototype demonstrates acquisition and follow-up states with example results. Those examples are not live measurements, and they do not replace an approved climbing decision procedure.
+
+Record lean and movement
+{CAM:safeLean}{LABEL:Lean record}A lean record can retain a photograph and an indicated pole alignment. [P0.8] {CAM:safeMovement}{LABEL:Movement record}Movement observations can include a recorded amount and a note. Together, these records make the observation clearer for another person. This prototype uses an image angle and manually entered movement.
+
+Make issues visible
+{CAM:safeIssues}When something causes concern, record the reason and supporting evidence. [P0.8] {CAM:safeRecords}{LABEL:Inspection record}Inspection history keeps issues visible for review and handover, with the pole and inspection context. That creates an auditable record. This local prototype demonstrates the workflow; it does not send a live network notification.

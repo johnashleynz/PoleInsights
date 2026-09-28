@@ -1,0 +1,28 @@
+{
+  "axonic": {
+    "acquisition.js": "94e97bbd947532c23467358ef819c3d9534db04ce8dfee11112598503a973e28",
+    "app.js": "436026a8d461539795d3faed8b195ff59c0a68be63b4d5adcfe3dd7a9f962625",
+    "axonic.css": "82f6ddd4a20ffef77c2859812be60afbe609002c28f3122ba83f981171e6fd96",
+    "capture-ui.js": "919b958883b1cedcc35567c040c1e2d966142c21921561281ecbfe730e06ab01",
+    "domain.js": "8b3dd9002fea6cab038a2b2724cee83054b36c0bbd576601b0ad598c9ddfd04e",
+    "index.html": "864649aa3b9a15d43cd7c3b86a2150e7b429b2e0653a7769821fd7cece34fa32",
+    "phone.html": "2fecff3076ab228f7e149910fddb695ee0eb34d750c1d39d80335d9c931da527",
+    "phone.js": "89bd5bdc100b520af6c02fe648331212f812afe9747b360b32dc538e09cc8d3f",
+    "photos.js": "45a16352e45c400f8eeee901d64967dcd8c0f36b084ae4960c1875935f9caaf7",
+    "scan-animation.js": "4af74438c8c0f33b9a848dcad8545d3775b8b0abb3a285e2fa272738481d27ae",
+    "styles.css": "af3e7c003de1129ba5373041a5e3cf5cc244077ac58de28c7c437eff8288015e",
+    "survey-location.js": "712c7dc3b634a69164381d7bc31e565c6bb9ca9b0c009a973714e1efd9e70bc0"
+  },
+  "safe2climb": {
+    "app.js": "0d244a02180fd7356eee42b0fac1972bdcbe75c334c1472a556a2dcaa845f410",
+    "camera.js": "c7f943aa6c12dd73acb26ab7e911ce94af92e7eb7f284947cbc0f5f0df9ec58e",
+    "flow.js": "caaaf29e7545a55e6b6fd46296370f4743553005036e2bb97979c8eade1d6724",
+    "handover.js": "0b93e58bb938f16addec8dae569bc2874d34b8f75412230ad7d4ba93d5e83294",
+    "index.html": "efcdc7e457abdf3459b0c85d2e5f7f0ef724b52e2f09e16c8337ecd6676baa38",
+    "model.js": "676662ab2584ab80062b31f720fb23f6c7255d911fc1b826afdbc487cfede912",
+    "phone.html": "352dca1a8a458f4c557c51e0520cdfc484dbc2dae3e7d3baf2090393b7159198",
+    "phone.js": "82b75caa3f76c094d6a87b08fac6897a290511859e31fd345b5aeb989b26ca69",
+    "store.js": "4c02c6a9df9b6e8a100941a419c57f34ec63ccb575f080476a9a42da14f16444",
+    "style.css": "d3edb1cbdf383b238b2027e8efb15a06bc6c645450d619553f8f78fa930fa334"
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "case": {
+    "schemaVersion": 1,
+    "id": "A",
+    "name": "Pole A",
+    "length": 11,
+    "embedment": 1.8,
+    "diameters": {
+      "butt": 0.3,
+      "ground": 0.3,
+      "tip": 0.3
+    },
+    "species": "radiata-pine",
+    "material": {
+      "E": 8000000000,
+      "tension": 35000000,
+      "compression": 25000000,
+      "basis": "illustrative"
+    },
+    "soil": "Fixed",
+    "loadKN": 1,
+    "bearing": 90,
+    "regions": [
+      {
+        "id": "cavity",
+        "name": "Enclosed hollow",
+        "kind": "void",
+        "zMin": 1.6,
+        "zMax": 2.2,
+        "severity": 1,
+        "shape": {
+          "type": "ellipse",
+          "centreX": 0.02,
+          "centreY": 0,
+          "radiusX": 0.06,
+          "radiusY": 0.07,
+          "angle": 0,
+          "profile": "rounded"
+        },
+        "provenance": "synthetic"
+      }
+    ]
+  },
+  "rows": [
+    {
+      "level": "coarse",
+      "nodes": 2650,
+      "elements": 1584,
+      "energy": 15.3798793092934,
+      "peakMPa": 2.729140713836928,
+      "areaError": 0.00015531356329878676,
+      "secondMomentError": 0.0003105927479232218,
+      "ms": 5798.9262,
+      "residual": 6.988837129996296e-10
+    },
+    {
+      "level": "medium",
+      "nodes": 5838,
+      "elements": 3744,
+      "energy": 15.398923588097752,
+      "peakMPa": 2.823450816109925,
+      "areaError": 0.00004931794253659749,
+      "secondMomentError": 0.0000986324150545892,
+      "ms": 34123.1042,
+      "residual": 8.569816109623498e-10
+    },
+    {
+      "level": "fine",
+      "nodes": 16434,
+      "elements": 10944,
+      "energy": 15.410760108101524,
+      "peakMPa": 2.8953005536596024,
+      "areaError": 0.00000976668893992727,
+      "secondMomentError": 0.000019533241693459047,
+      "ms": 132831.9512,
+      "residual": 9.89950621346195e-10
+    }
+  ],
+  "assessment": {
+    "lastEnergyChange": 0.0007686589219080275,
+    "lastDiagnosticPeakChange": 0.025447490404196138,
+    "energyGate": 0.02,
+    "qualified": false,
+    "note": "Outer geometry study only. Cavity geometry, local assessment measure and boundary qualification remain open."
+  }
+}

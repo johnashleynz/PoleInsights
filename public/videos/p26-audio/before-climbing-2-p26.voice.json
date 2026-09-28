@@ -1,0 +1,10 @@
+{
+  "provider": "edge_tts",
+  "voice": "en-GB-RyanNeural",
+  "rate": "-8%",
+  "volume": "+0%",
+  "pitch": "+0Hz",
+  "text": "The red arrow represents a simple sideways tip load.  It does not depict a climber or all the forces from their equipment. A real assessment must include actual work loads, the planned procedure and ground conditions.",
+  "unit": "one chapter per call",
+  "fingerprint": "5f22b4bd75e8aa94d48ac954788cf2545a26152d948e8d1ac401eb6fe7527e5e"
+}

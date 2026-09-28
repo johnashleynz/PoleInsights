@@ -1,0 +1,37 @@
+{
+  "sources": [
+    {
+      "file": "AS NZS 1720.1-2022.pdf",
+      "title": "NZS AS 1720.1:2022, including AS 1720.1:2010",
+      "sha256": "05c791d562b7e7ac27e47db8a528b02776d64965d13a56ecee519716850f674b",
+      "reviewedPdfPages": [
+        17,
+        89,
+        90,
+        91,
+        92,
+        209,
+        210,
+        211,
+        212,
+        275,
+        276,
+        277,
+        278,
+        279
+      ],
+      "verification": "Relevant tables and full accompanying page notes visually inspected; scanned source."
+    },
+    {
+      "file": "ANSI+O5.1-2022.pdf",
+      "title": "ANSI O5.1-2022",
+      "sha256": "3fc31b60a26b5e1245043b6e89c979c2b56a8d03d448ec37def5fc4dbe7050b4",
+      "reviewedPdfPages": [
+        21,
+        40
+      ],
+      "verification": "Table 1 and all notes visually inspected; extracted text and Annex A checked. Six existing US entries match."
+    }
+  ],
+  "redistribution": "Original PDFs, extracted pages and page images are not included in the review archives."
+}

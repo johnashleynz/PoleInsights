@@ -1,0 +1,10 @@
+{
+  "provider": "edge_tts",
+  "voice": "en-GB-RyanNeural",
+  "rate": "-8%",
+  "volume": "+0%",
+  "pitch": "+0Hz",
+  "text": "Decay changes this simulated response.  Compare the section trace with the sound reference below. Reflection, scattering and damping can affect the waveform. A large peak alone does not establish strength: overlapping waves can reinforce one another.",
+  "unit": "one chapter per call",
+  "fingerprint": "3562a3f7bcaada2a0ecc4037f2cbfa967e043653b3f31fac2c0cfc4c4aca0e92"
+}

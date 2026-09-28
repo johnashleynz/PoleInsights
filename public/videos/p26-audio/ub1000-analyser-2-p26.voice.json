@@ -1,0 +1,10 @@
+{
+  "provider": "edge_tts",
+  "voice": "en-GB-RyanNeural",
+  "rate": "-8%",
+  "volume": "+0%",
+  "pitch": "+0Hz",
+  "text": "A scan produces evidence to examine, rather than a picture of the exact decay shape.  The analyser keeps scan information available for review. Signal behaviour needs an approved interpretation; a single peak is not a direct measurement of pole bending capacity.",
+  "unit": "one chapter per call",
+  "fingerprint": "1ea15776cad107acf527068f287a39e23fa0fa0ad1a4855ab576197f48827800"
+}

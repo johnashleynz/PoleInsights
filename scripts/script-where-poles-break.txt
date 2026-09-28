@@ -1,0 +1,11 @@
+Follow the load
+{CAM:whole}Where might this pole break? [P1.5] Start with the {CAM:tip}{LABEL:Tip load}sideways load at its physical tip. [P0.8] {CAM:returnWide}Bending demand increases down the pole. The section on the right shows the timber available to resist it.
+
+Demand meets resistance
+{CAM:whole}The pole also thickens towards the ground. Demand is only half the story. [P0.4] Here, {CAM:section}{LABEL:Beam utilisation}green and blue show utilisation below the assumed timber strength. [P0.8] Applied stress, material strength and their ratio are different quantities.
+
+A local weakness
+{CAM:whole}This pole has a weakened region above ground. [P0.8] {CAM:detail}{LABEL:Remaining timber}Look at the remaining timber. It still carries load. A defect can change the governing height; this close view does not identify it.
+
+Turn the load
+{CAM:whole}The load now points in another direction. [P0.8] Follow the {CAM:tip}{LABEL:Load direction}arrow. An off-centre defect can respond differently when bending changes direction. [P0.4] These are beam bending estimates. Splitting, shell instability and real fracture need separate assessment.

@@ -1,0 +1,109 @@
+{
+  "scope": "Directional section envelopes and display palette; not physical qualification",
+  "checks": [
+    {
+      "name": "Specified-direction peak stress is in MPa",
+      "pass": true,
+      "data": {
+        "a": 0.000003,
+        "b": 0.000003
+      }
+    },
+    {
+      "name": "All-direction peak stress is vector amplitude",
+      "pass": true,
+      "data": {
+        "a": 0.000006,
+        "b": 0.000006
+      }
+    },
+    {
+      "name": "Worst capacity uses weakest direction",
+      "pass": true,
+      "data": {
+        "a": 0.5,
+        "b": 0.5
+      }
+    },
+    {
+      "name": "Specified capacity retains strength sign",
+      "pass": true,
+      "data": {
+        "a": 4,
+        "b": 4
+      }
+    },
+    {
+      "name": "Worst direction selects compression when weaker",
+      "pass": true,
+      "data": {
+        "a": 270,
+        "b": 270
+      }
+    },
+    {
+      "name": "Solving at worst bearing reproduces envelope",
+      "pass": true,
+      "data": {
+        "a": 6,
+        "b": 6
+      }
+    },
+    {
+      "name": "Solving at worst stress bearing reproduces stress envelope",
+      "pass": true,
+      "data": {
+        "a": 0.000006,
+        "b": 0.000006
+      }
+    },
+    {
+      "name": "Zero load retains capacity",
+      "pass": true,
+      "data": {
+        "a": 0.5,
+        "b": 0.5
+      }
+    },
+    {
+      "name": "Skipping unused best-direction search preserves selected results",
+      "pass": true
+    },
+    {
+      "name": "Worst capacity never exceeds specified capacity",
+      "pass": true
+    },
+    {
+      "name": "Fixed utilisation colour at 0%",
+      "pass": true
+    },
+    {
+      "name": "Fixed utilisation colour at 40%",
+      "pass": true
+    },
+    {
+      "name": "Fixed utilisation colour at 60%",
+      "pass": true
+    },
+    {
+      "name": "Fixed utilisation colour at 80%",
+      "pass": true
+    },
+    {
+      "name": "Fixed utilisation colour at 100%",
+      "pass": true
+    },
+    {
+      "name": "Current maximum above 100% is dark purple",
+      "pass": true
+    },
+    {
+      "name": "100% stays red when maximum changes",
+      "pass": true
+    },
+    {
+      "name": "Overrun colour graduates rather than jumps",
+      "pass": true
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "scope": "Defect gesture geometry and backward compatibility; no new FE qualification",
+  "checks": [
+    {
+      "name": "Vertical drag preserves length",
+      "pass": true
+    },
+    {
+      "name": "Vertical drag preserves relative decay source",
+      "pass": true
+    },
+    {
+      "name": "Vertical extent clamps at pole ends",
+      "pass": true
+    },
+    {
+      "name": "Knot drag moves physical centre",
+      "pass": true
+    },
+    {
+      "name": "Knot fibre properties unchanged",
+      "pass": true
+    },
+    {
+      "name": "Bore drag rotates attached radial hole",
+      "pass": true
+    },
+    {
+      "name": "Tangential bore move preserves depth",
+      "pass": true
+    },
+    {
+      "name": "Moved bore uses actual material removal",
+      "pass": true
+    },
+    {
+      "name": "Bore outline reflects cut through circular hole",
+      "pass": true
+    },
+    {
+      "name": "Legacy shell stays concentric without optional offsets",
+      "pass": true
+    },
+    {
+      "name": "Shell drag changes decay location consistently",
+      "pass": true
+    },
+    {
+      "name": "Moved shell retains valid saved geometry",
+      "pass": true
+    },
+    {
+      "name": "Invalid shell offset rejected",
+      "pass": true
+    }
+  ]
+}

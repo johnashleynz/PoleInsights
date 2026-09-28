@@ -1,0 +1,88 @@
+{
+  "case": {
+    "schemaVersion": 1,
+    "id": "A",
+    "name": "Pole A",
+    "length": 11,
+    "embedment": 1.8,
+    "diameters": {
+      "butt": 0.3,
+      "ground": 0.3,
+      "tip": 0.3
+    },
+    "species": "radiata-pine",
+    "material": {
+      "E": 8000000000,
+      "tension": 35000000,
+      "compression": 25000000,
+      "basis": "illustrative"
+    },
+    "soil": "Fixed",
+    "loadKN": 1,
+    "bearing": 90,
+    "regions": [
+      {
+        "id": "cavity",
+        "name": "Enclosed hollow",
+        "kind": "void",
+        "zMin": 1.6,
+        "zMax": 2.2,
+        "severity": 1,
+        "shape": {
+          "type": "ellipse",
+          "centreX": 0.02,
+          "centreY": 0,
+          "radiusX": 0.06,
+          "radiusY": 0.07,
+          "angle": 0,
+          "profile": "rounded"
+        },
+        "provenance": "synthetic"
+      }
+    ]
+  },
+  "rows": [
+    {
+      "level": "coarse",
+      "nodes": 2650,
+      "elements": 1584,
+      "energy": 16.88087548257516,
+      "peakMPa": 2.960326708212889,
+      "rmsMPa": 1.6399632355669589,
+      "ms": 1284.8915,
+      "iterations": 296
+    },
+    {
+      "level": "medium",
+      "nodes": 5838,
+      "elements": 3744,
+      "energy": 16.225461909303597,
+      "peakMPa": 2.955604118787914,
+      "rmsMPa": 1.5951720149165018,
+      "ms": 7332.4367,
+      "iterations": 391
+    },
+    {
+      "level": "fine",
+      "nodes": 16434,
+      "elements": 10944,
+      "energy": 15.77276699068177,
+      "peakMPa": 2.9558721253442095,
+      "rmsMPa": 1.5618632910014698,
+      "ms": 48615.508,
+      "iterations": 556
+    }
+  ],
+  "limits": {
+    "energyChange": 0.02,
+    "localChange": 0.05
+  },
+  "scope": "Centroid peaks diagnostic only; no capacity qualification.",
+  "assessment": {
+    "lastEnergyChange": 0.027900279274160684,
+    "lastDiagnosticPeakChange": 0.00009067742008884882,
+    "lastRmsChange": 0.020880960550687416,
+    "qualified": false,
+    "note": "The 2% global-energy change gate fails. Stable sampled centroid peaks do not qualify a local failure measure."
+  }
+}

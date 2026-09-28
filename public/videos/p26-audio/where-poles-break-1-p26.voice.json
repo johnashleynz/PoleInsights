@@ -1,0 +1,10 @@
+{
+  "provider": "edge_tts",
+  "voice": "en-GB-RyanNeural",
+  "rate": "-8%",
+  "volume": "+0%",
+  "pitch": "+0Hz",
+  "text": "The pole also thickens towards the ground. Demand is only half the story.  Here, green and blue show utilisation below the assumed timber strength.  Applied stress, material strength and their ratio are different quantities.",
+  "unit": "one chapter per call",
+  "fingerprint": "e950f2152a2a85228436f287c61b9d6b3c283a53da17c62f96c658b1950dda40"
+}

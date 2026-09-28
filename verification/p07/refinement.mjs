@@ -1,0 +1,12 @@
+import fs from 'node:fs';
+import {defaultCase} from '../../src/domain/model.ts';
+import {RESOLUTIONS} from '../../src/analysis/solid/mesh.ts';
+import {solveCurvedLocal} from '../../src/analysis/solid/curvedField.ts';
+import {localStressAt} from '../../src/analysis/solid/field.ts';
+const p=defaultCase();p.soil='Fixed';p.diameters={butt:.3,ground:.3,tip:.3};p.regions=[{id:'cavity',name:'Enclosed hollow',kind:'void',zMin:1.6,zMax:2.2,severity:1,shape:{type:'ellipse',centreX:.02,centreY:0,radiusX:.06,radiusY:.07,angle:0,profile:'rounded'},provenance:'synthetic'}];
+const probes=[[.115,0,1.9],[.04,0,1.58],[.04,0,2.22],[-.115,0,1.9],[.09,0,1.75]],rows=process.argv.includes('--resume')?JSON.parse(fs.readFileSync('verification/results/p07-refinement.json','utf8')).rows.filter(r=>!r.error):[];
+for(const level of ['coarse','medium','fine']){if(rows.some(r=>r.level===level))continue;try{const f=solveCurvedLocal(p,level),stress=probes.map(q=>localStressAt(f,...q));let max=.0;const start=performance.now();for(let j=0;j<64;j++)for(let i=0;i<64;i++){const x=(i/63-.5)*.3,y=(j/63-.5)*.3;if(x*x+y*y<.15**2)localStressAt(f,x,y,1.9);}rows.push({level,nodes:f.nodes,elements:f.elements,energy:f.energy,diagnosticPeakMPa:f.sampledPeakPa/1e6,probeMPa:stress.map(v=>v===null?null:v/1e6),solveMs:f.elapsedMs,sampling64Ms:performance.now()-start});console.log(rows.at(-1));}catch(e){rows.push({level,error:e.message});console.log(rows.at(-1));}fs.writeFileSync('verification/results/p07-refinement.json',JSON.stringify({case:p,probes,rows,qualified:false},null,2));}
+const a=rows[1],b=rows[2];let assessment={qualified:false};if(!a.error&&!b.error)assessment={energyChange:Math.abs(b.energy/a.energy-1),probeChanges:b.probeMPa.map((v,i)=>v===null||a.probeMPa[i]===null?null:Math.abs(v/a.probeMPa[i]-1)),energyGate:.02,probeGate:.05,qualified:false};fs.writeFileSync('verification/results/p07-refinement.json',JSON.stringify({case:p,probes,rows,assessment},null,2));
+if(!process.argv.includes('--resume')){const boundary=[];for(const marginDiameters of [1,2,3]){try{const f=solveCurvedLocal(p,'coarse',{...RESOLUTIONS.coarse,marginDiameters});boundary.push({marginDiameters,probeMPa:probes.map(q=>{const v=localStressAt(f,...q);return v===null?null:v/1e6;}),ms:f.elapsedMs});}catch(e){boundary.push({marginDiameters,error:e.message});}}fs.writeFileSync('verification/results/p07-boundaries.json',JSON.stringify({boundary,probes,note:'Remeshing accompanies boundary change; not a controlled pure boundary experiment.'},null,2));console.log('Boundary study complete');
+
+}

@@ -1,0 +1,2899 @@
+{
+  "passed": 362,
+  "failed": [],
+  "checks": [
+    {
+      "name": "where-poles-break/1 chapter speech unit",
+      "pass": true,
+      "evidence": 32
+    },
+    {
+      "name": "where-poles-break/1 shot count",
+      "pass": true,
+      "evidence": 3
+    },
+    {
+      "name": "where-poles-break/1 camera holds >=50%",
+      "pass": true,
+      "evidence": 85.5
+    },
+    {
+      "name": "where-poles-break/1 maximum three labels",
+      "pass": true,
+      "evidence": 1
+    },
+    {
+      "name": "where-poles-break/1 label starts before Tip load",
+      "pass": true,
+      "evidence": {
+        "start": 5.270125,
+        "cue": 5.570125
+      }
+    },
+    {
+      "name": "where-poles-break/1 label minimum duration Tip load",
+      "pass": true,
+      "evidence": 3.4000000000000004
+    },
+    {
+      "name": "where-poles-break/1 label fade Tip load",
+      "pass": true,
+      "evidence": {
+        "fadeIn": 0.25,
+        "fadeOut": 0.4
+      }
+    },
+    {
+      "name": "where-poles-break/1 move tip",
+      "pass": true,
+      "evidence": {
+        "id": "tip",
+        "framing": "tip",
+        "transition": "move",
+        "easing": "easeOutCubic",
+        "cueTime": 5.570125,
+        "cueWord": "sideways",
+        "start": 3.670125,
+        "arrive": 5.270125,
+        "moveDuration": 1.6
+      }
+    },
+    {
+      "name": "where-poles-break/1 move returnWide",
+      "pass": true,
+      "evidence": {
+        "id": "returnWide",
+        "framing": "whole",
+        "transition": "move",
+        "easing": "easeInOutQuad",
+        "cueTime": 9.372833,
+        "cueWord": "Bending",
+        "start": 8.172832999999999,
+        "arrive": 9.072833,
+        "moveDuration": 0.9
+      }
+    },
+    {
+      "name": "where-poles-break/1 pause outside words",
+      "pass": true,
+      "evidence": {
+        "cut": 2.079083,
+        "previousEnd": 1.608166,
+        "nextStart": 2.55,
+        "extra": 1.5
+      }
+    },
+    {
+      "name": "where-poles-break/1 pause outside words",
+      "pass": true,
+      "evidence": {
+        "cut": 5.804062,
+        "previousEnd": 5.335291,
+        "nextStart": 6.272833,
+        "extra": 0.8
+      }
+    },
+    {
+      "name": "where-poles-break/1 whole framing",
+      "pass": true,
+      "evidence": {
+        "points": [
+          {
+            "x": 383.8537903793615,
+            "y": 29.491889435476388
+          },
+          {
+            "x": 372,
+            "y": 379.0751379416919
+          },
+          {
+            "x": 431.3704985783248,
+            "y": 33.466734202784146
+          }
+        ],
+        "heightFraction": 0.728298434387949
+      }
+    },
+    {
+      "name": "where-poles-break/1 tip and arrow visible",
+      "pass": true,
+      "evidence": [
+        {
+          "x": 321.6990606224662,
+          "y": 234.44055618633985
+        },
+        {
+          "x": 287.41455708725334,
+          "y": 1555.8690342954505
+        },
+        {
+          "x": 524.9050674720633,
+          "y": 222.2647062455292
+        }
+      ]
+    },
+    {
+      "name": "where-poles-break/1 whole framing",
+      "pass": true,
+      "evidence": {
+        "points": [
+          {
+            "x": 383.8537903793615,
+            "y": 29.491889435476388
+          },
+          {
+            "x": 372,
+            "y": 379.0751379416919
+          },
+          {
+            "x": 431.3704985783248,
+            "y": 33.466734202784146
+          }
+        ],
+        "heightFraction": 0.728298434387949
+      }
+    },
+    {
+      "name": "where-poles-break/2 chapter speech unit",
+      "pass": true,
+      "evidence": 34
+    },
+    {
+      "name": "where-poles-break/2 shot count",
+      "pass": true,
+      "evidence": 2
+    },
+    {
+      "name": "where-poles-break/2 camera holds >=50%",
+      "pass": true,
+      "evidence": 95.4
+    },
+    {
+      "name": "where-poles-break/2 maximum three labels",
+      "pass": true,
+      "evidence": 1
+    },
+    {
+      "name": "where-poles-break/2 label starts before Beam utilisation",
+      "pass": true,
+      "evidence": {
+        "start": 7.370666,
+        "cue": 7.670666
+      }
+    },
+    {
+      "name": "where-poles-break/2 label minimum duration Beam utilisation",
+      "pass": true,
+      "evidence": 4.653792000000001
+    },
+    {
+      "name": "where-poles-break/2 label fade Beam utilisation",
+      "pass": true,
+      "evidence": {
+        "fadeIn": 0.25,
+        "fadeOut": 0.4
+      }
+    },
+    {
+      "name": "where-poles-break/2 move section",
+      "pass": true,
+      "evidence": {
+        "id": "section",
+        "framing": "section",
+        "transition": "move",
+        "easing": "easeInOutQuad",
+        "cueTime": 7.670666,
+        "cueWord": "green",
+        "start": 6.470666,
+        "arrive": 7.370666,
+        "moveDuration": 0.9
+      }
+    },
+    {
+      "name": "where-poles-break/2 pause outside words",
+      "pass": true,
+      "evidence": {
+        "cut": 5.912791,
+        "previousEnd": 5.444041,
+        "nextStart": 6.381541,
+        "extra": 0.4
+      }
+    },
+    {
+      "name": "where-poles-break/2 pause outside words",
+      "pass": true,
+      "evidence": {
+        "cut": 11.293208,
+        "previousEnd": 10.824458,
+        "nextStart": 11.761958,
+        "extra": 0.8
+      }
+    },
+    {
+      "name": "where-poles-break/2 whole framing",
+      "pass": true,
+      "evidence": {
+        "points": [
+          {
+            "x": 383.8537903793615,
+            "y": 29.491889435476388
+          },
+          {
+            "x": 372,
+            "y": 379.0751379416919
+          },
+          {
+            "x": 431.3704985783248,
+            "y": 33.466734202784146
+          }
+        ],
+        "heightFraction": 0.728298434387949
+      }
+    },
+    {
+      "name": "where-poles-break/2 inspection ellipse under40%",
+      "pass": true,
+      "evidence": 0.2699347285809704
+    },
+    {
+      "name": "where-poles-break/3 chapter speech unit",
+      "pass": true,
+      "evidence": 31
+    },
+    {
+      "name": "where-poles-break/3 shot count",
+      "pass": true,
+      "evidence": 2
+    },
+    {
+      "name": "where-poles-break/3 camera holds >=50%",
+      "pass": true,
+      "evidence": 90.1
+    },
+    {
+      "name": "where-poles-break/3 maximum three labels",
+      "pass": true,
+      "evidence": 1
+    },
+    {
+      "name": "where-poles-break/3 label starts before Remaining timber",
+      "pass": true,
+      "evidence": {
+        "start": 4.918458,
+        "cue": 5.218458
+      }
+    },
+    {
+      "name": "where-poles-break/3 label minimum duration Remaining timber",
+      "pass": true,
+      "evidence": 3.3999999999999995
+    },
+    {
+      "name": "where-poles-break/3 label fade Remaining timber",
+      "pass": true,
+      "evidence": {
+        "fadeIn": 0.25,
+        "fadeOut": 0.4
+      }
+    },
+    {
+      "name": "where-poles-break/3 move detail",
+      "pass": true,
+      "evidence": {
+        "id": "detail",
+        "framing": "detail",
+        "transition": "move",
+        "easing": "easeOutCubic",
+        "cueTime": 5.218458,
+        "cueWord": "Look",
+        "start": 3.318458,
+        "arrive": 4.918458,
+        "moveDuration": 1.6
+      }
+    },
+    {
+      "name": "where-poles-break/3 pause outside words",
+      "pass": true,
+      "evidence": {
+        "cut": 3.2475415,
+        "previousEnd": 2.776625,
+        "nextStart": 3.718458,
+        "extra": 0.8
+      }
+    },
+    {
+      "name": "where-poles-break/3 whole framing",
+      "pass": true,
+      "evidence": {
+        "points": [
+          {
+            "x": 384.872822391707,
+            "y": 29.577133010116068
+          },
+          {
+            "x": 372,
+            "y": 379.0751379416919
+          },
+          {
+            "x": 432.3409949294094,
+            "y": 33.547917695686216
+          }
+        ],
+        "heightFraction": 0.7281208436074496
+      }
+    },
+    {
+      "name": "where-poles-break/3 inspection ellipse under40%",
+      "pass": true,
+      "evidence": 0.26993472858097034
+    },
+    {
+      "name": "where-poles-break/4 chapter speech unit",
+      "pass": true,
+      "evidence": 34
+    },
+    {
+      "name": "where-poles-break/4 shot count",
+      "pass": true,
+      "evidence": 2
+    },
+    {
+      "name": "where-poles-break/4 camera holds >=50%",
+      "pass": true,
+      "evidence": 92.2
+    },
+    {
+      "name": "where-poles-break/4 maximum three labels",
+      "pass": true,
+      "evidence": 1
+    },
+    {
+      "name": "where-poles-break/4 label starts before Load direction",
+      "pass": true,
+      "evidence": {
+        "start": 4.695125,
+        "cue": 4.995125
+      }
+    },
+    {
+      "name": "where-poles-break/4 label minimum duration Load direction",
+      "pass": true,
+      "evidence": 3.3999999999999995
+    },
+    {
+      "name": "where-poles-break/4 label fade Load direction",
+      "pass": true,
+      "evidence": {
+        "fadeIn": 0.25,
+        "fadeOut": 0.4
+      }
+    },
+    {
+      "name": "where-poles-break/4 move tip",
+      "pass": true,
+      "evidence": {
+        "id": "tip",
+        "framing": "tipnorth",
+        "transition": "move",
+        "easing": "easeInOutQuad",
+        "cueTime": 4.995125,
+        "cueWord": "arrow.",
+        "start": 3.095125,
+        "arrive": 4.695125,
+        "moveDuration": 1.6
+      }
+    },
+    {
+      "name": "where-poles-break/4 pause outside words",
+      "pass": true,
+      "evidence": {
+        "cut": 2.839937,
+        "previousEnd": 2.368999,
+        "nextStart": 3.310875,
+        "extra": 0.8
+      }
+    },
+    {
+      "name": "where-poles-break/4 pause outside words",
+      "pass": true,
+      "evidence": {
+        "cut": 9.730708,
+        "previousEnd": 9.261958,
+        "nextStart": 10.199458,
+        "extra": 0.4
+      }
+    },
+    {
+      "name": "where-poles-break/4 whole framing",
+      "pass": true,
+      "evidence": {
+        "points": [
+          {
+            "x": 366.9511482614826,
+            "y": 30.86301186781375
+          },
+          {
+            "x": 372,
+            "y": 379.0751379416919
+          },
+          {
+            "x": 347.81502583397037,
+            "y": 39.81813869336436
+          }
+        ],
+        "heightFraction": 0.7254419293205795
+      }
+    },
+    {
+      "name": "where-poles-break/4 tip and arrow visible",
+      "pass": true,
+      "evidence": [
+        {
+          "x": 358.1636004851141,
+          "y": 233.04631385316134
+        },
+        {
+          "x": 405.27768754056945,
+          "y": 1539.2149954211116
+        },
+        {
+          "x": 160.34531228356832,
+          "y": 221.81291014480416
+        }
+      ]
+    },
+    {
+      "name": "decay-and-strength/1 chapter speech unit",
+      "pass": true,
+      "evidence": 34
+    },
+    {
+      "name": "decay-and-strength/1 shot count",
+      "pass": true,
+      "evidence": 2
+    },
+    {
+      "name": "decay-and-strength/1 camera holds >=50%",
+      "pass": true,
+      "evidence": 91.4
+    },
+    {
+      "name": "decay-and-strength/1 maximum three labels",
+      "pass": true,
+      "evidence": 1
+    },
+    {
+      "name": "decay-and-strength/1 label starts before Sound timber",
+      "pass": true,
+      "evidence": {
+        "start": 5.330958,
+        "cue": 5.630958
+      }
+    },
+    {
+      "name": "decay-and-strength/1 label minimum duration Sound timber",
+      "pass": true,
+      "evidence": 3.3999999999999995
+    },
+    {
+      "name": "decay-and-strength/1 label fade Sound timber",
+      "pass": true,
+      "evidence": {
+        "fadeIn": 0.25,
+        "fadeOut": 0.4
+      }
+    },
+    {
+      "name": "decay-and-strength/1 move detail",
+      "pass": true,
+      "evidence": {
+        "id": "detail",
+        "framing": "detail",
+        "transition": "move",
+        "easing": "easeOutCubic",
+        "cueTime": 5.630958,
+        "cueWord": "Here",
+        "start": 3.7309579999999998,
+        "arrive": 5.330958,
+        "moveDuration": 1.6
+      }
+    },
+    {
+      "name": "decay-and-strength/1 pause outside words",
+      "pass": true,
+      "evidence": {
+        "cut": 3.5600620000000003,
+        "previousEnd": 3.089166,
+        "nextStart": 4.030958,
+        "extra": 0.8
+      }
+    },
+    {
+      "name": "decay-and-strength/1 whole framing",
+      "pass": true,
+      "evidence": {
+        "points": [
+          {
+            "x": 383.8537903793615,
+            "y": 29.491889435476388
+          },
+          {
+            "x": 372,
+            "y": 379.0751379416919
+          },
+          {
+            "x": 431.3704985783248,
+            "y": 33.466734202784146
+          }
+        ],
+        "heightFraction": 0.728298434387949
+      }
+    },
+    {
+      "name": "decay-and-strength/1 inspection ellipse under40%",
+      "pass": true,
+      "evidence": 0.2699347285809704
+    },
+    {
+      "name": "decay-and-strength/2 chapter speech unit",
+      "pass": true,
+      "evidence": 33
+    },
+    {
+      "name": "decay-and-strength/2 shot count",
+      "pass": true,
+      "evidence": 2
+    },
+    {
+      "name": "decay-and-strength/2 camera holds >=50%",
+      "pass": true,
+      "evidence": 91.1
+    },
+    {
+      "name": "decay-and-strength/2 maximum three labels",
+      "pass": true,
+      "evidence": 1
+    },
+    {
+      "name": "decay-and-strength/2 label starts before Prescribed decay",
+      "pass": true,
+      "evidence": {
+        "start": 3.905958,
+        "cue": 4.205958
+      }
+    },
+    {
+      "name": "decay-and-strength/2 label minimum duration Prescribed decay",
+      "pass": true,
+      "evidence": 5.115791
+    },
+    {
+      "name": "decay-and-strength/2 label fade Prescribed decay",
+      "pass": true,
+      "evidence": {
+        "fadeIn": 0.25,
+        "fadeOut": 0.4
+      }
+    },
+    {
+      "name": "decay-and-strength/2 move detail",
+      "pass": true,
+      "evidence": {
+        "id": "detail",
+        "framing": "detail",
+        "transition": "move",
+        "easing": "easeInOutQuad",
+        "cueTime": 4.205958,
+        "cueWord": "This",
+        "start": 2.305958,
+        "arrive": 3.905958,
+        "moveDuration": 1.6
+      }
+    },
+    {
+      "name": "decay-and-strength/2 pause outside words",
+      "pass": true,
+      "evidence": {
+        "cut": 2.935041,
+        "previousEnd": 2.464124,
+        "nextStart": 3.405958,
+        "extra": 0.4
+      }
+    },
+    {
+      "name": "decay-and-strength/2 pause outside words",
+      "pass": true,
+      "evidence": {
+        "cut": 8.2904995,
+        "previousEnd": 7.821749,
+        "nextStart": 8.75925,
+        "extra": 0.8
+      }
+    },
+    {
+      "name": "decay-and-strength/2 whole framing",
+      "pass": true,
+      "evidence": {
+        "points": [
+          {
+            "x": 383.86232754085887,
+            "y": 29.49260358199436
+          },
+          {
+            "x": 372,
+            "y": 379.0751379416919
+          },
+          {
+            "x": 431.37862902128444,
+            "y": 33.467414326679084
+          }
+        ],
+        "heightFraction": 0.7282969465827033
+      }
+    },
+    {
+      "name": "decay-and-strength/2 inspection ellipse under40%",
+      "pass": true,
+      "evidence": 0.26993472858097034
+    },
+    {
+      "name": "decay-and-strength/3 chapter speech unit",
+      "pass": true,
+      "evidence": 34
+    },
+    {
+      "name": "decay-and-strength/3 shot count",
+      "pass": true,
+      "evidence": 2
+    },
+    {
+      "name": "decay-and-strength/3 camera holds >=50%",
+      "pass": true,
+      "evidence": 91.5
+    },
+    {
+      "name": "decay-and-strength/3 maximum three labels",
+      "pass": true,
+      "evidence": 1
+    },
+    {
+      "name": "decay-and-strength/3 label starts before Off-centre decay",
+      "pass": true,
+      "evidence": {
+        "start": 4.986416,
+        "cue": 5.286416
+      }
+    },
+    {
+      "name": "decay-and-strength/3 label minimum duration Off-centre decay",
+      "pass": true,
+      "evidence": 4.585875
+    },
+    {
+      "name": "decay-and-strength/3 label fade Off-centre decay",
+      "pass": true,
+      "evidence": {
+        "fadeIn": 0.25,
+        "fadeOut": 0.4
+      }
+    },
+    {
+      "name": "decay-and-strength/3 move detail",
+      "pass": true,
+      "evidence": {
+        "id": "detail",
+        "framing": "detail",
+        "transition": "move",
+        "easing": "easeOutCubic",
+        "cueTime": 5.286416,
+        "cueWord": "The",
+        "start": 3.386416,
+        "arrive": 4.986416,
+        "moveDuration": 1.6
+      }
+    },
+    {
+      "name": "decay-and-strength/3 pause outside words",
+      "pass": true,
+      "evidence": {
+        "cut": 3.3154995,
+        "previousEnd": 2.844583,
+        "nextStart": 3.786416,
+        "extra": 0.8
+      }
+    },
+    {
+      "name": "decay-and-strength/3 whole framing",
+      "pass": true,
+      "evidence": {
+        "points": [
+          {
+            "x": 385.1360565715283,
+            "y": 29.599152948826042
+          },
+          {
+            "x": 372,
+            "y": 379.0751379416919
+          },
+          {
+            "x": 432.59169541355794,
+            "y": 33.56888917172799
+          }
+        ],
+        "heightFraction": 0.7280749687351372
+      }
+    },
+    {
+      "name": "decay-and-strength/3 inspection ellipse under40%",
+      "pass": true,
+      "evidence": 0.26993472858097034
+    },
+    {
+      "name": "decay-and-strength/4 chapter speech unit",
+      "pass": true,
+      "evidence": 38
+    },
+    {
+      "name": "decay-and-strength/4 shot count",
+      "pass": true,
+      "evidence": 2
+    },
+    {
+      "name": "decay-and-strength/4 camera holds >=50%",
+      "pass": true,
+      "evidence": 91.6
+    },
+    {
+      "name": "decay-and-strength/4 maximum three labels",
+      "pass": true,
+      "evidence": 1
+    },
+    {
+      "name": "decay-and-strength/4 label starts before Remaining shell",
+      "pass": true,
+      "evidence": {
+        "start": 3.852708,
+        "cue": 4.152708
+      }
+    },
+    {
+      "name": "decay-and-strength/4 label minimum duration Remaining shell",
+      "pass": true,
+      "evidence": 3.5940410000000007
+    },
+    {
+      "name": "decay-and-strength/4 label fade Remaining shell",
+      "pass": true,
+      "evidence": {
+        "fadeIn": 0.25,
+        "fadeOut": 0.4
+      }
+    },
+    {
+      "name": "decay-and-strength/4 move detail",
+      "pass": true,
+      "evidence": {
+        "id": "detail",
+        "framing": "detail",
+        "transition": "move",
+        "easing": "easeInOutQuad",
+        "cueTime": 4.152708,
+        "cueWord": "The",
+        "start": 2.2527079999999997,
+        "arrive": 3.852708,
+        "moveDuration": 1.6
+      }
+    },
+    {
+      "name": "decay-and-strength/4 pause outside words",
+      "pass": true,
+      "evidence": {
+        "cut": 2.5817699999999997,
+        "previousEnd": 2.110832,
+        "nextStart": 3.052708,
+        "extra": 0.8
+      }
+    },
+    {
+      "name": "decay-and-strength/4 whole framing",
+      "pass": true,
+      "evidence": {
+        "points": [
+          {
+            "x": 386.2400929649029,
+            "y": 29.691507268968486
+          },
+          {
+            "x": 372,
+            "y": 379.0751379416919
+          },
+          {
+            "x": 433.6431815416,
+            "y": 33.65684758240833
+          }
+        ],
+        "heightFraction": 0.7278825639015071
+      }
+    },
+    {
+      "name": "decay-and-strength/4 inspection ellipse under40%",
+      "pass": true,
+      "evidence": 0.26993472858097034
+    },
+    {
+      "name": "ultrasonic-detection/1 chapter speech unit",
+      "pass": true,
+      "evidence": 34
+    },
+    {
+      "name": "ultrasonic-detection/1 shot count",
+      "pass": true,
+      "evidence": 2
+    },
+    {
+      "name": "ultrasonic-detection/1 camera holds >=50%",
+      "pass": true,
+      "evidence": 91.8
+    },
+    {
+      "name": "ultrasonic-detection/1 maximum three labels",
+      "pass": true,
+      "evidence": 1
+    },
+    {
+      "name": "ultrasonic-detection/1 label starts before Opposed devices",
+      "pass": true,
+      "evidence": {
+        "start": 4.359791,
+        "cue": 4.659791
+      }
+    },
+    {
+      "name": "ultrasonic-detection/1 label minimum duration Opposed devices",
+      "pass": true,
+      "evidence": 4.653792
+    },
+    {
+      "name": "ultrasonic-detection/1 label fade Opposed devices",
+      "pass": true,
+      "evidence": {
+        "fadeIn": 0.25,
+        "fadeOut": 0.4
+      }
+    },
+    {
+      "name": "ultrasonic-detection/1 move detail",
+      "pass": true,
+      "evidence": {
+        "id": "detail",
+        "framing": "detail",
+        "transition": "move",
+        "easing": "easeOutCubic",
+        "cueTime": 4.659791,
+        "cueWord": "The",
+        "start": 2.7597910000000003,
+        "arrive": 4.359791,
+        "moveDuration": 1.6
+      }
+    },
+    {
+      "name": "ultrasonic-detection/1 pause outside words",
+      "pass": true,
+      "evidence": {
+        "cut": 1.8888535,
+        "previousEnd": 1.417916,
+        "nextStart": 2.359791,
+        "extra": 1.5
+      }
+    },
+    {
+      "name": "ultrasonic-detection/1 whole framing",
+      "pass": true,
+      "evidence": {
+        "points": [
+          {
+            "x": 383.8537903793615,
+            "y": 29.491889435476388
+          },
+          {
+            "x": 372,
+            "y": 379.0751379416919
+          },
+          {
+            "x": 431.3704985783248,
+            "y": 33.466734202784146
+          }
+        ],
+        "heightFraction": 0.728298434387949
+      }
+    },
+    {
+      "name": "ultrasonic-detection/1 inspection ellipse under40%",
+      "pass": true,
+      "evidence": 0.2699347285809704
+    },
+    {
+      "name": "ultrasonic-detection/2 chapter speech unit",
+      "pass": true,
+      "evidence": 33
+    },
+    {
+      "name": "ultrasonic-detection/2 shot count",
+      "pass": true,
+      "evidence": 2
+    },
+    {
+      "name": "ultrasonic-detection/2 camera holds >=50%",
+      "pass": true,
+      "evidence": 91.5
+    },
+    {
+      "name": "ultrasonic-detection/2 maximum three labels",
+      "pass": true,
+      "evidence": 1
+    },
+    {
+      "name": "ultrasonic-detection/2 label starts before Received signal",
+      "pass": true,
+      "evidence": {
+        "start": 4.292375,
+        "cue": 4.592375
+      }
+    },
+    {
+      "name": "ultrasonic-detection/2 label minimum duration Received signal",
+      "pass": true,
+      "evidence": 4.9663330000000006
+    },
+    {
+      "name": "ultrasonic-detection/2 label fade Received signal",
+      "pass": true,
+      "evidence": {
+        "fadeIn": 0.25,
+        "fadeOut": 0.4
+      }
+    },
+    {
+      "name": "ultrasonic-detection/2 move detail",
+      "pass": true,
+      "evidence": {
+        "id": "detail",
+        "framing": "detail",
+        "transition": "move",
+        "easing": "easeInOutQuad",
+        "cueTime": 4.592375,
+        "cueWord": "Below,",
+        "start": 2.6923749999999997,
+        "arrive": 4.292375,
+        "moveDuration": 1.6
+      }
+    },
+    {
+      "name": "ultrasonic-detection/2 pause outside words",
+      "pass": true,
+      "evidence": {
+        "cut": 2.921458,
+        "previousEnd": 2.450541,
+        "nextStart": 3.392375,
+        "extra": 0.8
+      }
+    },
+    {
+      "name": "ultrasonic-detection/2 whole framing",
+      "pass": true,
+      "evidence": {
+        "points": [
+          {
+            "x": 383.8537903793615,
+            "y": 29.491889435476388
+          },
+          {
+            "x": 372,
+            "y": 379.0751379416919
+          },
+          {
+            "x": 431.3704985783248,
+            "y": 33.466734202784146
+          }
+        ],
+        "heightFraction": 0.728298434387949
+      }
+    },
+    {
+      "name": "ultrasonic-detection/2 inspection ellipse under40%",
+      "pass": true,
+      "evidence": 0.2699347285809704
+    },
+    {
+      "name": "ultrasonic-detection/3 chapter speech unit",
+      "pass": true,
+      "evidence": 36
+    },
+    {
+      "name": "ultrasonic-detection/3 shot count",
+      "pass": true,
+      "evidence": 2
+    },
+    {
+      "name": "ultrasonic-detection/3 camera holds >=50%",
+      "pass": true,
+      "evidence": 92.1
+    },
+    {
+      "name": "ultrasonic-detection/3 maximum three labels",
+      "pass": true,
+      "evidence": 1
+    },
+    {
+      "name": "ultrasonic-detection/3 label starts before Sound reference",
+      "pass": true,
+      "evidence": {
+        "start": 4.850541,
+        "cue": 5.150541
+      }
+    },
+    {
+      "name": "ultrasonic-detection/3 label minimum duration Sound reference",
+      "pass": true,
+      "evidence": 3.6212090000000003
+    },
+    {
+      "name": "ultrasonic-detection/3 label fade Sound reference",
+      "pass": true,
+      "evidence": {
+        "fadeIn": 0.25,
+        "fadeOut": 0.4
+      }
+    },
+    {
+      "name": "ultrasonic-detection/3 move detail",
+      "pass": true,
+      "evidence": {
+        "id": "detail",
+        "framing": "detail",
+        "transition": "move",
+        "easing": "easeOutCubic",
+        "cueTime": 5.150541,
+        "cueWord": "Compare",
+        "start": 3.2505409999999997,
+        "arrive": 4.850541,
+        "moveDuration": 1.6
+      }
+    },
+    {
+      "name": "ultrasonic-detection/3 pause outside words",
+      "pass": true,
+      "evidence": {
+        "cut": 3.179624,
+        "previousEnd": 2.708707,
+        "nextStart": 3.650541,
+        "extra": 0.8
+      }
+    },
+    {
+      "name": "ultrasonic-detection/3 whole framing",
+      "pass": true,
+      "evidence": {
+        "points": [
+          {
+            "x": 384.1020509105058,
+            "y": 29.51265680574579
+          },
+          {
+            "x": 372,
+            "y": 379.0751379416919
+          },
+          {
+            "x": 431.60693243380155,
+            "y": 33.48651225368195
+          }
+        ],
+        "heightFraction": 0.728255169033221
+      }
+    },
+    {
+      "name": "ultrasonic-detection/3 inspection ellipse under40%",
+      "pass": true,
+      "evidence": 0.26993472858097034
+    },
+    {
+      "name": "ultrasonic-detection/4 chapter speech unit",
+      "pass": true,
+      "evidence": 34
+    },
+    {
+      "name": "ultrasonic-detection/4 shot count",
+      "pass": true,
+      "evidence": 2
+    },
+    {
+      "name": "ultrasonic-detection/4 camera holds >=50%",
+      "pass": true,
+      "evidence": 95.7
+    },
+    {
+      "name": "ultrasonic-detection/4 maximum three labels",
+      "pass": true,
+      "evidence": 1
+    },
+    {
+      "name": "ultrasonic-detection/4 label starts before Timber bending estimate",
+      "pass": true,
+      "evidence": {
+        "start": 0.99675,
+        "cue": 1.29675
+      }
+    },
+    {
+      "name": "ultrasonic-detection/4 label minimum duration Timber bending estimate",
+      "pass": true,
+      "evidence": 3.4
+    },
+    {
+      "name": "ultrasonic-detection/4 label fade Timber bending estimate",
+      "pass": true,
+      "evidence": {
+        "fadeIn": 0.25,
+        "fadeOut": 0.4
+      }
+    },
+    {
+      "name": "ultrasonic-detection/4 move section",
+      "pass": true,
+      "evidence": {
+        "id": "section",
+        "framing": "section",
+        "transition": "move",
+        "easing": "easeInOutQuad",
+        "cueTime": 10.525,
+        "cueWord": "The",
+        "start": 9.325,
+        "arrive": 10.225,
+        "moveDuration": 0.9
+      }
+    },
+    {
+      "name": "ultrasonic-detection/4 pause outside words",
+      "pass": true,
+      "evidence": {
+        "cut": 2.7719995,
+        "previousEnd": 2.301083,
+        "nextStart": 3.242916,
+        "extra": 0.8
+      }
+    },
+    {
+      "name": "ultrasonic-detection/4 whole framing",
+      "pass": true,
+      "evidence": {
+        "points": [
+          {
+            "x": 384.1020509105058,
+            "y": 29.51265680574579
+          },
+          {
+            "x": 372,
+            "y": 379.0751379416919
+          },
+          {
+            "x": 431.60693243380155,
+            "y": 33.48651225368195
+          }
+        ],
+        "heightFraction": 0.728255169033221
+      }
+    },
+    {
+      "name": "ultrasonic-detection/4 inspection ellipse under40%",
+      "pass": true,
+      "evidence": 0.26993472858097034
+    },
+    {
+      "name": "before-climbing/1 chapter speech unit",
+      "pass": true,
+      "evidence": 31
+    },
+    {
+      "name": "before-climbing/1 shot count",
+      "pass": true,
+      "evidence": 2
+    },
+    {
+      "name": "before-climbing/1 camera holds >=50%",
+      "pass": true,
+      "evidence": 91.1
+    },
+    {
+      "name": "before-climbing/1 maximum three labels",
+      "pass": true,
+      "evidence": 1
+    },
+    {
+      "name": "before-climbing/1 label starts before Surface appearance",
+      "pass": true,
+      "evidence": {
+        "start": 8.510333,
+        "cue": 8.810333
+      }
+    },
+    {
+      "name": "before-climbing/1 label minimum duration Surface appearance",
+      "pass": true,
+      "evidence": 5.292374000000001
+    },
+    {
+      "name": "before-climbing/1 label fade Surface appearance",
+      "pass": true,
+      "evidence": {
+        "fadeIn": 0.25,
+        "fadeOut": 0.4
+      }
+    },
+    {
+      "name": "before-climbing/1 move detail",
+      "pass": true,
+      "evidence": {
+        "id": "detail",
+        "framing": "detail",
+        "transition": "move",
+        "easing": "easeOutCubic",
+        "cueTime": 8.810333,
+        "cueWord": "These",
+        "start": 6.910333,
+        "arrive": 8.510333,
+        "moveDuration": 1.6
+      }
+    },
+    {
+      "name": "before-climbing/1 pause outside words",
+      "pass": true,
+      "evidence": {
+        "cut": 3.587249,
+        "previousEnd": 3.116332,
+        "nextStart": 4.058166,
+        "extra": 0.8
+      }
+    },
+    {
+      "name": "before-climbing/1 whole framing",
+      "pass": true,
+      "evidence": {
+        "points": [
+          {
+            "x": 383.8537903793615,
+            "y": 29.491889435476388
+          },
+          {
+            "x": 372,
+            "y": 379.0751379416919
+          },
+          {
+            "x": 431.3704985783248,
+            "y": 33.466734202784146
+          }
+        ],
+        "heightFraction": 0.728298434387949
+      }
+    },
+    {
+      "name": "before-climbing/1 inspection ellipse under40%",
+      "pass": true,
+      "evidence": 0.2699347285809704
+    },
+    {
+      "name": "before-climbing/2 chapter speech unit",
+      "pass": true,
+      "evidence": 32
+    },
+    {
+      "name": "before-climbing/2 shot count",
+      "pass": true,
+      "evidence": 2
+    },
+    {
+      "name": "before-climbing/2 camera holds >=50%",
+      "pass": true,
+      "evidence": 92.4
+    },
+    {
+      "name": "before-climbing/2 maximum three labels",
+      "pass": true,
+      "evidence": 1
+    },
+    {
+      "name": "before-climbing/2 label starts before Entered condition",
+      "pass": true,
+      "evidence": {
+        "start": 4.672833,
+        "cue": 4.972833
+      }
+    },
+    {
+      "name": "before-climbing/2 label minimum duration Entered condition",
+      "pass": true,
+      "evidence": 3.4445419999999993
+    },
+    {
+      "name": "before-climbing/2 label fade Entered condition",
+      "pass": true,
+      "evidence": {
+        "fadeIn": 0.25,
+        "fadeOut": 0.4
+      }
+    },
+    {
+      "name": "before-climbing/2 move detail",
+      "pass": true,
+      "evidence": {
+        "id": "detail",
+        "framing": "detail",
+        "transition": "move",
+        "easing": "easeInOutQuad",
+        "cueTime": 4.972833,
+        "cueWord": "The",
+        "start": 3.0728329999999997,
+        "arrive": 4.672833,
+        "moveDuration": 1.6
+      }
+    },
+    {
+      "name": "before-climbing/2 pause outside words",
+      "pass": true,
+      "evidence": {
+        "cut": 3.3018954999999997,
+        "previousEnd": 2.830958,
+        "nextStart": 3.772833,
+        "extra": 0.8
+      }
+    },
+    {
+      "name": "before-climbing/2 whole framing",
+      "pass": true,
+      "evidence": {
+        "points": [
+          {
+            "x": 384.1020509105058,
+            "y": 29.51265680574579
+          },
+          {
+            "x": 372,
+            "y": 379.0751379416919
+          },
+          {
+            "x": 431.60693243380155,
+            "y": 33.48651225368195
+          }
+        ],
+        "heightFraction": 0.728255169033221
+      }
+    },
+    {
+      "name": "before-climbing/2 inspection ellipse under40%",
+      "pass": true,
+      "evidence": 0.26993472858097034
+    },
+    {
+      "name": "before-climbing/3 chapter speech unit",
+      "pass": true,
+      "evidence": 36
+    },
+    {
+      "name": "before-climbing/3 shot count",
+      "pass": true,
+      "evidence": 2
+    },
+    {
+      "name": "before-climbing/3 camera holds >=50%",
+      "pass": true,
+      "evidence": 90.8
+    },
+    {
+      "name": "before-climbing/3 maximum three labels",
+      "pass": true,
+      "evidence": 1
+    },
+    {
+      "name": "before-climbing/3 label starts before Applied load",
+      "pass": true,
+      "evidence": {
+        "start": 2.429333,
+        "cue": 2.729333
+      }
+    },
+    {
+      "name": "before-climbing/3 label minimum duration Applied load",
+      "pass": true,
+      "evidence": 3.4
+    },
+    {
+      "name": "before-climbing/3 label fade Applied load",
+      "pass": true,
+      "evidence": {
+        "fadeIn": 0.25,
+        "fadeOut": 0.4
+      }
+    },
+    {
+      "name": "before-climbing/3 move tip",
+      "pass": true,
+      "evidence": {
+        "id": "tip",
+        "framing": "tip",
+        "transition": "move",
+        "easing": "easeOutCubic",
+        "cueTime": 2.729333,
+        "cueWord": "sideways",
+        "start": 0.8293330000000001,
+        "arrive": 2.429333,
+        "moveDuration": 1.6
+      }
+    },
+    {
+      "name": "before-climbing/3 pause outside words",
+      "pass": true,
+      "evidence": {
+        "cut": 3.9676455,
+        "previousEnd": 3.496708,
+        "nextStart": 4.438583,
+        "extra": 0.8
+      }
+    },
+    {
+      "name": "before-climbing/3 whole framing",
+      "pass": true,
+      "evidence": {
+        "points": [
+          {
+            "x": 384.1020509105058,
+            "y": 29.51265680574579
+          },
+          {
+            "x": 372,
+            "y": 379.0751379416919
+          },
+          {
+            "x": 431.60693243380155,
+            "y": 33.48651225368195
+          }
+        ],
+        "heightFraction": 0.728255169033221
+      }
+    },
+    {
+      "name": "before-climbing/3 tip and arrow visible",
+      "pass": true,
+      "evidence": [
+        {
+          "x": 322.86649269508047,
+          "y": 234.37060511573614
+        },
+        {
+          "x": 287.41455708725334,
+          "y": 1555.8690342954505
+        },
+        {
+          "x": 525.8237007202082,
+          "y": 222.20966288951107
+        }
+      ]
+    },
+    {
+      "name": "before-climbing/4 chapter speech unit",
+      "pass": true,
+      "evidence": 34
+    },
+    {
+      "name": "before-climbing/4 shot count",
+      "pass": true,
+      "evidence": 2
+    },
+    {
+      "name": "before-climbing/4 camera holds >=50%",
+      "pass": true,
+      "evidence": 92
+    },
+    {
+      "name": "before-climbing/4 maximum three labels",
+      "pass": true,
+      "evidence": 1
+    },
+    {
+      "name": "before-climbing/4 label starts before Simulated inspection",
+      "pass": true,
+      "evidence": {
+        "start": 5.157083,
+        "cue": 5.457083
+      }
+    },
+    {
+      "name": "before-climbing/4 label minimum duration Simulated inspection",
+      "pass": true,
+      "evidence": 3.9879999999999995
+    },
+    {
+      "name": "before-climbing/4 label fade Simulated inspection",
+      "pass": true,
+      "evidence": {
+        "fadeIn": 0.25,
+        "fadeOut": 0.4
+      }
+    },
+    {
+      "name": "before-climbing/4 move detail",
+      "pass": true,
+      "evidence": {
+        "id": "detail",
+        "framing": "detail",
+        "transition": "move",
+        "easing": "easeInOutQuad",
+        "cueTime": 5.457083,
+        "cueWord": "This",
+        "start": 3.557083,
+        "arrive": 5.157083,
+        "moveDuration": 1.6
+      }
+    },
+    {
+      "name": "before-climbing/4 pause outside words",
+      "pass": true,
+      "evidence": {
+        "cut": 3.8861665,
+        "previousEnd": 3.41525,
+        "nextStart": 4.357083,
+        "extra": 0.8
+      }
+    },
+    {
+      "name": "before-climbing/4 whole framing",
+      "pass": true,
+      "evidence": {
+        "points": [
+          {
+            "x": 384.1020509105058,
+            "y": 29.51265680574579
+          },
+          {
+            "x": 372,
+            "y": 379.0751379416919
+          },
+          {
+            "x": 431.60693243380155,
+            "y": 33.48651225368195
+          }
+        ],
+        "heightFraction": 0.728255169033221
+      }
+    },
+    {
+      "name": "before-climbing/4 inspection ellipse under40%",
+      "pass": true,
+      "evidence": 0.26993472858097034
+    },
+    {
+      "name": "predict-pole-test/1 chapter speech unit",
+      "pass": true,
+      "evidence": 38
+    },
+    {
+      "name": "predict-pole-test/1 shot count",
+      "pass": true,
+      "evidence": 2
+    },
+    {
+      "name": "predict-pole-test/1 camera holds >=50%",
+      "pass": true,
+      "evidence": 100
+    },
+    {
+      "name": "predict-pole-test/1 maximum three labels",
+      "pass": true,
+      "evidence": 1
+    },
+    {
+      "name": "predict-pole-test/1 label starts before Ideal fixed groundline",
+      "pass": true,
+      "evidence": {
+        "start": 10.011958,
+        "cue": 10.311958
+      }
+    },
+    {
+      "name": "predict-pole-test/1 label minimum duration Ideal fixed groundline",
+      "pass": true,
+      "evidence": 3.838583
+    },
+    {
+      "name": "predict-pole-test/1 label fade Ideal fixed groundline",
+      "pass": true,
+      "evidence": {
+        "fadeIn": 0.25,
+        "fadeOut": 0.4
+      }
+    },
+    {
+      "name": "predict-pole-test/1 move tip",
+      "pass": true,
+      "evidence": {
+        "id": "tip",
+        "framing": "tip",
+        "transition": "cut",
+        "easing": "easeOutCubic",
+        "cueTime": 14.388041,
+        "cueWord": "The",
+        "start": 14.088040999999999,
+        "arrive": 14.088040999999999,
+        "moveDuration": 0
+      }
+    },
+    {
+      "name": "predict-pole-test/1 pause outside words",
+      "pass": true,
+      "evidence": {
+        "cut": 2.7312495,
+        "previousEnd": 2.260333,
+        "nextStart": 3.202166,
+        "extra": 1.5
+      }
+    },
+    {
+      "name": "predict-pole-test/1 genuine P25 UI ground",
+      "pass": true,
+      "evidence": "http://127.0.0.1:5191/"
+    },
+    {
+      "name": "predict-pole-test/1 visible focus target ground",
+      "pass": true,
+      "evidence": {
+        "height": 14,
+        "width": 14,
+        "x": 16,
+        "y": 619.3500366210938
+      }
+    },
+    {
+      "name": "predict-pole-test/1 genuine P25 UI tip",
+      "pass": true,
+      "evidence": "http://127.0.0.1:5191/"
+    },
+    {
+      "name": "predict-pole-test/1 visible focus target tip",
+      "pass": true,
+      "evidence": {
+        "height": 30.600000381469727,
+        "width": 83.2750015258789,
+        "x": 256,
+        "y": 669.4000244140625
+      }
+    },
+    {
+      "name": "predict-pole-test/2 chapter speech unit",
+      "pass": true,
+      "evidence": 39
+    },
+    {
+      "name": "predict-pole-test/2 shot count",
+      "pass": true,
+      "evidence": 3
+    },
+    {
+      "name": "predict-pole-test/2 camera holds >=50%",
+      "pass": true,
+      "evidence": 100
+    },
+    {
+      "name": "predict-pole-test/2 maximum three labels",
+      "pass": true,
+      "evidence": 2
+    },
+    {
+      "name": "predict-pole-test/2 label starts before Properties",
+      "pass": true,
+      "evidence": {
+        "start": 1.4635829999999999,
+        "cue": 1.763583
+      }
+    },
+    {
+      "name": "predict-pole-test/2 label minimum duration Properties",
+      "pass": true,
+      "evidence": 3.4000000000000004
+    },
+    {
+      "name": "predict-pole-test/2 label fade Properties",
+      "pass": true,
+      "evidence": {
+        "fadeIn": 0.25,
+        "fadeOut": 0.4
+      }
+    },
+    {
+      "name": "predict-pole-test/2 label starts before Entered dimensions",
+      "pass": true,
+      "evidence": {
+        "start": 13.844040999999999,
+        "cue": 14.144041
+      }
+    },
+    {
+      "name": "predict-pole-test/2 label minimum duration Entered dimensions",
+      "pass": true,
+      "evidence": 4.762500000000001
+    },
+    {
+      "name": "predict-pole-test/2 label fade Entered dimensions",
+      "pass": true,
+      "evidence": {
+        "fadeIn": 0.25,
+        "fadeOut": 0.4
+      }
+    },
+    {
+      "name": "predict-pole-test/2 move entered",
+      "pass": true,
+      "evidence": {
+        "id": "entered",
+        "framing": "entered",
+        "transition": "cut",
+        "easing": "easeInOutQuad",
+        "cueTime": 6.523375,
+        "cueWord": "Here,",
+        "start": 6.223375,
+        "arrive": 6.223375,
+        "moveDuration": 0
+      }
+    },
+    {
+      "name": "predict-pole-test/2 move dimensions",
+      "pass": true,
+      "evidence": {
+        "id": "dimensions",
+        "framing": "dimensions",
+        "transition": "cut",
+        "easing": "easeInOutQuad",
+        "cueTime": 14.144041,
+        "cueWord": "Enter",
+        "start": 13.844040999999999,
+        "arrive": 13.844040999999999,
+        "moveDuration": 0
+      }
+    },
+    {
+      "name": "predict-pole-test/2 pause outside words",
+      "pass": true,
+      "evidence": {
+        "cut": 12.47527,
+        "previousEnd": 12.006499,
+        "nextStart": 12.944041,
+        "extra": 0.8
+      }
+    },
+    {
+      "name": "predict-pole-test/2 genuine P25 UI properties",
+      "pass": true,
+      "evidence": "http://127.0.0.1:5191/"
+    },
+    {
+      "name": "predict-pole-test/2 visible focus target properties",
+      "pass": true,
+      "evidence": {
+        "height": 33.60000228881836,
+        "width": 200.8000030517578,
+        "x": 16,
+        "y": 230.1999969482422
+      }
+    },
+    {
+      "name": "predict-pole-test/2 genuine P25 UI entered",
+      "pass": true,
+      "evidence": "http://127.0.0.1:5191/"
+    },
+    {
+      "name": "predict-pole-test/2 visible focus target entered",
+      "pass": true,
+      "evidence": {
+        "height": 37.60000228881836,
+        "width": 144.2624969482422,
+        "x": 29.600000381469727,
+        "y": 203.1000061035156
+      }
+    },
+    {
+      "name": "predict-pole-test/2 genuine P25 UI dimensions",
+      "pass": true,
+      "evidence": "http://127.0.0.1:5191/"
+    },
+    {
+      "name": "predict-pole-test/2 visible focus target dimensions",
+      "pass": true,
+      "evidence": {
+        "height": 37.60000228881836,
+        "width": 75.17500305175781,
+        "x": 16.80000114440918,
+        "y": 302.8999938964844
+      }
+    },
+    {
+      "name": "predict-pole-test/3 chapter speech unit",
+      "pass": true,
+      "evidence": 38
+    },
+    {
+      "name": "predict-pole-test/3 shot count",
+      "pass": true,
+      "evidence": 2
+    },
+    {
+      "name": "predict-pole-test/3 camera holds >=50%",
+      "pass": true,
+      "evidence": 100
+    },
+    {
+      "name": "predict-pole-test/3 maximum three labels",
+      "pass": true,
+      "evidence": 1
+    },
+    {
+      "name": "predict-pole-test/3 label starts before Add",
+      "pass": true,
+      "evidence": {
+        "start": 2.823375,
+        "cue": 3.123375
+      }
+    },
+    {
+      "name": "predict-pole-test/3 label minimum duration Add",
+      "pass": true,
+      "evidence": 3.400000000000001
+    },
+    {
+      "name": "predict-pole-test/3 label fade Add",
+      "pass": true,
+      "evidence": {
+        "fadeIn": 0.25,
+        "fadeOut": 0.4
+      }
+    },
+    {
+      "name": "predict-pole-test/3 move cavity",
+      "pass": true,
+      "evidence": {
+        "id": "cavity",
+        "framing": "cavity",
+        "transition": "cut",
+        "easing": "easeOutCubic",
+        "cueTime": 4.377708,
+        "cueWord": "Set",
+        "start": 4.077708,
+        "arrive": 4.077708,
+        "moveDuration": 0
+      }
+    },
+    {
+      "name": "predict-pole-test/3 pause outside words",
+      "pass": true,
+      "evidence": {
+        "cut": 11.293208,
+        "previousEnd": 10.824458,
+        "nextStart": 11.761958,
+        "extra": 0.8
+      }
+    },
+    {
+      "name": "predict-pole-test/3 genuine P25 UI defects",
+      "pass": true,
+      "evidence": "http://127.0.0.1:5191/"
+    },
+    {
+      "name": "predict-pole-test/3 visible focus target defects",
+      "pass": true,
+      "evidence": {
+        "height": 37.20000076293945,
+        "width": 39.837501525878906,
+        "x": 187.3625030517578,
+        "y": 108
+      }
+    },
+    {
+      "name": "predict-pole-test/3 genuine P25 UI cavity",
+      "pass": true,
+      "evidence": "http://127.0.0.1:5191/"
+    },
+    {
+      "name": "predict-pole-test/3 visible focus target cavity",
+      "pass": true,
+      "evidence": {
+        "height": 14.40000057220459,
+        "width": 179.1999969482422,
+        "x": 26.80000114440918,
+        "y": 440.6000061035156
+      }
+    },
+    {
+      "name": "predict-pole-test/4 chapter speech unit",
+      "pass": true,
+      "evidence": 38
+    },
+    {
+      "name": "predict-pole-test/4 shot count",
+      "pass": true,
+      "evidence": 2
+    },
+    {
+      "name": "predict-pole-test/4 camera holds >=50%",
+      "pass": true,
+      "evidence": 100
+    },
+    {
+      "name": "predict-pole-test/4 maximum three labels",
+      "pass": true,
+      "evidence": 2
+    },
+    {
+      "name": "predict-pole-test/4 label starts before Capacity (kN)",
+      "pass": true,
+      "evidence": {
+        "start": 1.091833,
+        "cue": 1.391833
+      }
+    },
+    {
+      "name": "predict-pole-test/4 label minimum duration Capacity (kN)",
+      "pass": true,
+      "evidence": 3.4000000000000004
+    },
+    {
+      "name": "predict-pole-test/4 label fade Capacity (kN)",
+      "pass": true,
+      "evidence": {
+        "fadeIn": 0.25,
+        "fadeOut": 0.4
+      }
+    },
+    {
+      "name": "predict-pole-test/4 label starts before Critical section",
+      "pass": true,
+      "evidence": {
+        "start": 6.476625,
+        "cue": 6.776625
+      }
+    },
+    {
+      "name": "predict-pole-test/4 label minimum duration Critical section",
+      "pass": true,
+      "evidence": 3.4000000000000004
+    },
+    {
+      "name": "predict-pole-test/4 label fade Critical section",
+      "pass": true,
+      "evidence": {
+        "fadeIn": 0.25,
+        "fadeOut": 0.4
+      }
+    },
+    {
+      "name": "predict-pole-test/4 move critical",
+      "pass": true,
+      "evidence": {
+        "id": "critical",
+        "framing": "critical",
+        "transition": "cut",
+        "easing": "easeInOutQuad",
+        "cueTime": 6.776625,
+        "cueWord": "Critical",
+        "start": 6.476625,
+        "arrive": 6.476625,
+        "moveDuration": 0
+      }
+    },
+    {
+      "name": "predict-pole-test/4 pause outside words",
+      "pass": true,
+      "evidence": {
+        "cut": 7.9779789999999995,
+        "previousEnd": 7.509208,
+        "nextStart": 8.44675,
+        "extra": 0.8
+      }
+    },
+    {
+      "name": "predict-pole-test/4 genuine P25 UI capacity",
+      "pass": true,
+      "evidence": "http://127.0.0.1:5191/"
+    },
+    {
+      "name": "predict-pole-test/4 visible focus target capacity",
+      "pass": true,
+      "evidence": {
+        "height": 38,
+        "width": 126.6624984741211,
+        "x": 1130.1375732421875,
+        "y": 14.800000190734863
+      }
+    },
+    {
+      "name": "predict-pole-test/4 genuine P25 UI critical",
+      "pass": true,
+      "evidence": "http://127.0.0.1:5191/"
+    },
+    {
+      "name": "predict-pole-test/4 visible focus target critical",
+      "pass": true,
+      "evidence": {
+        "height": 36,
+        "width": 109.2750015258789,
+        "x": 977.1500244140624,
+        "y": 341.8000183105469
+      }
+    },
+    {
+      "name": "predict-pole-test/5 chapter speech unit",
+      "pass": true,
+      "evidence": 40
+    },
+    {
+      "name": "predict-pole-test/5 shot count",
+      "pass": true,
+      "evidence": 2
+    },
+    {
+      "name": "predict-pole-test/5 camera holds >=50%",
+      "pass": true,
+      "evidence": 100
+    },
+    {
+      "name": "predict-pole-test/5 maximum three labels",
+      "pass": true,
+      "evidence": 1
+    },
+    {
+      "name": "predict-pole-test/5 label starts before Worst direction",
+      "pass": true,
+      "evidence": {
+        "start": 4.833166,
+        "cue": 5.133166
+      }
+    },
+    {
+      "name": "predict-pole-test/5 label minimum duration Worst direction",
+      "pass": true,
+      "evidence": 4.626625000000001
+    },
+    {
+      "name": "predict-pole-test/5 label fade Worst direction",
+      "pass": true,
+      "evidence": {
+        "fadeIn": 0.25,
+        "fadeOut": 0.4
+      }
+    },
+    {
+      "name": "predict-pole-test/5 move worst",
+      "pass": true,
+      "evidence": {
+        "id": "worst",
+        "framing": "worst",
+        "transition": "cut",
+        "easing": "easeOutCubic",
+        "cueTime": 5.133166,
+        "cueWord": "Load",
+        "start": 4.833166,
+        "arrive": 4.833166,
+        "moveDuration": 0
+      }
+    },
+    {
+      "name": "predict-pole-test/5 pause outside words",
+      "pass": true,
+      "evidence": {
+        "cut": 2.9622285,
+        "previousEnd": 2.491291,
+        "nextStart": 3.433166,
+        "extra": 0.8
+      }
+    },
+    {
+      "name": "predict-pole-test/5 genuine P25 UI direction",
+      "pass": true,
+      "evidence": "http://127.0.0.1:5191/"
+    },
+    {
+      "name": "predict-pole-test/5 visible focus target direction",
+      "pass": true,
+      "evidence": {
+        "height": 160,
+        "width": 160,
+        "x": 41.60000228881836,
+        "y": 236
+      }
+    },
+    {
+      "name": "predict-pole-test/5 genuine P25 UI worst",
+      "pass": true,
+      "evidence": "http://127.0.0.1:5191/"
+    },
+    {
+      "name": "predict-pole-test/5 visible focus target worst",
+      "pass": true,
+      "evidence": {
+        "height": 39.20000076293945,
+        "width": 380.8000183105469,
+        "x": 876.7999877929688,
+        "y": 86
+      }
+    },
+    {
+      "name": "predict-pole-test/6 chapter speech unit",
+      "pass": true,
+      "evidence": 45
+    },
+    {
+      "name": "predict-pole-test/6 shot count",
+      "pass": true,
+      "evidence": 3
+    },
+    {
+      "name": "predict-pole-test/6 camera holds >=50%",
+      "pass": true,
+      "evidence": 100
+    },
+    {
+      "name": "predict-pole-test/6 maximum three labels",
+      "pass": true,
+      "evidence": 1
+    },
+    {
+      "name": "predict-pole-test/6 label starts before Compare A/B",
+      "pass": true,
+      "evidence": {
+        "start": 1.2782499999999999,
+        "cue": 1.57825
+      }
+    },
+    {
+      "name": "predict-pole-test/6 label minimum duration Compare A/B",
+      "pass": true,
+      "evidence": 3.689166
+    },
+    {
+      "name": "predict-pole-test/6 label fade Compare A/B",
+      "pass": true,
+      "evidence": {
+        "fadeIn": 0.25,
+        "fadeOut": 0.4
+      }
+    },
+    {
+      "name": "predict-pole-test/6 move compare",
+      "pass": true,
+      "evidence": {
+        "id": "compare",
+        "framing": "compare",
+        "transition": "cut",
+        "easing": "easeInOutQuad",
+        "cueTime": 5.50925,
+        "cueWord": "Hold",
+        "start": 5.20925,
+        "arrive": 5.20925,
+        "moveDuration": 0
+      }
+    },
+    {
+      "name": "predict-pole-test/6 move save",
+      "pass": true,
+      "evidence": {
+        "id": "save",
+        "framing": "save",
+        "transition": "cut",
+        "easing": "easeInOutQuad",
+        "cueTime": 11.365208,
+        "cueWord": "Save",
+        "start": 11.065208,
+        "arrive": 11.065208,
+        "moveDuration": 0
+      }
+    },
+    {
+      "name": "predict-pole-test/6 pause outside words",
+      "pass": true,
+      "evidence": {
+        "cut": 14.377458,
+        "previousEnd": 13.908708,
+        "nextStart": 14.846208,
+        "extra": 0.8
+      }
+    },
+    {
+      "name": "predict-pole-test/6 genuine P25 UI menu",
+      "pass": true,
+      "evidence": "http://127.0.0.1:5191/"
+    },
+    {
+      "name": "predict-pole-test/6 visible focus target menu",
+      "pass": true,
+      "evidence": {
+        "height": 36,
+        "width": 148.40000915527344,
+        "x": 73,
+        "y": 193.8000030517578
+      }
+    },
+    {
+      "name": "predict-pole-test/6 genuine P25 UI compare",
+      "pass": true,
+      "evidence": "http://127.0.0.1:5191/"
+    },
+    {
+      "name": "predict-pole-test/6 visible focus target compare",
+      "pass": true,
+      "evidence": {
+        "height": 14.40000057220459,
+        "width": 79.63750457763672,
+        "x": 97.4375,
+        "y": 171.5
+      }
+    },
+    {
+      "name": "predict-pole-test/6 genuine P25 UI save",
+      "pass": true,
+      "evidence": "http://127.0.0.1:5191/"
+    },
+    {
+      "name": "predict-pole-test/6 visible focus target save",
+      "pass": true,
+      "evidence": {
+        "height": 36,
+        "width": 148.40000915527344,
+        "x": 73,
+        "y": 85.80000305175781
+      }
+    },
+    {
+      "name": "ub1000-analyser/1 chapter speech unit",
+      "pass": true,
+      "evidence": 40
+    },
+    {
+      "name": "ub1000-analyser/1 shot count",
+      "pass": true,
+      "evidence": 2
+    },
+    {
+      "name": "ub1000-analyser/1 camera holds >=50%",
+      "pass": true,
+      "evidence": 100
+    },
+    {
+      "name": "ub1000-analyser/1 maximum three labels",
+      "pass": true,
+      "evidence": 1
+    },
+    {
+      "name": "ub1000-analyser/1 label starts before UB1000 pair",
+      "pass": true,
+      "evidence": {
+        "start": 5.222291,
+        "cue": 5.522291
+      }
+    },
+    {
+      "name": "ub1000-analyser/1 label minimum duration UB1000 pair",
+      "pass": true,
+      "evidence": 5.8902079999999994
+    },
+    {
+      "name": "ub1000-analyser/1 label fade UB1000 pair",
+      "pass": true,
+      "evidence": {
+        "fadeIn": 0.25,
+        "fadeOut": 0.4
+      }
+    },
+    {
+      "name": "ub1000-analyser/1 move devicesClose",
+      "pass": true,
+      "evidence": {
+        "id": "devicesClose",
+        "framing": "devicesClose",
+        "transition": "cut",
+        "easing": "easeOutCubic",
+        "cueTime": 11.65,
+        "cueWord": "Here",
+        "start": 11.35,
+        "arrive": 11.35,
+        "moveDuration": 0
+      }
+    },
+    {
+      "name": "ub1000-analyser/1 pause outside words",
+      "pass": true,
+      "evidence": {
+        "cut": 3.2747285,
+        "previousEnd": 2.803791,
+        "nextStart": 3.745666,
+        "extra": 0.8
+      }
+    },
+    {
+      "name": "ub1000-analyser/1 genuine P25 UI devices",
+      "pass": true,
+      "evidence": "http://127.0.0.1:5191/"
+    },
+    {
+      "name": "ub1000-analyser/1 visible focus target devices",
+      "pass": true,
+      "evidence": {
+        "height": 37.60000228881836,
+        "width": 119.2249984741211,
+        "x": 16,
+        "y": 573.2000122070312
+      }
+    },
+    {
+      "name": "ub1000-analyser/1 genuine P25 UI devicesClose",
+      "pass": true,
+      "evidence": "http://127.0.0.1:5191/"
+    },
+    {
+      "name": "ub1000-analyser/1 visible focus target devicesClose",
+      "pass": true,
+      "evidence": {
+        "height": 37.60000228881836,
+        "width": 119.2249984741211,
+        "x": 16,
+        "y": 523.6000366210938
+      }
+    },
+    {
+      "name": "ub1000-analyser/2 chapter speech unit",
+      "pass": true,
+      "evidence": 40
+    },
+    {
+      "name": "ub1000-analyser/2 shot count",
+      "pass": true,
+      "evidence": 2
+    },
+    {
+      "name": "ub1000-analyser/2 camera holds >=50%",
+      "pass": true,
+      "evidence": 100
+    },
+    {
+      "name": "ub1000-analyser/2 maximum three labels",
+      "pass": true,
+      "evidence": 1
+    },
+    {
+      "name": "ub1000-analyser/2 label starts before Axonic Analyser",
+      "pass": true,
+      "evidence": {
+        "start": 0.6309579999999999,
+        "cue": 0.930958
+      }
+    },
+    {
+      "name": "ub1000-analyser/2 label minimum duration Axonic Analyser",
+      "pass": true,
+      "evidence": 5.509791000000001
+    },
+    {
+      "name": "ub1000-analyser/2 label fade Axonic Analyser",
+      "pass": true,
+      "evidence": {
+        "fadeIn": 0.25,
+        "fadeOut": 0.4
+      }
+    },
+    {
+      "name": "ub1000-analyser/2 move analyserScan",
+      "pass": true,
+      "evidence": {
+        "id": "analyserScan",
+        "framing": "analyserScan",
+        "transition": "cut",
+        "easing": "easeOutCubic",
+        "cueTime": 7.482625,
+        "cueWord": "The",
+        "start": 7.182625,
+        "arrive": 7.182625,
+        "moveDuration": 0
+      }
+    },
+    {
+      "name": "ub1000-analyser/2 pause outside words",
+      "pass": true,
+      "evidence": {
+        "cut": 5.611687,
+        "previousEnd": 5.140749,
+        "nextStart": 6.082625,
+        "extra": 0.8
+      }
+    },
+    {
+      "name": "ub1000-analyser/2 genuine P25 UI analyserHome",
+      "pass": true,
+      "evidence": "http://127.0.0.1:5191/mockups/axonic/phone.html#analyser/summary"
+    },
+    {
+      "name": "ub1000-analyser/2 genuine P25 UI analyserScan",
+      "pass": true,
+      "evidence": "http://127.0.0.1:5191/mockups/axonic/phone.html#analyser/summary"
+    },
+    {
+      "name": "ub1000-analyser/3 chapter speech unit",
+      "pass": true,
+      "evidence": 41
+    },
+    {
+      "name": "ub1000-analyser/3 shot count",
+      "pass": true,
+      "evidence": 2
+    },
+    {
+      "name": "ub1000-analyser/3 camera holds >=50%",
+      "pass": true,
+      "evidence": 100
+    },
+    {
+      "name": "ub1000-analyser/3 maximum three labels",
+      "pass": true,
+      "evidence": 1
+    },
+    {
+      "name": "ub1000-analyser/3 label starts before Recorded scan",
+      "pass": true,
+      "evidence": {
+        "start": 6.805958,
+        "cue": 7.105958
+      }
+    },
+    {
+      "name": "ub1000-analyser/3 label minimum duration Recorded scan",
+      "pass": true,
+      "evidence": 3.947291
+    },
+    {
+      "name": "ub1000-analyser/3 label fade Recorded scan",
+      "pass": true,
+      "evidence": {
+        "fadeIn": 0.25,
+        "fadeOut": 0.4
+      }
+    },
+    {
+      "name": "ub1000-analyser/3 move analyserDetail",
+      "pass": true,
+      "evidence": {
+        "id": "analyserDetail",
+        "framing": "analyserDetail",
+        "transition": "cut",
+        "easing": "easeOutCubic",
+        "cueTime": 7.105958,
+        "cueWord": "The",
+        "start": 6.805958,
+        "arrive": 6.805958,
+        "moveDuration": 0
+      }
+    },
+    {
+      "name": "ub1000-analyser/3 pause outside words",
+      "pass": true,
+      "evidence": {
+        "cut": 5.4350415000000005,
+        "previousEnd": 4.964125,
+        "nextStart": 5.905958,
+        "extra": 0.8
+      }
+    },
+    {
+      "name": "ub1000-analyser/3 genuine P25 UI analyserResult",
+      "pass": true,
+      "evidence": "http://127.0.0.1:5191/mockups/axonic/phone.html#analyser/summary"
+    },
+    {
+      "name": "ub1000-analyser/3 genuine P25 UI analyserDetail",
+      "pass": true,
+      "evidence": "http://127.0.0.1:5191/mockups/axonic/phone.html#analyser/summary"
+    },
+    {
+      "name": "ub1000-analyser/4 chapter speech unit",
+      "pass": true,
+      "evidence": 42
+    },
+    {
+      "name": "ub1000-analyser/4 shot count",
+      "pass": true,
+      "evidence": 2
+    },
+    {
+      "name": "ub1000-analyser/4 camera holds >=50%",
+      "pass": true,
+      "evidence": 100
+    },
+    {
+      "name": "ub1000-analyser/4 maximum three labels",
+      "pass": true,
+      "evidence": 0
+    },
+    {
+      "name": "ub1000-analyser/4 move analyserHome",
+      "pass": true,
+      "evidence": {
+        "id": "analyserHome",
+        "framing": "analyserHome",
+        "transition": "cut",
+        "easing": "easeOutCubic",
+        "cueTime": 6.283166,
+        "cueWord": "Keep",
+        "start": 5.983166,
+        "arrive": 5.983166,
+        "moveDuration": 0
+      }
+    },
+    {
+      "name": "ub1000-analyser/4 pause outside words",
+      "pass": true,
+      "evidence": {
+        "cut": 4.2122495,
+        "previousEnd": 3.741333,
+        "nextStart": 4.683166,
+        "extra": 0.8
+      }
+    },
+    {
+      "name": "ub1000-analyser/4 genuine P25 UI analyserRecords",
+      "pass": true,
+      "evidence": "http://127.0.0.1:5191/mockups/axonic/phone.html#analyser/summary"
+    },
+    {
+      "name": "ub1000-analyser/4 genuine P25 UI analyserHome",
+      "pass": true,
+      "evidence": "http://127.0.0.1:5191/mockups/axonic/phone.html#analyser/summary"
+    },
+    {
+      "name": "safe2climb/1 chapter speech unit",
+      "pass": true,
+      "evidence": 40
+    },
+    {
+      "name": "safe2climb/1 shot count",
+      "pass": true,
+      "evidence": 2
+    },
+    {
+      "name": "safe2climb/1 camera holds >=50%",
+      "pass": true,
+      "evidence": 100
+    },
+    {
+      "name": "safe2climb/1 maximum three labels",
+      "pass": true,
+      "evidence": 1
+    },
+    {
+      "name": "safe2climb/1 label starts before Structured checks",
+      "pass": true,
+      "evidence": {
+        "start": 6.404333,
+        "cue": 6.704333
+      }
+    },
+    {
+      "name": "safe2climb/1 label minimum duration Structured checks",
+      "pass": true,
+      "evidence": 6.854916
+    },
+    {
+      "name": "safe2climb/1 label fade Structured checks",
+      "pass": true,
+      "evidence": {
+        "fadeIn": 0.25,
+        "fadeOut": 0.4
+      }
+    },
+    {
+      "name": "safe2climb/1 move safeChecks",
+      "pass": true,
+      "evidence": {
+        "id": "safeChecks",
+        "framing": "safeChecks",
+        "transition": "cut",
+        "easing": "easeOutCubic",
+        "cueTime": 6.704333,
+        "cueWord": "Safe2Climb",
+        "start": 6.404333,
+        "arrive": 6.404333,
+        "moveDuration": 0
+      }
+    },
+    {
+      "name": "safe2climb/1 pause outside words",
+      "pass": true,
+      "evidence": {
+        "cut": 4.633416,
+        "previousEnd": 4.162499,
+        "nextStart": 5.104333,
+        "extra": 0.8
+      }
+    },
+    {
+      "name": "safe2climb/1 genuine P25 UI safeHome",
+      "pass": true,
+      "evidence": "http://127.0.0.1:5191/mockups/safe2climb/phone.html"
+    },
+    {
+      "name": "safe2climb/1 genuine P25 UI safeChecks",
+      "pass": true,
+      "evidence": "http://127.0.0.1:5191/mockups/safe2climb/phone.html"
+    },
+    {
+      "name": "safe2climb/2 chapter speech unit",
+      "pass": true,
+      "evidence": 43
+    },
+    {
+      "name": "safe2climb/2 shot count",
+      "pass": true,
+      "evidence": 2
+    },
+    {
+      "name": "safe2climb/2 camera holds >=50%",
+      "pass": true,
+      "evidence": 100
+    },
+    {
+      "name": "safe2climb/2 maximum three labels",
+      "pass": true,
+      "evidence": 1
+    },
+    {
+      "name": "safe2climb/2 label starts before UB1000 check",
+      "pass": true,
+      "evidence": {
+        "start": 0.5902080000000001,
+        "cue": 0.890208
+      }
+    },
+    {
+      "name": "safe2climb/2 label minimum duration UB1000 check",
+      "pass": true,
+      "evidence": 4.314166
+    },
+    {
+      "name": "safe2climb/2 label fade UB1000 check",
+      "pass": true,
+      "evidence": {
+        "fadeIn": 0.25,
+        "fadeOut": 0.4
+      }
+    },
+    {
+      "name": "safe2climb/2 move safeScan",
+      "pass": true,
+      "evidence": {
+        "id": "safeScan",
+        "framing": "safeScan",
+        "transition": "cut",
+        "easing": "easeOutCubic",
+        "cueTime": 9.208166,
+        "cueWord": "The",
+        "start": 8.908166,
+        "arrive": 8.908166,
+        "moveDuration": 0
+      }
+    },
+    {
+      "name": "safe2climb/2 pause outside words",
+      "pass": true,
+      "evidence": {
+        "cut": 4.375291,
+        "previousEnd": 3.904374,
+        "nextStart": 4.846208,
+        "extra": 0.8
+      }
+    },
+    {
+      "name": "safe2climb/2 genuine P25 UI safeUB",
+      "pass": true,
+      "evidence": "http://127.0.0.1:5191/mockups/safe2climb/phone.html"
+    },
+    {
+      "name": "safe2climb/2 genuine P25 UI safeScan",
+      "pass": true,
+      "evidence": "http://127.0.0.1:5191/mockups/safe2climb/phone.html"
+    },
+    {
+      "name": "safe2climb/3 chapter speech unit",
+      "pass": true,
+      "evidence": 42
+    },
+    {
+      "name": "safe2climb/3 shot count",
+      "pass": true,
+      "evidence": 2
+    },
+    {
+      "name": "safe2climb/3 camera holds >=50%",
+      "pass": true,
+      "evidence": 100
+    },
+    {
+      "name": "safe2climb/3 maximum three labels",
+      "pass": true,
+      "evidence": 2
+    },
+    {
+      "name": "safe2climb/3 label starts before Lean record",
+      "pass": true,
+      "evidence": {
+        "start": 0.2,
+        "cue": 0.5
+      }
+    },
+    {
+      "name": "safe2climb/3 label minimum duration Lean record",
+      "pass": true,
+      "evidence": 4.708124
+    },
+    {
+      "name": "safe2climb/3 label fade Lean record",
+      "pass": true,
+      "evidence": {
+        "fadeIn": 0.25,
+        "fadeOut": 0.4
+      }
+    },
+    {
+      "name": "safe2climb/3 label starts before Movement record",
+      "pass": true,
+      "evidence": {
+        "start": 5.95,
+        "cue": 6.25
+      }
+    },
+    {
+      "name": "safe2climb/3 label minimum duration Movement record",
+      "pass": true,
+      "evidence": 4.069583000000001
+    },
+    {
+      "name": "safe2climb/3 label fade Movement record",
+      "pass": true,
+      "evidence": {
+        "fadeIn": 0.25,
+        "fadeOut": 0.4
+      }
+    },
+    {
+      "name": "safe2climb/3 move safeMovement",
+      "pass": true,
+      "evidence": {
+        "id": "safeMovement",
+        "framing": "safeMovement",
+        "transition": "cut",
+        "easing": "easeOutCubic",
+        "cueTime": 6.25,
+        "cueWord": "Movement",
+        "start": 5.95,
+        "arrive": 5.95,
+        "moveDuration": 0
+      }
+    },
+    {
+      "name": "safe2climb/3 pause outside words",
+      "pass": true,
+      "evidence": {
+        "cut": 4.579062,
+        "previousEnd": 4.108124,
+        "nextStart": 5.05,
+        "extra": 0.8
+      }
+    },
+    {
+      "name": "safe2climb/3 genuine P25 UI safeLean",
+      "pass": true,
+      "evidence": "http://127.0.0.1:5191/mockups/safe2climb/phone.html"
+    },
+    {
+      "name": "safe2climb/3 genuine P25 UI safeMovement",
+      "pass": true,
+      "evidence": "http://127.0.0.1:5191/mockups/safe2climb/phone.html"
+    },
+    {
+      "name": "safe2climb/4 chapter speech unit",
+      "pass": true,
+      "evidence": 44
+    },
+    {
+      "name": "safe2climb/4 shot count",
+      "pass": true,
+      "evidence": 2
+    },
+    {
+      "name": "safe2climb/4 camera holds >=50%",
+      "pass": true,
+      "evidence": 100
+    },
+    {
+      "name": "safe2climb/4 maximum three labels",
+      "pass": true,
+      "evidence": 1
+    },
+    {
+      "name": "safe2climb/4 label starts before Inspection record",
+      "pass": true,
+      "evidence": {
+        "start": 6.703250000000001,
+        "cue": 7.00325
+      }
+    },
+    {
+      "name": "safe2climb/4 label minimum duration Inspection record",
+      "pass": true,
+      "evidence": 6.705456999999999
+    },
+    {
+      "name": "safe2climb/4 label fade Inspection record",
+      "pass": true,
+      "evidence": {
+        "fadeIn": 0.25,
+        "fadeOut": 0.4
+      }
+    },
+    {
+      "name": "safe2climb/4 move safeRecords",
+      "pass": true,
+      "evidence": {
+        "id": "safeRecords",
+        "framing": "safeRecords",
+        "transition": "cut",
+        "easing": "easeOutCubic",
+        "cueTime": 7.00325,
+        "cueWord": "Inspection",
+        "start": 6.703250000000001,
+        "arrive": 6.703250000000001,
+        "moveDuration": 0
+      }
+    },
+    {
+      "name": "safe2climb/4 pause outside words",
+      "pass": true,
+      "evidence": {
+        "cut": 4.932333,
+        "previousEnd": 4.461416,
+        "nextStart": 5.40325,
+        "extra": 0.8
+      }
+    },
+    {
+      "name": "safe2climb/4 genuine P25 UI safeIssues",
+      "pass": true,
+      "evidence": "http://127.0.0.1:5191/mockups/safe2climb/phone.html"
+    },
+    {
+      "name": "safe2climb/4 genuine P25 UI safeRecords",
+      "pass": true,
+      "evidence": "http://127.0.0.1:5191/mockups/safe2climb/phone.html"
+    }
+  ]
+}

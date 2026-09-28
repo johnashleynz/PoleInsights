@@ -1,0 +1,10 @@
+{
+  "provider": "edge_tts",
+  "voice": "en-GB-RyanNeural",
+  "rate": "-8%",
+  "volume": "+0%",
+  "pitch": "+0Hz",
+  "text": "Open Menu and Compare A and B to set up matching cases. Hold geometry, material and direction constant when comparing deterioration. Save case preserves the inputs and property source.  This beam first-limit estimate is not a validated fracture load; comparison with measured tests remains necessary.",
+  "unit": "one chapter per call",
+  "fingerprint": "f2f3563f7e151de55acfda883a039a011f1a7a01c47f0dab50c140256d044bec"
+}

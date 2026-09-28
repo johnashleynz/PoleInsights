@@ -1,0 +1,1437 @@
+{
+  "ground": {
+    "rect": {
+      "height": 14,
+      "width": 14,
+      "x": 16,
+      "y": 619.3500366210938
+    },
+    "frames": [
+      {
+        "file": "ground-0.jpg",
+        "capturedAt": 1790503108503
+      },
+      {
+        "file": "ground-1.jpg",
+        "capturedAt": 1790503108606
+      },
+      {
+        "file": "ground-2.jpg",
+        "capturedAt": 1790503108676
+      },
+      {
+        "file": "ground-3.jpg",
+        "capturedAt": 1790503108752
+      },
+      {
+        "file": "ground-4.jpg",
+        "capturedAt": 1790503108828
+      },
+      {
+        "file": "ground-5.jpg",
+        "capturedAt": 1790503108892
+      },
+      {
+        "file": "ground-6.jpg",
+        "capturedAt": 1790503108969
+      },
+      {
+        "file": "ground-7.jpg",
+        "capturedAt": 1790503109052
+      }
+    ],
+    "build": "P25",
+    "url": "http://127.0.0.1:5191/"
+  },
+  "properties": {
+    "rect": {
+      "height": 33.60000228881836,
+      "width": 200.8000030517578,
+      "x": 16,
+      "y": 230.1999969482422
+    },
+    "frames": [
+      {
+        "file": "properties-0.jpg",
+        "capturedAt": 1790503118162
+      },
+      {
+        "file": "properties-1.jpg",
+        "capturedAt": 1790503118233
+      },
+      {
+        "file": "properties-2.jpg",
+        "capturedAt": 1790503118293
+      },
+      {
+        "file": "properties-3.jpg",
+        "capturedAt": 1790503118357
+      },
+      {
+        "file": "properties-4.jpg",
+        "capturedAt": 1790503118424
+      },
+      {
+        "file": "properties-5.jpg",
+        "capturedAt": 1790503118498
+      },
+      {
+        "file": "properties-6.jpg",
+        "capturedAt": 1790503118565
+      },
+      {
+        "file": "properties-7.jpg",
+        "capturedAt": 1790503118640
+      }
+    ],
+    "build": "P25",
+    "url": "http://127.0.0.1:5191/"
+  },
+  "entered": {
+    "rect": {
+      "height": 37.60000228881836,
+      "width": 144.2624969482422,
+      "x": 29.600000381469727,
+      "y": 203.1000061035156
+    },
+    "frames": [
+      {
+        "file": "entered-0.jpg",
+        "capturedAt": 1790503129097
+      },
+      {
+        "file": "entered-1.jpg",
+        "capturedAt": 1790503129598
+      },
+      {
+        "file": "entered-2.jpg",
+        "capturedAt": 1790503129690
+      },
+      {
+        "file": "entered-3.jpg",
+        "capturedAt": 1790503129756
+      },
+      {
+        "file": "entered-4.jpg",
+        "capturedAt": 1790503129826
+      },
+      {
+        "file": "entered-5.jpg",
+        "capturedAt": 1790503129891
+      },
+      {
+        "file": "entered-6.jpg",
+        "capturedAt": 1790503129969
+      },
+      {
+        "file": "entered-7.jpg",
+        "capturedAt": 1790503130028
+      }
+    ],
+    "build": "P25",
+    "url": "http://127.0.0.1:5191/"
+  },
+  "defects": {
+    "rect": {
+      "height": 37.20000076293945,
+      "width": 39.837501525878906,
+      "x": 187.3625030517578,
+      "y": 108
+    },
+    "frames": [
+      {
+        "file": "defects-0.jpg",
+        "capturedAt": 1790503137517
+      },
+      {
+        "file": "defects-1.jpg",
+        "capturedAt": 1790503137592
+      },
+      {
+        "file": "defects-2.jpg",
+        "capturedAt": 1790503137652
+      },
+      {
+        "file": "defects-3.jpg",
+        "capturedAt": 1790503137720
+      },
+      {
+        "file": "defects-4.jpg",
+        "capturedAt": 1790503137794
+      },
+      {
+        "file": "defects-5.jpg",
+        "capturedAt": 1790503137856
+      },
+      {
+        "file": "defects-6.jpg",
+        "capturedAt": 1790503137927
+      },
+      {
+        "file": "defects-7.jpg",
+        "capturedAt": 1790503137997
+      }
+    ],
+    "build": "P25",
+    "url": "http://127.0.0.1:5191/"
+  },
+  "cavity": {
+    "rect": {
+      "height": 14.40000057220459,
+      "width": 179.1999969482422,
+      "x": 26.80000114440918,
+      "y": 440.6000061035156
+    },
+    "frames": [
+      {
+        "file": "cavity-0.jpg",
+        "capturedAt": 1790503406448
+      },
+      {
+        "file": "cavity-1.jpg",
+        "capturedAt": 1790503408299
+      },
+      {
+        "file": "cavity-2.jpg",
+        "capturedAt": 1790503408516
+      },
+      {
+        "file": "cavity-3.jpg",
+        "capturedAt": 1790503408630
+      },
+      {
+        "file": "cavity-4.jpg",
+        "capturedAt": 1790503408831
+      },
+      {
+        "file": "cavity-5.jpg",
+        "capturedAt": 1790503408966
+      },
+      {
+        "file": "cavity-6.jpg",
+        "capturedAt": 1790503409092
+      },
+      {
+        "file": "cavity-7.jpg",
+        "capturedAt": 1790503409202
+      }
+    ],
+    "build": "P25",
+    "url": "http://127.0.0.1:5191/"
+  },
+  "capacity": {
+    "rect": {
+      "height": 38,
+      "width": 126.6624984741211,
+      "x": 1130.1375732421875,
+      "y": 14.800000190734863
+    },
+    "frames": [
+      {
+        "file": "capacity-0.jpg",
+        "capturedAt": 1790503581384
+      },
+      {
+        "file": "capacity-1.jpg",
+        "capturedAt": 1790503581530
+      },
+      {
+        "file": "capacity-2.jpg",
+        "capturedAt": 1790503581712
+      },
+      {
+        "file": "capacity-3.jpg",
+        "capturedAt": 1790503581842
+      },
+      {
+        "file": "capacity-4.jpg",
+        "capturedAt": 1790503581977
+      },
+      {
+        "file": "capacity-5.jpg",
+        "capturedAt": 1790503582074
+      },
+      {
+        "file": "capacity-6.jpg",
+        "capturedAt": 1790503582198
+      },
+      {
+        "file": "capacity-7.jpg",
+        "capturedAt": 1790503582332
+      }
+    ],
+    "build": "P25",
+    "url": "http://127.0.0.1:5191/"
+  },
+  "critical": {
+    "rect": {
+      "height": 36,
+      "width": 109.2750015258789,
+      "x": 977.1500244140624,
+      "y": 341.8000183105469
+    },
+    "frames": [
+      {
+        "file": "critical-0.jpg",
+        "capturedAt": 1790503651476
+      },
+      {
+        "file": "critical-1.jpg",
+        "capturedAt": 1790503651593
+      },
+      {
+        "file": "critical-2.jpg",
+        "capturedAt": 1790503651704
+      },
+      {
+        "file": "critical-3.jpg",
+        "capturedAt": 1790503651814
+      },
+      {
+        "file": "critical-4.jpg",
+        "capturedAt": 1790503651957
+      },
+      {
+        "file": "critical-5.jpg",
+        "capturedAt": 1790503652065
+      },
+      {
+        "file": "critical-6.jpg",
+        "capturedAt": 1790503652171
+      },
+      {
+        "file": "critical-7.jpg",
+        "capturedAt": 1790503652286
+      }
+    ],
+    "build": "P25",
+    "url": "http://127.0.0.1:5191/"
+  },
+  "direction": {
+    "rect": {
+      "height": 160,
+      "width": 160,
+      "x": 41.60000228881836,
+      "y": 236
+    },
+    "frames": [
+      {
+        "file": "direction-0.jpg",
+        "capturedAt": 1790503652440
+      },
+      {
+        "file": "direction-1.jpg",
+        "capturedAt": 1790503652543
+      },
+      {
+        "file": "direction-2.jpg",
+        "capturedAt": 1790503652653
+      },
+      {
+        "file": "direction-3.jpg",
+        "capturedAt": 1790503652776
+      },
+      {
+        "file": "direction-4.jpg",
+        "capturedAt": 1790503652899
+      },
+      {
+        "file": "direction-5.jpg",
+        "capturedAt": 1790503653021
+      },
+      {
+        "file": "direction-6.jpg",
+        "capturedAt": 1790503653145
+      },
+      {
+        "file": "direction-7.jpg",
+        "capturedAt": 1790503653259
+      }
+    ],
+    "build": "P25",
+    "url": "http://127.0.0.1:5191/"
+  },
+  "worst": {
+    "rect": {
+      "height": 39.20000076293945,
+      "width": 380.8000183105469,
+      "x": 876.7999877929688,
+      "y": 86
+    },
+    "frames": [
+      {
+        "file": "worst-0.jpg",
+        "capturedAt": 1790504578035
+      },
+      {
+        "file": "worst-1.jpg",
+        "capturedAt": 1790504578922
+      },
+      {
+        "file": "worst-2.jpg",
+        "capturedAt": 1790504579207
+      },
+      {
+        "file": "worst-3.jpg",
+        "capturedAt": 1790504579503
+      },
+      {
+        "file": "worst-4.jpg",
+        "capturedAt": 1790504579738
+      },
+      {
+        "file": "worst-5.jpg",
+        "capturedAt": 1790504579954
+      },
+      {
+        "file": "worst-6.jpg",
+        "capturedAt": 1790504580175
+      },
+      {
+        "file": "worst-7.jpg",
+        "capturedAt": 1790504580503
+      },
+      {
+        "file": "worst-8.jpg",
+        "capturedAt": 1790504580686
+      },
+      {
+        "file": "worst-9.jpg",
+        "capturedAt": 1790504580831
+      },
+      {
+        "file": "worst-10.jpg",
+        "capturedAt": 1790504581116
+      },
+      {
+        "file": "worst-11.jpg",
+        "capturedAt": 1790504581390
+      }
+    ],
+    "build": "P25",
+    "url": "http://127.0.0.1:5191/"
+  },
+  "menu": {
+    "rect": {
+      "height": 36,
+      "width": 148.40000915527344,
+      "x": 73,
+      "y": 193.8000030517578
+    },
+    "frames": [
+      {
+        "file": "menu-0.jpg",
+        "capturedAt": 1790503681313
+      },
+      {
+        "file": "menu-1.jpg",
+        "capturedAt": 1790503681507
+      },
+      {
+        "file": "menu-2.jpg",
+        "capturedAt": 1790503681691
+      },
+      {
+        "file": "menu-3.jpg",
+        "capturedAt": 1790503681894
+      },
+      {
+        "file": "menu-4.jpg",
+        "capturedAt": 1790503682092
+      },
+      {
+        "file": "menu-5.jpg",
+        "capturedAt": 1790503682203
+      },
+      {
+        "file": "menu-6.jpg",
+        "capturedAt": 1790503682407
+      },
+      {
+        "file": "menu-7.jpg",
+        "capturedAt": 1790503682613
+      }
+    ],
+    "build": "P25",
+    "url": "http://127.0.0.1:5191/"
+  },
+  "save": {
+    "rect": {
+      "height": 36,
+      "width": 148.40000915527344,
+      "x": 73,
+      "y": 85.80000305175781
+    },
+    "frames": [
+      {
+        "file": "save-0.jpg",
+        "capturedAt": 1790503682857
+      },
+      {
+        "file": "save-1.jpg",
+        "capturedAt": 1790503683063
+      },
+      {
+        "file": "save-2.jpg",
+        "capturedAt": 1790503683224
+      },
+      {
+        "file": "save-3.jpg",
+        "capturedAt": 1790503683330
+      },
+      {
+        "file": "save-4.jpg",
+        "capturedAt": 1790503683532
+      },
+      {
+        "file": "save-5.jpg",
+        "capturedAt": 1790503683720
+      },
+      {
+        "file": "save-6.jpg",
+        "capturedAt": 1790503683915
+      },
+      {
+        "file": "save-7.jpg",
+        "capturedAt": 1790503684104
+      }
+    ],
+    "build": "P25",
+    "url": "http://127.0.0.1:5191/"
+  },
+  "compare": {
+    "rect": {
+      "height": 14.40000057220459,
+      "width": 79.63750457763672,
+      "x": 97.4375,
+      "y": 171.5
+    },
+    "frames": [
+      {
+        "file": "compare-0.jpg",
+        "capturedAt": 1790503730920
+      },
+      {
+        "file": "compare-1.jpg",
+        "capturedAt": 1790503731185
+      },
+      {
+        "file": "compare-2.jpg",
+        "capturedAt": 1790503731385
+      },
+      {
+        "file": "compare-3.jpg",
+        "capturedAt": 1790503731594
+      },
+      {
+        "file": "compare-4.jpg",
+        "capturedAt": 1790503731796
+      },
+      {
+        "file": "compare-5.jpg",
+        "capturedAt": 1790503732013
+      },
+      {
+        "file": "compare-6.jpg",
+        "capturedAt": 1790503732223
+      },
+      {
+        "file": "compare-7.jpg",
+        "capturedAt": 1790503732435
+      }
+    ],
+    "build": "P25",
+    "url": "http://127.0.0.1:5191/"
+  },
+  "dimensions": {
+    "rect": {
+      "height": 37.60000228881836,
+      "width": 75.17500305175781,
+      "x": 16.80000114440918,
+      "y": 302.8999938964844
+    },
+    "frames": [
+      {
+        "file": "dimensions-0.jpg",
+        "capturedAt": 1790503745069
+      },
+      {
+        "file": "dimensions-1.jpg",
+        "capturedAt": 1790503745220
+      },
+      {
+        "file": "dimensions-2.jpg",
+        "capturedAt": 1790503745481
+      },
+      {
+        "file": "dimensions-3.jpg",
+        "capturedAt": 1790503745760
+      },
+      {
+        "file": "dimensions-4.jpg",
+        "capturedAt": 1790503745976
+      },
+      {
+        "file": "dimensions-5.jpg",
+        "capturedAt": 1790503746211
+      },
+      {
+        "file": "dimensions-6.jpg",
+        "capturedAt": 1790503746357
+      },
+      {
+        "file": "dimensions-7.jpg",
+        "capturedAt": 1790503746499
+      }
+    ],
+    "build": "P25",
+    "url": "http://127.0.0.1:5191/"
+  },
+  "tip": {
+    "rect": {
+      "height": 30.600000381469727,
+      "width": 83.2750015258789,
+      "x": 256,
+      "y": 669.4000244140625
+    },
+    "frames": [
+      {
+        "file": "tip-0.jpg",
+        "capturedAt": 1790503763172
+      },
+      {
+        "file": "tip-1.jpg",
+        "capturedAt": 1790503763567
+      },
+      {
+        "file": "tip-2.jpg",
+        "capturedAt": 1790503763945
+      },
+      {
+        "file": "tip-3.jpg",
+        "capturedAt": 1790503764341
+      },
+      {
+        "file": "tip-4.jpg",
+        "capturedAt": 1790503764697
+      },
+      {
+        "file": "tip-5.jpg",
+        "capturedAt": 1790503765080
+      },
+      {
+        "file": "tip-6.jpg",
+        "capturedAt": 1790503765439
+      },
+      {
+        "file": "tip-7.jpg",
+        "capturedAt": 1790503765798
+      }
+    ],
+    "build": "P25",
+    "url": "http://127.0.0.1:5191/"
+  },
+  "devices": {
+    "rect": {
+      "height": 37.60000228881836,
+      "width": 119.2249984741211,
+      "x": 16,
+      "y": 573.2000122070312
+    },
+    "frames": [
+      {
+        "file": "devices-0.jpg",
+        "capturedAt": 1790503768878
+      },
+      {
+        "file": "devices-1.jpg",
+        "capturedAt": 1790503770568
+      },
+      {
+        "file": "devices-2.jpg",
+        "capturedAt": 1790503770767
+      },
+      {
+        "file": "devices-3.jpg",
+        "capturedAt": 1790503770989
+      },
+      {
+        "file": "devices-4.jpg",
+        "capturedAt": 1790503771201
+      },
+      {
+        "file": "devices-5.jpg",
+        "capturedAt": 1790503771457
+      },
+      {
+        "file": "devices-6.jpg",
+        "capturedAt": 1790503771656
+      },
+      {
+        "file": "devices-7.jpg",
+        "capturedAt": 1790503771941
+      }
+    ],
+    "build": "P25",
+    "url": "http://127.0.0.1:5191/"
+  },
+  "devicesClose": {
+    "rect": {
+      "height": 37.60000228881836,
+      "width": 119.2249984741211,
+      "x": 16,
+      "y": 523.6000366210938
+    },
+    "frames": [
+      {
+        "file": "devicesClose-0.jpg",
+        "capturedAt": 1790503778389
+      },
+      {
+        "file": "devicesClose-1.jpg",
+        "capturedAt": 1790503778620
+      },
+      {
+        "file": "devicesClose-2.jpg",
+        "capturedAt": 1790503778857
+      },
+      {
+        "file": "devicesClose-3.jpg",
+        "capturedAt": 1790503779097
+      },
+      {
+        "file": "devicesClose-4.jpg",
+        "capturedAt": 1790503779357
+      },
+      {
+        "file": "devicesClose-5.jpg",
+        "capturedAt": 1790503779584
+      },
+      {
+        "file": "devicesClose-6.jpg",
+        "capturedAt": 1790503779827
+      },
+      {
+        "file": "devicesClose-7.jpg",
+        "capturedAt": 1790503780054
+      }
+    ],
+    "build": "P25",
+    "url": "http://127.0.0.1:5191/"
+  },
+  "analyserHome": {
+    "rect": null,
+    "frames": [
+      {
+        "file": "analyserHome-0.jpg",
+        "capturedAt": 1790504540428
+      },
+      {
+        "file": "analyserHome-1.jpg",
+        "capturedAt": 1790504540550
+      },
+      {
+        "file": "analyserHome-2.jpg",
+        "capturedAt": 1790504540653
+      },
+      {
+        "file": "analyserHome-3.jpg",
+        "capturedAt": 1790504540756
+      },
+      {
+        "file": "analyserHome-4.jpg",
+        "capturedAt": 1790504540884
+      },
+      {
+        "file": "analyserHome-5.jpg",
+        "capturedAt": 1790504540968
+      },
+      {
+        "file": "analyserHome-6.jpg",
+        "capturedAt": 1790504541051
+      },
+      {
+        "file": "analyserHome-7.jpg",
+        "capturedAt": 1790504541135
+      },
+      {
+        "file": "analyserHome-8.jpg",
+        "capturedAt": 1790504541220
+      },
+      {
+        "file": "analyserHome-9.jpg",
+        "capturedAt": 1790504541307
+      },
+      {
+        "file": "analyserHome-10.jpg",
+        "capturedAt": 1790504541399
+      },
+      {
+        "file": "analyserHome-11.jpg",
+        "capturedAt": 1790504541481
+      }
+    ],
+    "build": "P25",
+    "url": "http://127.0.0.1:5191/mockups/axonic/phone.html#analyser/summary"
+  },
+  "analyserScan": {
+    "rect": null,
+    "frames": [
+      {
+        "file": "analyserScan-0.jpg",
+        "capturedAt": 1790504541939
+      },
+      {
+        "file": "analyserScan-1.jpg",
+        "capturedAt": 1790504542018
+      },
+      {
+        "file": "analyserScan-2.jpg",
+        "capturedAt": 1790504542147
+      },
+      {
+        "file": "analyserScan-3.jpg",
+        "capturedAt": 1790504542233
+      },
+      {
+        "file": "analyserScan-4.jpg",
+        "capturedAt": 1790504542347
+      },
+      {
+        "file": "analyserScan-5.jpg",
+        "capturedAt": 1790504542471
+      },
+      {
+        "file": "analyserScan-6.jpg",
+        "capturedAt": 1790504542564
+      },
+      {
+        "file": "analyserScan-7.jpg",
+        "capturedAt": 1790504542648
+      },
+      {
+        "file": "analyserScan-8.jpg",
+        "capturedAt": 1790504542732
+      },
+      {
+        "file": "analyserScan-9.jpg",
+        "capturedAt": 1790504542822
+      },
+      {
+        "file": "analyserScan-10.jpg",
+        "capturedAt": 1790504542916
+      },
+      {
+        "file": "analyserScan-11.jpg",
+        "capturedAt": 1790504543001
+      }
+    ],
+    "build": "P25",
+    "url": "http://127.0.0.1:5191/mockups/axonic/phone.html#analyser/summary"
+  },
+  "analyserResult": {
+    "rect": null,
+    "frames": [
+      {
+        "file": "analyserResult-0.jpg",
+        "capturedAt": 1790504538895
+      },
+      {
+        "file": "analyserResult-1.jpg",
+        "capturedAt": 1790504539032
+      },
+      {
+        "file": "analyserResult-2.jpg",
+        "capturedAt": 1790504539150
+      },
+      {
+        "file": "analyserResult-3.jpg",
+        "capturedAt": 1790504539269
+      },
+      {
+        "file": "analyserResult-4.jpg",
+        "capturedAt": 1790504539351
+      },
+      {
+        "file": "analyserResult-5.jpg",
+        "capturedAt": 1790504539434
+      },
+      {
+        "file": "analyserResult-6.jpg",
+        "capturedAt": 1790504539522
+      },
+      {
+        "file": "analyserResult-7.jpg",
+        "capturedAt": 1790504539622
+      },
+      {
+        "file": "analyserResult-8.jpg",
+        "capturedAt": 1790504539709
+      },
+      {
+        "file": "analyserResult-9.jpg",
+        "capturedAt": 1790504539795
+      },
+      {
+        "file": "analyserResult-10.jpg",
+        "capturedAt": 1790504539915
+      },
+      {
+        "file": "analyserResult-11.jpg",
+        "capturedAt": 1790504539995
+      }
+    ],
+    "build": "P25",
+    "url": "http://127.0.0.1:5191/mockups/axonic/phone.html#analyser/summary"
+  },
+  "analyserDetail": {
+    "rect": null,
+    "frames": [
+      {
+        "file": "analyserDetail-0.jpg",
+        "capturedAt": 1790504533650
+      },
+      {
+        "file": "analyserDetail-1.jpg",
+        "capturedAt": 1790504533823
+      },
+      {
+        "file": "analyserDetail-2.jpg",
+        "capturedAt": 1790504533996
+      },
+      {
+        "file": "analyserDetail-3.jpg",
+        "capturedAt": 1790504534156
+      },
+      {
+        "file": "analyserDetail-4.jpg",
+        "capturedAt": 1790504534262
+      },
+      {
+        "file": "analyserDetail-5.jpg",
+        "capturedAt": 1790504534459
+      },
+      {
+        "file": "analyserDetail-6.jpg",
+        "capturedAt": 1790504534613
+      },
+      {
+        "file": "analyserDetail-7.jpg",
+        "capturedAt": 1790504534719
+      },
+      {
+        "file": "analyserDetail-8.jpg",
+        "capturedAt": 1790504534810
+      },
+      {
+        "file": "analyserDetail-9.jpg",
+        "capturedAt": 1790504534909
+      },
+      {
+        "file": "analyserDetail-10.jpg",
+        "capturedAt": 1790504535104
+      },
+      {
+        "file": "analyserDetail-11.jpg",
+        "capturedAt": 1790504535230
+      }
+    ],
+    "build": "P25",
+    "url": "http://127.0.0.1:5191/mockups/axonic/phone.html#analyser/summary"
+  },
+  "analyserRecords": {
+    "rect": null,
+    "frames": [
+      {
+        "file": "analyserRecords-0.jpg",
+        "capturedAt": 1790504347330
+      },
+      {
+        "file": "analyserRecords-1.jpg",
+        "capturedAt": 1790504347413
+      },
+      {
+        "file": "analyserRecords-2.jpg",
+        "capturedAt": 1790504347494
+      },
+      {
+        "file": "analyserRecords-3.jpg",
+        "capturedAt": 1790504347581
+      },
+      {
+        "file": "analyserRecords-4.jpg",
+        "capturedAt": 1790504347706
+      },
+      {
+        "file": "analyserRecords-5.jpg",
+        "capturedAt": 1790504347788
+      },
+      {
+        "file": "analyserRecords-6.jpg",
+        "capturedAt": 1790504347875
+      },
+      {
+        "file": "analyserRecords-7.jpg",
+        "capturedAt": 1790504347987
+      },
+      {
+        "file": "analyserRecords-8.jpg",
+        "capturedAt": 1790504348068
+      },
+      {
+        "file": "analyserRecords-9.jpg",
+        "capturedAt": 1790504348153
+      },
+      {
+        "file": "analyserRecords-10.jpg",
+        "capturedAt": 1790504348278
+      },
+      {
+        "file": "analyserRecords-11.jpg",
+        "capturedAt": 1790504348409
+      }
+    ],
+    "build": "P25",
+    "url": "http://127.0.0.1:5191/mockups/axonic/phone.html#analyser/summary"
+  },
+  "safeHome": {
+    "rect": null,
+    "frames": [
+      {
+        "file": "safeHome-0.jpg",
+        "capturedAt": 1790504415712
+      },
+      {
+        "file": "safeHome-1.jpg",
+        "capturedAt": 1790504415832
+      },
+      {
+        "file": "safeHome-2.jpg",
+        "capturedAt": 1790504415918
+      },
+      {
+        "file": "safeHome-3.jpg",
+        "capturedAt": 1790504416003
+      },
+      {
+        "file": "safeHome-4.jpg",
+        "capturedAt": 1790504416084
+      },
+      {
+        "file": "safeHome-5.jpg",
+        "capturedAt": 1790504416218
+      },
+      {
+        "file": "safeHome-6.jpg",
+        "capturedAt": 1790504416304
+      },
+      {
+        "file": "safeHome-7.jpg",
+        "capturedAt": 1790504416388
+      },
+      {
+        "file": "safeHome-8.jpg",
+        "capturedAt": 1790504416513
+      },
+      {
+        "file": "safeHome-9.jpg",
+        "capturedAt": 1790504416613
+      },
+      {
+        "file": "safeHome-10.jpg",
+        "capturedAt": 1790504416738
+      },
+      {
+        "file": "safeHome-11.jpg",
+        "capturedAt": 1790504416823
+      }
+    ],
+    "build": "P25",
+    "url": "http://127.0.0.1:5191/mockups/safe2climb/phone.html"
+  },
+  "safeChecks": {
+    "rect": null,
+    "frames": [
+      {
+        "file": "safeChecks-0.jpg",
+        "capturedAt": 1790504423943
+      },
+      {
+        "file": "safeChecks-1.jpg",
+        "capturedAt": 1790504424064
+      },
+      {
+        "file": "safeChecks-2.jpg",
+        "capturedAt": 1790504424151
+      },
+      {
+        "file": "safeChecks-3.jpg",
+        "capturedAt": 1790504424235
+      },
+      {
+        "file": "safeChecks-4.jpg",
+        "capturedAt": 1790504424327
+      },
+      {
+        "file": "safeChecks-5.jpg",
+        "capturedAt": 1790504424422
+      },
+      {
+        "file": "safeChecks-6.jpg",
+        "capturedAt": 1790504424507
+      },
+      {
+        "file": "safeChecks-7.jpg",
+        "capturedAt": 1790504424590
+      },
+      {
+        "file": "safeChecks-8.jpg",
+        "capturedAt": 1790504424709
+      },
+      {
+        "file": "safeChecks-9.jpg",
+        "capturedAt": 1790504424798
+      },
+      {
+        "file": "safeChecks-10.jpg",
+        "capturedAt": 1790504424880
+      },
+      {
+        "file": "safeChecks-11.jpg",
+        "capturedAt": 1790504424960
+      }
+    ],
+    "build": "P25",
+    "url": "http://127.0.0.1:5191/mockups/safe2climb/phone.html"
+  },
+  "safeLean": {
+    "rect": null,
+    "frames": [
+      {
+        "file": "safeLean-0.jpg",
+        "capturedAt": 1790504493338
+      },
+      {
+        "file": "safeLean-1.jpg",
+        "capturedAt": 1790504493486
+      },
+      {
+        "file": "safeLean-2.jpg",
+        "capturedAt": 1790504493731
+      },
+      {
+        "file": "safeLean-3.jpg",
+        "capturedAt": 1790504493986
+      },
+      {
+        "file": "safeLean-4.jpg",
+        "capturedAt": 1790504494141
+      },
+      {
+        "file": "safeLean-5.jpg",
+        "capturedAt": 1790504494384
+      },
+      {
+        "file": "safeLean-6.jpg",
+        "capturedAt": 1790504494554
+      },
+      {
+        "file": "safeLean-7.jpg",
+        "capturedAt": 1790504494727
+      },
+      {
+        "file": "safeLean-8.jpg",
+        "capturedAt": 1790504494891
+      },
+      {
+        "file": "safeLean-9.jpg",
+        "capturedAt": 1790504495057
+      },
+      {
+        "file": "safeLean-10.jpg",
+        "capturedAt": 1790504495231
+      },
+      {
+        "file": "safeLean-11.jpg",
+        "capturedAt": 1790504495387
+      }
+    ],
+    "build": "P25",
+    "url": "http://127.0.0.1:5191/mockups/safe2climb/phone.html"
+  },
+  "safeMovement": {
+    "rect": null,
+    "frames": [
+      {
+        "file": "safeMovement-0.jpg",
+        "capturedAt": 1790504513199
+      },
+      {
+        "file": "safeMovement-1.jpg",
+        "capturedAt": 1790504513301
+      },
+      {
+        "file": "safeMovement-2.jpg",
+        "capturedAt": 1790504513424
+      },
+      {
+        "file": "safeMovement-3.jpg",
+        "capturedAt": 1790504513517
+      },
+      {
+        "file": "safeMovement-4.jpg",
+        "capturedAt": 1790504513628
+      },
+      {
+        "file": "safeMovement-5.jpg",
+        "capturedAt": 1790504513715
+      },
+      {
+        "file": "safeMovement-6.jpg",
+        "capturedAt": 1790504513806
+      },
+      {
+        "file": "safeMovement-7.jpg",
+        "capturedAt": 1790504513897
+      },
+      {
+        "file": "safeMovement-8.jpg",
+        "capturedAt": 1790504513982
+      },
+      {
+        "file": "safeMovement-9.jpg",
+        "capturedAt": 1790504514102
+      },
+      {
+        "file": "safeMovement-10.jpg",
+        "capturedAt": 1790504514178
+      },
+      {
+        "file": "safeMovement-11.jpg",
+        "capturedAt": 1790504514260
+      }
+    ],
+    "build": "P25",
+    "url": "http://127.0.0.1:5191/mockups/safe2climb/phone.html"
+  },
+  "safeUB": {
+    "rect": null,
+    "frames": [
+      {
+        "file": "safeUB-0.jpg",
+        "capturedAt": 1790504515106
+      },
+      {
+        "file": "safeUB-1.jpg",
+        "capturedAt": 1790504515297
+      },
+      {
+        "file": "safeUB-2.jpg",
+        "capturedAt": 1790504515421
+      },
+      {
+        "file": "safeUB-3.jpg",
+        "capturedAt": 1790504515512
+      },
+      {
+        "file": "safeUB-4.jpg",
+        "capturedAt": 1790504515606
+      },
+      {
+        "file": "safeUB-5.jpg",
+        "capturedAt": 1790504515721
+      },
+      {
+        "file": "safeUB-6.jpg",
+        "capturedAt": 1790504515802
+      },
+      {
+        "file": "safeUB-7.jpg",
+        "capturedAt": 1790504515886
+      },
+      {
+        "file": "safeUB-8.jpg",
+        "capturedAt": 1790504516009
+      },
+      {
+        "file": "safeUB-9.jpg",
+        "capturedAt": 1790504516091
+      },
+      {
+        "file": "safeUB-10.jpg",
+        "capturedAt": 1790504516188
+      },
+      {
+        "file": "safeUB-11.jpg",
+        "capturedAt": 1790504516281
+      }
+    ],
+    "build": "P25",
+    "url": "http://127.0.0.1:5191/mockups/safe2climb/phone.html"
+  },
+  "safeScan": {
+    "rect": null,
+    "frames": [
+      {
+        "file": "safeScan-0.jpg",
+        "capturedAt": 1790504516697
+      },
+      {
+        "file": "safeScan-1.jpg",
+        "capturedAt": 1790504516796
+      },
+      {
+        "file": "safeScan-2.jpg",
+        "capturedAt": 1790504516914
+      },
+      {
+        "file": "safeScan-3.jpg",
+        "capturedAt": 1790504516976
+      },
+      {
+        "file": "safeScan-4.jpg",
+        "capturedAt": 1790504517061
+      },
+      {
+        "file": "safeScan-5.jpg",
+        "capturedAt": 1790504517182
+      },
+      {
+        "file": "safeScan-6.jpg",
+        "capturedAt": 1790504517301
+      },
+      {
+        "file": "safeScan-7.jpg",
+        "capturedAt": 1790504517380
+      },
+      {
+        "file": "safeScan-8.jpg",
+        "capturedAt": 1790504517465
+      },
+      {
+        "file": "safeScan-9.jpg",
+        "capturedAt": 1790504517550
+      },
+      {
+        "file": "safeScan-10.jpg",
+        "capturedAt": 1790504517660
+      },
+      {
+        "file": "safeScan-11.jpg",
+        "capturedAt": 1790504517739
+      }
+    ],
+    "build": "P25",
+    "url": "http://127.0.0.1:5191/mockups/safe2climb/phone.html"
+  },
+  "safeIssues": {
+    "rect": null,
+    "frames": [
+      {
+        "file": "safeIssues-0.jpg",
+        "capturedAt": 1790504411428
+      },
+      {
+        "file": "safeIssues-1.jpg",
+        "capturedAt": 1790504411515
+      },
+      {
+        "file": "safeIssues-2.jpg",
+        "capturedAt": 1790504411598
+      },
+      {
+        "file": "safeIssues-3.jpg",
+        "capturedAt": 1790504411684
+      },
+      {
+        "file": "safeIssues-4.jpg",
+        "capturedAt": 1790504411814
+      },
+      {
+        "file": "safeIssues-5.jpg",
+        "capturedAt": 1790504411903
+      },
+      {
+        "file": "safeIssues-6.jpg",
+        "capturedAt": 1790504412021
+      },
+      {
+        "file": "safeIssues-7.jpg",
+        "capturedAt": 1790504412120
+      },
+      {
+        "file": "safeIssues-8.jpg",
+        "capturedAt": 1790504412202
+      },
+      {
+        "file": "safeIssues-9.jpg",
+        "capturedAt": 1790504412303
+      },
+      {
+        "file": "safeIssues-10.jpg",
+        "capturedAt": 1790504412394
+      },
+      {
+        "file": "safeIssues-11.jpg",
+        "capturedAt": 1790504412475
+      }
+    ],
+    "build": "P25",
+    "url": "http://127.0.0.1:5191/mockups/safe2climb/phone.html"
+  },
+  "safeRecords": {
+    "rect": null,
+    "frames": [
+      {
+        "file": "safeRecords-0.jpg",
+        "capturedAt": 1790504409837
+      },
+      {
+        "file": "safeRecords-1.jpg",
+        "capturedAt": 1790504409968
+      },
+      {
+        "file": "safeRecords-2.jpg",
+        "capturedAt": 1790504410132
+      },
+      {
+        "file": "safeRecords-3.jpg",
+        "capturedAt": 1790504410232
+      },
+      {
+        "file": "safeRecords-4.jpg",
+        "capturedAt": 1790504410356
+      },
+      {
+        "file": "safeRecords-5.jpg",
+        "capturedAt": 1790504410441
+      },
+      {
+        "file": "safeRecords-6.jpg",
+        "capturedAt": 1790504410521
+      },
+      {
+        "file": "safeRecords-7.jpg",
+        "capturedAt": 1790504410613
+      },
+      {
+        "file": "safeRecords-8.jpg",
+        "capturedAt": 1790504410699
+      },
+      {
+        "file": "safeRecords-9.jpg",
+        "capturedAt": 1790504410804
+      },
+      {
+        "file": "safeRecords-10.jpg",
+        "capturedAt": 1790504410887
+      },
+      {
+        "file": "safeRecords-11.jpg",
+        "capturedAt": 1790504410988
+      }
+    ],
+    "build": "P25",
+    "url": "http://127.0.0.1:5191/mockups/safe2climb/phone.html"
+  }
+}
