@@ -1,4 +1,4 @@
-import {SOILS,diameterAt,validateCase,type PoleCase} from '../../domain/model.ts';
+import {SOILS,diameterAt,validateCase,loadApplicationHeight,type PoleCase} from '../../domain/model.ts';
 import {hermite,sectionProperties} from '../beam.ts';
 
 type Pair=[number,number];
@@ -28,7 +28,7 @@ export function soilYieldStudy(p:PoleCase,path:Pair[],segments=32,increments=12)
  const started=performance.now(),errors=validateCase(p);if(errors.length)throw Error(errors[0]);
  if(p.soil==='Fixed')throw Error('Soil study needs embedded soil restraint.');
  if(!Number.isInteger(segments)||segments<8||!Number.isInteger(increments)||increments<1||!path.length||path.some(q=>q.length!==2||!q.every(Number.isFinite)))throw Error('Invalid research path or resolution.');
- const top=p.length-p.embedment,zs=[...new Set([-p.embedment,0,top,...Array.from({length:segments-1},(_,i)=>-p.embedment+p.length*(i+1)/segments),...Array.from({length:15},(_,i)=>-p.embedment*(i+1)/16),...p.regions.flatMap(r=>[r.zMin,r.zMax,(r.zMin+r.zMax)/2]).filter(z=>z>=-p.embedment&&z<=top)].map(z=>Math.round(z*1e8)/1e8))].sort((a,b)=>a-b),n=zs.length*4,K=new Float64Array(n*n),springs:Spring[]=[],soil=SOILS[p.soil];
+ const top=p.length-p.embedment,loadZ=loadApplicationHeight(p),zs=[...new Set([-p.embedment,0,loadZ,top,...Array.from({length:segments-1},(_,i)=>-p.embedment+p.length*(i+1)/segments),...Array.from({length:15},(_,i)=>-p.embedment*(i+1)/16),...p.regions.flatMap(r=>[r.zMin,r.zMax,(r.zMin+r.zMax)/2]).filter(z=>z>=-p.embedment&&z<=top)].map(z=>Math.round(z*1e8)/1e8))].sort((a,b)=>a-b),n=zs.length*4,loadNode=zs.indexOf(loadZ),loadX=loadNode*4,loadY=loadX+2,K=new Float64Array(n*n),springs:Spring[]=[],soil=SOILS[p.soil];
  const bending:{ix:number[];iy:number[];B:number[];L:number;xx:number;yy:number;xy:number;weight:number}[]=[];
  const gauss=[[(1-Math.sqrt(3/5))/2,5/18],[.5,4/9],[(1+Math.sqrt(3/5))/2,5/18]];
  for(let e=0;e<zs.length-1;e++){const L=zs[e+1]-zs[e],ix=[4*e,4*e+1,4*e+4,4*e+5],iy=ix.map(i=>i+2);
@@ -45,11 +45,11 @@ export function soilYieldStudy(p:PoleCase,path:Pair[],segments=32,increments=12)
   const states=springs.map((s,k)=>{const y:Pair=[s.H.reduce((a,h,i)=>a+h*v[s.ix[i]],0),s.H.reduce((a,h,i)=>a+h*v[s.iy[i]],0)],r=soilReturn(y,plastic[k],s.k,s.limit);
    for(let i=0;i<4;i++){force[s.ix[i]]+=s.H[i]*r.force[0]*s.weight;force[s.iy[i]]+=s.H[i]*r.force[1]*s.weight;
     for(let j=0;j<4;j++){const h=s.H[i]*s.H[j]*s.weight;tangent[s.ix[i]*n+s.ix[j]]+=h*r.tangent[0];tangent[s.ix[i]*n+s.iy[j]]+=h*r.tangent[1];tangent[s.iy[i]*n+s.ix[j]]+=h*r.tangent[2];tangent[s.iy[i]*n+s.iy[j]]+=h*r.tangent[3];}}
-   return r;});force[n-4]-=target[0];force[n-2]-=target[1];let arithmeticScale=0;for(let i=0;i<n;i++){let row=0;for(let j=0;j<n;j++)row+=Math.abs(K[i*n+j]*v[j]);arithmeticScale=Math.max(arithmeticScale,row);}return {residual:force,tangent,states,norm:Math.max(...force.map(Math.abs)),roundoff:32*Number.EPSILON*arithmeticScale};
+   return r;});force[loadX]-=target[0];force[loadY]-=target[1];let arithmeticScale=0;for(let i=0;i<n;i++){let row=0;for(let j=0;j<n;j++)row+=Math.abs(K[i*n+j]*v[j]);arithmeticScale=Math.max(arithmeticScale,row);}return {residual:force,tangent,states,norm:Math.max(...force.map(Math.abs)),roundoff:32*Number.EPSILON*arithmeticScale};
  }
  // Independent physical gate at every converged increment: a large numerical
  // arithmetic floor must never admit an unbalanced mechanism/overload.
- function balanced(states:ReturnType<typeof soilReturn>[],target:Pair){const force=[0,0],moment=[0,0];springs.forEach((q,i)=>{for(let k=0;k<2;k++){force[k]+=states[i].force[k]*q.weight;moment[k]+=q.z*states[i].force[k]*q.weight;}});return Math.hypot(force[0]-target[0],force[1]-target[1])<.001&&Math.hypot(moment[0]-target[0]*top,moment[1]-target[1]*top)<.01;}
+ function balanced(states:ReturnType<typeof soilReturn>[],target:Pair){const force=[0,0],moment=[0,0];springs.forEach((q,i)=>{for(let k=0;k<2;k++){force[k]+=states[i].force[k]*q.weight;moment[k]+=q.z*states[i].force[k]*q.weight;}});return Math.hypot(force[0]-target[0],force[1]-target[1])<.001&&Math.hypot(moment[0]-target[0]*loadZ,moment[1]-target[1]*loadZ)<.01;}
  const rows=[];
  for(const target of path){const previous=[...load] as Pair;
   for(let step=1;step<=increments;step++){const next:Pair=target.map((v,i)=>previous[i]+(v-previous[i])*step/increments) as Pair;let trial=new Float64Array(u),state=evaluate(trial,next),converged=false;

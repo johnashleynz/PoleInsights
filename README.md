@@ -1,6 +1,8 @@
-# InnerView Insights Pole Laboratory
+# InnerView Insights Pole Insights
 
-**P26 · Seven narrated films · 27 September 2026**
+**P27 DEV · based on Carl Rathbone's Pole Laboratory P26**
+
+Run `Start-Pole-Lab.ps1`, or use the workspace-level `START-WINDOWS.cmd`, then open <http://127.0.0.1:5190>. The DEV label distinguishes this requirements build from the accepted P26 baseline.
 
 Five films have been reworked with narration-timed shots and labels, and UB1000/Analyser and Safe2Climb introductions added. See [P26 review](docs/P26-REVIEW.md).
 
