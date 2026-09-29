@@ -3,7 +3,7 @@ export {utilisationColour} from './utilisationPalette.ts';
 import type {SolidField} from '../analysis/solid/field.ts';
 import {displayedStress} from '../analysis/solid/field.ts';
 import {CanvasTexture,RepeatWrapping,SRGBColorSpace,Source} from 'three';
-import {clamp,conditionAt,diameterAt} from '../domain/model.ts';
+import {clamp,conditionAt,diameterAt,exteriorRadiusAt} from '../domain/model.ts';
 import {defectAppearance,type Raster} from './defectAppearance.ts';
 import type {PoleCase,ViewMode,StressDisplay} from '../domain/model.ts';
 import {stationAt,stressAt,utilisationAt} from '../analysis/beam.ts';
@@ -73,10 +73,11 @@ export function sectionCanvas(p:PoleCase,z:number,view:ViewMode,result:AnalysisR
 export function paintSection(canvas:HTMLCanvasElement,p:PoleCase,z:number,view:ViewMode,result:AnalysisResult|null,display:StressDisplay='stress',photo?:CanvasImageSource,solid?:SolidField|null,atlas?:Raster,utilisationMax=1.5) {
   const ctx=canvas.getContext('2d')!,size=canvas.width,R=diameterAt(p,z)/2,scale=size*.46/R,c=size/2,img=ctx.createImageData(size,size),rnd=random(871),station=result?stationAt(result,z):null;
   let base:Uint8ClampedArray|undefined;
-  if(photo){ctx.clearRect(0,0,size,size);ctx.drawImage(photo,-size*.356,-size*.254,size*1.4,size*1.4);base=ctx.getImageData(0,0,size,size).data;}
+  if(photo){ctx.clearRect(0,0,size,size);ctx.drawImage(photo,-size*.396,-size*.302,size*1.4,size*1.4);base=ctx.getImageData(0,0,size,size).data;}
   for(let py=0;py<size;py++)for(let px=0;px<size;px++){
     const x=(px-c)/scale,y=-(py-c)/scale,r=Math.hypot(x,y),i=(py*size+px)*4;if(r>R)continue;
-    const a=Math.atan2(y,x),cond=conditionAt(p,x,y,z),noise=(rnd()-.5)*9;
+    const a=Math.atan2(y,x),bearing=((Math.atan2(x,y)*180/Math.PI)+360)%360;if(r>exteriorRadiusAt(p,z,bearing))continue;
+    const cond=conditionAt(p,x,y,z),noise=(rnd()-.5)*9;
     let rgb:[number,number,number];
     if(view==='Stresses'){
       if(cond.voided)continue;

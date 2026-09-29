@@ -17,6 +17,8 @@ The pole-specific reference is **ANSI O5.1-2022, Wood Poles — Specifications a
 
 The separate through-bored Douglas-fir option uses 52.44 MPa, the bulletin's 5% reduction. This treatment adjustment is distinct from adding a simulated inspection bore to the defect geometry. Avoid counting the same reduction twice.
 
+Some US class and material fields were cross-checked against the [Power Line Systems ANSI O5.1-2017 PLS-POLE component library](https://www.powline.com/files/pls_pole/ansi/ansi_O5-1.html). Its WPP rows identify class, length, top circumference, circumference 6 ft from butt and default groundline distance; its MAT rows identify MOE, fibre stress and assumed density. PLS provides these secondary files **as-is** and requires users to verify them; they do not replace the applicable ANSI O5.1 or RUS source.
+
 The standard's conditioning, geometry, class, height and design provisions still need to be satisfied. P19 does not implement Annex A adjustments, NESC design factors, reliability checks or allowable working loads. The catalogue deliberately excludes ANSI's radiata-pine row: its stated geographic and class restrictions describe Chilean poles, not NZ radiata pine.
 
 For static testing, use [ASTM D1036-99(2025), Standard Test Methods of Static Tests of Wood Poles](https://store.astm.org/d1036-99r25.html). Its scope includes cantilever and machine testing, treated and untreated poles, stiffness, strength, and effects of defects and treatment. P19 is not an implementation of either test procedure: its present load point is the physical tip and its fixed restraint is at groundline. A test at another point or with a different support arrangement requires the corresponding structural model.

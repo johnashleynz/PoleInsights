@@ -1,6 +1,12 @@
 import {soundStrength} from '../domain/species.ts';
 import {conditionAt,diameterAt,type PoleCase} from '../domain/model.ts';
-export const PROBE_LENGTH=.160,PROBE_DIAMETER=.060;
+export const PROBE_BODY_LENGTH=.180;
+export const PROBE_TIP_LENGTH=.020;
+export const PROBE_LENGTH=PROBE_BODY_LENGTH+PROBE_TIP_LENGTH;
+export const PROBE_DIAMETER=.050;
+export const WAVE_GUIDE_LENGTH=.050;
+export const WAVE_GUIDE_EXPOSED=.030;
+export const PROBE_OUTER_REACH=WAVE_GUIDE_EXPOSED+PROBE_LENGTH;
 /** Explicit sandbox truth summary, NOT ultrasonic inference or a UB1000 calibration.
  * Equal-area samples integrate the existing illustrative longitudinal strength factors.
  * Remaining-fibre mean excludes voids. Capacity proxy includes missing material at zero.

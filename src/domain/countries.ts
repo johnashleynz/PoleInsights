@@ -84,8 +84,11 @@ const nzClasses = goldpineRows.map(([length, load, embedment, tip, ground]) =>
   ),
 );
 
+const plsAnsiReference =
+  "Some reference information was cross-checked against the Power Line Systems ANSI O5.1-2017 PLS-POLE library (https://www.powline.com/files/pls_pole/ansi/ansi_O5-1.html). PLS supplies it as-is; verify it against the applicable ANSI/RUS source.";
 const ansiSource =
-  "ANSI O5.1-2022 Table 8, p.24, supplied 29 September 2026: Douglas-fir (both types) and Southern Pine, fibre strength 8000 psi. Top and 6-ft-from-butt circumferences are published minima; model groundline and butt diameters are linear-taper calculations. Table 8 groundline distances are explicitly not recommended embedment depths.";
+  "ANSI O5.1-2022 Table 8, p.24, supplied 29 September 2026: Douglas-fir (both types) and Southern Pine, fibre strength 8000 psi. Top and 6-ft-from-butt circumferences are published minima; model groundline and butt diameters are linear-taper calculations. Table 8 groundline distances are explicitly not recommended embedment depths. " +
+  plsAnsiReference;
 const ansiClasses = [
   "H6",
   "H5",

@@ -99,6 +99,7 @@ export interface PoleCase {
   loadHeight?: number;
   bearing: number;
   showDetect?: boolean;
+  breakEnabled?: boolean;
   breakCapacityPercent?: number;
   actualBreakHeight?: number | null;
   actualBreakForceKN?: number | null;
@@ -148,6 +149,7 @@ export function defaultCase(id = "A"): PoleCase {
     loadKN: 1,
     bearing: 90,
     showDetect: true,
+    breakEnabled: false,
     breakCapacityPercent: 200,
     actualBreakHeight: null,
     actualBreakForceKN: null,
@@ -315,6 +317,8 @@ export function validateCase(p: PoleCase): string[] {
     );
   if (p.showDetect !== undefined && typeof p.showDetect !== "boolean")
     errors.push("Detect visibility must be enabled or disabled.");
+  if (p.breakEnabled !== undefined && typeof p.breakEnabled !== "boolean")
+    errors.push("Break display must be enabled or disabled.");
   if (
     p.breakCapacityPercent !== undefined &&
     (!Number.isFinite(p.breakCapacityPercent) ||
@@ -580,6 +584,53 @@ export function conditionAt(p: PoleCase, x: number, y: number, z: number) {
     drilled,
   };
 }
+
+function signedBearingDelta(bearing: number, centre: number) {
+  return ((bearing - centre + 540) % 360) - 180;
+}
+
+/** Remaining exterior radius for one chipped region at a height and bearing. */
+export function chippingBoundaryRadius(
+  p: PoleCase,
+  r: Region,
+  z: number,
+  bearing: number,
+) {
+  const R = diameterAt(p, z) / 2,
+    d = r.chipping;
+  if (!d || z < r.zMin || z > r.zMax) return R;
+  const delta = signedBearingDelta(bearing, d.bearing);
+  if (d.degrees < 360 && Math.abs(delta) > d.degrees / 2) return R;
+
+  // Feather from untouched circumference at the top to full depth at the bottom.
+  const taper = Math.max(
+    0,
+    Math.min(1, (r.zMax - z) / Math.max(1e-9, r.zMax - r.zMin)),
+  );
+  if (taper < 1e-9) return R;
+  const faceRadius = Math.max(0, R - d.depth * taper);
+  if (d.facets < 6) return faceRadius;
+
+  const sector = 360 / d.facets,
+    faceDelta = delta - Math.round(delta / sector) * sector,
+    radialIntersection =
+      faceRadius / Math.max(0.01, Math.cos((faceDelta * Math.PI) / 180));
+  return Math.min(R, radialIntersection);
+}
+
+/** Actual outer surface after all prescribed exterior chipping is removed. */
+export function exteriorRadiusAt(
+  p: PoleCase,
+  z: number,
+  bearing: number,
+) {
+  let radius = diameterAt(p, z) / 2;
+  for (const r of p.regions)
+    if (r.kind === "chipping")
+      radius = Math.min(radius, chippingBoundaryRadius(p, r, z, bearing));
+  return radius;
+}
+
 /** Normalised distance in the authoritative defect geometry; >1 is outside. */
 export function defectDistance(
   p: PoleCase,
@@ -612,21 +663,11 @@ export function defectDistance(
     return radial / (d.diameter / 2);
   }
   if (r.kind === "chipping" && r.chipping) {
-    const d = r.chipping,
-      R = diameterAt(p, z) / 2,
+    const R = diameterAt(p, z) / 2,
       rho = Math.hypot(x, y),
       bearing = ((Math.atan2(x, y) * 180) / Math.PI + 360) % 360,
-      delta = Math.abs(((bearing - d.bearing + 540) % 360) - 180);
-    if (d.degrees < 360 && delta > d.degrees / 2) return Infinity;
-    let boundary = R - d.depth;
-    if (d.facets >= 6) {
-      const sector = (2 * Math.PI) / d.facets,
-        theta = ((Math.atan2(y, x) % sector) + sector) % sector,
-        beta = theta - sector / 2;
-      boundary =
-        (boundary * Math.cos(Math.PI / d.facets)) /
-        Math.max(0.01, Math.cos(beta));
-    }
+      boundary = chippingBoundaryRadius(p, r, z, bearing);
+    if (boundary >= R - 1e-9 || rho < boundary) return Infinity;
     return (R - rho) / Math.max(1e-9, R - boundary);
   }
   if (r.kind === "decay" && r.decay?.pattern === "shell") {
@@ -662,7 +703,10 @@ export function decaySeverity(r: Region, distance: number, z: number) {
         0,
         (Math.pow(0.05, Math.pow(v, r.decay!.exponent)) - 0.05) / 0.95,
       );
-  return r.severity * fall(q) * fall(t);
+  // A heart-rot source is a source cross-section, not a single point on the
+  // neutral axis. Its drawn width/depth carries the entered source severity.
+  const radial = r.decay.pattern === "heart" ? 1 : fall(q);
+  return r.severity * radial * fall(t);
 }
 /** Wood Handbook ch. 5, Eq. 5–2. Ratios are illustrative, not a knot grade rule. */
 export function hankinson(angle: number, ratio: number) {
@@ -694,6 +738,7 @@ export function normaliseCase(p: PoleCase): PoleCase {
     poleClass: p.poleClass ?? null,
     loadHeight: clamp(p.loadHeight ?? top, 0, top),
     showDetect: p.showDetect ?? true,
+    breakEnabled: p.breakEnabled ?? false,
     breakCapacityPercent: p.breakCapacityPercent ?? 200,
     actualBreakHeight: p.actualBreakHeight ?? null,
     actualBreakForceKN: p.actualBreakForceKN ?? null,

@@ -11,7 +11,9 @@ import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import type { PoleCase, ViewMode, StressDisplay } from "../domain/model.ts";
 import {
   conditionAt,
+  defectDistance,
   diameterAt,
+  exteriorRadiusAt,
   regionScale,
   loadApplicationHeight,
 } from "../domain/model.ts";
@@ -25,9 +27,10 @@ import {
   imageTexture,
 } from "./materials.ts";
 import { groundPatch } from "./ground.ts";
+import { drillingScenePlacement } from "./drillingGeometry.ts";
+import {displayForce,formatPoleLength,unitLabels,type UnitSystem} from '../domain/units.ts';
 export const arrowLength = (load: number) =>
   0.35 + 0.6 * Math.sqrt(Math.max(0, load));
-
 function resizeArrow(arrow: T.Object3D, len: number) {
   const head = Math.min(0.24, len * 0.28),
     shaft = arrow.getObjectByName("arrow-shaft"),
@@ -48,6 +51,7 @@ function resizeArrow(arrow: T.Object3D, len: number) {
 }
 
 export interface SceneProps {
+  units?: UnitSystem;
   capture?: boolean;
   testBearing?: number;
   profilePole?: PoleCase;
@@ -141,7 +145,11 @@ function tubeGeometry(
   );
   if (kind === "pole")
     for (const r of p.regions)
-      if (r.kind === "void" || r.kind === "drilling")
+      if (
+        r.kind === "void" ||
+        r.kind === "drilling" ||
+        r.kind === "chipping"
+      )
         for (let j = 0; j <= 80; j++)
           axial.push(
             Math.max(
@@ -158,9 +166,14 @@ function tubeGeometry(
   for (let j = 0; j <= rows; j++) {
     const z = heights[j],
       s = result ? stationAt(result, z) : null,
-      R = diameterAt(p, z) / 2;
+      nominalRadius = diameterAt(p, z) / 2;
     for (let k = 0; k <= cols; k++) {
       const a = (k / cols) * Math.PI * 2;
+      const bearing = ((90 - (a * 180) / Math.PI) % 360 + 360) % 360,
+        R =
+          kind === "pole"
+            ? exteriorRadiusAt(p, z, bearing)
+            : nominalRadius;
       let x = R * Math.cos(a),
         y = R * Math.sin(a);
       if (kind === "region" && region.shape.type !== "section-contours") {
@@ -221,7 +234,17 @@ function tubeGeometry(
           aa = ((k + 0.5) / cols) * Math.PI * 2;
         if (
           kind === "pole" &&
-          conditionAt(p, rr * Math.cos(aa), rr * Math.sin(aa), zz).voided
+          p.regions.some(
+            (r) =>
+              (r.kind === "void" || r.kind === "drilling") &&
+              defectDistance(
+                p,
+                r,
+                rr * Math.cos(aa),
+                rr * Math.sin(aa),
+                zz,
+              ) <= 1,
+          )
         )
           continue;
         if (kind === "pole")
@@ -295,6 +318,7 @@ export default function PoleScene(props: SceneProps) {
   };
   const sectionHandle = useRef<HTMLDivElement>(null),
     loadHandle = useRef<HTMLDivElement>(null),
+    breakLabel = useRef<HTMLDivElement>(null),
     sectionLabel = useRef<HTMLSpanElement>(null),
     loadLabel = useRef<HTMLSpanElement>(null),
     dragNote = useRef<HTMLSpanElement>(null),
@@ -470,6 +494,17 @@ export default function PoleScene(props: SceneProps) {
         leader.style.width = Math.max(8, Math.abs(endX - point.x)) + "px";
         leader.classList.toggle("leader-reverse", endX < point.x);
       }
+      const zone=p.breakState?.active?p.breakState:null,label=breakLabel.current;
+      if(label&&zone){
+        const breakAt=p.result?stationAt(p.result,zone.heightM):null,
+          screen=project(new T.Vector3((breakAt?.ux??0)*p.scale,zone.heightM,-(breakAt?.uy??0)*p.scale)),
+          placeLeft=screen.x>host!.clientWidth-190;
+        label.hidden=screen.y<24||screen.y>host!.clientHeight-24;
+        label.classList.toggle('left',placeLeft);
+        label.style.left=(screen.x+(placeLeft?-20:20))+'px';
+        label.style.top=screen.y+'px';
+        label.textContent=zone.basis==='observed'?'Actual break zone':'Likely break zone';
+      }else if(label)label.hidden=true;
       const origin = new T.Vector3(
           (tip?.ux ?? 0) * p.scale,
           loadZ,
@@ -510,9 +545,9 @@ export default function PoleScene(props: SceneProps) {
         el.style.setProperty("--counter-angle", `${-angle}rad`);
       }
       if (loadLabel.current)
-        loadLabel.current.textContent = `${(drag?.kind === "bearing" ? drag.load : p.pole.loadKN).toFixed(1)} kN`;
+        loadLabel.current.textContent = `${displayForce(drag?.kind === "bearing" ? drag.load : p.pole.loadKN,p.units??'metric').toFixed((p.units??'metric')==='metric'?1:0)} ${unitLabels[p.units??'metric'].force}`;
       if (sectionLabel.current)
-        sectionLabel.current.textContent = `${chartState.current.profile.error ? "Chart unavailable" : chartState.current.profile.pending ? "Updating…" : profileLabel(chartState.current.profile.rows, chartState.current.metric, z)} · ${z.toFixed(2)} m`;
+        sectionLabel.current.textContent = `${chartState.current.profile.error ? "Chart unavailable" : chartState.current.profile.pending ? "Updating…" : profileLabel(chartState.current.profile.rows, chartState.current.metric, z,p.units??'metric')} · ${formatPoleLength(z,p.units??'metric')}`;
       chartPositions.current = Array.from({ length: 101 }, (_, i) => {
         const z = -p.pole.embedment + (p.pole.length * i) / 100,
           q = p.result ? stationAt(p.result, z) : null;
@@ -546,6 +581,7 @@ export default function PoleScene(props: SceneProps) {
           chartState.current.scale,
           p.pole.loadKN,
           chartState.current.maximum,
+          p.units??'metric',
         );
       const dt = last ? begin - last : 16;
       if (moving && dt < 200) {
@@ -925,7 +961,7 @@ export default function PoleScene(props: SceneProps) {
         if (dragNote.current) {
           dragNote.current.hidden = false;
           dragNote.current.textContent =
-            d.value.toFixed(2) + " m · release to update";
+            formatPoleLength(d.value,latest.current.units??'metric') + " · release to update";
         }
         request();
         return;
@@ -1013,56 +1049,39 @@ export default function PoleScene(props: SceneProps) {
           Math.min(top - 0.02, props.breakState.heightM),
         )
       : null;
-    if (breakHeight === null) {
-      const body = new T.Mesh(
-        tubeGeometry(p, result, scale, top, "pole", 0, view, stressDisplay),
-        mat,
-      );
-      body.castShadow = view === "Setup";
-      body.receiveShadow = view === "Setup";
-      s.model.add(body);
-    } else {
-      const lower = new T.Mesh(
-        tubeGeometry(p, result, scale, top, "pole", 0, view, stressDisplay, {
-          start: -p.embedment,
-          end: breakHeight - 0.008,
-        }),
-        mat,
-      );
-      lower.castShadow = view === "Setup";
-      lower.receiveShadow = view === "Setup";
-      s.model.add(lower);
-      const upperGroup = new T.Group(),
-        upper = new T.Mesh(
-          tubeGeometry(p, result, scale, top, "pole", 0, view, stressDisplay, {
-            start: breakHeight + 0.008,
-            end: top,
-          }),
-          mat,
-        );
-      upper.position.y = -breakHeight;
-      upper.castShadow = view === "Setup";
-      upper.receiveShadow = view === "Setup";
-      upperGroup.position.set(0.08, breakHeight, 0);
-      upperGroup.rotation.set(0.04, 0, -0.18);
-      upperGroup.add(upper);
-      s.model.add(upperGroup);
-      for (const side of [-1, 1]) {
-        const fracture = new T.Mesh(
-          new T.CircleGeometry(diameterAt(p, breakHeight) / 2, 18),
-          new T.MeshStandardMaterial({
-            color: "#825431",
-            roughness: 1,
-            side: T.DoubleSide,
-          }),
-        );
-        fracture.rotation.x = -Math.PI / 2;
-        fracture.position.y = side * 0.009;
-        if (side > 0) upperGroup.add(fracture);
-        else {
-          fracture.position.y = breakHeight - 0.009;
-          s.model.add(fracture);
-        }
+    const body = new T.Mesh(
+      tubeGeometry(p, result, scale, top, "pole", 0, view, stressDisplay),
+      mat,
+    );
+    body.castShadow = view === "Setup";
+    body.receiveShadow = view === "Setup";
+    s.model.add(body);
+    if (breakHeight !== null) {
+      const atBreak=result?stationAt(result,breakHeight):null,
+        cx=(atBreak?.ux??0)*scale,
+        cz=-(atBreak?.uy??0)*scale,
+        radius=diameterAt(p,breakHeight)/2,
+        seamMaterial=new T.LineBasicMaterial({color:'#b42318'}),
+        points=Array.from({length:32},(_,i)=>{
+          const angle=i/32*Math.PI*2,r=radius*(1+(i%3===0?.018:0));
+          return new T.Vector3(cx+r*Math.cos(angle),breakHeight+(i%2===0?.012:-.012),cz+r*Math.sin(angle));
+        });
+      s.model.add(new T.LineLoop(new T.BufferGeometry().setFromPoints(points),seamMaterial));
+
+      const chipMaterial=new T.MeshStandardMaterial({color:'#b88a5b',roughness:.92}),
+        loadAngle=p.bearing*Math.PI/180,
+        outward=new T.Vector3(Math.sin(loadAngle),0,-Math.cos(loadAngle)),
+        tangent=new T.Vector3(-outward.z,0,outward.x);
+      for(let i=0;i<6;i++){
+        const chip=new T.Mesh(new T.TetrahedronGeometry(.011+i*.0014,0),chipMaterial),
+          distance=radius+.025+i*.014,
+          spread=(i-2.5)*.012;
+        chip.position.set(cx,0,cz).addScaledVector(outward,distance).addScaledVector(tangent,spread);
+        chip.position.y=breakHeight+(i%3-1)*.018;
+        chip.rotation.set(i*.7,i*.43,i*.29);
+        chip.scale.set(1.6,.65+(.12*(i%2)),.8);
+        chip.castShadow=true;
+        s.model.add(chip);
       }
     }
 
@@ -1120,13 +1139,18 @@ export default function PoleScene(props: SceneProps) {
           const d = r.drilling,
             z = d.entryHeight ?? (r.zMin + r.zMax) / 2,
             R = diameterAt(p, z) / 2,
-            a = (d.bearing * Math.PI) / 180,
-            down = ((d.inclination ?? 0) * Math.PI) / 180,
             q = result ? stationAt(result, z) : null,
-            axis = new T.Vector3(
-              Math.sin(a) * Math.cos(down),
-              -Math.sin(down),
-              -Math.cos(a) * Math.cos(down),
+            placement = drillingScenePlacement(
+              d.bearing,
+              d.inclination ?? 0,
+              R,
+              d.depth,
+            ),
+            axis = new T.Vector3(...placement.inward),
+            poleCentre = new T.Vector3(
+              (q?.ux ?? 0) * scale,
+              z,
+              -(q?.uy ?? 0) * scale,
             );
           const bore = new T.Mesh(
             new T.CylinderGeometry(
@@ -1145,9 +1169,7 @@ export default function PoleScene(props: SceneProps) {
           );
           bore.userData.defect = r.id;
           bore.quaternion.setFromUnitVectors(new T.Vector3(0, 1, 0), axis);
-          bore.position
-            .set((q?.ux ?? 0) * scale, z, -(q?.uy ?? 0) * scale)
-            .addScaledVector(axis, R - d.depth / 2);
+          bore.position.copy(poleCentre).add(new T.Vector3(...placement.midpoint));
           s.model.add(bore);
           const mouth = new T.Mesh(
             new T.CircleGeometry(d.diameter / 2, 32),
@@ -1155,9 +1177,7 @@ export default function PoleScene(props: SceneProps) {
           );
           mouth.userData.defect = r.id;
           mouth.quaternion.setFromUnitVectors(new T.Vector3(0, 0, 1), axis);
-          mouth.position
-            .set((q?.ux ?? 0) * scale, z, -(q?.uy ?? 0) * scale)
-            .addScaledVector(axis, R + 0.0008);
+          mouth.position.copy(poleCentre).add(new T.Vector3(...placement.mouth));
           s.model.add(mouth);
           const pick = new T.Mesh(
             new T.CylinderGeometry(0.04, 0.04, d.depth, 12),
@@ -1169,6 +1189,31 @@ export default function PoleScene(props: SceneProps) {
           );
           pick.quaternion.copy(bore.quaternion);
           pick.position.copy(bore.position);
+          pick.userData.defect = r.id;
+          s.model.add(pick);
+          return;
+        }
+        if (r.kind === "chipping") {
+          const centre = (r.zMin + r.zMax) / 2,
+            at = result ? stationAt(result, centre) : null,
+            pick = new T.Mesh(
+              new T.CylinderGeometry(
+                diameterAt(p, centre) / 2,
+                diameterAt(p, centre) / 2,
+                Math.max(0.08, r.zMax - r.zMin),
+                24,
+              ),
+              new T.MeshBasicMaterial({
+                transparent: true,
+                opacity: 0,
+                depthWrite: false,
+              }),
+            );
+          pick.position.set(
+            (at?.ux ?? 0) * scale,
+            centre,
+            -(at?.uy ?? 0) * scale,
+          );
           pick.userData.defect = r.id;
           s.model.add(pick);
           return;
@@ -1445,6 +1490,7 @@ export default function PoleScene(props: SceneProps) {
     props.stressDisplay,
     props.soil,
     props.scale,
+    props.units,
     props.reveal,
     props.utilisationMax,
     props.testBearing !== undefined,
@@ -1769,6 +1815,7 @@ export default function PoleScene(props: SceneProps) {
       )}
       {!failed && (
         <>
+          <div ref={breakLabel} className="scene-break-label" hidden />
           <div ref={sectionHandle} className="scene-leader section-leader">
             <button
               className="section-leader-hit"
@@ -1795,7 +1842,7 @@ export default function PoleScene(props: SceneProps) {
               }}
             />
             <span ref={sectionLabel} className="leader-label">
-              {props.section.toFixed(2)} m
+              {formatPoleLength(props.section,props.units??'metric')}
             </span>
             <button
               className="leader-circle"
@@ -1824,7 +1871,7 @@ export default function PoleScene(props: SceneProps) {
           </div>
           <div ref={loadHandle} className="scene-leader load-leader">
             <span ref={loadLabel} className="leader-label">
-              {props.pole.loadKN.toFixed(1)} kN
+              {displayForce(props.pole.loadKN,props.units??'metric').toFixed((props.units??'metric')==='metric'?1:0)} {unitLabels[props.units??'metric'].force}
             </span>
             <button
               className="leader-circle"

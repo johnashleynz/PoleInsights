@@ -377,8 +377,9 @@ export default function DefectEditor({
                           />
                         </div>
                         <p className="field-note">
-                          Faceted chipping uses six or more flat faces in beam
-                          section integration; zero retains a round surface.
+                          Chipping tapers inward from the original circumference
+                          at the top to the entered depth at the bottom. Six or
+                          more facets form flat faces; zero leaves a round cut.
                         </p>
                       </>
                     )}
@@ -634,9 +635,10 @@ export default function DefectEditor({
                           </>
                         )}
                         <p className="field-note">
-                          Assumed spatial progression. Early decay may have
-                          little visible discoloration in Setup; Defects makes
-                          its prescribed extent visible.
+                          Heart-rot severity applies across its prescribed
+                          section at the source height and diminishes along its
+                          length. Shell rot also diminishes inward from the
+                          outside. This is an assumed spatial progression.
                         </p>
                       </details>
                     )}

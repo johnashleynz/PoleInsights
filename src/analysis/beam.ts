@@ -6,6 +6,7 @@ import {
   validateCase,
   defectDistance,
   loadApplicationHeight,
+  regionScale,
 } from "../domain/model.ts";
 import type { PoleCase } from "../domain/model.ts";
 
@@ -192,9 +193,29 @@ export function sectionProperties(
     yy = 0,
     xy = 0,
     remaining = 0;
-  for (let j = 0; j < nr; j++) {
-    const lo = (R * j) / nr,
-      hi = (R * (j + 1)) / nr,
+  const radialEdges = Array.from({ length: nr + 1 }, (_, j) => (R * j) / nr);
+  // Preserve thin concentric shells in the production quadrature. Without
+  // shell-aligned bands, a shallow outside layer can fall between radial
+  // sample points and incorrectly contribute sound-section stiffness.
+  for (const region of p.regions) {
+    if (
+      region.kind !== "decay" ||
+      region.decay?.pattern !== "shell" ||
+      z < region.zMin ||
+      z > region.zMax ||
+      Math.hypot(region.decay.offsetX ?? 0, region.decay.offsetY ?? 0) > 1e-9
+    )
+      continue;
+    const depth = Math.min(R, region.decay.shellDepth * regionScale(region, z));
+    for (let j = 0; j <= 8; j++) radialEdges.push(R - (depth * j) / 8);
+  }
+  radialEdges.sort((x, y) => x - y);
+  const edges = radialEdges.filter(
+    (edge, index) => index === 0 || edge - radialEdges[index - 1] > 1e-10,
+  );
+  for (let j = 0; j < edges.length - 1; j++) {
+    const lo = edges[j],
+      hi = edges[j + 1],
       r = Math.sqrt((lo * lo + hi * hi) / 2),
       da = (PI * (hi * hi - lo * lo)) / na;
     for (let k = 0; k < na; k++) {

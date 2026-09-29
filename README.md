@@ -4,6 +4,10 @@
 
 Run `Start-Pole-Lab.ps1`, or use the workspace-level `START-WINDOWS.cmd`, then open <http://127.0.0.1:5190>. The DEV label distinguishes this requirements build from the accepted P26 baseline.
 
+The Detect view now draws each UB1000 assembly to the supplied dimensions: a 180 mm body plus 20 mm metal tip, 50 mm body diameter, and a 50 mm wave guide shown 20 mm embedded and 30 mm protruding. The housing is divided into its 55 mm black butt, 110 mm orange mid-section, 10 mm end cap and 5 mm curved taper.
+
+P27 display corrections apply the selected unit system throughout the scene and charts, express load position as an offset down from the tip, recenter the section growth rings, and make the revised pole-break demonstration explicitly opt-in.
+
 Five films have been reworked with narration-timed shots and labels, and UB1000/Analyser and Safe2Climb introductions added. See [P26 review](docs/P26-REVIEW.md).
 
 Safe2Climb and Axonic Analyser now open inside the familiar Samsung Galaxy S21 Ultra phone frame in both popup and embedded views. The added workflow banner has been removed at the owner’s request. See [P25 review](docs/P25-REVIEW.md) for transport checks and browser verification.

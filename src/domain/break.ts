@@ -12,6 +12,7 @@ export function resolveBreakState(
   pole: PoleCase,
   result: AnalysisResult | null,
 ): BreakState | null {
+  if (pole.breakEnabled !== true) return null;
   const hasObservation =
     pole.actualBreakForceKN != null && pole.actualBreakHeight != null;
   if (hasObservation)
@@ -22,11 +23,12 @@ export function resolveBreakState(
       basis: "observed",
     };
   if (!result) return null;
-  const forceKN = (result.limitKN * (pole.breakCapacityPercent ?? 200)) / 100;
+  const forceKN =
+    (result.timberLimitKN * (pole.breakCapacityPercent ?? 200)) / 100;
   return {
     active: pole.loadKN >= forceKN,
     forceKN,
-    heightM: result.governingZ,
+    heightM: result.timberZ,
     basis: "illustrative",
   };
 }

@@ -449,7 +449,7 @@ export default function App() {
   const [reveal, setReveal] = useState(false),
     [solidEnabled, setSolidEnabled] = useState(false),
     [solidResolution, setSolidResolution] = useState("coarse"),
-    [loadPointUnlocked, setLoadPointUnlocked] = useState(false);
+    [loadPointLocked, setLoadPointLocked] = useState(true);
   const solidAnalysis = useSolid(
       shownCases,
       solidEnabled && view === "Stresses" && !awaitingDirection,
@@ -492,13 +492,6 @@ export default function App() {
     smallUnit = unitLabels[units].smallLength,
     forceUnit = unitLabels[units].force,
     stressUnit = unitLabels[units].stress;
-  const breakForceKN =
-      p.actualBreakForceKN ??
-      (result
-        ? (result.limitKN * (p.breakCapacityPercent ?? 200)) / 100
-        : null),
-    breakHeight = p.actualBreakHeight ?? result?.governingZ ?? null,
-    breakActive = breakForceKN !== null && p.loadKN >= breakForceKN;
   useEffect(() => {
     if (calculated.pending) return;
     setCases((old) => {
@@ -604,12 +597,10 @@ export default function App() {
     setCases((previous) => previous.map((c) => ({ ...c, unitSystem })));
   }
   function setGlobalCountry(code: CountryCode) {
-    const config = countryConfig(code);
     setCases((previous) =>
       previous.map((c) => ({
         ...c,
         country: code,
-        unitSystem: config.defaultUnits,
         poleClass: null,
       })),
     );
@@ -1517,11 +1508,11 @@ export default function App() {
                 <summary>Load and break demonstration</summary>
                 <div>
                   <NumberField
-                    label="Load application height"
-                    value={displayPoleLength(loadApplicationHeight(p), units)}
+                    label="Load application offset"
+                    value={displayPoleLength(h-loadApplicationHeight(p), units)}
                     onChange={(v) =>
                       v !== null &&
-                      patch({ loadHeight: poleLengthFromDisplay(v, units) })
+                      patch({ loadHeight: h-poleLengthFromDisplay(v, units) })
                     }
                     unit={lengthUnit}
                     min={0}
@@ -1531,36 +1522,44 @@ export default function App() {
                   <label className="check-row">
                     <input
                       type="checkbox"
-                      checked={loadPointUnlocked}
-                      onChange={(e) => setLoadPointUnlocked(e.target.checked)}
+                      checked={loadPointLocked}
+                      onChange={(e) => setLoadPointLocked(e.target.checked)}
                     />
-                    Unlock load-point slider
+                    Lock load point slider
                   </label>
-                  {loadPointUnlocked && (
+                  {!loadPointLocked && (
                     <Slider
-                      label="Drag load point"
-                      value={displayPoleLength(loadApplicationHeight(p), units)}
+                      label="Load application offset"
+                      value={displayPoleLength(h-loadApplicationHeight(p), units)}
                       min={0}
                       max={displayPoleLength(h, units)}
                       step={units === "metric" ? 0.05 : 0.1}
                       unit={lengthUnit}
                       onChange={(v) => {
-                        patch({ loadHeight: poleLengthFromDisplay(v, units) });
-                        setLoadPointUnlocked(false);
+                        patch({ loadHeight: h-poleLengthFromDisplay(v, units) });
+                        setLoadPointLocked(true);
                       }}
                     />
                   )}
                   <p className="field-note">
-                    Measured from groundline. The slider locks again after one
-                    adjustment.
+                    Measured down from the pole tip. Zero applies the load at
+                    the tip. The slider locks again after one adjustment.
                   </p>
+                  <label className="check-row">
+                    <input
+                      type="checkbox"
+                      checked={p.breakEnabled === true}
+                      onChange={(e) => patch({ breakEnabled: e.target.checked })}
+                    />
+                    Show pole break demonstration
+                  </label>
                   <NumberField
                     label="Illustrative break trigger"
                     value={p.breakCapacityPercent ?? 200}
                     onChange={(v) =>
                       v !== null && patch({ breakCapacityPercent: v })
                     }
-                    unit="% of model limit"
+                    unit="% of timber capacity"
                     min={100}
                     max={1000}
                     step={10}
@@ -1727,7 +1726,7 @@ export default function App() {
                   onControl={controlWaves}
                   onHeight={setSection}
                 />
-                <h3>Position the pair</h3>
+                <h3>Position the UB1000 probes</h3>
                 <p>
                   Drag either device up or down the pole. Turn the pair by
                   dragging a device around the section.
@@ -1755,8 +1754,8 @@ export default function App() {
                   Focus on devices
                 </button>
                 <p className="field-note">
-                  Opposed pair · approximately {formatSmallLength(0.16, units)}{" "}
-                  × {formatSmallLength(0.06, units)} each. Negative height is
+                  Opposed pair · {formatSmallLength(PROBE_LENGTH, units)} long ×{" "}
+                  {formatSmallLength(PROBE_DIAMETER, units)} diameter each. Negative height is
                   for an excavated or unembedded pole.
                 </p>
                 <details className="test-reference">
@@ -1837,6 +1836,7 @@ export default function App() {
                     </button>
                   )}
                   <PoleScene
+                    units={units}
                     breakState={resolveBreakState(c, r)}
                     testBearing={
                       view === "Test"
@@ -1918,7 +1918,7 @@ export default function App() {
                           linkedSection || k === (compare ? i : active)
                             ? clamp(
                                 z,
-                                view === "Test" ? 0 : -cases[k].embedment,
+                                -cases[k].embedment,
                                 cases[k].length - cases[k].embedment,
                               )
                             : v,
@@ -2083,7 +2083,7 @@ export default function App() {
                       ? "Stress"
                       : q === "utilisation"
                         ? "Utilisation"
-                        : "Capacity (kN)"}
+                        : `Capacity (${forceUnit})`}
                   </button>
                 ))}
               </div>
@@ -2135,11 +2135,12 @@ export default function App() {
                     chartRows[p.id] ?? [],
                     chartMetric,
                     effectiveSection,
+                    units,
                   )}
                 </strong>
                 <span>
                   {quantity === "stress" ? "Beam peak |stress| at" : "at"}{" "}
-                  {effectiveSection.toFixed(2)} m
+                  {formatPoleLength(effectiveSection, units)}
                 </span>
               </div>
               {resultDirection === "worst" && (
@@ -2159,6 +2160,7 @@ export default function App() {
           )}
           {view === "Test" ? (
             <DetectSection
+              units={units}
               control={waveControl}
               ref={sectionPreview}
               result={analysis.pending ? null : result}
@@ -2170,6 +2172,7 @@ export default function App() {
             />
           ) : (
             <SectionView
+              units={units}
               utilisationMax={utilisationMax}
               onHeight={setSection}
               selected={selected}
@@ -2206,13 +2209,13 @@ export default function App() {
               <strong>Ground yielding · history applied</strong>
               <p>
                 {result.nonlinear.plasticDepths.length
-                  ? `Yielded ground extends from ${Math.min(...result.nonlinear.plasticDepths).toFixed(2)} to ${Math.max(...result.nonlinear.plasticDepths).toFixed(2)} m.`
+                  ? `Yielded ground extends from ${formatPoleLength(Math.min(...result.nonlinear.plasticDepths),units)} to ${formatPoleLength(Math.max(...result.nonlinear.plasticDepths),units)}.`
                   : "Ground remains elastic in this history."}
               </p>
               <p>
                 Timber utilisation: {(result.utilisation * 100).toFixed(1)}%.{" "}
                 {p.loadKN === 0
-                  ? `Residual tip movement: ${(result.tipMovement * 1000).toFixed(1)} mm.`
+                  ? `Residual tip movement: ${formatSmallLength(result.tipMovement,units,units==='metric'?1:3)}.`
                   : ""}
               </p>
               <p>
