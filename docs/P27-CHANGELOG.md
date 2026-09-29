@@ -113,6 +113,9 @@ Added a concise Power Line Systems source and verification disclaimer to the US 
 **P27-CHG-034 - Regression coverage**
 Added P27 requirement checks and expanded inherited checks for units, country independence, load offset, hidden Detect UI, below-ground probes, chipping, angled drilling, break mode, observed breaks, heart rot, shell rot and revised UB1000 dimensions.
 
+**P27-CHG-035 - Decimal load-point solver correction**
+Corrected beam load-node placement when a saved load height differs from its rounded mesh node only by floating-point representation, for example `11.689999999999998` versus `11.69`. The previous exact lookup silently produced an unloaded solution with zero stress and infinite capacity. The solver now uses a bounded tolerance and explicitly rejects an unplaceable load point.
+
 ## Additional Reference Data and Documentation
 
 **P27-REF-001 - Goldpine class data**

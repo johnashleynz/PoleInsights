@@ -28,7 +28,7 @@ Source: `docs/TODO.md`, supplied by John Ashley on 29 September 2026. The source
 | NFR-002 | Preserve SI as the calculation/storage basis and round-trip converted inputs within numerical tolerance. | Met |
 | NFR-003 | Preserve qualification language: no invented standards data, UB1000 inference, Safe-to-Climb result or fracture prediction. | Met |
 | NFR-004 | Validate all new persisted fields and remain compatible with P26 case files. | Met |
-| NFR-005 | Add automated tests for each implemented requirement and run the full existing build suite. | Met - 18 P27 checks plus complete inherited suite and production build |
+| NFR-005 | Add automated tests for each implemented requirement and run the full existing build suite. | Met - 19 P27 checks plus complete inherited suite and production build |
 | NFR-006 | Keep staging isolated from InnerView production infrastructure and require authenticated access. | Pending deployment |
 
 ## Open deployment input

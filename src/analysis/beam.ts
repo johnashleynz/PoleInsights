@@ -339,8 +339,10 @@ export function solvePole(p: PoleCase, segments = 32): AnalysisResult {
     d = new Float64Array(n),
     theta = (p.bearing * PI) / 180;
   // A 1 kN unit pattern permits exact scaling in this linear model, including at zero applied load.
-  const loadNode = zs.indexOf(loadZ),
-    loadX = loadNode * 4,
+  const loadNode = zs.findIndex((z) => Math.abs(z - loadZ) < 1e-7);
+  if (loadNode < 0)
+    throw new Error("The load application point could not be placed on the beam mesh.");
+  const loadX = loadNode * 4,
     loadY = loadX + 2;
   f[loadX] = 1000 * Math.sin(theta);
   f[loadY] = 1000 * Math.cos(theta);
