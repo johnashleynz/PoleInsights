@@ -1,6 +1,6 @@
 import * as T from 'three';
 import type {PoleCase,StressDisplay} from '../domain/model.ts';
-import {diameterAt,conditionAt,regionScale} from '../domain/model.ts';
+import {diameterAt,conditionAt,exteriorRadiusAt,regionScale} from '../domain/model.ts';
 import type {AnalysisResult} from '../analysis/beam.ts';
 import {stationAt} from '../analysis/beam.ts';
 import {displayedStress,type SolidField} from '../analysis/solid/field.ts';
@@ -22,8 +22,8 @@ export function stressSurface(p:PoleCase,result:AnalysisResult,scale:number,disp
   // Additional axial stations resolve every defect, including small drill bores.
   const zs=Array.from({length:121},(_,i)=>-p.embedment+p.length*i/120);
   for(const r of p.regions)for(let i=0;i<=32;i++)zs.push(Math.max(-p.embedment,Math.min(p.length-p.embedment,r.zMin+(r.zMax-r.zMin)*i/32)));
-  const heights=[...new Set(zs)].sort((a,b)=>a-b),at=(z:number,a:number,u=1):Point=>{const R=diameterAt(p,z)/2;return [u*R*Math.cos(a),u*R*Math.sin(a),z];};
-  const angles=Array.from({length:97},(_,k)=>k*Math.PI*2/96);for(const r of p.regions)if(r.drilling){const a=Math.PI/2-r.drilling.bearing*Math.PI/180,delta=Math.asin(Math.min(.9,r.drilling.diameter/diameterAt(p,(r.zMin+r.zMax)/2)));for(let k=-12;k<=12;k++)angles.push(((a+delta*k/8)%(Math.PI*2)+Math.PI*2)%(Math.PI*2));}angles.sort((a,b)=>a-b);
+  const heights=[...new Set(zs)].sort((a,b)=>a-b),bearingAt=(a:number)=>((90-a*180/Math.PI)%360+360)%360,at=(z:number,a:number,u=1):Point=>{const R=exteriorRadiusAt(p,z,bearingAt(a))*(u>=1?.9995:u);return [R*Math.cos(a),R*Math.sin(a),z];};
+  const rawAngles=Array.from({length:97},(_,k)=>k*Math.PI*2/96);for(const r of p.regions){if(r.drilling){const a=Math.PI/2-r.drilling.bearing*Math.PI/180,delta=Math.asin(Math.min(.9,r.drilling.diameter/diameterAt(p,(r.zMin+r.zMax)/2)));for(let k=-12;k<=12;k++)rawAngles.push(((a+delta*k/8)%(Math.PI*2)+Math.PI*2)%(Math.PI*2));}if(r.kind==='chipping'&&r.chipping){const d=r.chipping,steps=d.facets>=6?d.facets:32,arc=d.degrees>=360?360:d.degrees,start=d.bearing-arc/2;for(let k=0;k<=steps;k++){const bearing=d.degrees>=360?k*360/steps:start+arc*k/steps;rawAngles.push(((Math.PI/2-bearing*Math.PI/180)%(Math.PI*2)+Math.PI*2)%(Math.PI*2));}}}const angles=[...new Set(rawAngles.map(a=>+(((a%(Math.PI*2))+Math.PI*2)%(Math.PI*2)).toFixed(12)))].sort((a,b)=>a-b);
   for(let j=0;j<heights.length-1;j++)for(let k=0;k<angles.length-1;k++){const a=angles[k],b=angles[k+1];quad([at(heights[j],a),at(heights[j+1],a),at(heights[j+1],b),at(heights[j],b)]);}
   // Sawn ends sample the same field as the sides; voids remain absent.
   for(const z of [-p.embedment,p.length-p.embedment])for(let k=0;k<angles.length-1;k++)for(let i=0;i<24;i++)

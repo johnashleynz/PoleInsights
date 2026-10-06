@@ -1,4 +1,4 @@
-import {diameterAt,type PoleCase} from '../../domain/model.ts';
+import {diameterAt,exteriorRadiusAt,type PoleCase} from '../../domain/model.ts';
 import {EDGES,type SolidMesh,type Vec3} from './kernel.ts';
 /** Shared T10 upgrade and boundary extraction, preserving matching triangle diagonals. */
 export function quadraticMesh(points:Vec3[],tets:number[][],zMin:number,zMax:number,project?:(mid:Vec3,a:Vec3,b:Vec3)=>Vec3):SolidMesh{
@@ -8,7 +8,7 @@ export function quadraticMesh(points:Vec3[],tets:number[][],zMin:number,zMax:num
  return {points,tets,factors:tets.map(()=>1),surface,top,bottom,zMin,zMax};
 }
 export function prism(tets:number[][],tri:number[],next:(n:number)=>number){const [a,b,c]=tri.slice().sort((a,b)=>a-b),A=next(a),B=next(b),C=next(c);tets.push([a,b,c,C],[a,b,B,C],[a,A,B,C]);}
-/** Full timber cylinder for continuous graded elasticity/fibre directions. No material deletion. */
+/** Star-shaped timber volume for continuous graded elasticity/fibre directions. */
 export function volumeMesh(p:PoleCase,level='coarse',marginDiameters=2){
  const na=level==='fine'?32:level==='medium'?24:16,nr=level==='fine'?6:level==='medium'?4:3,nz=level==='fine'?24:level==='medium'?18:12,lo=Math.max(0,Math.min(...p.regions.map(r=>r.zMin))),hi=Math.min(p.length-p.embedment,Math.max(...p.regions.map(r=>r.zMax))),D=diameterAt(p,(lo+hi)/2),zMin=Math.max(0,lo-marginDiameters*D),zMax=Math.min(p.length-p.embedment,hi+marginDiameters*D);
  if(hi<=lo)throw Error('This local model needs a defect above ground.');
@@ -18,10 +18,13 @@ export function volumeMesh(p:PoleCase,level='coarse',marginDiameters=2){
  // Redistribute existing nodes around geometric fibre gradients, not around a chosen probe.
  // The total mesh size and remote geometry remain independently refinable.
  const quantiles=(count:number,length:number,density:(x:number)=>number)=>{const steps=4096,cdf=[0];for(let i=1;i<=steps;i++)cdf.push(cdf[i-1]+density((i-.5)/steps*length));return Array.from({length:count+1},(_,j)=>{if(j===count)return length;const target=cdf[steps]*j/count;let i=1;while(cdf[i]<target)i++;return (i-1+(target-cdf[i-1])/(cdf[i]-cdf[i-1]))/steps*length;});},wrap=(a:number)=>Math.atan2(Math.sin(a),Math.cos(a));
- const radii=knots.length?quantiles(nr,1,x=>1+knots.reduce((s,k)=>s+6*Math.exp(-Math.pow((x-k.rho)/k.radial,2)),0)):Array.from({length:nr+1},(_,i)=>i/nr),angles=knots.length?quantiles(na,Math.PI*2,a=>1+knots.reduce((s,k)=>s+6*Math.exp(-Math.pow(wrap(a-k.phi)/k.angular,2)),0)):Array.from({length:na+1},(_,i)=>i*Math.PI*2/na);
- for(const z of zs){const R=diameterAt(p,z)/2;points.push([0,0,z]);for(let j=1;j<=nr;j++)for(let k=0;k<na;k++){const a=angles[k];points.push([R*radii[j]*Math.cos(a),R*radii[j]*Math.sin(a),z]);}}
- const id=(j:number,k:number)=>1+(j-1)*na+(k+na)%na,count=1+nr*na;
- for(let k=0;k<na;k++){tris.push([0,id(1,k),id(1,k+1)]);for(let j=1;j<nr;j++)tris.push([id(j,k),id(j+1,k),id(j+1,k+1)],[id(j,k),id(j+1,k+1),id(j,k+1)]);}
+ const radii=knots.length?quantiles(nr,1,x=>1+knots.reduce((s,k)=>s+6*Math.exp(-Math.pow((x-k.rho)/k.radial,2)),0)):Array.from({length:nr+1},(_,i)=>i/nr),rawAngles=knots.length?quantiles(na,Math.PI*2,a=>1+knots.reduce((s,k)=>s+6*Math.exp(-Math.pow(wrap(a-k.phi)/k.angular,2)),0)):Array.from({length:na+1},(_,i)=>i*Math.PI*2/na);
+ for(const r of p.regions)if(r.kind==='chipping'&&r.chipping){const d=r.chipping,steps=d.facets>=6?d.facets:32,arc=d.degrees>=360?360:d.degrees,start=d.bearing-arc/2;for(let k=0;k<=steps;k++){const bearing=d.degrees>=360?k*360/steps:start+arc*k/steps;rawAngles.push(((Math.PI/2-bearing*Math.PI/180)%(Math.PI*2)+Math.PI*2)%(Math.PI*2));}}
+ const angles=[...new Set(rawAngles.map(a=>+(((a%(Math.PI*2))+Math.PI*2)%(Math.PI*2)).toFixed(12)))].sort((a,b)=>a-b),angleCount=angles.length;
+ const boundary=(z:number,a:number)=>exteriorRadiusAt(p,z,((90-a*180/Math.PI)%360+360)%360);
+ for(const z of zs){points.push([0,0,z]);for(let j=1;j<=nr;j++)for(let k=0;k<angleCount;k++){const a=angles[k],R=boundary(z,a);points.push([R*radii[j]*Math.cos(a),R*radii[j]*Math.sin(a),z]);}}
+ const id=(j:number,k:number)=>1+(j-1)*angleCount+(k+angleCount)%angleCount,count=1+nr*angleCount;
+ for(let k=0;k<angleCount;k++){tris.push([0,id(1,k),id(1,k+1)]);for(let j=1;j<nr;j++)tris.push([id(j,k),id(j+1,k),id(j+1,k+1)],[id(j,k),id(j+1,k+1),id(j,k+1)]);}
  const tets:number[][]=[];for(let j=0;j<zs.length-1;j++)for(const tri of tris)prism(tets,tri.map(i=>i+j*count),n=>n+count);
- return quadraticMesh(points,tets,zMin,zMax,(v,a,b)=>{if([a,b].every(q=>Math.abs(Math.hypot(q[0],q[1])-diameterAt(p,q[2])/2)<1e-8)){const ratio=diameterAt(p,v[2])/2/Math.hypot(v[0],v[1]);v[0]*=ratio;v[1]*=ratio;}return v;});
+ return quadraticMesh(points,tets,zMin,zMax,(v,a,b)=>{if([a,b].every(q=>{const angle=Math.atan2(q[1],q[0]);return Math.abs(Math.hypot(q[0],q[1])-boundary(q[2],angle))<1e-8;})){const angle=Math.atan2(v[1],v[0]),rho=Math.hypot(v[0],v[1]),target=boundary(v[2],angle);if(rho>1e-12){v[0]*=target/rho;v[1]*=target/rho;}}return v;});
 }
