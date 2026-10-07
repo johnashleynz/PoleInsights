@@ -2566,6 +2566,15 @@ export default function App() {
           </footer>{" "}
         </aside>
       </main>
+      <footer className="company-footer">
+        <span>Copyright InnerView Insights Limited {new Date().getFullYear()}</span>
+        <img
+          src={`${import.meta.env.BASE_URL}innerview-insights-logo.png`}
+          alt="InnerView Insights"
+          width="112"
+          height="46"
+        />
+      </footer>
       {notice && (
         <div className="toast" role="status">
           {notice}
@@ -2699,6 +2708,14 @@ export default function App() {
             <button className="primary-button" onClick={save}>
               Save inputs and result basis
             </button>
+            <div className="model-company-logo">
+              <img
+                src={`${import.meta.env.BASE_URL}innerview-insights-logo.png`}
+                alt="InnerView Insights"
+                width="160"
+                height="66"
+              />
+            </div>
           </section>
         </div>
       )}

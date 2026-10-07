@@ -1,4 +1,10 @@
 /* P02: white drafting workspace, plain text controls, full-height model. */
+.company-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-shrink:0;padding:6px 18px;border-top:1px solid var(--line);background:#fff;color:#66717a;font-size:10px;line-height:1.5}
+.company-footer>span{min-width:0;overflow-wrap:break-word}
+.company-footer img{display:block;width:112px;height:auto;flex-shrink:0}
+.model-company-logo{display:flex;justify-content:flex-end;margin-top:24px;padding-top:16px;border-top:1px solid var(--line)}
+.model-company-logo img{display:block;width:160px;max-width:100%;height:auto}
+@media(max-width:480px){.company-footer{padding:6px 12px;gap:10px}.company-footer img{width:88px}}
 :root{--ink:#24282d;--muted:#626970;--brand:#245c83;--accent:#245c83;--line:#dce0e3;--paper:#fff;--soft:#f5f6f7;color:var(--ink);background:#fff;font-size:13px}
 html,body,#root{width:100%;height:100%;overflow:hidden;background:#fff}
 .app-shell,.app-shell:fullscreen{height:100dvh;min-height:0;overflow:hidden;background:#fff}
