@@ -1,6 +1,6 @@
 import { polygonDistance, simplePolygon } from "./sketch.ts";
 import type { DiameterStation, GridPoleSnapshot } from "../integrations/types.ts";
-import {validGridSnapshot} from "../integrations/geometry.ts";
+import {validGridSnapshot, applyGridInspection} from "../integrations/geometry.ts";
 import {validProfile} from "../integrations/preferences.ts";
 import {
   materialErrors,
@@ -90,6 +90,7 @@ export interface PoleCase {
   axonic?: {profile: string; assetId: string};
   gridManager?: GridPoleSnapshot;
   diameterStations?: DiameterStation[];
+  geometryEstimates?: {diameters: ("butt" | "ground" | "tip")[]; length: boolean; embedment: boolean; basis: string};
   country?: CountryCode;
   unitSystem?: UnitSystem;
   poleClass?: string | null;
@@ -313,6 +314,7 @@ export function validateCase(p: PoleCase): string[] {
   if (p.axonic !== undefined && (!p.axonic || typeof p.axonic.profile !== "string" || p.axonic.profile !== "" && !validProfile(p.axonic.profile) || typeof p.axonic.assetId !== "string" || p.axonic.assetId.length > 255)) errors.push("Enter a valid Axonic profile and asset ID.");
   if (p.gridManager !== undefined && !validGridSnapshot(p.gridManager)) errors.push("Grid Manager data has an unsupported format.");
   if (p.diameterStations !== undefined && (!Array.isArray(p.diameterStations) || p.diameterStations.length > 64 || p.diameterStations.some((s, i, all) => !s || !Number.isFinite(s.heightM) || s.heightM < -p.embedment || s.heightM > p.length - p.embedment || !Number.isFinite(s.diameterM) || s.diameterM < .07 || s.diameterM > 1.2 || typeof s.inspectionId !== "string" || typeof s.readingId !== "string" || all.some((other, j) => j < i && other.heightM === s.heightM)))) errors.push("Use at most 64 unique measured diameter stations within the pole and 70-1,200 mm in diameter.");
+  if (p.geometryEstimates !== undefined && (!p.geometryEstimates || !Array.isArray(p.geometryEstimates.diameters) || p.geometryEstimates.diameters.some(k=>!["butt","ground","tip"].includes(k)) || typeof p.geometryEstimates.length !== "boolean" || typeof p.geometryEstimates.embedment !== "boolean" || typeof p.geometryEstimates.basis !== "string")) errors.push("Invalid estimated geometry provenance.");
   if (
     p.unitSystem !== undefined &&
     !["metric", "imperial"].includes(p.unitSystem)
@@ -749,9 +751,11 @@ export function drillingBounds(d: NonNullable<Region["drilling"]>) {
 }
 export function normaliseCase(p: PoleCase): PoleCase {
   const top = p.length - p.embedment;
-  return {
+  const assetId = p.assetId?.trim() ? p.assetId : p.axonic?.assetId || p.gridManager?.assetId || "";
+  const normalized: PoleCase = {
     ...p,
-    assetId: p.assetId ?? "",
+    assetId,
+    ...(p.axonic ? {axonic: {...p.axonic, assetId}} : {}),
     country: p.country ?? "NZ",
     unitSystem: p.unitSystem ?? "metric",
     poleClass: p.poleClass ?? null,
@@ -775,6 +779,10 @@ export function normaliseCase(p: PoleCase): PoleCase {
         : r,
     ),
   };
+  if (normalized.gridManager && normalized.diameterStations?.length && !normalized.geometryEstimates) {
+    return {...normalized, ...applyGridInspection(normalized, normalized.gridManager, normalized.gridManager.selectedInspectionId)};
+  }
+  return normalized;
 }
 export function safeAssetFilePart(value: string | undefined) {
   const cleaned = (value ?? "")

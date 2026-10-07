@@ -6,6 +6,7 @@ import {axonicUrl, readPreferences, preferencesKey} from '../src/integrations/pr
 import {structuralKey, resetHistoryOnGeometry} from '../src/analysis/nonlinear.ts';
 import {solvePole} from '../src/analysis/beam.ts';
 import {onRequest} from '../functions/api/grid-manager/[[path]].ts';
+import {groupReadingsByHeight, placeHeightLabels} from '../src/integrations/readingGroups.ts';
 
 let passed = 0;
 async function check(name, fn) {await fn(); passed++; console.log(`PASS ${name}`);}
@@ -18,7 +19,18 @@ await check('Latest SR, explicit metric/imperial units and verbatim tags',()=>{c
 await check('Unknown codes and NaN do not fabricate dimensions or results',()=>{const s=normalizeGridPole({...raw,PoleInspectionUB1000s:[{Id:4,HeightAgl:50,PoleCircumference:'NaN',UnitType:'0',Ar:'NaN'}]},'165482'); assert.equal(s.inspections[0].readings[0].heightM,null); assert.equal(s.inspections[0].readings[0].ar,null); assert.ok(s.warnings.some(x=>x.includes('Unmapped'))); const mapped=normalizeGridPole({...raw,PoleInspectionUB1000s:[{Id:4,HeightAgl:50,PoleCircumference:1000,UnitType:'0',RSM:89}]},'165482',{GRID_MANAGER_UNIT_MAP:'{"0":"mm"}',GRID_MANAGER_RSM_FIELD:'RSM'}); assert.equal(mapped.inspections[0].readings[0].heightM,.05); assert.equal(mapped.inspections[0].readings[0].rsm,89);});
 await check('Actual stations are shared by geometry and beam mesh',()=>{const s=normalizeGridPole(raw,'165482'), p=defaultCase(); const imported={...p,...applyGridInspection(p,s,'10')}; assert.equal(validateCase(imported).length,0); assert.ok(Math.abs(diameterAt(imported,.05)-1/Math.PI)<1e-12); assert.ok(Math.abs(diameterAt(imported,.6)-.95/Math.PI)<1e-12); assert.ok(Math.abs(diameterAt(imported,.325)-.975/Math.PI)<1e-12); const result=solvePole({...imported,soil:'Fixed'}); assert.ok(result.stations.some(q=>Math.abs(q.z-.05)<1e-8)); assert.ok(result.stations.some(q=>Math.abs(q.z-.6)<1e-8));});
 await check('Malformed snapshots and station geometry are rejected on JSON import',()=>{const p=defaultCase(); assert.ok(validateCase({...p,gridManager:{source:'grid-manager'}}).length); assert.ok(validateCase({...p,diameterStations:[{heightM:50,diameterM:.3,inspectionId:'x',readingId:'y'}]}).length); assert.ok(!validGridSnapshot({...normalizeGridPole(raw,'165482'),inspections:[null]})); const s=normalizeGridPole(raw,'165482'), imported={...p,axonic:{profile:'ussteel',assetId:'kewatin255'},...applyGridInspection(p,s,'10')}; const roundtrip=normaliseCase(JSON.parse(JSON.stringify(imported))); assert.equal(roundtrip.axonic.profile,'ussteel'); assert.equal(roundtrip.gridManager.poleId,'1495480'); assert.deepEqual(roundtrip.diameterStations,imported.diameterStations);});
-await check('Implausible imperial readings and duplicate heights are withheld',()=>{const s=normalizeGridPole({...raw,PoleInspectionUB1000s:[{Id:7,ServiceRequestId:10,HeightAgl:300,PoleCircumference:790,UnitType:'inches'}]},'165482'),p=defaultCase(); assert.equal(applyGridInspection(p,s,'10').diameterStations,undefined); const dup=structuredClone(raw); dup.PoleInspectionUB1000s.push({...dup.PoleInspectionUB1000s[0],Id:8}); const applied=applyGridInspection(p,normalizeGridPole(dup,'165482'),'10'); assert.equal(applied.diameterStations.length,2); assert.ok(applied.gridManager.warnings.some(w=>w.includes('duplicate')));});
+await check('Implausible dimensions are withheld; valid repeat measurements remain preserved',()=>{
+ const s=normalizeGridPole({...raw,PoleInspectionUB1000s:[{Id:7,ServiceRequestId:10,HeightAgl:300,PoleCircumference:790,UnitType:'inches'}]},'165482'),p=defaultCase();
+ assert.equal(applyGridInspection(p,s,'10').diameterStations,undefined);
+ const repeated=structuredClone(raw);repeated.PoleInspectionUB1000s.push({...repeated.PoleInspectionUB1000s[0],Id:8});
+ const applied=applyGridInspection(p,normalizeGridPole(repeated,'165482'),'10');
+ assert.equal(applied.diameterStations.length,2);assert.ok(!applied.gridManager.warnings.some(w=>w.includes('repeated test height')));
+ assert.equal(applied.gridManager.inspections[0].readings.length,3);
+ repeated.PoleInspectionUB1000s.at(-1).PoleCircumference='1100';
+ const conflicting=applyGridInspection(p,normalizeGridPole(repeated,'165482'),'10');
+ assert.ok(conflicting.gridManager.warnings.some(w=>w.includes('circumference differs')));
+ assert.equal(conflicting.diameterStations[0].diameterM,1/Math.PI);
+});
 await check('Metadata does not reset physical ground history',()=>{const p={...defaultCase(),soilHistory:[[1000,0]]}; const q={...p,axonic:{profile:'ussteel',assetId:'kewatin255'},gridManager:normalizeGridPole(raw,'165482')}; assert.equal(structuralKey(p),structuralKey(q)); assert.deepEqual(resetHistoryOnGeometry(p,q).soilHistory,p.soilHistory); assert.deepEqual(resetHistoryOnGeometry(p,{...q,...applyGridInspection(q,q.gridManager,'10')}).soilHistory,[]);});
 await check('Profiles contain no prepopulated organisations and links encode asset IDs',()=>{globalThis.localStorage={getItem:()=>null}; assert.deepEqual(readPreferences().recentProfiles,[]); assert.equal(axonicUrl('ussteel','kewatin255'),'axonic://ussteel/kewatin255'); assert.equal(axonicUrl('axonic_com','Pole / 42'),'axonic://axonic_com/Pole%20%2F%2042'); assert.equal(axonicUrl('../unsafe','x'),null); globalThis.localStorage={getItem:k=>k===preferencesKey?JSON.stringify({detect:false,axonic:true,lastProfile:'ussteel',recentProfiles:['ussteel','../unsafe']}):null}; assert.equal(readPreferences().detect,false); assert.deepEqual(readPreferences().recentProfiles,['ussteel']); delete globalThis.localStorage;});
 await check('OAuth query, exact OData escaping, internal record URL and no secret response',async()=>{const calls=[],config={GRID_MANAGER_CLIENT_ID:'test-client',GRID_MANAGER_CLIENT_SECRET:'test-secret'};const handler=createGridManagerHandler(config,async(url,options)=>{calls.push({url:new URL(url),options});return Response.json(calls.length===1?{access_token:'test-token',expires_in:3600}:{value:[raw]});}); const response=await handler(new Request('http://127.0.0.1/api/grid-manager/pole?assetId=O%27Brien')); const body=await response.text(),data=JSON.parse(body);assert.equal(response.status,200);assert.equal(calls[0].options.method,'POST');assert.equal(calls[0].url.searchParams.get('client_secret'),'test-secret');assert.ok(calls[1].url.searchParams.get('$filter').includes("eq 'O''Brien'"));assert.equal(calls[1].options.headers.Authorization,'Bearer test-token');assert.equal(data.recordUrl,'https://app.innerviewinsights.com/pole/1495480');assert.ok(!body.includes('test-secret')&&!body.includes('test-token')); await handler(new Request('http://127.0.0.1/api/grid-manager/connect'));assert.equal(calls.length,3);});
@@ -37,5 +49,50 @@ await check('Verified Metric and Imperial labels convert independently within on
  assert.ok(Math.abs(imperial.heightM-.0762)<1e-12);assert.ok(Math.abs(imperial.circumferenceM-.9144)<1e-12);
  assert.equal(imperial.rawUnit,'Imperial');assert.ok(!s.warnings.some(w=>w.includes('Unmapped')));
  const applied=applyGridInspection(defaultCase(),s,'10');assert.equal(applied.diameterStations.length,2);
+});
+await check('One annotation per height preserves AR ranges and raw reading counts',()=>{
+ const s=normalizeGridPole({...raw,PoleInspectionUB1000s:[
+  {Id:1,ServiceRequestId:10,HeightAgl:50,PoleCircumference:980,UnitType:'Metric',Ar:78},
+  {Id:2,ServiceRequestId:10,HeightAgl:50,PoleCircumference:980,UnitType:'Metric',Ar:82},
+  {Id:3,ServiceRequestId:10,HeightAgl:50,PoleCircumference:980,UnitType:'Metric',Ar:'NaN'},
+  {Id:4,ServiceRequestId:10,HeightAgl:600,PoleCircumference:980,UnitType:'Metric',Ar:85},
+ ]},'synthetic-repeat');
+ const groups=groupReadingsByHeight(s.inspections[0].readings);
+ assert.equal(groups.length,2);assert.equal(groups[0].arSummary,'78-82');
+ assert.equal(groups[0].count,3);assert.equal(groups[0].missingAr,1);
+ assert.equal(groups[1].arSummary,'85');assert.equal(s.inspections[0].readings.length,4);
+ const p=defaultCase(),imported={...p,...applyGridInspection(p,s,'10')};
+ for(const height of [.05,.6])assert.ok(Math.abs(diameterAt(imported,height)-.98/Math.PI)<1e-12);
+ assert.ok(Math.abs(diameterAt(imported,.325)-.98/Math.PI)<1e-12);
+});
+await check('Shared asset identity normalises old independent Axonic IDs',()=>{
+ const p=normaliseCase({...defaultCase(),assetId:'canonical',axonic:{profile:'demo',assetId:'legacy'}});
+ assert.equal(p.axonic.assetId,'canonical');assert.equal(axonicUrl(p.axonic.profile,p.assetId),'axonic://demo/canonical');
+ assert.equal(normaliseCase({...defaultCase(),assetId:'',axonic:{profile:'demo',assetId:'legacy'}}).assetId,'legacy');
+});
+await check('Height labels align where possible and pack densely without overlap',()=>{
+ assert.deepEqual(placeHeightLabels([100,200],40,400),[100,200]);
+ const dense=placeHeightLabels([100,105,110],40,400);assert.deepEqual(dense,[70,105,140]);
+ const edge=placeHeightLabels([42,45,48],40,400);assert.equal(edge[0],40);assert.ok(edge.every((y,i)=>!i||y-edge[i-1]>=35));
+});
+await check('Measured end extrapolation removes mismatched anchors and preserves sampled sections',()=>{
+ const readings=[50,300,600,900,1200].map((height,i)=>({Id:i,ServiceRequestId:10,HeightAgl:height,PoleCircumference:980,UnitType:'Metric',Ar:83}));
+ const s=normalizeGridPole({Id:42,Height_M:9,PoleInspectionUB1000s:readings},'repeat');
+ const p=defaultCase(),imported={...p,...applyGridInspection(p,s,'10')};
+ assert.equal(validateCase(imported).length,0);
+ for(const height of [-imported.embedment,0,.05,.6,1.2,9])assert.ok(Math.abs(diameterAt(imported,height)-.98/Math.PI)<1e-12);
+ assert.deepEqual(imported.geometryEstimates.diameters,['butt','ground','tip']);assert.equal(imported.geometryEstimates.length,true);
+ const saved=normaliseCase(JSON.parse(JSON.stringify(imported)));assert.deepEqual(saved.geometryEstimates,imported.geometryEstimates);
+ const legacy={...imported,geometryEstimates:undefined,diameters:p.diameters};assert.ok(Math.abs(normaliseCase(legacy).diameters.ground-.98/Math.PI)<1e-12);
+});
+await check('Supported nominal taper anchors to measurements, otherwise fitted taper is bounded',()=>{
+ const p={...defaultCase(),country:'NZ',species:'radiata-pine'},s=normalizeGridPole({Id:42,PoleClass:'6 kN',Height_M:8.2,PoleInspectionUB1000s:[{Id:1,ServiceRequestId:10,HeightAgl:600,PoleCircumference:980,UnitType:'Metric'}]},'class');
+ const imported={...p,...applyGridInspection(p,s,'10')};assert.ok(imported.geometryEstimates.basis.includes('nominal taper'));
+ assert.ok(imported.diameters.butt>imported.diameters.ground&&imported.diameters.ground>imported.diameters.tip);
+ assert.ok(Math.abs(diameterAt(imported,.6)-.98/Math.PI)<1e-12);
+ const descending=normalizeGridPole({Id:42,PoleInspectionUB1000s:[{Id:1,ServiceRequestId:10,HeightAgl:50,PoleCircumference:1000,UnitType:'Metric'},{Id:2,ServiceRequestId:10,HeightAgl:600,PoleCircumference:950,UnitType:'Metric'}]},'fit');
+ const fitted={...p,...applyGridInspection(p,descending,'10')};assert.equal(validateCase(fitted).length,0);
+ assert.ok(fitted.diameters.butt>=fitted.diameters.ground&&fitted.diameters.ground>=fitted.diameters.tip);
+ assert.ok(!fitted.geometryEstimates.basis.includes('nominal'));
 });
 console.log(`${passed} system integration checks passed including unit corrections and AGL dimensions.`);

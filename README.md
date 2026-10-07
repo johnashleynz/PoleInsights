@@ -1,8 +1,13 @@
 # InnerView Insights Pole Insights
 
-**P27 DEV · based on Carl Rathbone's Pole Laboratory P26**
+**P28 · based on Carl Rathbone's Pole Laboratory P26**
 
-Run `Start-Pole-Lab.ps1`, or use the workspace-level `START-WINDOWS.cmd`, then open <http://127.0.0.1:5190>. The DEV label distinguishes this requirements build from the accepted P26 baseline.
+Run `Start-Pole-Lab.ps1`, or `npm run dev -- --port 5192`, then open the URL printed
+by the server. P27 delivered the original requirements; P28 adds recorded Grid
+Manager measurements and Axonic links around one focused Asset ID. See the
+[cumulative changelog](docs/P28-CHANGELOG.md), [as-built requirements](docs/P28-AS-BUILT-REQUIREMENTS.md),
+[deployment runbook](docs/DEPLOYMENT.md), [integration notes](system-integration.md)
+and [Carl handoff](docs/P28-HANDOFF.md). Credentials are local/server-only.
 
 The Detect view now draws each UB1000 assembly to the supplied dimensions: a 180 mm body plus 20 mm metal tip, 50 mm body diameter, and a 50 mm wave guide shown 20 mm embedded and 30 mm protruding. The housing is divided into its 55 mm black butt, 110 mm orange mid-section, 10 mm end cap and 5 mm curved taper.
 

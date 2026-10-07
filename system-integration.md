@@ -1,4 +1,70 @@
-# Pole Insights system integration spike
+# Pole Insights P28 System Integration
+
+## P28 Update: 8 October 2026
+
+Core integration was published in commit 197d112. The owner confirmed Cloudflare
+OTP, OAuth and meaningful retrieval. Latest P28 refinements below are local until
+committed/deployed. The dated original spike notes following this section are
+historical where superseded here. Full current deployment: docs/DEPLOYMENT.md.
+
+- One focused case Asset ID drives Axonic and Grid Manager. Recent profile/link
+  are below it, collapsed; retrieval icon is beside it. Legacy separate Axonic ID
+  is normalised to the case ID. ID edits abort lookup and clear previous records
+  and stations. Visible diameter inputs remain assumptions until a new import.
+- Actual height comes only from pole AGL metadata/explicit survey total length.
+  UB1000 test-zone heights do not establish overall pole height. AGL plus assumed
+  embedment gives estimated total length; both explicit lengths give embedment.
+- Measured circumference/pi stations remain exact. Unmeasured anchors are now
+  recomputed, rather than joined to unrelated defaults. A supported source class
+  scoped to current species/country (or selected class when no source class exists)
+  supplies nominal taper using the nearest length row. Measurements anchor that
+  taper: these are not claims of published class minima or class compliance.
+- Without a class match, a non-increasing least-squares taper is fitted to unique
+  measured points. A single/equal-girth sample cannot establish taper and gives
+  a declared cylindrical estimate. Groundline inside the sampled span is
+  interpolated; outside ends extrapolate from nearest measured end. Estimates
+  are bounded to supported diameters, with warnings. Increasing measured values
+  are retained with a review warning, never silently smoothed.
+- Estimated diameters, derived length and assumed embedment use (est.) and a
+  distinct colour. JSON stores geometryEstimates provenance; manual entry clears
+  the corresponding flag. Older saved imported cases migrate this end profile
+  when opened. Removing stations leaves the visible estimated anchor profile.
+- Repeat assessments remain raw rows. Labels group by exact converted height,
+  show AR range/count and hover values, with height-aligned centres where room
+  permits. Minimal-displacement packing and leaders preserve true-height linkage.
+  Matching repeated girths are valid; differing ones warn and use the first usable
+  circumference for geometry. No test-run grouping or AR average is invented.
+- Current credentials query only Field team training. Global account/customer
+  selection and account-scoped authorisation are P28-TODO-001, not delivered.
+
+### Credentials and Access: Locations Only
+
+Local development: repository-root .env.local, ignored by Git, consumed by the
+Vite server. Template: .env.example. Never use VITE_ for credentials.
+Hosted: Workers & Pages > pole-insights > Settings > Variables and secrets >
+Production, GRID_MANAGER_CLIENT_ID/GRID_MANAGER_CLIENT_SECRET as Secret; Access
+team-domain and AUD as Text. Preview is configured separately. Redeploy after
+runtime-variable changes. Secret rotation must update local and hosted locations.
+
+Zero Trust: production exact-host application pole-insights.pages.dev, with policy
+Allow OTP users; separate managed wildcard preview application. AUD was found
+under Additional settings in the owner's UI. Existing team hostname is
+digitalartisans.cloudflareaccess.com, not a staff group. Source deployment does not
+create Access applications/policies or provision provider clients. The server
+validates signed Access tokens before provider OAuth. Missing Access config fails
+closed. Broad gmail.com permissions should be replaced by exact addresses.
+The screenshot-exposed client secret needs provider rotation; no value is stored
+in this document, source or handoff. See P28-TODO-006 for audit tasks.
+
+### Live Account Examples
+
+CH097081 maps to 1487805, CH096804 to 1487800, CH096945 to 1487802,
+CH096944 to 1487801 (mixed Metric/Imperial). Business 165482 maps to 1486580 in
+training and has no inspections; the older 1495480 example was another scope.
+Always use returned internal ID, never a hard-coded mapping. RSM stays unavailable;
+nested visual-survey expansion returned 500 and is omitted by default.
+
+## Original Spike Record (7 October 2026)
 
 Implemented 7 October 2026. This MVP is local code; it has not been published. The replacement local credentials successfully authenticated to the Field team training account. Asset 165482 returned internal ID 1486580 with no inspections, as confirmed by the owner. Live tests then verified CH097081 (1487805), CH096804 (1487800), CH096945 (1487802) and CH096944 (1487801), including their UB1000 dimensions. The initial credentials returned HTTP 403; the implementation follows the documented OAuth query format.
 
@@ -13,7 +79,7 @@ Implemented 7 October 2026. This MVP is local code; it has not been published. T
 - Per the owner's instruction, searching a pole or selecting an SR immediately applies usable dimensions and circumference stations. Existing species, class and material strengths are retained; species/class/year are shown as source metadata. This avoids silently substituting unverified material presets.
 - The owner confirmed Grid Manager's pole Height is above-ground height. Height_M is read as metres AGL, or Height_Ft as feet AGL when metres are unavailable. When only AGL height is available, total length becomes AGL plus the current embedment; embedment remains an assumption. Survey `PoleStructureInspectionVisual.Length` with explicit `LengthUnit` is treated as total pole length. If both total length and AGL are available, embedment is their difference, subject to geometry validation. Contradictory/out-of-range dimensions are withheld. The load's offset down from the tip is preserved. The latest survey timestamp and latest available dimensional survey may differ.
 - Each usable circumference is converted to diameter with C / pi. Heights use the original AGL datum. Piecewise-linear interpolation connects measured stations with existing butt/ground/tip anchors; a measured station at an anchor overrides that anchor for the shared diameter function. Untested spans and the original anchors remain model assumptions. All scene/section/beam calculations use that same function; measured heights also become scene and beam sampling stations.
-- Unsupported dimensions, duplicate test heights, unknown units and nonfinite values such as NaN are withheld with import status. First reading wins at a duplicate height; there is no averaging. At most 64 usable stations are applied per inspection to bound the beam mesh size; additional stations remain in the source table. If an SR has no usable circumference, the existing diameter profile is retained with its original SR provenance. Imported stations can be removed in Setup to return to the entered diameter profile.
+- Unsupported dimensions, unknown units and nonfinite values such as NaN are withheld with import status. Repeated assessments are valid and all remain in the source table. Geometry uses one circumference per height: matching repeat dimensions produce no warning; differing circumferences retain the first usable value with an explicit warning, without averaging. Pole annotations group by exact converted height and show AR min/max and total reading count, with individual AR values and model diameter on hover. Clicking a group selects its measured section. Unavailable AR values are excluded from the range but included in the count. Unmeasured butt, groundline and tip remain entered assumptions; the diameter profile interpolates through measured sections and those anchors. At most 64 usable stations are applied per inspection to bound the beam mesh size; additional stations remain in the source table. If an SR has no usable circumference, the existing diameter profile is retained with its original SR provenance. Imported stations can be removed in Setup to return to the entered diameter profile.
 - Units are per reading, never a system-wide or user-wide choice. UnitType is a string in OData metadata, but its enumeration is undocumented. Explicit mm, in/inches, m and ft/feet are recognised; numeric or other codes need GRID_MANAGER_UNIT_MAP, which is only a dictionary translating code labels, not an account unit setting. Mixed metric and imperial records in the same SR are supported. No unit is inferred from value magnitude. The supplied screenshot's 300/500-inch heights and 790-inch circumference are not silently reinterpreted as millimetres. Out-of-range circumference/height is rejected for geometry.
 - The Units menu on each reading can explicitly correct a misrecorded unit to mm or in. That correction applies to that reading's HeightAgl and PoleCircumference only; it does not change other readings or the source record in Grid Manager. Original raw values/unit and original conversions are retained, and corrections are saved in case JSON. Selecting Recorded restores the original interpretation. Geometry is reapplied immediately after a correction, subject to validation.
 - `Ar` is available in metadata. Displayed AR preserves the API number without assuming whether it is a ratio or percentage. The owner elected to leave per-reading RSM unavailable for this spike. It is absent from published metadata; GRID_MANAGER_RSM_FIELD remains empty. The application's displayed RSM may be a server-derived quantity; this spike does not reproduce an unpublished calculation.
@@ -67,8 +133,15 @@ References: [Cloudflare JWT validation](https://developers.cloudflare.com/cloudf
 
 ## Verification and remaining evidence
 
+P28 follow-up (8 October): all 19 focused integration checks and the complete
+checked production build passed. Live desktop/mobile browser checks verified the
+shared Asset ID, links, no-match handling, stale import reset, five geometry
+stations, compatible estimated anchors and manual estimate overrides. Mobile
+label placement reserves the camera-control area. These follow-up changes are
+local source work, not a claim of a new hosted deployment.
+
 Automated integration checks cover exact OData escaping, OAuth, credential withholding, unit conversion, SR ordering, internal-ID links, malformed/imported snapshots, geometry station interpolation and preserving nonlinear history during metadata edits. Browser checks cover global preferences, Axonic links, imported records, inspection selection, annotation display and JSON round trips. Existing numerical suites and the production build must also pass.
 
-Verification passed: 14 focused integration checks, including mixed Metric/Imperial labels in one inspection. Earlier checks passed TypeScript, existing numerical/review suites, Vite production build and Cloudflare Pages Function compilation. Desktop/mobile browser checks used explicit test responses and covered preferences, per-pole Axonic profiles, exact search, automatic dimensions, per-reading corrections, SR selection, annotations, save/open JSON and persistence. Live lookup and dimension application succeeded for all four supplied inspected assets: CH097081/CH096804/CH096945 each produced five unique geometry stations, CH096944 eight. The API returned respectively 18/15/14/31 individual readings, all preserved rather than silently aggregated. The owner screenshot's per-height AR summaries differ from individual API readings; no undocumented summary formula is applied. Duplicate-height dimensions follow the existing first-reading policy with a warning. The adapter uses the returned internal ID for record links and does not invent readings when the returned collection is empty.
+Verification passed: 15 focused integration checks, including mixed Metric/Imperial labels, repeat assessment preservation and grouped annotation ranges. Earlier checks passed TypeScript, existing numerical/review suites, Vite production build and Cloudflare Pages Function compilation. Desktop/mobile browser checks used explicit test responses and covered preferences, per-pole Axonic profiles, exact search, automatic dimensions, per-reading corrections, SR selection, annotations, save/open JSON and persistence. Live lookup and dimension application succeeded for all four supplied inspected assets: CH097081/CH096804/CH096945 each produced five unique geometry stations, CH096944 eight. The API returned respectively 18/15/14/31 individual readings, all preserved rather than silently aggregated. The owner confirmed repeat tests for tool repeatability; no undocumented summary formula is applied. Additional live desktop/mobile browser checks verified five grouped annotations and all 18 source readings for CH097081, and clicking 1.2 m selected a 312 mm cross-section, matching the imported 980 mm circumference. The adapter uses the returned internal ID for record links and does not invent readings when the returned collection is empty.
 
 Visual survey retrieval, the Grid Manager per-height AR aggregation formula, Axonic OS launch and Cloudflare Access login remain unverified. RSM is deliberately unavailable for this spike at the owner's request. No source records or fixture data are bundled into the public app. No deployment is part of this spike.

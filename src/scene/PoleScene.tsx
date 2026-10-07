@@ -1,4 +1,5 @@
 import { cavityGeometry } from "./cavityGeometry.ts";
+import { groupReadingsByHeight, placeHeightLabels } from "../integrations/readingGroups.ts";
 import { makeProbePair, placeProbePair } from "./inspectionProbes.ts";
 import { useProfile } from "../workers/useProfile.ts";
 import { paintHeightChart, chartLeft, profileLabel } from "./heightChart.ts";
@@ -28,7 +29,7 @@ import {
 } from "./materials.ts";
 import { groundPatch } from "./ground.ts";
 import { drillingScenePlacement } from "./drillingGeometry.ts";
-import {displayForce,formatPoleLength,unitLabels,type UnitSystem} from '../domain/units.ts';
+import {displayForce,formatPoleLength,formatSmallLength,unitLabels,type UnitSystem} from '../domain/units.ts';
 export const arrowLength = (load: number) =>
   0.35 + 0.6 * Math.sqrt(Math.max(0, load));
 function resizeArrow(arrow: T.Object3D, len: number) {
@@ -330,6 +331,7 @@ export default function PoleScene(props: SceneProps) {
       end: (commit?: boolean) => void;
     } | null>(null);
   const readingLabels = useRef(new Map<string, HTMLButtonElement>());
+  const readingLeaders = useRef(new Map<string, HTMLSpanElement>());
   const mount = useRef<HTMLDivElement>(null),
     state = useRef<SceneState | null>(null),
     latest = useRef(props);
@@ -510,21 +512,32 @@ export default function PoleScene(props: SceneProps) {
         label.textContent=zone.basis==='observed'?'Actual break zone':'Likely break zone';
       }else if(label)label.hidden=true;
       const inspection = p.pole.gridManager?.inspections.find(s => s.id === p.pole.gridManager?.selectedInspectionId);
-      let lastReadingY = -100;
-      const recorded = (p.showRecordedReadings ? inspection?.readings ?? [] : []).filter(r => r.heightM !== null).map(r => {
+      const labelBottom = host!.clientHeight - (window.innerWidth <= 760 ? 170 : 50);
+      for (const el of readingLabels.current.values()) el.hidden = true;
+      for (const el of readingLeaders.current.values()) el.hidden = true;
+      const recorded = groupReadingsByHeight(p.showRecordedReadings ? inspection?.readings ?? [] : []).map(r => {
         const q = p.result ? stationAt(p.result, r.heightM!) : null;
         const at = new T.Vector3((q?.ux ?? 0) * p.scale, r.heightM!, -(q?.uy ?? 0) * p.scale);
         const right = new T.Vector3().setFromMatrixColumn(camera.matrixWorld, 0).multiplyScalar(-diameterAt(p.pole, r.heightM!) / 2 - .15);
         at.add(right);
         return {reading: r, screen: project(at.clone()), depth: at.project(camera).z};
-      }).sort((a, b) => a.screen.y - b.screen.y);
-      for (const {reading, screen, depth} of recorded) {
+      }).filter(({reading, screen, depth}) => depth >= -1 && depth <= 1 && screen.x >= 0 && screen.x <= host!.clientWidth && screen.y >= 40 && screen.y <= host!.clientHeight - 40 && reading.heightM >= -p.pole.embedment && reading.heightM <= h).sort((a, b) => a.screen.y - b.screen.y).slice(0, Math.max(0, Math.floor((labelBottom - 50) / 35) + 1));
+      const positions = placeHeightLabels(recorded.map(r => r.screen.y), 50, labelBottom);
+      for (const [index, {reading, screen}] of recorded.entries()) {
         const el = readingLabels.current.get(reading.id);
         if (!el) continue;
-        const y = Math.max(screen.y, lastReadingY + 35); lastReadingY = y;
-        el.hidden = depth < -1 || depth > 1 || screen.x < 0 || screen.x > host!.clientWidth || y < 40 || y > host!.clientHeight - 40 || reading.heightM! < -p.pole.embedment || reading.heightM! > h;
-        el.style.left = Math.max(8, Math.min(host!.clientWidth - 170, screen.x - 164)) + "px";
+        const y = positions[index], x = Math.max(8, Math.min(host!.clientWidth - 170, screen.x - 184));
+        el.hidden = false;
+        el.style.left = x + "px";
         el.style.top = y + "px";
+        const leader = readingLeaders.current.get(reading.id);
+        if (leader) {
+          const dx = screen.x - (x + 164), dy = screen.y - y;
+          leader.hidden = false;
+          leader.style.left = x + 164 + "px"; leader.style.top = y + "px";
+          leader.style.width = Math.hypot(dx, dy) + "px";
+          leader.style.transform = `rotate(${Math.atan2(dy, dx)}rad)`;
+        }
       }
       const origin = new T.Vector3(
           (tip?.ux ?? 0) * p.scale,
@@ -1836,7 +1849,7 @@ export default function PoleScene(props: SceneProps) {
       )}
       {!failed && (
         <>
-          {props.showRecordedReadings && props.pole.gridManager?.inspections.find(s => s.id === props.pole.gridManager?.selectedInspectionId)?.readings.filter(r => r.heightM !== null).map(r => <button key={r.id} ref={el => {if (el) readingLabels.current.set(r.id, el); else readingLabels.current.delete(r.id);}} className="recorded-reading-label" title={`Recorded UB1000 reading ${r.id}`} onClick={() => props.onSection(r.heightM!)}><span>UB1000 · {formatPoleLength(r.heightM!, props.units ?? "metric")} AGL</span><strong>AR {r.ar ?? "—"}{r.rsm !== null ? ` · RSM ${r.rsm}` : ""}</strong></button>)}
+          {props.showRecordedReadings && groupReadingsByHeight(props.pole.gridManager?.inspections.find(s => s.id === props.pole.gridManager?.selectedInspectionId)?.readings ?? []).map(r => <span key={r.id}><span className="recorded-reading-leader" ref={el => {if (el) readingLeaders.current.set(r.id, el); else readingLeaders.current.delete(r.id);}} aria-hidden="true"/><button ref={el => {if (el) readingLabels.current.set(r.id, el); else readingLabels.current.delete(r.id);}} className="recorded-reading-label" title={`${r.count} recorded readings: ${r.readingDetails}. ${r.missingAr} unavailable AR values. Model diameter ${formatSmallLength(diameterAt(props.pole, r.heightM), props.units ?? "metric")}.`} onClick={() => props.onSection(r.heightM)}><span>UB1000 · {formatPoleLength(r.heightM, props.units ?? "metric")} AGL</span><strong>AR {r.arSummary} · {r.count} {r.count === 1 ? "reading" : "readings"}</strong></button></span>)}
           <div ref={breakLabel} className="scene-break-label" hidden />
           <div ref={sectionHandle} className="scene-leader section-leader">
             <button

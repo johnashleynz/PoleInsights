@@ -1,6 +1,6 @@
-POLE INSIGHTS - P27 DEV
+POLE INSIGHTS - P28
 Based on Carl Rathbone's Pole Laboratory P26
-Updated 29 September 2026
+Updated 8 October 2026
 
 RUN LOCALLY
 1. Install Node.js 22.13 or newer.
@@ -8,14 +8,13 @@ RUN LOCALLY
 3. Run:
      npm ci
      npm run dev
-4. Open http://127.0.0.1:5190/ and keep the terminal open.
+4. Open the URL printed by Vite (normally http://127.0.0.1:5190/).
+   Keep the terminal open; another port may be selected if occupied.
 
 On Windows, Start-Pole-Lab.ps1 performs the same launch. In the complete local
 handoff, the workspace-level START-WINDOWS.cmd also launches this DEV source.
 
-The interface must show "Pole Insights" and the footer
-"P27 DEV - P26 base - Local review". If it shows Pole Laboratory or only P26,
-close the older server before starting this version again.
+The interface must show "Pole Insights"; About identifies P28.
 
 Do not open index.html directly. Calculations use web workers and require the
 local HTTP server. Local startup does not publish or deploy the application.
@@ -24,24 +23,30 @@ DOCUMENTATION
 - docs\Requirements.md: requirement status and implementation variations.
 - docs\TODO.md: original supplied requirements, unchanged.
 - docs\About this model.md: origin from Carl Rathbone's P26 model.
-- docs\DEPLOYMENT.md: isolated Cloudflare staging procedure.
+- docs\DEPLOYMENT.md: current Cloudflare Pages and Access runbook.
+- docs\P28-AS-BUILT-REQUIREMENTS.md: as-built user stories.
+- docs\P28-CHANGELOG.md: cumulative changes since P26.
+- docs\P28-HANDOFF.md: fresh source rebuild without heavyweight videos.
+- docs\P28-TODO.md: production enhancements and remaining limitations.
+- system-integration.md: integration assumptions and secret locations.
 
 TEST AND BUILD
   npm test
   npm run build
 
 The checked build runs the inherited P01-P26 verification chain, the P27
-requirement checks and the Vite production build. Output is written to dist\.
+requirement checks, integration checks and Vite build. Output is dist\.
 
 BRANCHES
 - main: original P26 baseline.
-- dev: Pole Insights P27 development and review candidate.
+- dev: Pole Insights P28 development; production Pages tracks dev.
 
-CLOUDFLARE STAGING
-Staging uses the isolated pole-insights-staging Cloudflare Pages project. No
-production site or DNS should be changed. Authenticate Wrangler and confirm the
-Cloudflare Access email/domain allow-list before running:
-  npm run deploy:staging
+CLOUDFLARE
+Hosted application: https://pole-insights.pages.dev/
+Production and preview use separate Access applications and AUD settings.
+Read docs\DEPLOYMENT.md before changing deployment or Access configuration.
+OAuth credentials belong in ignored .env.local locally and Cloudflare Secret
+variables in production, never in browser code or source handoffs.
 
 MODEL SCOPE
 Pole Insights remains an illustrative prototype, not an engineering-qualified

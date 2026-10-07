@@ -128,6 +128,7 @@ function NumberField({
   max,
   step = 0.1,
   estimated,
+  approximate = false,
 }: {
   label: string;
   value: number | null;
@@ -137,6 +138,7 @@ function NumberField({
   max?: number;
   step?: number;
   estimated?: string;
+  approximate?: boolean;
 }) {
   const [draft, setDraft] = useState(value === null ? "" : String(value));
   useLayoutEffect(
@@ -144,6 +146,7 @@ function NumberField({
     [value],
   );
   function commit() {
+    if (draft === (value === null ? "" : String(Number(value.toFixed(3))))) return;
     if (draft.trim() === "") {
       onChange(null);
     } else {
@@ -154,7 +157,7 @@ function NumberField({
     setDraft(value === null ? "" : String(value));
   }
   return (
-    <label className="number-field">
+    <label className={`number-field${approximate ? " estimated-field" : ""}`}>
       <span>{label}</span>
       <div>
         <input
@@ -171,7 +174,7 @@ function NumberField({
             if (e.key === "Enter") e.currentTarget.blur();
           }}
         />
-        <small>{unit}</small>
+        <small>{unit}{approximate ? " (est.)" : ""}</small>
       </div>
       {value === null && estimated && (
         <em>
@@ -701,7 +704,7 @@ export default function App() {
   }
   function save() {
     download(
-      `Pole-Insights-${safeAssetFilePart(p.assetId)}-P27-DEV.json`,
+      `Pole-Insights-${safeAssetFilePart(p.assetId)}-P28.json`,
       JSON.stringify(
         {
           format: "innerview-pole-lab",
@@ -1284,15 +1287,7 @@ export default function App() {
               <details className="setup-group" open>
                 <summary>Case settings</summary>
                 <div>
-                  <label className="select-field">
-                    Asset ID
-                    <input
-                      aria-label="Asset ID"
-                      maxLength={255}
-                      value={p.assetId ?? ""}
-                      onChange={(e) => patch({ assetId: e.target.value })}
-                    />
-                  </label>
+                  <IntegrationsPanel key={p.id} pole={p} preferences={preferences} onPreferences={setPreferences} onChange={update => change(c => ({...c, ...update}), {both: false})}/>
                   <div
                     className="result-quantity"
                     role="group"
@@ -1349,9 +1344,6 @@ export default function App() {
               </details>
             )}
             {view === "Setup" && (
-              <IntegrationsPanel key={p.id} pole={p} preferences={preferences} onPreferences={setPreferences} onChange={update => change(c => ({...c, ...update}), {both: false})}/>
-            )}
-            {view === "Setup" && (
               <details className="setup-group" open>
                 <summary>Pole</summary>
                 <div>
@@ -1398,6 +1390,7 @@ export default function App() {
                   <div className="field-grid">
                     <NumberField
                       label="Total length"
+                      approximate={p.geometryEstimates?.length}
                       value={displayPoleLength(p.length, units)}
                       onChange={(v) => {
                         if (v === null) return;
@@ -1405,6 +1398,7 @@ export default function App() {
                           top = length - p.embedment;
                         patch({
                           length,
+                          geometryEstimates: p.geometryEstimates ? {...p.geometryEstimates, length: false} : undefined,
                           loadHeight: Math.min(loadApplicationHeight(p), top),
                         });
                       }}
@@ -1414,12 +1408,14 @@ export default function App() {
                     />
                     <NumberField
                       label="Embedment"
+                      approximate={p.geometryEstimates?.embedment}
                       value={displayPoleLength(p.embedment, units)}
                       onChange={(v) => {
                         if (v === null) return;
                         const embedment = poleLengthFromDisplay(v, units);
                         patch({
                           embedment,
+                          geometryEstimates: p.geometryEstimates ? {...p.geometryEstimates, embedment: false} : undefined,
                           loadHeight: Math.min(
                             loadApplicationHeight(p),
                             p.length - embedment,
@@ -1461,6 +1457,7 @@ export default function App() {
                       return (
                         <NumberField
                           key={key + girthMode + units}
+                          approximate={p.geometryEstimates?.diameters.includes(key)}
                           label={
                             key === "ground"
                               ? "Groundline"
@@ -1478,6 +1475,7 @@ export default function App() {
                           onChange={(v) =>
                             change((c) => ({
                               ...c,
+                              geometryEstimates: c.geometryEstimates ? {...c.geometryEstimates, diameters: c.geometryEstimates.diameters.filter(k=>k!==key)} : undefined,
                               diameters: {
                                 ...c.diameters,
                                 [key]: diameterFromMM(
@@ -2569,7 +2567,7 @@ export default function App() {
             )}
           </div>
           <footer className="app-footer">
-            <span>P27 DEV · P26 base · Local review</span>
+            <span>P28 · P26 base · Local review</span>
             <button onClick={() => setShowDetails(true)}>
               About this model{" "}
             </button>

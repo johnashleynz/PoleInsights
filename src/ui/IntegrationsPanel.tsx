@@ -14,13 +14,17 @@ async function gridRequest(path: string, signal: AbortSignal) {
   return data;
 }
 export default function IntegrationsPanel({pole, preferences, onPreferences, onChange}: {pole: PoleCase; preferences: SystemPreferences; onPreferences: (p: SystemPreferences) => void; onChange: (p: Partial<PoleCase>) => void}) {
-  const [query, setQuery] = useState(pole.assetId ?? ""), [busy, setBusy] = useState(false), [connected, setConnected] = useState(false), [error, setError] = useState("");
+  const [busy, setBusy] = useState(false), [connected, setConnected] = useState(false), [error, setError] = useState("");
   const request = useRef<AbortController | null>(null);
   const currentPole = useRef(pole); currentPole.current = pole;
   useEffect(() => () => request.current?.abort(), []);
   useEffect(() => {if (!preferences.gridManager) {request.current?.abort(); setBusy(false); setConnected(false);}}, [preferences.gridManager]);
-  useEffect(() => {setQuery(pole.assetId ?? "");}, [pole.assetId]);
-  const profile = pole.axonic?.profile ?? preferences.lastProfile, axonicAsset = pole.axonic?.assetId ?? pole.assetId ?? "", url = axonicUrl(profile, axonicAsset);
+  useEffect(() => {request.current?.abort(); setBusy(false); setError("");}, [pole.assetId]);
+  const assetId = pole.assetId ?? "", profile = pole.axonic?.profile ?? preferences.lastProfile, url = axonicUrl(profile, assetId);
+  function changeAsset(value: string) {
+    request.current?.abort();
+    onChange({assetId: value, ...(pole.axonic ? {axonic: {profile, assetId: value}} : {}), gridManager: undefined, diameterStations: undefined});
+  }
   function rememberProfile() {
     if (validProfile(profile)) onPreferences({...preferences, lastProfile: profile, recentProfiles: [profile, ...preferences.recentProfiles.filter(p => p !== profile)].slice(0, 12)});
   }
@@ -28,7 +32,7 @@ export default function IntegrationsPanel({pole, preferences, onPreferences, onC
     request.current?.abort(); const controller = new AbortController(); request.current = controller;
     setBusy(true); setError("");
     try {
-      const data = await gridRequest(search ? `pole?${new URLSearchParams({assetId: query.trim()})}` : "connect", controller.signal);
+      const data = await gridRequest(search ? `pole?${new URLSearchParams({assetId: assetId.trim()})}` : "connect", controller.signal);
       if (controller.signal.aborted) return;
       setConnected(true);
       if (search) {
@@ -41,15 +45,17 @@ export default function IntegrationsPanel({pole, preferences, onPreferences, onC
   const snapshot = pole.gridManager, inspection = snapshot?.inspections.find(s => s.id === snapshot.selectedInspectionId);
   function selectInspection(snapshot: GridPoleSnapshot, id: string) {onChange(applyGridInspection(pole, snapshot, id));}
   return <>
-    {preferences.axonic && <details className="setup-group" open><summary>Axonic</summary><div className="integration-fields">
-      <label className="select-field">Organisation profile<input aria-label="Axonic organisation profile" list={`axonic-profiles-${pole.id}`} maxLength={100} value={profile} onChange={e => onChange({axonic: {profile: e.target.value, assetId: axonicAsset}})} onBlur={rememberProfile}/></label>
+    <div className="integration-search">
+      <label className="select-field">Asset ID<input aria-label="Asset ID" maxLength={255} value={assetId} onChange={e => changeAsset(e.target.value)} onKeyDown={e => {if (e.key === "Enter" && preferences.gridManager && assetId.trim() && !busy) {e.preventDefault(); void connect(true);}}}/></label>
+      {preferences.gridManager && <button className="text-control" title="Retrieve this asset from Grid Manager" aria-label="Retrieve asset from Grid Manager" disabled={busy || !assetId.trim()} onClick={() => void connect(true)}><Search size={15}/></button>}
+    </div>
+    {preferences.axonic && <details className="integration-section"><summary>Axonic</summary><div className="integration-fields">
+      <label className="select-field">Organisation profile<input aria-label="Axonic organisation profile" list={`axonic-profiles-${pole.id}`} maxLength={100} value={profile} onChange={e => onChange({axonic: {profile: e.target.value, assetId}})} onBlur={rememberProfile}/></label>
       <datalist id={`axonic-profiles-${pole.id}`}>{preferences.recentProfiles.map(p => <option key={p} value={p}/>)}</datalist>
-      <label className="select-field">Axonic asset ID<input aria-label="Axonic asset ID" maxLength={255} value={axonicAsset} onChange={e => onChange({axonic: {profile, assetId: e.target.value}})}/></label>
-      {url ? <a className="integration-link" href={url} onClick={rememberProfile}><ExternalLink size={14}/>Open in Axonic</a> : <span className="integration-status">Enter a profile and asset ID.</span>}
+      {url && <a className="integration-link" href={url} onClick={rememberProfile}><ExternalLink size={14}/>Open in Axonic</a>}
     </div></details>}
-    {preferences.gridManager && <details className="setup-group" open><summary>Grid Manager 2.0</summary><div className="integration-fields">
+    {preferences.gridManager && <details className="integration-section" open><summary>Grid Manager</summary><div className="integration-fields">
       <button className="text-control" disabled={busy} onClick={() => void connect()}><Plug size={14}/>{connected ? "Reconnect" : "Connect"}</button>
-      <form className="integration-search" onSubmit={e => {e.preventDefault(); void connect(true);}}><label className="select-field">Pole ID<input aria-label="Grid Manager pole ID" value={query} maxLength={255} onChange={e => setQuery(e.target.value)}/></label><button className="text-control" title="Find exact pole ID" aria-label="Find Grid Manager pole" disabled={busy || !query.trim()}><Search size={15}/></button></form>
       <span className="integration-status" role="status">{busy ? "Connecting..." : connected ? "Connected" : "Not connected"}</span>
       {error && <p className="integration-error" role="alert">{error}</p>}
       {snapshot && <>
@@ -60,6 +66,6 @@ export default function IntegrationsPanel({pole, preferences, onPreferences, onC
         <details><summary>Source and import status</summary><p className="integration-status">Grid Manager · retrieved {new Date(snapshot.fetchedAt).toLocaleString()}</p>{snapshot.warnings.map(w => <p className="integration-status" key={w}>{w}</p>)}</details>
       </>}
     </div></details>}
-    {!!pole.diameterStations?.length && <details className="setup-group"><summary>Imported diameter stations</summary><div className="integration-fields">{pole.diameterStations.map(s => <p className="integration-status" key={s.heightM}>{formatSmallLength(s.heightM, pole.unitSystem ?? "metric")} AGL · diameter {formatSmallLength(s.diameterM, pole.unitSystem ?? "metric")} · SR {s.inspectionId}</p>)}<button className="text-control" onClick={() => onChange({diameterStations: undefined})}>Remove imported stations</button></div></details>}
+    {!!pole.diameterStations?.length && <details className="integration-section"><summary>Imported diameter stations</summary><div className="integration-fields">{pole.geometryEstimates && <p className="integration-status">{pole.geometryEstimates.basis}</p>}{pole.diameterStations.map(s => <p className="integration-status" key={s.heightM}>{formatSmallLength(s.heightM, pole.unitSystem ?? "metric")} AGL · diameter {formatSmallLength(s.diameterM, pole.unitSystem ?? "metric")} · SR {s.inspectionId}</p>)}<button className="text-control" onClick={() => onChange({diameterStations: undefined})}>Remove imported stations</button></div></details>}
   </>;
 }

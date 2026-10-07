@@ -1,5 +1,6 @@
 import type { PoleCase } from "../domain/model.ts";
 import type { DiameterStation, GridPoleSnapshot } from "./types.ts";
+import {estimatedProfile} from "./estimatedProfile.ts";
 
 export function applyGridInspection(pole: PoleCase, snapshot: GridPoleSnapshot, inspectionId: string | null): Partial<PoleCase> {
   const selected = snapshot.inspections.find(s => s.id === inspectionId);
@@ -15,13 +16,19 @@ export function applyGridInspection(pole: PoleCase, snapshot: GridPoleSnapshot, 
     if (r.heightM === null || r.circumferenceM === null) continue;
     const diameterM = r.circumferenceM / Math.PI;
     if (!Number.isFinite(r.heightM) || r.heightM < -(lengthValid ? embedment : pole.embedment) || r.heightM > top || diameterM < .07 || diameterM > 1.2) {warnings.push(`Reading ${r.id}: dimension is outside the supported pole geometry; not applied.`); continue;}
-    if (stations.some(s => s.heightM === r.heightM)) {warnings.push(`Reading ${r.id}: duplicate test height; first circumference retained.`); continue;}
+    const existing = stations.find(s => s.heightM === r.heightM);
+    if (existing) {
+      if (Math.abs(existing.diameterM - diameterM) > 1e-9) warnings.push(`Reading ${r.id}: circumference differs at a repeated test height; first circumference retained for geometry. All assessment results preserved.`);
+      continue;
+    }
     stations.push({heightM: r.heightM, diameterM, inspectionId: selected!.id, readingId: r.id});
   }
   const clearPriorStations = !stations.length && pole.gridManager?.poleId === snapshot.poleId && pole.diameterStations?.every(s => s.inspectionId === inspectionId);
   if (!stations.length) warnings.push(clearPriorStations ? "No usable circumference stations in this inspection; entered diameter profile restored." : "No usable circumference stations in this inspection; existing diameter profile retained.");
   const offsetFromTip = pole.length - pole.embedment - (pole.loadHeight ?? pole.length - pole.embedment);
-  return {assetId: snapshot.assetId, gridManager: {...snapshot, sourceWarnings, selectedInspectionId: inspectionId, warnings: [...new Set(warnings)]}, ...(stations.length ? {diameterStations: stations.sort((a, b) => a.heightM - b.heightM)} : clearPriorStations ? {diameterStations: undefined} : {}), ...(lengthValid ? {length, embedment, loadHeight: Math.max(0, top - offsetFromTip)} : {})};
+  const profile = stations.length ? estimatedProfile(pole, snapshot, stations, lengthValid ? length! : pole.length, lengthValid ? embedment : pole.embedment) : null;
+  if (profile) warnings.push(...profile.warnings);
+  return {assetId: snapshot.assetId, gridManager: {...snapshot, sourceWarnings, selectedInspectionId: inspectionId, warnings: [...new Set(warnings)]}, ...(profile ? {diameters: profile.diameters, geometryEstimates: {diameters: profile.keys, length: lengthValid && snapshot.lengthM === null, embedment: !(snapshot.lengthM !== null && agl !== null), basis: profile.basis}} : {}), ...(stations.length ? {diameterStations: stations.sort((a, b) => a.heightM - b.heightM)} : clearPriorStations ? {diameterStations: undefined} : {}), ...(lengthValid ? {length, embedment, loadHeight: Math.max(0, top - offsetFromTip)} : {})};
 }
 
 export function overrideReadingUnit(snapshot: GridPoleSnapshot, readingId: string, unit: "mm" | "in" | undefined): GridPoleSnapshot {

@@ -7,5 +7,5 @@ if (-not (Test-Path -LiteralPath $poleRuntime)) { throw 'Node.js 22.13 or newer 
 $poleVite = Join-Path $PSScriptRoot 'node_modules\vite\bin\vite.js'
 if (-not (Test-Path -LiteralPath $poleVite)) { $poleVite = Join-Path $PSScriptRoot '..\node_modules\vite\bin\vite.js' }
 if (-not (Test-Path -LiteralPath $poleVite)) { throw 'Install the project dependencies with npm ci first.' }
-Write-Host 'Pole Insights P27 DEV (P26 base): http://127.0.0.1:5190 (Ctrl+C to stop)'
+Write-Host 'Pole Insights P28 (P26 base): http://127.0.0.1:5190 (Ctrl+C to stop)'
 & $poleRuntime $poleVite --config vite.config.ts
