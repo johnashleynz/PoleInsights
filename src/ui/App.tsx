@@ -81,6 +81,7 @@ import SectionView, { type SectionPreviewHandle } from "./SectionView.tsx";
 import { lessons } from "../lessons/content.ts";
 type LabView = ViewMode | "Test";
 const views: LabView[] = ["Setup", "Innerview", "Stresses", "Test"];
+const companyUrl = "https://innerviewinsights.com/?utm_source=pole_insights&utm_medium=referral&utm_campaign=pole_insights_model";
 function TextButton({
   label,
   onClick,
@@ -2568,12 +2569,14 @@ export default function App() {
       </main>
       <footer className="company-footer">
         <span>Copyright InnerView Insights Limited {new Date().getFullYear()}</span>
-        <img
-          src={`${import.meta.env.BASE_URL}innerview-insights-logo.png`}
-          alt="InnerView Insights"
-          width="112"
-          height="46"
-        />
+        <a href={`${companyUrl}&utm_content=footer_logo`} aria-label="Visit InnerView Insights">
+          <img
+            src={`${import.meta.env.BASE_URL}innerview-insights-logo.png`}
+            alt="InnerView Insights"
+            width="56"
+            height="23"
+          />
+        </a>
       </footer>
       {notice && (
         <div className="toast" role="status">
@@ -2709,12 +2712,14 @@ export default function App() {
               Save inputs and result basis
             </button>
             <div className="model-company-logo">
+              <a href={`${companyUrl}&utm_content=about_model_logo`} aria-label="Visit InnerView Insights">
               <img
                 src={`${import.meta.env.BASE_URL}innerview-insights-logo.png`}
                 alt="InnerView Insights"
                 width="160"
                 height="66"
               />
+              </a>
             </div>
           </section>
         </div>

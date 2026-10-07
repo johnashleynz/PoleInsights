@@ -1,10 +1,12 @@
 /* P02: white drafting workspace, plain text controls, full-height model. */
-.company-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-shrink:0;padding:6px 18px;border-top:1px solid var(--line);background:#fff;color:#66717a;font-size:10px;line-height:1.5}
+:root{--company-footer-height:30px}
+.company-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;height:var(--company-footer-height);flex-shrink:0;padding:2px 18px;border-top:1px solid var(--line);background:#fff;color:#66717a;font-size:10px;line-height:1.5}
 .company-footer>span{min-width:0;overflow-wrap:break-word}
-.company-footer img{display:block;width:112px;height:auto;flex-shrink:0}
+.company-footer>a{display:block;flex-shrink:0}
+.company-footer img{display:block;width:56px;height:auto}
 .model-company-logo{display:flex;justify-content:flex-end;margin-top:24px;padding-top:16px;border-top:1px solid var(--line)}
 .model-company-logo img{display:block;width:160px;max-width:100%;height:auto}
-@media(max-width:480px){.company-footer{padding:6px 12px;gap:10px}.company-footer img{width:88px}}
+@media(max-width:480px){:root{--company-footer-height:25px}.company-footer{padding:2px 12px;gap:10px}.company-footer img{width:44px}}
 :root{--ink:#24282d;--muted:#626970;--brand:#245c83;--accent:#245c83;--line:#dce0e3;--paper:#fff;--soft:#f5f6f7;color:var(--ink);background:#fff;font-size:13px}
 html,body,#root{width:100%;height:100%;overflow:hidden;background:#fff}
 .app-shell,.app-shell:fullscreen{height:100dvh;min-height:0;overflow:hidden;background:#fff}
@@ -77,3 +79,6 @@ html,body,#root{width:100%;height:100%;overflow:hidden;background:#fff}
 
 @media(max-width:760px){.mobile-pole-switch,.scene-panel:has(.mobile-stress-select) .mobile-pole-switch{top:49px}body:has(.mobile-pole-switch) .shared-view-switch{width:calc(100% - 135px);max-width:235px}}
 .section-live-status{display:block;text-align:center;font-size:10px;color:#607481;min-height:14px}.section-visual canvas{touch-action:none}
+.app-shell>.workspace{height:calc(100dvh - var(--company-footer-height));flex:1;min-height:0}
+.workspace>.scene-panel{height:100%}
+@media(max-width:760px){.workspace.mobile-settings>.controls-panel,.workspace.mobile-section>.section-panel{height:calc(100% - 42px)}}
