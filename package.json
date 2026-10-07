@@ -6,10 +6,12 @@
   "scripts": {
     "dev": "vite --host 127.0.0.1 --configLoader runner",
     "build": "node tools/build.mjs",
-    "test": "node --experimental-strip-types verification/verify.mjs && node --experimental-strip-types verification/p27.mjs",
+    "test": "node --experimental-strip-types verification/verify.mjs && node --experimental-strip-types verification/p27.mjs && node --experimental-strip-types verification/system-integration.mjs",
+    "test:integration": "node --experimental-strip-types verification/system-integration.mjs",
     "deploy:staging": "npm run build && wrangler pages deploy dist --project-name pole-insights-staging"
   },
   "dependencies": {
+    "jose": "6.2.12",
     "lucide-react": "1.31.0",
     "react": "19.2.6",
     "react-dom": "19.2.6",

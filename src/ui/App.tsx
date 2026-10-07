@@ -1,4 +1,7 @@
 import DetectApps from "./DetectApps.tsx";
+import SystemPreferences from "./SystemPreferences.tsx";
+import IntegrationsPanel from "./IntegrationsPanel.tsx";
+import {readPreferences, preferencesKey} from "../integrations/preferences.ts";
 import type { WaveControl } from "../inspection/mockupProtocol.ts";
 import MaterialPicker from "./MaterialPicker.tsx";
 import { materialDescription, speciesById } from "../domain/species.ts";
@@ -344,6 +347,14 @@ export default function App() {
     [mobilePanel, setMobilePanel] = useState<"model" | "settings" | "section">(
       "model",
     );
+  const [preferences, setPreferences] = useState(() => readPreferences(cases[0].showDetect !== false));
+  const [showPreferences, setShowPreferences] = useState(false);
+  useEffect(() => {try {localStorage.setItem(preferencesKey, JSON.stringify(preferences));} catch {}}, [preferences]);
+  useEffect(() => {if (!preferences.detect && view === "Test") {setView("Setup"); setWaveControl(null);}}, [preferences.detect, view]);
+  useEffect(() => {
+    if (!preferences.axonic || !preferences.lastProfile) return;
+    setCases(old => old.map(c => c.axonic ? c : {...c, axonic: {profile: preferences.lastProfile, assetId: c.assetId ?? ""}}));
+  }, [preferences.axonic, preferences.lastProfile]);
   const chartMetric: ProfileMetric =
     quantity === "capacity"
       ? resultDirection === "worst"
@@ -530,7 +541,7 @@ export default function App() {
     }
   }, [notice]);
   useEffect(() => {
-    if (!showDetails && !showLessons) return;
+    if (!showDetails && !showLessons && !showPreferences) return;
     const previous = document.activeElement as HTMLElement | null;
     const modal = document.querySelector<HTMLElement>('[role="dialog"]');
     const focusable = () =>
@@ -544,6 +555,7 @@ export default function App() {
       if (e.key === "Escape") {
         setShowDetails(false);
         setShowLessons(false);
+        setShowPreferences(false);
       }
       if (e.key === "Tab") {
         const items = focusable(),
@@ -563,7 +575,7 @@ export default function App() {
       document.removeEventListener("keydown", key);
       previous?.focus();
     };
-  }, [showDetails, showLessons]);
+  }, [showDetails, showLessons, showPreferences]);
   function change(
     fn: (c: PoleCase) => PoleCase,
     { both = editBoth, load = false, record = true } = {},
@@ -963,7 +975,7 @@ export default function App() {
       aria-label="Pole views"
     >
       {views
-        .filter((v) => v !== "Test" || p.showDetect !== false)
+        .filter((v) => v !== "Test" || preferences.detect)
         .map((v) => {
           return (
             <button
@@ -1028,6 +1040,7 @@ export default function App() {
                 }}
               >
                 <button onClick={() => setShowLessons(true)}>Videos</button>
+                <button onClick={() => setShowPreferences(true)}>System preferences</button>
                 <button onClick={save}>Save case</button>
                 <button onClick={() => importInput.current?.click()}>
                   Open
@@ -1332,16 +1345,11 @@ export default function App() {
                     Apply {country.name} embedment starting point
                   </button>
                   <p className="field-note">{country.embedmentRule}</p>
-                  <label className="check-row">
-                    <input
-                      type="checkbox"
-                      checked={p.showDetect !== false}
-                      onChange={(e) => patch({ showDetect: e.target.checked })}
-                    />
-                    Show Detect features
-                  </label>
                 </div>
               </details>
+            )}
+            {view === "Setup" && (
+              <IntegrationsPanel key={p.id} pole={p} preferences={preferences} onPreferences={setPreferences} onChange={update => change(c => ({...c, ...update}), {both: false})}/>
             )}
             {view === "Setup" && (
               <details className="setup-group" open>
@@ -1838,6 +1846,7 @@ export default function App() {
                   )}
                   <PoleScene
                     units={units}
+                    showRecordedReadings={preferences.gridManager}
                     breakState={resolveBreakState(c, r)}
                     testBearing={
                       view === "Test"
@@ -2569,7 +2578,7 @@ export default function App() {
       </main>
       <footer className="company-footer">
         <span>Copyright InnerView Insights Limited {new Date().getFullYear()}</span>
-        <a href={`${companyUrl}&utm_content=footer_logo`} aria-label="Visit InnerView Insights">
+        <a href={`${companyUrl}&utm_content=footer_logo`} target="_blank" rel="noopener noreferrer" aria-label="Visit InnerView Insights (opens in a new tab)">
           <img
             src={`${import.meta.env.BASE_URL}innerview-insights-logo.png`}
             alt="InnerView Insights"
@@ -2591,10 +2600,11 @@ export default function App() {
       )}
       {showLessons && (
         <VideoLibrary
-          showDetect={p.showDetect !== false}
+          showDetect={preferences.detect}
           onClose={() => setShowLessons(false)}
         />
       )}
+      {showPreferences && <SystemPreferences value={preferences} onChange={setPreferences} onClose={() => setShowPreferences(false)}/>}
       {showDetails && (
         <div className="modal-backdrop" onClick={() => setShowDetails(false)}>
           <section
@@ -2687,7 +2697,7 @@ export default function App() {
               Qualified solid stresses and capacity, validated knot response,
               splitting, thin-wall buckling, nonlinear timber failure,
               calibrated soil response and physical calibration.
-              {p.showDetect !== false &&
+              {preferences.detect &&
                 " Actual instrument inference and official Safe to Climb decisions remain undeveloped."}{" "}
               Hand-sketched
               synthetic pockets are available. Photo registration remains
@@ -2712,7 +2722,7 @@ export default function App() {
               Save inputs and result basis
             </button>
             <div className="model-company-logo">
-              <a href={`${companyUrl}&utm_content=about_model_logo`} aria-label="Visit InnerView Insights">
+              <a href={`${companyUrl}&utm_content=about_model_logo`} target="_blank" rel="noopener noreferrer" aria-label="Visit InnerView Insights (opens in a new tab)">
               <img
                 src={`${import.meta.env.BASE_URL}innerview-insights-logo.png`}
                 alt="InnerView Insights"

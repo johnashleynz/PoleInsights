@@ -51,6 +51,7 @@ function resizeArrow(arrow: T.Object3D, len: number) {
 }
 
 export interface SceneProps {
+  showRecordedReadings?: boolean;
   units?: UnitSystem;
   capture?: boolean;
   testBearing?: number;
@@ -143,6 +144,7 @@ function tubeGeometry(
     { length: baseRows + 1 },
     (_, j) => start + ((end - start) * j) / baseRows,
   );
+  for (const s of p.diameterStations ?? []) if (s.heightM > start && s.heightM < end) axial.push(s.heightM);
   if (kind === "pole")
     for (const r of p.regions)
       if (
@@ -327,6 +329,7 @@ export default function PoleScene(props: SceneProps) {
       move: (x: number, y: number) => void;
       end: (commit?: boolean) => void;
     } | null>(null);
+  const readingLabels = useRef(new Map<string, HTMLButtonElement>());
   const mount = useRef<HTMLDivElement>(null),
     state = useRef<SceneState | null>(null),
     latest = useRef(props);
@@ -334,6 +337,7 @@ export default function PoleScene(props: SceneProps) {
   const [failed, setFailed] = useState(false),
     [quality, setQuality] = useState("Auto quality"),
     [narrow, setNarrow] = useState(window.innerWidth <= 760);
+  useEffect(() => {state.current?.render();}, [props.showRecordedReadings, props.pole.gridManager]);
   useEffect(() => {
     const host = mount.current;
     if (!host) return;
@@ -505,6 +509,23 @@ export default function PoleScene(props: SceneProps) {
         label.style.top=screen.y+'px';
         label.textContent=zone.basis==='observed'?'Actual break zone':'Likely break zone';
       }else if(label)label.hidden=true;
+      const inspection = p.pole.gridManager?.inspections.find(s => s.id === p.pole.gridManager?.selectedInspectionId);
+      let lastReadingY = -100;
+      const recorded = (p.showRecordedReadings ? inspection?.readings ?? [] : []).filter(r => r.heightM !== null).map(r => {
+        const q = p.result ? stationAt(p.result, r.heightM!) : null;
+        const at = new T.Vector3((q?.ux ?? 0) * p.scale, r.heightM!, -(q?.uy ?? 0) * p.scale);
+        const right = new T.Vector3().setFromMatrixColumn(camera.matrixWorld, 0).multiplyScalar(-diameterAt(p.pole, r.heightM!) / 2 - .15);
+        at.add(right);
+        return {reading: r, screen: project(at.clone()), depth: at.project(camera).z};
+      }).sort((a, b) => a.screen.y - b.screen.y);
+      for (const {reading, screen, depth} of recorded) {
+        const el = readingLabels.current.get(reading.id);
+        if (!el) continue;
+        const y = Math.max(screen.y, lastReadingY + 35); lastReadingY = y;
+        el.hidden = depth < -1 || depth > 1 || screen.x < 0 || screen.x > host!.clientWidth || y < 40 || y > host!.clientHeight - 40 || reading.heightM! < -p.pole.embedment || reading.heightM! > h;
+        el.style.left = Math.max(8, Math.min(host!.clientWidth - 170, screen.x - 164)) + "px";
+        el.style.top = y + "px";
+      }
       const origin = new T.Vector3(
           (tip?.ux ?? 0) * p.scale,
           loadZ,
@@ -1815,6 +1836,7 @@ export default function PoleScene(props: SceneProps) {
       )}
       {!failed && (
         <>
+          {props.showRecordedReadings && props.pole.gridManager?.inspections.find(s => s.id === props.pole.gridManager?.selectedInspectionId)?.readings.filter(r => r.heightM !== null).map(r => <button key={r.id} ref={el => {if (el) readingLabels.current.set(r.id, el); else readingLabels.current.delete(r.id);}} className="recorded-reading-label" title={`Recorded UB1000 reading ${r.id}`} onClick={() => props.onSection(r.heightM!)}><span>UB1000 · {formatPoleLength(r.heightM!, props.units ?? "metric")} AGL</span><strong>AR {r.ar ?? "—"}{r.rsm !== null ? ` · RSM ${r.rsm}` : ""}</strong></button>)}
           <div ref={breakLabel} className="scene-break-label" hidden />
           <div ref={sectionHandle} className="scene-leader section-leader">
             <button

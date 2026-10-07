@@ -1,4 +1,7 @@
 import { polygonDistance, simplePolygon } from "./sketch.ts";
+import type { DiameterStation, GridPoleSnapshot } from "../integrations/types.ts";
+import {validGridSnapshot} from "../integrations/geometry.ts";
+import {validProfile} from "../integrations/preferences.ts";
 import {
   materialErrors,
   speciesById,
@@ -84,6 +87,9 @@ export interface PoleCase {
   id: string;
   name: string;
   assetId?: string;
+  axonic?: {profile: string; assetId: string};
+  gridManager?: GridPoleSnapshot;
+  diameterStations?: DiameterStation[];
   country?: CountryCode;
   unitSystem?: UnitSystem;
   poleClass?: string | null;
@@ -273,6 +279,16 @@ export function diameters(p: PoleCase) {
 }
 export function diameterAt(p: PoleCase, z: number) {
   const d = diameters(p);
+  if (p.diameterStations?.length) {
+    const stations = new Map<number, number>([[-p.embedment, d.butt], [0, d.ground], [p.length - p.embedment, d.tip]]);
+    for (const s of p.diameterStations) stations.set(s.heightM, s.diameterM);
+    const points = [...stations].sort((a, b) => a[0] - b[0]);
+    for (let i = 1; i < points.length; i++) if (z <= points[i][0]) {
+      const [a, b] = [points[i - 1], points[i]];
+      return a[1] + (b[1] - a[1]) * (z - a[0]) / (b[0] - a[0]);
+    }
+    return points[points.length - 1][1];
+  }
   return z <= 0
     ? d.ground + ((d.ground - d.butt) * z) / p.embedment
     : d.ground + ((d.tip - d.ground) * z) / (p.length - p.embedment);
@@ -294,6 +310,9 @@ export function validateCase(p: PoleCase): string[] {
     errors.push("Asset ID must contain no more than 255 characters.");
   if (p.country !== undefined && !["NZ", "AU", "US"].includes(p.country))
     errors.push("Select a supported country.");
+  if (p.axonic !== undefined && (!p.axonic || typeof p.axonic.profile !== "string" || p.axonic.profile !== "" && !validProfile(p.axonic.profile) || typeof p.axonic.assetId !== "string" || p.axonic.assetId.length > 255)) errors.push("Enter a valid Axonic profile and asset ID.");
+  if (p.gridManager !== undefined && !validGridSnapshot(p.gridManager)) errors.push("Grid Manager data has an unsupported format.");
+  if (p.diameterStations !== undefined && (!Array.isArray(p.diameterStations) || p.diameterStations.length > 64 || p.diameterStations.some((s, i, all) => !s || !Number.isFinite(s.heightM) || s.heightM < -p.embedment || s.heightM > p.length - p.embedment || !Number.isFinite(s.diameterM) || s.diameterM < .07 || s.diameterM > 1.2 || typeof s.inspectionId !== "string" || typeof s.readingId !== "string" || all.some((other, j) => j < i && other.heightM === s.heightM)))) errors.push("Use at most 64 unique measured diameter stations within the pole and 70-1,200 mm in diameter.");
   if (
     p.unitSystem !== undefined &&
     !["metric", "imperial"].includes(p.unitSystem)

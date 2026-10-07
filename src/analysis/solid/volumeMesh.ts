@@ -13,6 +13,7 @@ export function volumeMesh(p:PoleCase,level='coarse',marginDiameters=2){
  const na=level==='fine'?32:level==='medium'?24:16,nr=level==='fine'?6:level==='medium'?4:3,nz=level==='fine'?24:level==='medium'?18:12,lo=Math.max(0,Math.min(...p.regions.map(r=>r.zMin))),hi=Math.min(p.length-p.embedment,Math.max(...p.regions.map(r=>r.zMax))),D=diameterAt(p,(lo+hi)/2),zMin=Math.max(0,lo-marginDiameters*D),zMax=Math.min(p.length-p.embedment,hi+marginDiameters*D);
  if(hi<=lo)throw Error('This local model needs a defect above ground.');
  const heights=Array.from({length:nz+1},(_,i)=>lo+(hi-lo)*i/nz);for(const edge of [zMin,zMax]){const at=edge===zMin?lo:hi;for(let i=1;i<=4;i++)heights.push(at+(edge-at)*i/4);}for(const r of p.regions)heights.push(Math.max(lo,r.zMin),Math.min(hi,r.zMax),(Math.max(lo,r.zMin)+Math.min(hi,r.zMax))/2);
+ for(const s of p.diameterStations??[])if(s.heightM>zMin&&s.heightM<zMax)heights.push(s.heightM);
  const zs=[...new Set(heights.map(z=>+z.toFixed(10)))].sort((a,b)=>a-b),points:Vec3[]=[],tris:number[][]=[];
  const knots=p.regions.filter(r=>r.kind==='knot'&&r.shape.type!=='section-contours').map(r=>{const sh=r.shape;if(sh.type==='section-contours')throw Error('Unsupported knot');const R=diameterAt(p,(r.zMin+r.zMax)/2)/2,c=Math.hypot(sh.centreX,sh.centreY);return {rho:c/R,phi:Math.atan2(sh.centreY,sh.centreX),radial:Math.max(sh.radiusX,sh.radiusY)/R*.7,angular:Math.atan2(Math.max(sh.radiusX,sh.radiusY),Math.max(.01,c))*1.5};});
  // Redistribute existing nodes around geometric fibre gradients, not around a chosen probe.

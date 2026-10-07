@@ -6,5 +6,7 @@ for(const args of [['node_modules/typescript/bin/tsc','--project','tsconfig.json
   const result=spawnSync(process.execPath,args,{cwd:root,stdio:'inherit',windowsHide:true});
   if(result.status!==0)process.exit(result.status??1);
 }
+const integration=spawnSync(process.execPath,['--experimental-strip-types','verification/system-integration.mjs'],{cwd:root,stdio:'inherit',windowsHide:true});
+if(integration.status!==0)process.exit(integration.status??1);
 console.log('Review build ready in dist/. Serve over HTTP; no deployment has been performed.');
 

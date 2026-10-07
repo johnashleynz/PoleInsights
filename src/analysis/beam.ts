@@ -322,6 +322,7 @@ export function solvePole(p: PoleCase, segments = 32): AnalysisResult {
     first = p.soil === "Fixed" ? 0 : -p.embedment,
     loadZ = loadApplicationHeight(p);
   const locations = [first, 0, loadZ, h];
+  for (const s of p.diameterStations ?? []) if (s.heightM > first && s.heightM < h) locations.push(s.heightM);
   for (let i = 1; i < segments; i++)
     locations.push(first + ((h - first) * i) / segments);
   if (p.soil !== "Fixed")
