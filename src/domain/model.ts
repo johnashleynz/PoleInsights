@@ -786,7 +786,7 @@ export function normaliseCase(p: PoleCase): PoleCase {
         : r,
     ),
   };
-  if (normalized.gridManager && normalized.diameterStations?.length && !normalized.geometryEstimates) {
+  if (normalized.gridManager && (normalized.gridManager.poleLengthM === undefined && normalized.gridManager.heightAglM != null || normalized.diameterStations?.length && !normalized.geometryEstimates)) {
     return {...normalized, ...applyGridInspection(normalized, normalized.gridManager, normalized.gridManager.selectedInspectionId)};
   }
   return normalized;

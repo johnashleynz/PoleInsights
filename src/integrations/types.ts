@@ -30,6 +30,8 @@ export interface GridPoleSnapshot {
   lastSurvey: string | null;
   tag: string | null;
   lengthM: number | null;
+  poleLengthM?: number | null;
+  // Legacy snapshots stored Grid Manager's total length under this name.
   heightAglM?: number | null;
   inspections: RecordedInspection[];
   selectedInspectionId: string | null;

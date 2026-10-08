@@ -10,11 +10,13 @@ This supplements the original P27 source, preserved verbatim in `TODO.md`.
 5. Display readings at test heights; use circumference to model sampled sections.
 6. Open related Grid Manager image record by returned internal ID, not business Asset ID.
 7. Units belong to individual readings; mixed units and erroneous labels exist. Preserve originals and allow correction.
-8. Pole Height means AGL. RSM remains unavailable for this spike.
+8. Corrected 8 October: Grid Manager pole Height means total length, not AGL. Apply the selected country's embedment heuristic and derive AGL height. Per-reading UB1000 test heights remain AGL. RSM remains unavailable for this spike.
 9. Repeated tests are valid repeatability evidence; declutter labels without deleting observations, align them to height.
 10. One focused Asset ID shared across integrations; collapsible Axonic profile/link below it; relabel Grid Manager 2.0 to Grid Manager.
 11. Add global customer/account selection to production TODO; current credentials access one Field team training account.
 12. Identify original enhancements as P27 and integrations as P28; prepare cumulative P26 changes, as-built stories, deployment/integration notes and a full source handoff without videos/secrets.
+13. Known class/length imports must use applicable species-specific nominal end dimensions from the supplied ANSI O5.1-2022 reference, not a cylinder from one girth. Preserve measured stations and a regular taper where compatible. Show Species separately from Class / Length (US Class 1/45; NZ 6 kN / 10 m).
+14. NaN/infinite AR must remain visible as NaN but must not supply degradation. Add a subtle V28.x footer marker, incremented once per published iteration.
 
 Owner reported successful Cloudflare OTP, OAuth connection and meaningful record
 retrieval. Independent user/policy audit and rotation after a dashboard screenshot

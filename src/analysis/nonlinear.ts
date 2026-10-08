@@ -1,11 +1,11 @@
 import {bendingResistance,strengthUsage} from '../domain/species.ts';
-import {deconditioningSamples} from '../integrations/deconditioning.ts';
+import {deconditioningProfile} from '../integrations/deconditioning.ts';
 import {conditionAt,diameterAt,loadApplicationHeight,type PoleCase} from '../domain/model.ts';
 import {hermite,sectionProperties,solvePole,type AnalysisResult,type Station} from './beam.ts';
 import {soilYieldStudy} from './research/soilYield.ts';
 export const yielding=(p:PoleCase)=>p.soilResponse==='yielding'&&p.soil!=='Fixed';
 export function loadPath(p:PoleCase):[number,number][]{const a=p.bearing*Math.PI/180,current:[number,number]=[1000*p.loadKN*Math.sin(a),1000*p.loadKN*Math.cos(a)],out:[number,number][]=[];for(const q of [...(p.soilHistory??[]),current])if(!out.length||Math.hypot(q[0]-out.at(-1)![0],q[1]-out.at(-1)![1])>1e-7)out.push(q);return out;}
-export function structuralKey(p:PoleCase){const {loadKN,bearing,soilHistory,axonic,gridManager,geometryEstimates,...rest}=p;return JSON.stringify({...rest,...(p.arDeconditioning?{arSamples:deconditioningSamples(p)}:{})});}
+export function structuralKey(p:PoleCase){const {loadKN,bearing,soilHistory,axonic,gridManager,geometryEstimates,...rest}=p;return JSON.stringify({...rest,...(p.arDeconditioning?{arSamples:deconditioningProfile(p)}:{})});}
 export function resetHistoryOnGeometry(previous:PoleCase,next:PoleCase){return structuralKey(previous)===structuralKey(next)?next:{...next,soilHistory:[]};}
 /** The nonlinear result uses one solved displacement field throughout. Elastic
  * reference loads are explicitly retained as references, never nonlinear capacity. */

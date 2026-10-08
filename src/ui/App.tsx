@@ -2,6 +2,7 @@ import DetectApps from "./DetectApps.tsx";
 import SystemPreferences from "./SystemPreferences.tsx";
 import IntegrationsPanel from "./IntegrationsPanel.tsx";
 import {arStrengthAt} from "../integrations/deconditioning.ts";
+import {BUILD_VERSION} from "../domain/build.ts";
 import {readPreferences, preferencesKey} from "../integrations/preferences.ts";
 import type { WaveControl } from "../inspection/mockupProtocol.ts";
 import MaterialPicker from "./MaterialPicker.tsx";
@@ -2566,7 +2567,7 @@ export default function App() {
         </aside>
       </main>
       <footer className="company-footer">
-        <span>Copyright InnerView Insights Limited {new Date().getFullYear()}</span>
+        <span>Copyright InnerView Insights Limited {new Date().getFullYear()}<small className="build-number" aria-label={`Build ${BUILD_VERSION}`}>{BUILD_VERSION}</small></span>
         <a href={`${companyUrl}&utm_content=footer_logo`} target="_blank" rel="noopener noreferrer" aria-label="Visit InnerView Insights (opens in a new tab)">
           <img
             src={`${import.meta.env.BASE_URL}innerview-insights-logo.png`}

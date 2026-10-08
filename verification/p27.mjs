@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import {BUILD_VERSION} from '../src/domain/build.ts';
 import fs from 'node:fs';
 import path from 'node:path';
 import {conditionAt,defaultCase,diameterAt,newRegion,normaliseCase,safeAssetFilePart,validateCase,drillingBounds} from '../src/domain/model.ts';
@@ -36,5 +37,6 @@ check('FR-015','shell rot degrades the outside fibres, chart capacity and timber
 check('FR-005','both pole ends receive section-sized end-grain caps',()=>{const scene=fs.readFileSync(path.join(root,'src/scene/PoleScene.tsx'),'utf8');assert.ok(scene.includes('for (const endHeight of [top, -p.embedment])'));assert.ok(scene.includes('new T.CircleGeometry(diameterAt(p, endHeight) / 2, 64)'));assert.ok(scene.includes('stationAt(result, endHeight)'));assert.ok(scene.includes('endHeight + (endHeight === top ? 0.001 : -0.001)'));});
 check('FR-003','shallow embedment is accepted and Imperial above-ground errors use feet',()=>{const p=defaultCase();p.regions=[];p.embedment=.05;assert.equal(validateCase(p).length,0);p.soil='Fixed';assert.ok(Number.isFinite(solvePole(p).tipMovement));p.embedment=0;assert.equal(validateCase(p).length,0);assert.ok(Number.isFinite(diameterAt(p,0)));assert.ok(Number.isFinite(solvePole(p).tipMovement));p.embedment=-.01;assert.ok(validateCase(p).some(e=>e.includes('non-negative')));p.unitSystem='imperial';p.embedment=p.length-.5;assert.ok(validateCase(p).some(e=>e.includes('3.28 ft above ground')));});
 check('FR-003','rounded Imperial inches carry to feet without displaying 12 inches',()=>{assert.equal(formatFeetInches(.6096,2),'2.0 ft');assert.equal(formatFeetInches(.60959,2),'2.0 ft');assert.equal(formatFeetInches(-.60959,2),'-2.0 ft');assert.equal(formatFeetInches(.5969,2),'1 ft 11.50 in');assert.equal(formatPoleLength(.6096,'imperial'),'2.0 ft');});
+check('FR-005','footer shows the maintained P28 build marker',()=>{assert.match(BUILD_VERSION,/^V28\.\d+$/);const app=fs.readFileSync(path.join(root,'src/ui/App.tsx'),'utf8');assert.ok(app.includes('className="build-number"'));assert.ok(app.includes('{BUILD_VERSION}</small>'));});
 const failed=checks.filter(x=>!x.pass);console.log(JSON.stringify({passed:checks.length-failed.length,failed},null,2));
 if(failed.length)process.exitCode=1;

@@ -9,6 +9,7 @@ Read README.md, DEVELOPMENT-PROMPT.md and docs/ROADMAP-AND-REVIEW.md before edit
 - The owner authorised initial development. Routine reversible implementation proceeds within the authorised milestone without repeated permission requests.
 - Preserve the future registered-contour/photo-input contract; read docs/FUTURE-PHOTO-INPUT.md. Never silently approximate unsupported measured geometry as a supported ellipse.
 - Never deploy unless the owner requests publication. Do not infer publishing permission from local development.
+- The footer build marker lives in src/domain/build.ts. Starting at V28.1, increment its minor number once for each new published iteration, not for each local edit or rebuild. If a pending batch already bumped it, do not bump it again at commit/push time.
 - Keep one authoritative pole geometry/defect definition across visual, structural and section views.
 - Keep simulated internal condition, simulated acoustic response and actual UB1000 evidence distinct. Do not invent proprietary algorithms, RSV definitions or Safe to Climb thresholds.
 - Distinguish beam-recovered stresses, local solid FE results, elastic limit estimates, fracture predictions and factored design capacities.

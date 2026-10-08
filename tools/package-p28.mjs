@@ -7,7 +7,7 @@ import {loadEnv} from 'vite';
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const tracked=execFileSync('git',['ls-files','-z'],{cwd:root}).toString().split('\0').filter(Boolean);
-const additions=['deployment.md','src/integrations/readingGroups.ts','src/integrations/estimatedProfile.ts','src/integrations/poleTag.ts','src/integrations/speciesMatch.ts','src/integrations/deconditioning.ts','src/integrations/gridRecordWindow.ts','tools/package-p28.mjs'];
+const additions=['deployment.md','src/domain/build.ts','src/domain/ansiDimensions.ts','src/integrations/readingGroups.ts','src/integrations/estimatedProfile.ts','src/integrations/poleTag.ts','src/integrations/speciesMatch.ts','src/integrations/deconditioning.ts','src/integrations/gridRecordWindow.ts','tools/package-p28.mjs'];
 for(const name of readdirSync(path.join(root,'docs')))if(name.startsWith('P28-'))additions.push(`docs/${name}`);
 const candidates=[...new Set([...tracked,...additions])].sort();
 const excluded=f=>/(^|\/)(?:\.git|node_modules|dist|handoff|\.wrangler|\.media-work|\.media-deps)(\/|$)/.test(f)||/(^|\/)\.env(?:\.|$)/.test(f)&&f!=='.env.example'||/(^|\/)\.dev\.vars(?:\.|$)/.test(f)||/\.(?:mp4|mov|webm|wav|mp3|m4a|ogg|avi)$/i.test(f);

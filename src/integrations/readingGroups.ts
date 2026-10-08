@@ -31,8 +31,8 @@ export function groupReadingsByHeight(readings: RecordedReading[]) {
     const values = samples.map(r => r.ar).filter((v): v is number => v !== null && Number.isFinite(v));
     const low = Math.min(...values), high = Math.max(...values);
     return {id: `height-${heightM}`, heightM, count: samples.length,
-      arSummary: !values.length ? "Unavailable" : low === high ? String(low) : `${low}-${high}`,
+      arSummary: !values.length ? "NaN" : `${low === high ? String(low) : `${low}-${high}`}${values.length < samples.length ? " / NaN" : ""}`,
       missingAr: samples.length - values.length,
-      readingDetails: samples.map(r => `${r.id}: AR ${r.ar ?? "unavailable"}`).join("; ")};
+      readingDetails: samples.map(r => `${r.id}: AR ${r.ar !== null && Number.isFinite(r.ar) ? r.ar : "NaN"}`).join("; ")};
   });
 }

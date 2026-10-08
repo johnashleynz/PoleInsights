@@ -2,13 +2,34 @@
 
 ## P28 Update: 8 October 2026
 
+### Grid Manager Length Correction
+
+The owner corrected the earlier AGL interpretation: Grid Manager's pole-level
+Height_M / Height_Ft means total pole length. Explicit visual survey Length still
+takes precedence when available. Import applies the selected country's starting
+embedment heuristic (US: 10% plus 2 ft; AU/NZ: one sixth), marks embedment (est.),
+and derives above-ground height as length minus embedment. For example, 75 ft in
+the US gives 9.5 ft assumed embedment and 65.5 ft above ground. These are starting
+assumptions, not installation recommendations. Manual embedment remains editable
+and is retained when switching SR or correcting units within the same import.
+Fresh retrieval reapplies the heuristic. Legacy saved heightAglM metadata migrates
+once to total-length semantics; subsequent reloads preserve manual edits.
+UB1000 per-reading HeightAgl remains the measured above-ground test-zone datum.
+Source length displays follow the selected Metric/Imperial units.
+
 ### Optional AR Deconditioning
 
 The per-pole Grid Manager checkbox is off by default. It derives a Deconditioning
 profile from the selected inspection's usable AR/height pairs (not other SRs).
 Repeated heights use the lowest available AR; raw observations remain intact.
-Up to 64 unique heights are used in ascending height order. Unknown/negative AR
-or unknown/out-of-pole heights are ignored; values above 100% confer no increase.
+Up to 64 unique heights are used in ascending height order. Unknown/out-of-pole
+heights are ignored; values above 100% confer no increase. NaN/infinite/missing AR
+displays as NaN and supplies no degradation value. Unknown-only heights interrupt
+interpolation, with neighbouring valid zones fading out over at most 0.30 m;
+no reduction is assigned at the unknown station. Valid repeats at that same
+height can still supply a known AR; the label shows the range and NaN together.
+Negative AR is excluded from strength conversion. The owner reports nonfinite
+AR as a device-firmware limitation; do not fabricate a replacement measurement.
 Strength factor is AR/100, multiplied by existing fibre-strength factors,
 uniformly across the section. Area and elastic modulus are unchanged. Intervals
 use smoothstep interpolation, with 0.30 m smooth ends back to sound strength.
@@ -39,11 +60,9 @@ historical where superseded here. Full current deployment: docs/DEPLOYMENT.md.
   pole data and outbound Open pole record hyperlink-style actions. Legacy separate Axonic ID
   is normalised to the case ID. ID edits abort lookup and clear previous records
   and stations. Visible diameter inputs remain assumptions until a new import.
-- Actual height comes only from pole AGL metadata/explicit survey total length.
-  Source AGL/length summaries use selected units. AGL updates the pole even when
-  no usable circumference readings exist.
-  UB1000 test-zone heights do not establish overall pole height. AGL plus assumed
-  embedment gives estimated total length; both explicit lengths give embedment.
+- Pole-level Height metadata is total length, not AGL (see correction above).
+  It updates the pole even without circumference readings. Above-ground height
+  is calculated using estimated embedment, never the highest UB1000 test zone.
 - Source species is now matched against catalogue IDs, common/botanical names,
   known aliases and conservative minor spelling differences. Regional matches
   disambiguate names; ambiguous names remain unchanged with a warning. A changed
@@ -51,11 +70,16 @@ historical where superseded here. Full current deployment: docs/DEPLOYMENT.md.
   review warning. Same-species imports preserve manual material values. A match
   without verified properties retains the existing species/material. This
   supersedes the original spike's metadata-only species treatment below.
-- Measured circumference/pi stations remain exact. Unmeasured anchors are now
-  recomputed, rather than joined to unrelated defaults. A supported source class
-  scoped to current species/country (or selected class when no source class exists)
-  supplies nominal taper using the nearest length row. Measurements anchor that
-  taper: these are not claims of published class minima or class compliance.
+- Measured circumference/pi stations remain exact. An applicable species-specific
+  class at the recorded length supplies nominal tip and estimated butt anchors,
+  with groundline interpolated through the measured stations. Source class/length
+  forms such as 1/45 and 6 kN / 10 m are supported; an unrelated nearest length
+  row is not silently substituted. ANSI Tables 5/6/8/9 cover the US catalogue
+  species; top and six-feet-from-butt minima define the nominal linear taper.
+  ANSI butt dimensions are extrapolated, not published minima. If measurements
+  conflict with end taper, adjust estimated ends with a warning to avoid a false
+  bulge, preserving measurements. This is not class compliance certification.
+  Details and regression values: docs/ANSI-DIMENSION-MAPPING.md.
 - Without a class match, a non-increasing least-squares taper is fitted to unique
   measured points. A single/equal-girth sample cannot establish taper and gives
   a declared cylindrical estimate. Groundline inside the sampled span is
@@ -71,6 +95,8 @@ historical where superseded here. Full current deployment: docs/DEPLOYMENT.md.
   permits. Minimal-displacement packing and leaders preserve true-height linkage.
   Matching repeated girths are valid; differing ones warn and use the first usable
   circumference for geometry. No test-run grouping or AR average is invented.
+- Species and Class / Length occupy separate summary rows. US convention is
+  Class 1/45 (class / feet); NZ convention is 6 kN / 10 m.
 - Current credentials query only Field team training. Global account/customer
   selection and account-scoped authorisation are P28-TODO-001, not delivered.
 

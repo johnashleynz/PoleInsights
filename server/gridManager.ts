@@ -41,8 +41,8 @@ export function normalizeGridPole(value: unknown, assetId: string, config: Confi
   const inspections = [...groups.values()].sort((a, b) => (b.date ? Date.parse(b.date) : -Infinity) - (a.date ? Date.parse(a.date) : -Infinity));
   if (!config.GRID_MANAGER_RSM_FIELD) warnings.add("Per-reading RSM field is not defined in the published metadata; RSM remains unavailable.");
   if (!inspections.length) warnings.add("No UB1000 readings returned for this pole.");
-  const metres = number(p.Height_M), feet = number(p.Height_Ft), heightAglM = metres !== null && metres > 0 ? metres : feet !== null && feet > 0 ? feet * .3048 : null;
-  return {source: "grid-manager", fetchedAt: new Date().toISOString(), poleId: text(p.Id) ?? "", assetId, species: text(p.Species), poleClass: text(p.PoleClass), installYear: number(p.InstallYear), lastSurvey: survey, tag: text(p.LastPoleStructureTag), lengthM, heightAglM, inspections, selectedInspectionId: inspections[0]?.id ?? null, warnings: [...warnings]};
+  const metres = number(p.Height_M), feet = number(p.Height_Ft), poleLengthM = metres !== null && metres > 0 ? metres : feet !== null && feet > 0 ? feet * .3048 : null;
+  return {source: "grid-manager", fetchedAt: new Date().toISOString(), poleId: text(p.Id) ?? "", assetId, species: text(p.Species), poleClass: text(p.PoleClass), installYear: number(p.InstallYear), lastSurvey: survey, tag: text(p.LastPoleStructureTag), lengthM, poleLengthM, inspections, selectedInspectionId: inspections[0]?.id ?? null, warnings: [...warnings]};
 }
 
 /** Local, read-only adapter. Credentials never enter the Vite client environment. */

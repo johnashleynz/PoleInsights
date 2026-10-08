@@ -13,6 +13,8 @@ import {arStrengthAt,deconditioningSamples,AR_END_BLEND_M} from '../src/integrat
 import {conditionAt} from '../src/domain/model.ts';
 import {prepareHeightProfile,profileFromBasis} from '../src/analysis/heightProfile.ts';
 import {defectAppearance} from '../src/scene/defectAppearance.ts';
+import {COUNTRIES} from '../src/domain/countries.ts';
+import {nominalPoleClass,gridClassLengthLabel} from '../src/integrations/estimatedProfile.ts';
 
 let passed = 0;
 assert.equal(poleTagTone('OK'),'green');assert.equal(poleTagTone('Red Tag'),'red');assert.equal(poleTagTone('Reinspect in 5 Years'),'yellow');assert.equal(poleTagTone('Pole Not Found'),'neutral');assert.equal(poleTagTone('Custom customer assessment'),'neutral');assert.equal(poleTagTone(null),'neutral');
@@ -22,10 +24,10 @@ const raw = {Id:1495480, CustomerPoleId:'165482', Species:'Southern Yellow Pine'
  {Id:2, ServiceRequestId:10, HeightAgl:600, PoleCircumference:'950', UnitType:'mm', Ar:75},
  {Id:3, ServiceRequestId:9, HeightAgl:24, PoleCircumference:'40', UnitType:'inches', Ar:60, ServiceRequest:{Id:9, UtcCalendarDateTime:'2025-08-18T10:51:00Z', PoleTag:'Reinspect in 5 years'}},
 ]};
-await check('Species soft matching and AGL apply without circumference samples',()=>{
+await check('Species soft matching and total length apply without circumference samples',()=>{
  assert.equal(matchGridSpecies('Western Red Cedar','US').id,'western-red-cedar');assert.equal(matchGridSpecies('Western red ceder','US').id,'western-red-cedar');assert.equal(matchGridSpecies('Pinus radiata','AU').id,'radiata-pine-australia');assert.equal(matchGridSpecies('Southern Yellow Pine','US').id,'southern-pine');assert.equal(matchGridSpecies('Pine','US'),null);assert.equal(matchGridSpecies('Unknown tree','US'),null);
- const p={...defaultCase(),country:'US',unitSystem:'imperial'},s=normalizeGridPole({...raw,Species:'Western Red Cedar',Height_M:16.76,PoleInspectionUB1000s:[]},'CH031617V2');s.lengthM=null;s.heightAglM=16.76;const imported={...p,...applyGridInspection(p,s,null)};
- assert.equal(imported.species,'western-red-cedar');assert.equal(imported.material.referenceId,'ansi-o5.1-2022-western-red-cedar');assert.ok(Math.abs(imported.length-imported.embedment-16.76)<1e-10);assert.equal(imported.geometryEstimates.length,true);assert.equal(validateCase(imported).length,0);
+ const p={...defaultCase(),country:'US',unitSystem:'imperial'},s=normalizeGridPole({...raw,Species:'Western Red Cedar',Height_M:16.76,PoleInspectionUB1000s:[]},'CH031617V2');s.lengthM=null;const imported={...p,...applyGridInspection(p,s,null)};
+ assert.equal(imported.species,'western-red-cedar');assert.equal(imported.material.referenceId,'ansi-o5.1-2022-western-red-cedar');assert.ok(Math.abs(imported.length-16.76)<1e-10);assert.equal(imported.geometryEstimates.length,false);assert.equal(validateCase(imported).length,0);
  const custom={...imported,material:{basis:'user-bending',E:9e9,bending:35e6,source:'Test report'}};assert.deepEqual({...custom,...applyGridInspection(custom,s,null)}.material,custom.material);
  assert.equal(applyGridInspection(p,{...s,species:'Unknown tree'},null).species,undefined);
 });
@@ -52,7 +54,19 @@ await check('No match, ambiguous poles, pagination and missing credentials are e
 await check('Local requests reject cross-origin access',async()=>{const m=gridManagerMiddleware({GRID_MANAGER_BEARER_TOKEN:'test'}); const res={statusCode:0,end(){}};await m({url:'/api/grid-manager/connect',method:'GET',headers:{host:'127.0.0.1:5192',origin:'https://evil.example'}},res,()=>{throw Error('Unexpected passthrough');});assert.equal(res.statusCode,403);});
 await check('Cloudflare routes fail closed without Access configuration or JWT',async()=>{assert.equal((await onRequest({request:new Request('https://pole-insights.pages.dev/api/grid-manager/connect'),env:{}})).status,503);const env={GRID_MANAGER_ACCESS_TEAM_DOMAIN:'example.cloudflareaccess.com',GRID_MANAGER_ACCESS_AUD:'test'};assert.equal((await onRequest({request:new Request('https://pole-insights.pages.dev/api/grid-manager/connect'),env})).status,401);assert.equal((await onRequest({request:new Request('https://pole-insights.pages.dev/api/grid-manager/connect',{headers:{'Cf-Access-Jwt-Assertion':'invalid'}}),env})).status,401);});
 await check('Per-reading unit corrections preserve originals and never affect adjacent readings',()=>{const s=normalizeGridPole({...raw,PoleInspectionUB1000s:[{Id:7,ServiceRequestId:10,HeightAgl:300,PoleCircumference:790,UnitType:'inches'},{Id:8,ServiceRequestId:10,HeightAgl:600,PoleCircumference:1000,UnitType:'mm'}]},'165482');const corrected=overrideReadingUnit(s,'7','mm');assert.equal(corrected.inspections[0].readings[0].heightM,.3);assert.equal(corrected.inspections[0].readings[0].circumferenceM,.79);assert.equal(corrected.inspections[0].readings[0].rawUnit,'inches');assert.equal(corrected.inspections[0].readings[1].heightM,.6);const restored=overrideReadingUnit(corrected,'7',undefined);assert.ok(Math.abs(restored.inspections[0].readings[0].heightM-7.62)<1e-12);assert.equal(restored.inspections[0].readings[0].rawHeight,'300');assert.ok(validGridSnapshot(JSON.parse(JSON.stringify(corrected))));});
-await check('Confirmed AGL height sets total length and combines consistently with survey length',()=>{const p=defaultCase(),s=normalizeGridPole({...raw,Height_M:9.1},'165482'),combined=applyGridInspection(p,s,'10');assert.ok(Math.abs(combined.embedment-1.9)<1e-12);assert.equal(combined.length,11);assert.equal(combined.loadHeight,9.1);const aglOnly=applyGridInspection(p,{...s,lengthM:null},'10');assert.equal(aglOnly.embedment,p.embedment);assert.ok(Math.abs(aglOnly.length-10.9)<1e-12);const invalid=applyGridInspection(p,{...s,lengthM:8},'10');assert.equal(invalid.length,undefined);assert.ok(invalid.gridManager.warnings.some(w=>w.includes('inconsistent')));const imperial=normalizeGridPole({...raw,Height_Ft:30},'165482');assert.ok(Math.abs(imperial.heightAglM-9.144)<1e-12);});
+await check('Grid Manager Height is total length, with country embedment and legacy migration',()=>{
+ const p=defaultCase(),s=normalizeGridPole({...raw,Height_M:9.1},'165482'),combined=applyGridInspection(p,s,'10');
+ assert.equal(combined.length,11);assert.ok(Math.abs(combined.embedment-11/6)<1e-12);
+ const only=applyGridInspection(p,{...s,lengthM:null},'10');assert.equal(only.length,9.1);assert.ok(Math.abs(only.embedment-9.1/6)<1e-12);
+ assert.ok(Math.abs(only.loadHeight-(9.1-9.1/6))<1e-12);assert.equal(only.geometryEstimates.length,false);assert.equal(only.geometryEstimates.embedment,true);
+ const imperial=normalizeGridPole({Id:42,Height_Ft:75},'US-pole'),us={...p,country:'US'},imported={...us,...applyGridInspection(us,imperial,null)};
+ assert.ok(Math.abs(imported.length/.3048-75)<1e-12);assert.ok(Math.abs(imported.embedment/.3048-9.5)<1e-12);assert.ok(Math.abs((imported.length-imported.embedment)/.3048-65.5)<1e-12);
+ const au=applyGridInspection({...p,country:'AU'},imperial,null);assert.ok(Math.abs(au.embedment-imperial.poleLengthM/6)<1e-12);
+ const edited={...imported,embedment:.2};assert.equal(applyGridInspection(edited,edited.gridManager,null).embedment,.2);
+ const legacy={...us,length:imperial.poleLengthM+us.embedment,gridManager:{...imperial,poleLengthM:undefined,heightAglM:imperial.poleLengthM}};
+ const migrated=normaliseCase(legacy);assert.equal(migrated.length,imperial.poleLengthM);assert.equal(migrated.gridManager.heightAglM,undefined);assert.deepEqual(normaliseCase(JSON.parse(JSON.stringify(migrated))),JSON.parse(JSON.stringify(migrated)));
+ const invalid=applyGridInspection(p,{...s,lengthM:40},'10');assert.equal(invalid.length,undefined);assert.ok(invalid.gridManager.warnings.some(w=>w.includes('supported model range')));
+});
 await check('Verified Metric and Imperial labels convert independently within one inspection',()=>{
  const s=normalizeGridPole({Id:42,PoleInspectionUB1000s:[
   {Id:1,ServiceRequestId:10,HeightAgl:50,PoleCircumference:1020,UnitType:'Metric',Ar:84},
@@ -72,7 +86,7 @@ await check('One annotation per height preserves AR ranges and raw reading count
   {Id:4,ServiceRequestId:10,HeightAgl:600,PoleCircumference:980,UnitType:'Metric',Ar:85},
  ]},'synthetic-repeat');
  const groups=groupReadingsByHeight(s.inspections[0].readings);
- assert.equal(groups.length,2);assert.equal(groups[0].arSummary,'78-82');
+ assert.equal(groups.length,2);assert.equal(groups[0].arSummary,'78-82 / NaN');
  assert.equal(groups[0].count,3);assert.equal(groups[0].missingAr,1);
  assert.equal(groups[1].arSummary,'85');assert.equal(s.inspections[0].readings.length,4);
  const p=defaultCase(),imported={...p,...applyGridInspection(p,s,'10')};
@@ -94,14 +108,14 @@ await check('Measured end extrapolation removes mismatched anchors and preserves
  const s=normalizeGridPole({Id:42,Height_M:9,PoleInspectionUB1000s:readings},'repeat');
  const p=defaultCase(),imported={...p,...applyGridInspection(p,s,'10')};
  assert.equal(validateCase(imported).length,0);
- for(const height of [-imported.embedment,0,.05,.6,1.2,9])assert.ok(Math.abs(diameterAt(imported,height)-.98/Math.PI)<1e-12);
- assert.deepEqual(imported.geometryEstimates.diameters,['butt','ground','tip']);assert.equal(imported.geometryEstimates.length,true);
+ for(const height of [-imported.embedment,0,.05,.6,1.2,imported.length-imported.embedment])assert.ok(Math.abs(diameterAt(imported,height)-.98/Math.PI)<1e-12);
+ assert.deepEqual(imported.geometryEstimates.diameters,['butt','ground','tip']);assert.equal(imported.geometryEstimates.length,false);
  const saved=normaliseCase(JSON.parse(JSON.stringify(imported)));assert.deepEqual(saved.geometryEstimates,imported.geometryEstimates);
  const legacy={...imported,geometryEstimates:undefined,diameters:p.diameters};assert.ok(Math.abs(normaliseCase(legacy).diameters.ground-.98/Math.PI)<1e-12);
 });
 await check('Supported nominal taper anchors to measurements, otherwise fitted taper is bounded',()=>{
- const p={...defaultCase(),country:'NZ',species:'radiata-pine'},s=normalizeGridPole({Id:42,PoleClass:'6 kN',Height_M:8.2,PoleInspectionUB1000s:[{Id:1,ServiceRequestId:10,HeightAgl:600,PoleCircumference:980,UnitType:'Metric'}]},'class');
- const imported={...p,...applyGridInspection(p,s,'10')};assert.ok(imported.geometryEstimates.basis.includes('nominal taper'));
+ const p={...defaultCase(),country:'NZ',species:'radiata-pine'},s=normalizeGridPole({Id:42,PoleClass:'6 kN',Height_M:10,PoleInspectionUB1000s:[{Id:1,ServiceRequestId:10,HeightAgl:600,PoleCircumference:980,UnitType:'Metric'}]},'class');
+ const imported={...p,...applyGridInspection(p,s,'10')};assert.ok(imported.geometryEstimates.basis.includes('nominal end dimensions'));
  assert.ok(imported.diameters.butt>imported.diameters.ground&&imported.diameters.ground>imported.diameters.tip);
  assert.ok(Math.abs(diameterAt(imported,.6)-.98/Math.PI)<1e-12);
  const descending=normalizeGridPole({Id:42,PoleInspectionUB1000s:[{Id:1,ServiceRequestId:10,HeightAgl:50,PoleCircumference:1000,UnitType:'Metric'},{Id:2,ServiceRequestId:10,HeightAgl:600,PoleCircumference:950,UnitType:'Metric'}]},'fit');
@@ -121,6 +135,37 @@ await check('Optional AR deconditioning blends uniformly and changes strength/ca
  assert.deepEqual(normaliseCase(JSON.parse(JSON.stringify(active))).arDeconditioning,true);assert.equal(arStrengthAt({...active,assetId:'different'},.6),1);assert.equal(arStrengthAt(defaultCase(),.6),1);
  assert.notEqual(structuralKey(active),structuralKey({...active,gridManager:{...snapshot,inspections:snapshot.inspections.map(s=>({...s,readings:s.readings.map(r=>({...r,ar:70}))}))}}));
  const zero={...active,gridManager:{...snapshot,inspections:snapshot.inspections.map(s=>({...s,readings:s.readings.map(r=>({...r,ar:0}))}))}};assert.equal(conditionAt(zero,0,0,.6).strength,0);assert.equal(solvePole(zero).timberLimitKN,0);assert.ok(solvePole({...zero,loadKN:0}).stations.every(s=>!Number.isNaN(s.usage)));
- const varied={...active,gridManager:{...snapshot,inspections:snapshot.inspections.map(s=>({...s,readings:[{...s.readings[0],heightM:.3,ar:60},{...s.readings[0],heightM:.9,ar:80},{...s.readings[0],heightM:.6,ar:null}]}))}};assert.ok(Math.abs(arStrengthAt(varied,.6)-.7)<1e-12);
+ const varied={...active,gridManager:{...snapshot,inspections:snapshot.inspections.map(s=>({...s,readings:[{...s.readings[0],heightM:.3,ar:60},{...s.readings[0],heightM:.9,ar:80},{...s.readings[0],heightM:.6,ar:null}]}))}};assert.equal(arStrengthAt(varied,.6),1);assert.equal(groupReadingsByHeight(varied.gridManager.inspections[0].readings).find(g=>g.heightM===.6).arSummary,'NaN');assert.notEqual(structuralKey(varied),structuralKey({...varied,gridManager:{...varied.gridManager,inspections:varied.gridManager.inspections.map(s=>({...s,readings:s.readings.filter(r=>r.ar!==null)}))}}));
 });
-console.log(`${passed} system integration checks passed including unit corrections and AGL dimensions.`);
+await check('NaN and infinite firmware AR results remain visible without invented degradation',()=>{
+ const s=normalizeGridPole({Id:42,PoleInspectionUB1000s:['NaN','Infinity','-Infinity',NaN,Infinity,-Infinity].map((Ar,i)=>({Id:i,ServiceRequestId:1,HeightAgl:i*100,UnitType:'Metric',Ar}))},'unknown');
+ assert.ok(s.inspections[0].readings.every(r=>r.ar===null));assert.ok(validGridSnapshot(JSON.parse(JSON.stringify(s))));
+ assert.ok(groupReadingsByHeight(s.inspections[0].readings).every(g=>g.arSummary==='NaN'));
+ const p={...defaultCase(),assetId:'unknown',arDeconditioning:true,gridManager:s};
+ assert.deepEqual(deconditioningSamples(p),[]);for(const z of [0,.1,.2,.3,.4,.5])assert.equal(arStrengthAt(p,z),1);
+ const repeat={...p,gridManager:{...s,inspections:[{...s.inspections[0],readings:[s.inspections[0].readings[0],{...s.inspections[0].readings[0],id:'valid',ar:65}]}]}};
+ assert.equal(arStrengthAt(repeat,0),.65);assert.equal(groupReadingsByHeight(repeat.gridManager.inspections[0].readings)[0].arSummary,'65 / NaN');
+});
+await check('ANSI species-specific class/length tables preserve nominal ends and measured sections',()=>{
+ const near=(a,b)=>assert.ok(Math.abs(a-b)<1e-10,`${a} != ${b}`);
+ for(const [species,table,stationIn] of [['western-red-cedar',5,47.5],['lodgepole-pine',6,46],['red-pine',6,46],['southern-pine',8,43],['douglas-fir-coastal',8,43],['western-larch',9,42]]){
+  const c=COUNTRIES.US.poleClasses.find(c=>c.speciesIds.includes(species)&&c.label==='Class 1 / 45 ft');
+  assert.ok(c);assert.match(c.source,new RegExp(`Table ${table}`));near(c.tipDiameterM*Math.PI/.0254,27);
+  const buttIn=stationIn+(stationIn-27)*6/(45-6);near(c.buttDiameterM*Math.PI/.0254,buttIn);
+  near((c.buttDiameterM+(c.tipDiameterM-c.buttDiameterM)*6/45)*Math.PI/.0254,stationIn);
+ }
+ const p={...defaultCase(),country:'US'},s=normalizeGridPole({Id:42,Species:'Western Red Cedar',PoleClass:'1/45',Height_Ft:45,PoleInspectionUB1000s:[{Id:1,ServiceRequestId:1,HeightAgl:2,PoleCircumference:46,UnitType:'Imperial',Ar:80}]},'cedar');
+ const imported={...p,...applyGridInspection(p,s,'1')},c=nominalPoleClass(imported,s,imported.length);
+ assert.ok(c);near(imported.length,45*.3048);near(imported.diameters.tip,c.tipDiameterM);near(imported.diameters.butt,c.buttDiameterM);near(diameterAt(imported,2*.0254),46*.0254/Math.PI);
+ near(imported.diameters.ground,c.buttDiameterM+(46*.0254/Math.PI-c.buttDiameterM)*imported.embedment/(imported.embedment+2*.0254));
+ assert.equal(gridClassLengthLabel(imported,s),'Class 1/45');assert.equal(validateCase(imported).length,0);
+ const oversized=structuredClone(s);oversized.inspections[0].readings[0].circumferenceM=54*.0254;
+ const adjusted={...p,...applyGridInspection(p,oversized,'1')};assert.ok(adjusted.diameters.butt>adjusted.diameters.ground);near(adjusted.diameters.tip,c.tipDiameterM);near(diameterAt(adjusted,2*.0254),54*.0254/Math.PI);assert.ok(adjusted.gridManager.warnings.some(w=>w.includes('conflict with nominal')));
+ const unsupported={...s,poleClass:'1/44'};assert.equal(nominalPoleClass(imported,unsupported,45*.3048),undefined);
+ assert.equal(nominalPoleClass(imported,{...s,poleClass:'1'},44*.3048),undefined);
+ assert.equal(gridClassLengthLabel(p,{...s,poleClass:'4',poleLengthM:40*.3048}),'Class 4/40');
+ const nz={...defaultCase(),country:'NZ',species:'radiata-pine'},n=normalizeGridPole({Id:43,PoleClass:'6 kN',Height_M:10},'NZ');
+ assert.equal(gridClassLengthLabel(nz,n),'6 kN / 10 m');assert.equal(gridClassLengthLabel(nz,{...n,poleClass:'6 kN / 10 m'}),'6 kN / 10 m');
+ assert.equal(nominalPoleClass(nz,{...n,poleClass:'6 kN / 10 m'},10).id,'nz-goldpine-10m-6kn');
+});
+console.log(`${passed} system integration checks passed including total-length imports, unknown AR gaps and ANSI nominal ends.`);

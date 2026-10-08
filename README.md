@@ -2,6 +2,9 @@
 
 **P28 · based on Carl Rathbone's Pole Laboratory P26**
 
+The footer build marker is defined in `src/domain/build.ts`. Increment its minor
+number once per published iteration (V28.1, V28.2, ...), not per local rebuild.
+
 Run `Start-Pole-Lab.ps1`, or `npm run dev -- --port 5192`, then open the URL printed
 by the server. P27 delivered the original requirements; P28 adds recorded Grid
 Manager measurements and Axonic links around one focused Asset ID. See the

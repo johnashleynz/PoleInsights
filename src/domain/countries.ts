@@ -1,4 +1,5 @@
 import type { UnitSystem } from "./units.ts";
+import {additionalAnsiClasses} from "./ansiDimensions.ts";
 
 export type CountryCode = "NZ" | "AU" | "US";
 export interface PoleClassDefinition {
@@ -517,7 +518,7 @@ export const COUNTRIES: Record<CountryCode, CountryConfig> = {
     embedmentRule:
       "Starting embedment heuristic: 10% of total pole length plus 2 ft. ANSI Table 8 groundline distances are not embedment recommendations.",
     embedment: (length) => length * 0.1 + 0.6096,
-    poleClasses: usClasses,
+    poleClasses: [...usClasses, ...additionalAnsiClasses],
   },
 };
 export function countryConfig(code: CountryCode | undefined) {
