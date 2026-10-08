@@ -1,4 +1,5 @@
 import { cavityGeometry } from "./cavityGeometry.ts";
+import {deconditioningHeights} from "../integrations/deconditioning.ts";
 import { groupReadingsByHeight, placeHeightLabels } from "../integrations/readingGroups.ts";
 import { makeProbePair, placeProbePair } from "./inspectionProbes.ts";
 import { useProfile } from "../workers/useProfile.ts";
@@ -146,6 +147,7 @@ function tubeGeometry(
     (_, j) => start + ((end - start) * j) / baseRows,
   );
   for (const s of p.diameterStations ?? []) if (s.heightM > start && s.heightM < end) axial.push(s.heightM);
+  if (kind === "pole") axial.push(...deconditioningHeights(p).filter(z=>z>=start&&z<=end));
   if (kind === "pole")
     for (const r of p.regions)
       if (
@@ -1070,7 +1072,7 @@ export default function PoleScene(props: SceneProps) {
             color: "#ffffff",
             roughness: 0.93,
             metalness: 0,
-            vertexColors: view !== "Setup",
+            vertexColors: view !== "Setup" || !!p.arDeconditioning,
             transparent: view === "Innerview",
             opacity: view === "Innerview" ? 0.07 : 1,
             depthWrite: view !== "Innerview",
@@ -1119,9 +1121,10 @@ export default function PoleScene(props: SceneProps) {
       }
     }
 
+    for (const endHeight of [top, -p.embedment]) {
     const capTexture = poleTopTexture(
       p,
-      top,
+      endHeight,
       view,
       result,
       stressDisplay,
@@ -1132,7 +1135,7 @@ export default function PoleScene(props: SceneProps) {
     capTexture.repeat.set(0.92, 0.92);
     capTexture.offset.set(0.04, 0.04);
     const cap = new T.Mesh(
-      new T.CircleGeometry(diameterAt(p, top) / 2, 64),
+      new T.CircleGeometry(diameterAt(p, endHeight) / 2, 64),
       view === "Stresses"
         ? new T.MeshBasicMaterial({
             map: capTexture,
@@ -1153,14 +1156,15 @@ export default function PoleScene(props: SceneProps) {
             depthWrite: view === "Setup",
           }),
     );
-    cap.rotation.x = -Math.PI / 2;
-    const capStation = result ? stationAt(result, top) : null;
+    cap.rotation.x = endHeight === top ? -Math.PI / 2 : Math.PI / 2;
+    const capStation = result ? stationAt(result, endHeight) : null;
     cap.position.set(
       (capStation?.ux ?? 0) * scale,
-      top + 0.001,
+      endHeight + (endHeight === top ? 0.001 : -0.001),
       -(capStation?.uy ?? 0) * scale,
     );
     s.model.add(cap);
+    }
     if (view !== "Stresses")
       p.regions.forEach((r, i) => {
         if (

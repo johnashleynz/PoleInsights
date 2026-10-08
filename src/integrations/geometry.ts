@@ -1,15 +1,23 @@
 import type { PoleCase } from "../domain/model.ts";
 import type { DiameterStation, GridPoleSnapshot } from "./types.ts";
 import {estimatedProfile} from "./estimatedProfile.ts";
+import {matchGridSpecies} from "./speciesMatch.ts";
+import {referenceMaterial} from "../domain/species.ts";
 
 export function applyGridInspection(pole: PoleCase, snapshot: GridPoleSnapshot, inspectionId: string | null): Partial<PoleCase> {
   const selected = snapshot.inspections.find(s => s.id === inspectionId);
   const agl = snapshot.heightAglM ?? null;
   const length = snapshot.lengthM ?? (agl !== null ? agl + pole.embedment : null);
   const embedment = snapshot.lengthM !== null && agl !== null ? snapshot.lengthM - agl : pole.embedment;
-  const lengthValid = length !== null && Number.isFinite(length) && length >= 3 && length <= 30 && embedment >= .4 && length > embedment + 1;
+  const lengthValid = length !== null && Number.isFinite(length) && length >= 3 && length <= 30 && embedment >= 0 && length > embedment + 1;
   const top = lengthValid ? length - embedment : pole.length - pole.embedment;
   const stations: DiameterStation[] = [], sourceWarnings = snapshot.sourceWarnings ?? snapshot.warnings, warnings = [...sourceWarnings];
+  const matched = matchGridSpecies(snapshot.species, pole.country ?? "NZ");
+  const material = matched && matched.id !== pole.species ? referenceMaterial(matched) : null;
+  const speciesUpdate = matched && material ? {species: matched.id, material, poleClass: null} : {};
+  if (material && matched) warnings.push(`Source species matched to ${matched.name}; its published material preset was applied. Review grade, treatment and reference assumptions.`);
+  else if (snapshot.species && !matched) warnings.push(`Source species "${snapshot.species}" could not be matched uniquely; existing species/material retained.`);
+  else if (matched && matched.id !== pole.species && !material) warnings.push(`Source species matched to ${matched.name}, but verified material properties are unavailable; existing species/material retained.`);
   if (length !== null && !lengthValid) warnings.push("Source length/AGL height is inconsistent or outside the supported model range; existing length and embedment retained.");
   for (const r of selected?.readings ?? []) {
     if (stations.length >= 64) {warnings.push("Only the first 64 usable circumference stations are applied in this MVP."); break;}
@@ -26,9 +34,9 @@ export function applyGridInspection(pole: PoleCase, snapshot: GridPoleSnapshot, 
   const clearPriorStations = !stations.length && pole.gridManager?.poleId === snapshot.poleId && pole.diameterStations?.every(s => s.inspectionId === inspectionId);
   if (!stations.length) warnings.push(clearPriorStations ? "No usable circumference stations in this inspection; entered diameter profile restored." : "No usable circumference stations in this inspection; existing diameter profile retained.");
   const offsetFromTip = pole.length - pole.embedment - (pole.loadHeight ?? pole.length - pole.embedment);
-  const profile = stations.length ? estimatedProfile(pole, snapshot, stations, lengthValid ? length! : pole.length, lengthValid ? embedment : pole.embedment) : null;
+  const profile = stations.length ? estimatedProfile({...pole, ...speciesUpdate}, snapshot, stations, lengthValid ? length! : pole.length, lengthValid ? embedment : pole.embedment) : null;
   if (profile) warnings.push(...profile.warnings);
-  return {assetId: snapshot.assetId, gridManager: {...snapshot, sourceWarnings, selectedInspectionId: inspectionId, warnings: [...new Set(warnings)]}, ...(profile ? {diameters: profile.diameters, geometryEstimates: {diameters: profile.keys, length: lengthValid && snapshot.lengthM === null, embedment: !(snapshot.lengthM !== null && agl !== null), basis: profile.basis}} : {}), ...(stations.length ? {diameterStations: stations.sort((a, b) => a.heightM - b.heightM)} : clearPriorStations ? {diameterStations: undefined} : {}), ...(lengthValid ? {length, embedment, loadHeight: Math.max(0, top - offsetFromTip)} : {})};
+  return {...speciesUpdate, assetId: snapshot.assetId, gridManager: {...snapshot, sourceWarnings, selectedInspectionId: inspectionId, warnings: [...new Set(warnings)]}, ...(profile ? {diameters: profile.diameters, geometryEstimates: {diameters: profile.keys, length: lengthValid && snapshot.lengthM === null, embedment: !(snapshot.lengthM !== null && agl !== null), basis: profile.basis}} : lengthValid ? {geometryEstimates: {diameters: pole.geometryEstimates?.diameters ?? [], length: snapshot.lengthM === null, embedment: !(snapshot.lengthM !== null && agl !== null), basis: pole.geometryEstimates?.basis ?? "Source AGL height plus assumed embedment; existing diameter profile retained."}} : {}), ...(stations.length ? {diameterStations: stations.sort((a, b) => a.heightM - b.heightM)} : clearPriorStations ? {diameterStations: undefined} : {}), ...(lengthValid ? {length, embedment, loadHeight: Math.max(0, top - offsetFromTip)} : {})};
 }
 
 export function overrideReadingUnit(snapshot: GridPoleSnapshot, readingId: string, unit: "mm" | "in" | undefined): GridPoleSnapshot {

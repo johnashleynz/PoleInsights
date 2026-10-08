@@ -1,7 +1,10 @@
 import {conditionAt,defectDistance} from '../domain/model.ts';
 import type {PoleCase,ViewMode} from '../domain/model.ts';
+import {arStrengthAt} from '../integrations/deconditioning.ts';
 export interface Raster {width:number;height:number;data:Uint8ClampedArray}
 export function defectAppearance(p:PoleCase,x:number,y:number,z:number,base:number[],view:ViewMode,atlas?:Raster):number[]{
+ const degradation=1-arStrengthAt(p,z);
+ if(degradation>0)base=base.map((v,i)=>v*(1-degradation*.65)+[145,95,65][i]*degradation*.65);
  const cond=conditionAt(p,x,y,z);if(!cond.knot&&!cond.voided&&cond.severity===0)return base;
  const region=p.regions.find(r=>defectDistance(p,r,x,y,z)<=1&&(cond.voided?(r.kind==='void'||r.kind==='drilling'):cond.knot?r.kind==='knot':r.kind==='decay'));
  if(!region)return base;const q=Math.min(1,Math.max(0,defectDistance(p,region,x,y,z))),sh=region.shape;

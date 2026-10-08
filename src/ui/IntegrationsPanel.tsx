@@ -1,10 +1,17 @@
 import {useEffect, useRef, useState} from "react";
-import {ExternalLink, Search, Plug} from "lucide-react";
+import {ExternalLink, LogIn, LogOut, Plug} from "lucide-react";
 import type {PoleCase} from "../domain/model.ts";
 import {axonicUrl, validProfile, type SystemPreferences} from "../integrations/preferences.ts";
 import {applyGridInspection, overrideReadingUnit, validGridSnapshot} from "../integrations/geometry.ts";
 import type {GridPoleSnapshot} from "../integrations/types.ts";
-import {formatSmallLength} from "../domain/units.ts";
+import {formatSmallLength, displayPoleLength, unitLabels} from "../domain/units.ts";
+import {poleTagTone} from "../integrations/poleTag.ts";
+import {deconditioningSamples} from "../integrations/deconditioning.ts";
+import {openGridRecord} from "../integrations/gridRecordWindow.ts";
+
+function PoleTag({tag, fallback = "Not recorded"}: {tag: string | null; fallback?: string}) {
+  return <span className="pole-tag"><span className={`pole-tag-dot pole-tag-${poleTagTone(tag)}`} aria-hidden="true"/>{tag ?? fallback}</span>;
+}
 
 async function gridRequest(path: string, signal: AbortSignal) {
   const response = await fetch(`${import.meta.env.BASE_URL}api/grid-manager/${path}`, {signal, headers: {Accept: "application/json"}});
@@ -13,7 +20,7 @@ async function gridRequest(path: string, signal: AbortSignal) {
   if (!response.ok) throw new Error(data.error ?? "Grid Manager request failed.");
   return data;
 }
-export default function IntegrationsPanel({pole, preferences, onPreferences, onChange}: {pole: PoleCase; preferences: SystemPreferences; onPreferences: (p: SystemPreferences) => void; onChange: (p: Partial<PoleCase>) => void}) {
+export default function IntegrationsPanel({pole, preferences, onPreferences, onChange, onSection}: {pole: PoleCase; preferences: SystemPreferences; onPreferences: (p: SystemPreferences) => void; onChange: (p: Partial<PoleCase>) => void; onSection: (z: number) => void}) {
   const [busy, setBusy] = useState(false), [connected, setConnected] = useState(false), [error, setError] = useState("");
   const request = useRef<AbortController | null>(null);
   const currentPole = useRef(pole); currentPole.current = pole;
@@ -21,10 +28,6 @@ export default function IntegrationsPanel({pole, preferences, onPreferences, onC
   useEffect(() => {if (!preferences.gridManager) {request.current?.abort(); setBusy(false); setConnected(false);}}, [preferences.gridManager]);
   useEffect(() => {request.current?.abort(); setBusy(false); setError("");}, [pole.assetId]);
   const assetId = pole.assetId ?? "", profile = pole.axonic?.profile ?? preferences.lastProfile, url = axonicUrl(profile, assetId);
-  function changeAsset(value: string) {
-    request.current?.abort();
-    onChange({assetId: value, ...(pole.axonic ? {axonic: {profile, assetId: value}} : {}), gridManager: undefined, diameterStations: undefined});
-  }
   function rememberProfile() {
     if (validProfile(profile)) onPreferences({...preferences, lastProfile: profile, recentProfiles: [profile, ...preferences.recentProfiles.filter(p => p !== profile)].slice(0, 12)});
   }
@@ -45,24 +48,24 @@ export default function IntegrationsPanel({pole, preferences, onPreferences, onC
   const snapshot = pole.gridManager, inspection = snapshot?.inspections.find(s => s.id === snapshot.selectedInspectionId);
   function selectInspection(snapshot: GridPoleSnapshot, id: string) {onChange(applyGridInspection(pole, snapshot, id));}
   return <>
-    <div className="integration-search">
-      <label className="select-field">Asset ID<input aria-label="Asset ID" maxLength={255} value={assetId} onChange={e => changeAsset(e.target.value)} onKeyDown={e => {if (e.key === "Enter" && preferences.gridManager && assetId.trim() && !busy) {e.preventDefault(); void connect(true);}}}/></label>
-      {preferences.gridManager && <button className="text-control" title="Retrieve this asset from Grid Manager" aria-label="Retrieve asset from Grid Manager" disabled={busy || !assetId.trim()} onClick={() => void connect(true)}><Search size={15}/></button>}
-    </div>
     {preferences.axonic && <details className="integration-section"><summary>Axonic</summary><div className="integration-fields">
       <label className="select-field">Organisation profile<input aria-label="Axonic organisation profile" list={`axonic-profiles-${pole.id}`} maxLength={100} value={profile} onChange={e => onChange({axonic: {profile: e.target.value, assetId}})} onBlur={rememberProfile}/></label>
       <datalist id={`axonic-profiles-${pole.id}`}>{preferences.recentProfiles.map(p => <option key={p} value={p}/>)}</datalist>
       {url && <a className="integration-link" href={url} onClick={rememberProfile}><ExternalLink size={14}/>Open in Axonic</a>}
     </div></details>}
-    {preferences.gridManager && <details className="integration-section" open><summary>Grid Manager</summary><div className="integration-fields">
+    {preferences.gridManager && <details className="integration-section"><summary>Grid Manager</summary><div className="integration-fields">
+      <button className="link-button integration-link" disabled={busy || !assetId.trim()} onClick={() => void connect(true)}><LogIn size={14}/>Load pole data from Grid Manager</button>
+      {snapshot?.recordUrl ? <a className="integration-link" href={snapshot.recordUrl} target="_blank" rel="noopener noreferrer" onClick={e=>{if(e.button===0&&!e.ctrlKey&&!e.metaKey&&!e.shiftKey&&!e.altKey&&openGridRecord(snapshot.recordUrl!))e.preventDefault();}}><LogOut size={14}/>Open pole record in Grid Manager</a> : <button className="link-button integration-link" disabled title="Load this pole's data to obtain its record link"><LogOut size={14}/>Open pole record in Grid Manager</button>}
       <button className="text-control" disabled={busy} onClick={() => void connect()}><Plug size={14}/>{connected ? "Reconnect" : "Connect"}</button>
       <span className="integration-status" role="status">{busy ? "Connecting..." : connected ? "Connected" : "Not connected"}</span>
       {error && <p className="integration-error" role="alert">{error}</p>}
       {snapshot && <>
-        <dl className="integration-summary"><div><dt>Pole</dt><dd>{snapshot.assetId}</dd></div><div><dt>Species / class</dt><dd>{snapshot.species ?? "Unknown"} / {snapshot.poleClass ?? "Unknown"}</dd></div><div><dt>Installed</dt><dd>{snapshot.installYear ?? "Unknown"}</dd></div><div><dt>Latest survey</dt><dd>{snapshot.lastSurvey ? new Date(snapshot.lastSurvey).toLocaleDateString() : "Unknown"}</dd></div><div><dt>Height AGL</dt><dd>{snapshot.heightAglM == null ? "Unknown" : `${snapshot.heightAglM.toFixed(2)} m`}</dd></div><div><dt>Survey length</dt><dd>{snapshot.lengthM === null ? "Unknown" : `${snapshot.lengthM.toFixed(2)} m`}</dd></div><div><dt>Latest tag</dt><dd>{snapshot.tag ?? "Not recorded"}</dd></div></dl>
-        {snapshot.recordUrl ? <a className="integration-link" href={snapshot.recordUrl} target="_blank" rel="noopener noreferrer"><ExternalLink size={14}/>Open Grid Manager record</a> : <span className="integration-status">Record link not configured.</span>}
+        <label className="check-row"><input type="checkbox" checked={!!pole.arDeconditioning} disabled={!deconditioningSamples(pole).length} onChange={e=>onChange({arDeconditioning:e.target.checked})}/>Show pole degradation based on attenuation ratio (AR) values</label>
+        {pole.arDeconditioning && <><p className="integration-status">Illustrative AR-to-strength assumption; uniform across the section, stiffness unchanged.</p><details><summary>Deconditioning assumptions</summary><p className="integration-status">Lowest AR at repeated heights; {formatSmallLength(.3,pole.unitSystem ?? "metric")} soft ends. Up to 64 heights; AR above 100% gives no strength increase. Not a calibrated strength assessment.</p></details>{deconditioningSamples(pole).filter(s=>s.ar<100).map(s=><button className="link-button integration-link" key={s.heightM} onClick={()=>onSection(s.heightM)}>Deconditioning · AR = {s.ar}% · {formatSmallLength(s.heightM,pole.unitSystem ?? "metric")} AGL</button>)}</>}
+        {!deconditioningSamples(pole).length && <p className="integration-status">No usable AR values at valid test heights in this inspection.</p>}
+        <dl className="integration-summary"><div><dt>Pole</dt><dd>{snapshot.assetId}</dd></div><div><dt>Species / class</dt><dd>{snapshot.species ?? "Unknown"} / {snapshot.poleClass ?? "Unknown"}</dd></div><div><dt>Installed</dt><dd>{snapshot.installYear ?? "Unknown"}</dd></div><div><dt>Latest survey</dt><dd>{snapshot.lastSurvey ? new Date(snapshot.lastSurvey).toLocaleDateString() : "Unknown"}</dd></div><div><dt>Height AGL</dt><dd>{snapshot.heightAglM == null ? "Unknown" : `${displayPoleLength(snapshot.heightAglM, pole.unitSystem ?? "metric").toFixed(2)} ${unitLabels[pole.unitSystem ?? "metric"].poleLength}`}</dd></div><div><dt>Survey length</dt><dd>{snapshot.lengthM === null ? "Unknown" : `${displayPoleLength(snapshot.lengthM, pole.unitSystem ?? "metric").toFixed(2)} ${unitLabels[pole.unitSystem ?? "metric"].poleLength}`}</dd></div><div><dt>Latest tag</dt><dd><PoleTag tag={snapshot.tag}/></dd></div></dl>
         <label className="select-field">Inspection / service request<select aria-label="Grid Manager inspection" value={snapshot.selectedInspectionId ?? ""} onChange={e => selectInspection(snapshot, e.target.value)} disabled={!snapshot.inspections.length}>{!snapshot.inspections.length && <option value="">No inspections</option>}{snapshot.inspections.map(s => <option key={s.id} value={s.id}>SR {s.id} · {s.date ? new Date(s.date).toLocaleDateString() : "Date unknown"}</option>)}</select></label>
-        {inspection && <><p className="integration-status">Inspector: {inspection.inspector ?? "Unknown"} · Tag: {inspection.tag ?? "Not recorded"}</p><div className="integration-table-wrap"><table className="integration-table"><thead><tr><th>Height AGL</th><th>Girth</th><th>AR</th><th>RSM</th><th>Units</th></tr></thead><tbody>{inspection.readings.map(r => <tr key={r.id}><td title={`Recorded: ${r.rawHeight ?? "-"} ${r.rawUnit ?? "unknown unit"}`}>{r.heightM === null ? `${r.rawHeight ?? "-"} (${r.rawUnit ?? "?"})` : formatSmallLength(r.heightM, pole.unitSystem ?? "metric")}</td><td title={`Recorded: ${r.rawCircumference ?? "-"} ${r.rawUnit ?? "unknown unit"}`}>{r.circumferenceM === null ? `${r.rawCircumference ?? "-"} (${r.rawUnit ?? "?"})` : formatSmallLength(r.circumferenceM, pole.unitSystem ?? "metric")}</td><td>{r.ar ?? "-"}</td><td>{r.rsm ?? "-"}</td><td><select aria-label={`Units for reading ${r.id}`} value={r.unitOverride ?? ""} onChange={e => onChange(applyGridInspection(pole, overrideReadingUnit(snapshot, r.id, e.target.value === "mm" || e.target.value === "in" ? e.target.value : undefined), inspection.id))}><option value="">Recorded</option><option value="mm">mm</option><option value="in">in</option></select></td></tr>)}</tbody></table></div></>}
+        {inspection && <><p className="integration-status">Inspector: {inspection.inspector ?? "Unknown"} · Tag: <PoleTag tag={inspection.tag}/></p><div className="integration-table-wrap"><table className="integration-table"><thead><tr><th>Height AGL</th><th>Girth</th><th>AR</th><th>RSM</th><th>Units</th></tr></thead><tbody>{inspection.readings.map(r => <tr key={r.id}><td title={`Recorded: ${r.rawHeight ?? "-"} ${r.rawUnit ?? "unknown unit"}`}>{r.heightM === null ? `${r.rawHeight ?? "-"} (${r.rawUnit ?? "?"})` : formatSmallLength(r.heightM, pole.unitSystem ?? "metric")}</td><td title={`Recorded: ${r.rawCircumference ?? "-"} ${r.rawUnit ?? "unknown unit"}`}>{r.circumferenceM === null ? `${r.rawCircumference ?? "-"} (${r.rawUnit ?? "?"})` : formatSmallLength(r.circumferenceM, pole.unitSystem ?? "metric")}</td><td>{r.ar ?? "-"}</td><td>{r.rsm ?? "-"}</td><td><select aria-label={`Units for reading ${r.id}`} value={r.unitOverride ?? ""} onChange={e => onChange(applyGridInspection(pole, overrideReadingUnit(snapshot, r.id, e.target.value === "mm" || e.target.value === "in" ? e.target.value : undefined), inspection.id))}><option value="">Recorded</option><option value="mm">mm</option><option value="in">in</option></select></td></tr>)}</tbody></table></div></>}
         <details><summary>Source and import status</summary><p className="integration-status">Grid Manager · retrieved {new Date(snapshot.fetchedAt).toLocaleString()}</p>{snapshot.warnings.map(w => <p className="integration-status" key={w}>{w}</p>)}</details>
       </>}
     </div></details>}

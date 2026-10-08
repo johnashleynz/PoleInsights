@@ -14,3 +14,4 @@ Updated 8 October 2026. These are not delivered features.
 | P28-TODO-008 | Verify Axonic OS launching. | Test installed handler, matching-profile login and missing-handler behaviour on supported Windows/mobile clients. |
 | P28-TODO-009 | Qualify structural assessment. | Carry forward P27 decay calibration, full-scale tests, local FE, regional table verification, uncertainty and Safe-to-Climb governance. |
 | P28-TODO-010 | Review and promote P28. | Carl restores his P26 media, runs full build and reviews source assumptions. Explicit merge/promotion decision; no automatic main/DNS change. |
+| P28-TODO-011 | Calibrate optional AR Deconditioning. | Validate strength relationship and spatial/end extent against physical tests; review repeat aggregation, unit/data quality and interactions with explicit decay. Current lowest-AR direct strength multiplication is illustrative only. No AR-derived stiffness law or certification. |

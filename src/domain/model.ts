@@ -2,6 +2,7 @@ import { polygonDistance, simplePolygon } from "./sketch.ts";
 import type { DiameterStation, GridPoleSnapshot } from "../integrations/types.ts";
 import {validGridSnapshot, applyGridInspection} from "../integrations/geometry.ts";
 import {validProfile} from "../integrations/preferences.ts";
+import {arStrengthAt} from "../integrations/deconditioning.ts";
 import {
   materialErrors,
   speciesById,
@@ -9,7 +10,7 @@ import {
   type PoleMaterial,
 } from "./species.ts";
 import type { CountryCode } from "./countries.ts";
-import type { UnitSystem } from "./units.ts";
+import {displayPoleLength, unitLabels, type UnitSystem} from "./units.ts";
 export type ViewMode = "Setup" | "Innerview" | "Stresses";
 export type StressDisplay =
   "stress" | "utilisation" | "longitudinal" | "transverse" | "shear";
@@ -89,6 +90,7 @@ export interface PoleCase {
   assetId?: string;
   axonic?: {profile: string; assetId: string};
   gridManager?: GridPoleSnapshot;
+  arDeconditioning?: boolean;
   diameterStations?: DiameterStation[];
   geometryEstimates?: {diameters: ("butt" | "ground" | "tip")[]; length: boolean; embedment: boolean; basis: string};
   country?: CountryCode;
@@ -290,7 +292,7 @@ export function diameterAt(p: PoleCase, z: number) {
     }
     return points[points.length - 1][1];
   }
-  return z <= 0
+  return z <= 0 && p.embedment > 0
     ? d.ground + ((d.ground - d.butt) * z) / p.embedment
     : d.ground + ((d.tip - d.ground) * z) / (p.length - p.embedment);
 }
@@ -313,6 +315,7 @@ export function validateCase(p: PoleCase): string[] {
     errors.push("Select a supported country.");
   if (p.axonic !== undefined && (!p.axonic || typeof p.axonic.profile !== "string" || p.axonic.profile !== "" && !validProfile(p.axonic.profile) || typeof p.axonic.assetId !== "string" || p.axonic.assetId.length > 255)) errors.push("Enter a valid Axonic profile and asset ID.");
   if (p.gridManager !== undefined && !validGridSnapshot(p.gridManager)) errors.push("Grid Manager data has an unsupported format.");
+  if (p.arDeconditioning !== undefined && typeof p.arDeconditioning !== "boolean") errors.push("AR deconditioning must be enabled or disabled.");
   if (p.diameterStations !== undefined && (!Array.isArray(p.diameterStations) || p.diameterStations.length > 64 || p.diameterStations.some((s, i, all) => !s || !Number.isFinite(s.heightM) || s.heightM < -p.embedment || s.heightM > p.length - p.embedment || !Number.isFinite(s.diameterM) || s.diameterM < .07 || s.diameterM > 1.2 || typeof s.inspectionId !== "string" || typeof s.readingId !== "string" || all.some((other, j) => j < i && other.heightM === s.heightM)))) errors.push("Use at most 64 unique measured diameter stations within the pole and 70-1,200 mm in diameter.");
   if (p.geometryEstimates !== undefined && (!p.geometryEstimates || !Array.isArray(p.geometryEstimates.diameters) || p.geometryEstimates.diameters.some(k=>!["butt","ground","tip"].includes(k)) || typeof p.geometryEstimates.length !== "boolean" || typeof p.geometryEstimates.embedment !== "boolean" || typeof p.geometryEstimates.basis !== "string")) errors.push("Invalid estimated geometry provenance.");
   if (
@@ -325,10 +328,10 @@ export function validateCase(p: PoleCase): string[] {
     errors.push("Total length must be between 3 and 30 m.");
   if (
     !Number.isFinite(p.embedment) ||
-    p.embedment < 0.4 ||
+    p.embedment < 0 ||
     p.embedment >= p.length - 1
   )
-    errors.push("Embedment must leave at least 1 m above ground.");
+    errors.push(`Embedment must be non-negative and leave more than ${displayPoleLength(1, p.unitSystem === "imperial" ? "imperial" : "metric").toFixed(p.unitSystem === "imperial" ? 2 : 0)} ${unitLabels[p.unitSystem === "imperial" ? "imperial" : "metric"].poleLength} above ground.`);
   if (!Number.isFinite(p.loadKN) || p.loadKN < 0 || p.loadKN > 50)
     errors.push("Load must be between 0 and 50 kN.");
   const loadZ = loadApplicationHeight(p);
@@ -594,6 +597,10 @@ export function conditionAt(p: PoleCase, x: number, y: number, z: number) {
       severity = Math.max(severity, s);
     }
   }
+  const arStrength = arStrengthAt(p, z);
+  tension *= arStrength;
+  compression *= arStrength;
+  severity = Math.max(severity, 1 - arStrength);
   return {
     e,
     strength: Math.min(tension, compression),

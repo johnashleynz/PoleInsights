@@ -2,18 +2,55 @@
 
 ## P28 Update: 8 October 2026
 
+### Optional AR Deconditioning
+
+The per-pole Grid Manager checkbox is off by default. It derives a Deconditioning
+profile from the selected inspection's usable AR/height pairs (not other SRs).
+Repeated heights use the lowest available AR; raw observations remain intact.
+Up to 64 unique heights are used in ascending height order. Unknown/negative AR
+or unknown/out-of-pole heights are ignored; values above 100% confer no increase.
+Strength factor is AR/100, multiplied by existing fibre-strength factors,
+uniformly across the section. Area and elastic modulus are unchanged. Intervals
+use smoothstep interpolation, with 0.30 m smooth ends back to sound strength.
+This longitudinal spread is assumed, not measured.
+
+The shared condition field feeds capacity/utilisation calculations, including
+the beam and height profile. Stress demand at fixed load remains unchanged when
+stiffness is unchanged. Pole shading and section tint reveal the assumed zone;
+selecting a Deconditioning station shows its effective AR in the section panel.
+The checkbox/source data persist in pole JSON, independently of global settings.
+Asset ID edits clear readings, heights, imported diameters and the checkbox;
+Reset poles restores source-free sound examples. A mismatching source Asset ID
+is never used for Deconditioning. Changing SR or correcting reading units
+recomputes the profile and structural-history key.
+
+This optional direct AR-to-strength conversion is owner-requested and explicitly
+illustrative. It is not a validated structural assessment, decay localisation,
+stiffness calibration, RSM calculation or Safe-to-Climb decision. It supersedes
+the original spike's no-AR-strength-conversion limitation only when enabled.
+
 Core integration was published in commit 197d112. The owner confirmed Cloudflare
 OTP, OAuth and meaningful retrieval. Latest P28 refinements below are local until
 committed/deployed. The dated original spike notes following this section are
 historical where superseded here. Full current deployment: docs/DEPLOYMENT.md.
 
-- One focused case Asset ID drives Axonic and Grid Manager. Recent profile/link
-  are below it, collapsed; retrieval icon is beside it. Legacy separate Axonic ID
+- One focused case Asset ID drives Axonic and Grid Manager. Integration sections
+  follow basic pole dimensions and start collapsed. Grid Manager has inbound Load
+  pole data and outbound Open pole record hyperlink-style actions. Legacy separate Axonic ID
   is normalised to the case ID. ID edits abort lookup and clear previous records
   and stations. Visible diameter inputs remain assumptions until a new import.
 - Actual height comes only from pole AGL metadata/explicit survey total length.
+  Source AGL/length summaries use selected units. AGL updates the pole even when
+  no usable circumference readings exist.
   UB1000 test-zone heights do not establish overall pole height. AGL plus assumed
   embedment gives estimated total length; both explicit lengths give embedment.
+- Source species is now matched against catalogue IDs, common/botanical names,
+  known aliases and conservative minor spelling differences. Regional matches
+  disambiguate names; ambiguous names remain unchanged with a warning. A changed
+  species applies its verified published material preset, recorded as an import
+  review warning. Same-species imports preserve manual material values. A match
+  without verified properties retains the existing species/material. This
+  supersedes the original spike's metadata-only species treatment below.
 - Measured circumference/pi stations remain exact. Unmeasured anchors are now
   recomputed, rather than joined to unrelated defaults. A supported source class
   scoped to current species/country (or selected class when no source class exists)

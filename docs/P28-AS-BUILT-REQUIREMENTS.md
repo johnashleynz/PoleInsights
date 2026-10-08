@@ -40,7 +40,7 @@ FR-003/FR-004; no REQ4 was supplied. Integration input is recorded separately in
 | ID | User Story | Acceptance | Status |
 |---|---|---|---|
 | FR-014 | As a user, I want remembered global preferences. | Detect/Axonic/Grid Manager toggles and recent profiles persist locally; no credentials in localStorage. | Implemented |
-| FR-015 | As a user, I want one focused Asset ID for external records. | One editable field; retrieval beside it; collapsible Axonic profile/link below; Grid Manager heading without 2.0. ID changes abort lookup and clear previous source/stations; entered dimensions remain assumptions. | Implemented |
+| FR-015 | As a user, I want one focused Asset ID for external records. | One editable field at the top; collapsed Axonic and Grid Manager sections below basic pole dimensions. Grid Manager provides inbound Load pole data and outbound Open pole record links; the latter uses the returned internal ID. ID changes abort lookup and clear previous source/stations; entered dimensions remain assumptions. | Implemented |
 | FR-016 | As an Axonic user, I want to launch the actual pole. | axonic://profile/encoded-ID; recent user-entered profiles only, per-pole profile and saved JSON. Installed handler/profile login required; no API existence probe. | Implemented; OS verification open |
 | FR-017 | As a Grid Manager user, I want exact lookup. | Server-side OAuth/OData, escaped business ID, explicit no-match/ambiguous/error states, returned internal-ID record link. One configured account, not global account selection. | Live training lookup verified |
 | FR-018 | As an inspector, I want SR selection and metadata. | Latest dated SR by default, date/inspector/tag, all raw readings; older SR selection; empty/paginated history explicit. | Implemented; multi-SR fixture-tested |
@@ -52,12 +52,13 @@ FR-003/FR-004; no REQ4 was supplied. Integration input is recorded separately in
 | FR-024 | As a reviewer, I want provenance saved with cases. | JSON stores profile/snapshot/SR/unit corrections/stations, no secrets or global preferences. Legacy separate Axonic IDs normalised to canonical ID. | Implemented |
 | FR-025 | As an owner, I want secure hosted integration. | Pages Function verifies Access issuer/audience/signature/expiry and fails closed; encrypted OAuth secrets are server-only. Approved users share the configured training-account scope. | Implemented; owner connected |
 | FR-026 | As a maintainer, I want a lightweight handoff. | Cumulative changelog, requirements, runbooks and source ZIP/manifest; omit media binaries, credentials and build/dependency caches. | P28 handoff |
+| FR-027 | As a reviewer, I want optional AR-derived Deconditioning for the focused pole. | Off by default; selected SR only, valid per-reading heights/AR, lowest repeat AR at each height, up to 64 stations. AR/100 directly multiplies fibre strength uniformly across the section, not stiffness or area; no strength increase above 100%. Smooth blending between soundings and 0.30 m soft ends. Pole/section tint, clickable zones and effective AR label; shared beam/section/height-capacity calculations. JSON persists the toggle and source readings. Asset edits and Reset poles clear source heights, AR and the toggle. Clearly labelled uncalibrated illustrative assumption. | Implemented |
 
 ## Non-Functional Acceptance and Limits
 
 - NFR-001: Preserve P26; full-source handoff goes in a new directory, not blindly over Carl's edits.
 - NFR-002: SI calculations, input validation and backward JSON compatibility are regression-tested.
-- NFR-003: No certified Safe-to-Climb, ultimate fracture or AR-to-strength inference. RSM deliberately unavailable.
+- NFR-003: No certified Safe-to-Climb, ultimate fracture or validated AR-to-strength inference. Optional direct AR% strength scaling is an explicitly labelled illustrative assumption, not calibration. RSM deliberately unavailable.
 - NFR-004: Responsive stable UI, one focus, label-height and stale-import regression checks.
 - NFR-005: npm test plus complete npm run build gate; independent hosted smoke tests distinguish reported from automated evidence.
 - NFR-006: No secrets in repo/bundle/browser; .env.local and Cloudflare secrets/settings remain separate. Rotate disclosed secrets.

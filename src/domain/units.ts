@@ -18,7 +18,11 @@ export function displayForce(kN:number, system:UnitSystem){return system==='metr
 export function forceFromDisplay(value:number, system:UnitSystem){return system==='metric'?value:value/KN_TO_LBF;}
 export function displayStress(mPa:number, system:UnitSystem){return system==='metric'?mPa:mPa*MPA_TO_KPSI;}
 export function displayMoment(kNm:number, system:UnitSystem){return system==='metric'?kNm:kNm*KNM_TO_LBF_FT;}
-export function formatFeetInches(metres:number,digits=1){const inches=metres*M_TO_FT*12,feet=Math.floor(inches/12),remaining=inches-feet*12;return `${feet} ft ${remaining.toFixed(digits)} in`;}
+export function formatFeetInches(metres:number,digits=1){
+ const scale=10**digits,total=Math.round(Math.abs(metres)*M_TO_FT*12*scale),perFoot=12*scale;
+ const feet=Math.floor(total/perFoot),remaining=(total%perFoot)/scale,sign=metres<0&&total>0?'-':'';
+ return remaining===0?`${sign}${feet.toFixed(1)} ft`:`${sign}${feet} ft ${remaining.toFixed(digits)} in`;
+}
 export function formatPoleLength(metres:number, system:UnitSystem, digits=2){return system==='metric'?`${metres.toFixed(digits)} m`:formatFeetInches(metres,Math.min(digits,2));}
 export function formatSmallLength(metres:number, system:UnitSystem, digits=0){return `${displaySmallLength(metres,system).toFixed(digits)} ${unitLabels[system].smallLength}`;}
 export function formatForce(kN:number, system:UnitSystem, digits=2){return `${displayForce(kN,system).toFixed(digits)} ${unitLabels[system].force}`;}

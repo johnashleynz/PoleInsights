@@ -57,6 +57,7 @@ export {roundDefaults,roundValues,type RoundOptions};
 /** Signed longitudinal beam bending check. Defect factors remain illustrative. */
 export function bendingResistance(m:PoleMaterial,stress:number,c:{tension:number;compression:number}) {const factor=stress>=0?c.tension:c.compression;return (m.basis==='illustrative'?(stress>=0?m.tension:m.compression):m.bending)*factor;}
 export function soundStrength(m:PoleMaterial){return m.basis==='illustrative'?m.tension:m.bending;}
+export function strengthUsage(demand:number,resistance:number){return resistance===0?(demand===0?0:Infinity):Math.abs(demand)/resistance;}
 export function materialDescription(m:PoleMaterial){return m.basis==='illustrative'?`Teaching values · E ${(m.E/1e9).toFixed(2)} GPa · tension ${(m.tension/1e6).toFixed(1)} / compression ${(m.compression/1e6).toFixed(1)} MPa`:`${m.basis==='user-bending'?'User-entered':'Published reference'} · E ${(m.E/1e9).toFixed(3)} GPa · bending ${(m.bending/1e6).toFixed(2)} MPa`;}
 export function materialErrors(species:string,m:PoleMaterial):string[]{
  if(!speciesById(species))return ['Select a supported pole species.'];

@@ -7,14 +7,28 @@ import {structuralKey, resetHistoryOnGeometry} from '../src/analysis/nonlinear.t
 import {solvePole} from '../src/analysis/beam.ts';
 import {onRequest} from '../functions/api/grid-manager/[[path]].ts';
 import {groupReadingsByHeight, placeHeightLabels} from '../src/integrations/readingGroups.ts';
+import {poleTagTone} from '../src/integrations/poleTag.ts';
+import {matchGridSpecies} from '../src/integrations/speciesMatch.ts';
+import {arStrengthAt,deconditioningSamples,AR_END_BLEND_M} from '../src/integrations/deconditioning.ts';
+import {conditionAt} from '../src/domain/model.ts';
+import {prepareHeightProfile,profileFromBasis} from '../src/analysis/heightProfile.ts';
+import {defectAppearance} from '../src/scene/defectAppearance.ts';
 
 let passed = 0;
+assert.equal(poleTagTone('OK'),'green');assert.equal(poleTagTone('Red Tag'),'red');assert.equal(poleTagTone('Reinspect in 5 Years'),'yellow');assert.equal(poleTagTone('Pole Not Found'),'neutral');assert.equal(poleTagTone('Custom customer assessment'),'neutral');assert.equal(poleTagTone(null),'neutral');
 async function check(name, fn) {await fn(); passed++; console.log(`PASS ${name}`);}
 const raw = {Id:1495480, CustomerPoleId:'165482', Species:'Southern Yellow Pine', PoleClass:'6 kN', InstallYear:1993, LastSurvey:'2026-08-18T10:51:00Z', LastPoleStructureTag:'OK', PoleInspectionUB1000s:[
  {Id:1, ServiceRequestId:10, HeightAgl:50, PoleCircumference:'1000', UnitType:'mm', Ar:74, ServiceRequest:{Id:10, UtcCalendarDateTime:'2026-08-18T10:51:00Z', PoleTag:'OK', InspectorInitials:'JAA', PoleStructureInspectionVisual:{Length:11, LengthUnit:'m', InspectionDate:'2026-08-18T10:51:00Z'}}},
  {Id:2, ServiceRequestId:10, HeightAgl:600, PoleCircumference:'950', UnitType:'mm', Ar:75},
  {Id:3, ServiceRequestId:9, HeightAgl:24, PoleCircumference:'40', UnitType:'inches', Ar:60, ServiceRequest:{Id:9, UtcCalendarDateTime:'2025-08-18T10:51:00Z', PoleTag:'Reinspect in 5 years'}},
 ]};
+await check('Species soft matching and AGL apply without circumference samples',()=>{
+ assert.equal(matchGridSpecies('Western Red Cedar','US').id,'western-red-cedar');assert.equal(matchGridSpecies('Western red ceder','US').id,'western-red-cedar');assert.equal(matchGridSpecies('Pinus radiata','AU').id,'radiata-pine-australia');assert.equal(matchGridSpecies('Southern Yellow Pine','US').id,'southern-pine');assert.equal(matchGridSpecies('Pine','US'),null);assert.equal(matchGridSpecies('Unknown tree','US'),null);
+ const p={...defaultCase(),country:'US',unitSystem:'imperial'},s=normalizeGridPole({...raw,Species:'Western Red Cedar',Height_M:16.76,PoleInspectionUB1000s:[]},'CH031617V2');s.lengthM=null;s.heightAglM=16.76;const imported={...p,...applyGridInspection(p,s,null)};
+ assert.equal(imported.species,'western-red-cedar');assert.equal(imported.material.referenceId,'ansi-o5.1-2022-western-red-cedar');assert.ok(Math.abs(imported.length-imported.embedment-16.76)<1e-10);assert.equal(imported.geometryEstimates.length,true);assert.equal(validateCase(imported).length,0);
+ const custom={...imported,material:{basis:'user-bending',E:9e9,bending:35e6,source:'Test report'}};assert.deepEqual({...custom,...applyGridInspection(custom,s,null)}.material,custom.material);
+ assert.equal(applyGridInspection(p,{...s,species:'Unknown tree'},null).species,undefined);
+});
 await check('Latest SR, explicit metric/imperial units and verbatim tags',()=>{const s=normalizeGridPole(raw,'165482'); assert.equal(s.selectedInspectionId,'10'); assert.equal(s.inspections[1].tag,'Reinspect in 5 years'); assert.equal(s.inspections[0].readings[0].heightM,.05); assert.equal(s.inspections[1].readings[0].circumferenceM,1.016); assert.ok(Math.abs(s.inspections[1].readings[0].heightM-.6096)<1e-12); assert.equal(s.lengthM,11); assert.equal(s.inspections[0].readings[0].rsm,null); assert.ok(validGridSnapshot(s));});
 await check('Unknown codes and NaN do not fabricate dimensions or results',()=>{const s=normalizeGridPole({...raw,PoleInspectionUB1000s:[{Id:4,HeightAgl:50,PoleCircumference:'NaN',UnitType:'0',Ar:'NaN'}]},'165482'); assert.equal(s.inspections[0].readings[0].heightM,null); assert.equal(s.inspections[0].readings[0].ar,null); assert.ok(s.warnings.some(x=>x.includes('Unmapped'))); const mapped=normalizeGridPole({...raw,PoleInspectionUB1000s:[{Id:4,HeightAgl:50,PoleCircumference:1000,UnitType:'0',RSM:89}]},'165482',{GRID_MANAGER_UNIT_MAP:'{"0":"mm"}',GRID_MANAGER_RSM_FIELD:'RSM'}); assert.equal(mapped.inspections[0].readings[0].heightM,.05); assert.equal(mapped.inspections[0].readings[0].rsm,89);});
 await check('Actual stations are shared by geometry and beam mesh',()=>{const s=normalizeGridPole(raw,'165482'), p=defaultCase(); const imported={...p,...applyGridInspection(p,s,'10')}; assert.equal(validateCase(imported).length,0); assert.ok(Math.abs(diameterAt(imported,.05)-1/Math.PI)<1e-12); assert.ok(Math.abs(diameterAt(imported,.6)-.95/Math.PI)<1e-12); assert.ok(Math.abs(diameterAt(imported,.325)-.975/Math.PI)<1e-12); const result=solvePole({...imported,soil:'Fixed'}); assert.ok(result.stations.some(q=>Math.abs(q.z-.05)<1e-8)); assert.ok(result.stations.some(q=>Math.abs(q.z-.6)<1e-8));});
@@ -94,5 +108,19 @@ await check('Supported nominal taper anchors to measurements, otherwise fitted t
  const fitted={...p,...applyGridInspection(p,descending,'10')};assert.equal(validateCase(fitted).length,0);
  assert.ok(fitted.diameters.butt>=fitted.diameters.ground&&fitted.diameters.ground>=fitted.diameters.tip);
  assert.ok(!fitted.geometryEstimates.basis.includes('nominal'));
+});
+await check('Optional AR deconditioning blends uniformly and changes strength/capacity, not stiffness',()=>{
+ const snapshot=normalizeGridPole({Id:99,PoleInspectionUB1000s:[{Id:1,ServiceRequestId:1,HeightAgl:0,Ar:65,UnitType:'Metric'},{Id:2,ServiceRequestId:1,HeightAgl:1200,Ar:65,UnitType:'Metric'},{Id:3,ServiceRequestId:1,HeightAgl:1200,Ar:80,UnitType:'Metric'}]},'AR-pole');
+ const base={...defaultCase(),diameters:{butt:.32,ground:.32,tip:.32},assetId:'AR-pole',regions:[],soil:'Fixed',gridManager:snapshot},active={...base,arDeconditioning:true};
+ assert.equal(arStrengthAt(base,.6),1);assert.equal(arStrengthAt(active,0),.65);assert.equal(arStrengthAt(active,.6),.65);assert.equal(deconditioningSamples(active).length,2);
+ for(const [x,y] of [[0,0],[.05,0],[0,.05]]){const c=conditionAt(active,x,y,.6);assert.equal(c.tension,.65);assert.equal(c.compression,.65);assert.equal(c.e,1);assert.equal(c.voided,false);}
+ assert.ok(Math.abs(arStrengthAt(active,1.2+AR_END_BLEND_M/2)-.825)<1e-12);assert.equal(arStrengthAt(active,1.2+AR_END_BLEND_M),1);
+ const s=solvePole(base),d=solvePole(active);assert.ok(Math.abs(d.tipMovement/s.tipMovement-1)<1e-6);assert.ok(Math.abs(d.timberLimitKN/s.timberLimitKN-.65)<1e-5);
+ const zone=d.stations.find(q=>q.z===.6);assert.ok(zone);const profiles=profileFromBasis(prepareHeightProfile(active),active.bearing,1,false);assert.ok(profiles.find(q=>Math.abs(q.z-.6)<1e-6).capacityApplied>0);
+ assert.notDeepEqual(defectAppearance(active,0,0,.6,[180,180,180],'Setup'),[180,180,180]);
+ assert.deepEqual(normaliseCase(JSON.parse(JSON.stringify(active))).arDeconditioning,true);assert.equal(arStrengthAt({...active,assetId:'different'},.6),1);assert.equal(arStrengthAt(defaultCase(),.6),1);
+ assert.notEqual(structuralKey(active),structuralKey({...active,gridManager:{...snapshot,inspections:snapshot.inspections.map(s=>({...s,readings:s.readings.map(r=>({...r,ar:70}))}))}}));
+ const zero={...active,gridManager:{...snapshot,inspections:snapshot.inspections.map(s=>({...s,readings:s.readings.map(r=>({...r,ar:0}))}))}};assert.equal(conditionAt(zero,0,0,.6).strength,0);assert.equal(solvePole(zero).timberLimitKN,0);assert.ok(solvePole({...zero,loadKN:0}).stations.every(s=>!Number.isNaN(s.usage)));
+ const varied={...active,gridManager:{...snapshot,inspections:snapshot.inspections.map(s=>({...s,readings:[{...s.readings[0],heightM:.3,ar:60},{...s.readings[0],heightM:.9,ar:80},{...s.readings[0],heightM:.6,ar:null}]}))}};assert.ok(Math.abs(arStrengthAt(varied,.6)-.7)<1e-12);
 });
 console.log(`${passed} system integration checks passed including unit corrections and AGL dimensions.`);

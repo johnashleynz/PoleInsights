@@ -1,4 +1,5 @@
-import { bendingResistance } from "../domain/species.ts";
+import { bendingResistance, strengthUsage } from "../domain/species.ts";
+import {deconditioningHeights} from "../integrations/deconditioning.ts";
 import {
   conditionAt,
   diameterAt,
@@ -321,7 +322,7 @@ export function solvePole(p: PoleCase, segments = 32): AnalysisResult {
   const h = p.length - p.embedment,
     first = p.soil === "Fixed" ? 0 : -p.embedment,
     loadZ = loadApplicationHeight(p);
-  const locations = [first, 0, loadZ, h];
+  const locations = [first, 0, loadZ, h, ...deconditioningHeights(p).filter(z=>z>=first&&z<=h)];
   for (const s of p.diameterStations ?? []) if (s.heightM > first && s.heightM < h) locations.push(s.heightM);
   for (let i = 1; i < segments; i++)
     locations.push(first + ((h - first) * i) / segments);
@@ -487,7 +488,7 @@ export function solvePole(p: PoleCase, segments = 32): AnalysisResult {
             strength = bendingResistance(p.material, stress, c);
           stressMin = Math.min(stressMin, stress);
           stressMax = Math.max(stressMax, stress);
-          usage = Math.max(usage, Math.abs(stress) / strength);
+          usage = Math.max(usage, strengthUsage(stress,strength));
         }
       if (usage > unitUsage) {
         unitUsage = usage;
@@ -502,7 +503,7 @@ export function solvePole(p: PoleCase, segments = 32): AnalysisResult {
         ky: ky * p.loadKN,
         stressMin: stressMin * p.loadKN,
         stressMax: stressMax * p.loadKN,
-        usage: usage * p.loadKN,
+        usage: p.loadKN === 0 ? 0 : usage * p.loadKN,
       });
     }
   }
@@ -533,6 +534,7 @@ export function solvePole(p: PoleCase, segments = 32): AnalysisResult {
     soilGoverns = soilLimitKN !== null && soilLimitKN < timberLimitKN,
     limitKN = soilGoverns ? soilLimitKN! : timberLimitKN;
   const warnings = [
+    ...(p.arDeconditioning ? ["Illustrative AR deconditioning: AR% directly scales fibre strength, not stiffness. This is not a validated AR-to-strength calibration; repeated heights use the lowest available AR in the selected inspection."] : []),
     p.material.basis === "illustrative"
       ? "Illustrative timber and soil properties; no field calibration."
       : "Pole bending reference: " +
@@ -628,7 +630,7 @@ export function scaleUnitResult(
       ky: s.ky * loadKN,
       stressMin: s.stressMin * loadKN,
       stressMax: s.stressMax * loadKN,
-      usage: s.usage * loadKN,
+      usage: loadKN === 0 ? 0 : s.usage * loadKN,
     })),
     tipX: unit.tipX * loadKN,
     tipY: unit.tipY * loadKN,
@@ -668,7 +670,7 @@ export function utilisationAt(p: PoleCase, s: Station, x: number, y: number) {
   const stress = stressAt(p, s, x, y);
   if (stress === null) return null;
   const c = conditionAt(p, x, y, s.z);
-  return Math.abs(stress) / bendingResistance(p.material, stress, c);
+  return strengthUsage(stress,bendingResistance(p.material, stress, c));
 }
 
 /** Exact Hermite beam kinematics for work-consistent displacement submodel cuts.

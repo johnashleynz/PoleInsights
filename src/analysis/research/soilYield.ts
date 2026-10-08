@@ -1,4 +1,5 @@
 import {SOILS,diameterAt,validateCase,loadApplicationHeight,type PoleCase} from '../../domain/model.ts';
+import {deconditioningHeights} from '../../integrations/deconditioning.ts';
 import {hermite,sectionProperties} from '../beam.ts';
 
 type Pair=[number,number];
@@ -28,7 +29,7 @@ export function soilYieldStudy(p:PoleCase,path:Pair[],segments=32,increments=12)
  const started=performance.now(),errors=validateCase(p);if(errors.length)throw Error(errors[0]);
  if(p.soil==='Fixed')throw Error('Soil study needs embedded soil restraint.');
  if(!Number.isInteger(segments)||segments<8||!Number.isInteger(increments)||increments<1||!path.length||path.some(q=>q.length!==2||!q.every(Number.isFinite)))throw Error('Invalid research path or resolution.');
- const top=p.length-p.embedment,loadZ=loadApplicationHeight(p),zs=[...new Set([-p.embedment,0,loadZ,top,...Array.from({length:segments-1},(_,i)=>-p.embedment+p.length*(i+1)/segments),...Array.from({length:15},(_,i)=>-p.embedment*(i+1)/16),...p.regions.flatMap(r=>[r.zMin,r.zMax,(r.zMin+r.zMax)/2]).filter(z=>z>=-p.embedment&&z<=top)].map(z=>Math.round(z*1e8)/1e8))].sort((a,b)=>a-b),n=zs.length*4,loadNode=zs.indexOf(loadZ),loadX=loadNode*4,loadY=loadX+2,K=new Float64Array(n*n),springs:Spring[]=[],soil=SOILS[p.soil];
+ const top=p.length-p.embedment,loadZ=loadApplicationHeight(p),zs=[...new Set([-p.embedment,0,loadZ,top,...deconditioningHeights(p),...Array.from({length:segments-1},(_,i)=>-p.embedment+p.length*(i+1)/segments),...Array.from({length:15},(_,i)=>-p.embedment*(i+1)/16),...p.regions.flatMap(r=>[r.zMin,r.zMax,(r.zMin+r.zMax)/2]).filter(z=>z>=-p.embedment&&z<=top)].map(z=>Math.round(z*1e8)/1e8))].sort((a,b)=>a-b),n=zs.length*4,loadNode=zs.indexOf(loadZ),loadX=loadNode*4,loadY=loadX+2,K=new Float64Array(n*n),springs:Spring[]=[],soil=SOILS[p.soil];
  const bending:{ix:number[];iy:number[];B:number[];L:number;xx:number;yy:number;xy:number;weight:number}[]=[];
  const gauss=[[(1-Math.sqrt(3/5))/2,5/18],[.5,4/9],[(1+Math.sqrt(3/5))/2,5/18]];
  for(let e=0;e<zs.length-1;e++){const L=zs[e+1]-zs[e],ix=[4*e,4*e+1,4*e+4,4*e+5],iy=ix.map(i=>i+2);

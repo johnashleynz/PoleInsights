@@ -77,6 +77,15 @@ and future discussion items are retained, not silently promoted to certified dat
 | P28-CHG-015 | Estimated dimensions/derived total length/assumed embedment use colour and (est.) provenance, saved JSON and old-import migration; manual edits clear relevant flags. AGL metadata can update length, never highest UB1000 test height. |
 | P28-CHG-016 | Browser title drops P27 DEV; About release is P28; saved filename uses P28. P26 historical records remain untouched. |
 | P28-CHG-017 | New cumulative changelog, user-story specification/input, production TODO, current Cloudflare/secret-location runbooks and no-media full-source handoff. |
+| P28-CHG-018 | Butt end now receives a section-sized end-grain cap, matching tip rendering. |
+| P28-CHG-019 | Shallow non-negative embedment is accepted with a unit-aware warning rather than a forced 0.4 m minimum. Above-ground validation uses selected units; zero embedment avoids a diameter division by zero. Unstable soil solves still withhold results. |
+| P28-CHG-020 | Embedment starting-point action moved below embedment. Integration sections now follow basic pole dimensions and start collapsed; Grid Manager uses inbound Load pole data and outbound Open pole record hyperlink-style actions instead of the Asset ID search icon. |
+| P28-CHG-021 | Country precedes measurement units. Changing country defaults US to Imperial and Australia/New Zealand to Metric; manual unit overrides remain available and persist until the next country change. Physical dimensions are unchanged. |
+| P28-CHG-022 | Imported latest and selected-inspection tags display subtle status circles, preserving configurable source wording. Recognised OK/Green, reinspection and Red Tag statuses are green/yellow/red; unknown/missing tags remain neutral. |
+| P28-CHG-023 | Grid Manager species are conservatively soft-matched to the supported catalogue, preferring regional matches. A changed species applies its verified reference preset and records a review warning; ambiguous or unsupported-property matches retain existing material. Same-species imports preserve explicit material overrides. AGL height updates settings without UB1000 girths; source AGL/length displays use selected units. |
+| P28-CHG-024 | Optional per-pole Deconditioning applies selected-inspection AR% uniformly to fibre strength. Lowest repeat AR, smooth height interpolation, 0.30 m soft ends, section/pole tint and selectable AR zones. Stiffness unchanged; no inferred cavity. Asset change/reset clears source data and toggle; saved JSON preserves it. Explicitly uncalibrated, not a certified AR-to-strength relationship. |
+| P28-CHG-025 | Ordinary Grid Manager record clicks try to reuse a named browser tab, with opener access removed before external navigation. Cross-site security can deny reuse; the fallback opens a replacement and attempts to close the prior script-opened tab. Browsers may deny both reuse and closing, so avoiding additional tabs is not guaranteed. Modified clicks retain normal browser behaviour; a safe new-tab link remains the fallback if popups are blocked. |
+| P28-CHG-026 | Imperial feet/inches formatting rounds before splitting units, carrying 12 rounded inches into feet. Whole-foot values display as 2.0 ft rather than 1 ft 12.00 in; negative heights use a single sign. |
 
 Core integration was committed in 197d112. Follow-up source in the handoff is not
 claimed committed or deployed unless accompanied by a later release SHA.
@@ -87,9 +96,12 @@ claimed committed or deployed unless accompanied by a later release SHA.
   five unique heights/18 readings; 980 mm girth gives about 312 mm diameter.
 - Repeated tests are valid assessment-tool repeatability evidence. Differing girths
   at one height currently retain first usable geometry with a warning.
-- No RSM inference; no conversion from AR to mechanical decay/strength. Existing
-  material assumptions still govern computed stresses/capacity.
-- Source pole species/class metadata does not silently replace material strengths.
+- No RSM inference. Optional Deconditioning directly scales configured fibre
+  strength by AR% as an illustrative assumption, not validated calibration.
+  Stiffness is unchanged; stress demand at a fixed load is not artificially reduced.
+- Matched species changes apply verified reference properties with a review
+  warning; ambiguous species and missing properties do not replace material.
+  Source class is used for matching taper, not automatic strength certification.
 - Nested visual-survey expansion returns upstream 500 and is omitted by default.
 - Equal girths cannot establish taper; extrapolated ends are estimates requiring
   review, not recovered measurements. Increasing measured diameters remain visible.

@@ -1,6 +1,7 @@
 import DetectApps from "./DetectApps.tsx";
 import SystemPreferences from "./SystemPreferences.tsx";
 import IntegrationsPanel from "./IntegrationsPanel.tsx";
+import {arStrengthAt} from "../integrations/deconditioning.ts";
 import {readPreferences, preferencesKey} from "../integrations/preferences.ts";
 import type { WaveControl } from "../inspection/mockupProtocol.ts";
 import MaterialPicker from "./MaterialPicker.tsx";
@@ -617,6 +618,7 @@ export default function App() {
       previous.map((c) => ({
         ...c,
         country: code,
+        unitSystem: code === "US" ? "imperial" : "metric",
         poleClass: null,
       })),
     );
@@ -1287,23 +1289,7 @@ export default function App() {
               <details className="setup-group" open>
                 <summary>Case settings</summary>
                 <div>
-                  <IntegrationsPanel key={p.id} pole={p} preferences={preferences} onPreferences={setPreferences} onChange={update => change(c => ({...c, ...update}), {both: false})}/>
-                  <div
-                    className="result-quantity"
-                    role="group"
-                    aria-label="Measurement units"
-                  >
-                    {(["metric", "imperial"] as const).map((u) => (
-                      <button
-                        key={u}
-                        className={units === u ? "selected" : ""}
-                        aria-pressed={units === u}
-                        onClick={() => setGlobalUnits(u)}
-                      >
-                        {u === "metric" ? "Metric" : "Imperial"}
-                      </button>
-                    ))}
-                  </div>
+                  <label className="select-field">Asset ID<input aria-label="Asset ID" maxLength={255} value={p.assetId ?? ""} onChange={e => {const assetId=e.target.value; change(c => ({...c, assetId, ...(c.axonic ? {axonic: {...c.axonic, assetId}} : {}), gridManager: undefined, diameterStations: undefined, arDeconditioning: false}), {both: false});}}/></label>
                   <label className="select-field">
                     Country
                     <select
@@ -1321,25 +1307,13 @@ export default function App() {
                     </select>
                   </label>
                   <p className="field-note">{country.standards.join(" · ")}</p>
-                  <button
-                    className="link-button"
-                    onClick={() =>
-                      patch({
-                        embedment: applyEmbedmentHeuristic(
-                          p.length,
-                          country.code,
-                        ),
-                        loadHeight: Math.min(
-                          loadApplicationHeight(p),
-                          p.length -
-                            applyEmbedmentHeuristic(p.length, country.code),
-                        ),
-                      })
-                    }
-                  >
-                    Apply {country.name} embedment starting point
-                  </button>
-                  <p className="field-note">{country.embedmentRule}</p>
+                  <div className="result-quantity" role="group" aria-label="Measurement units">
+                    {(["metric", "imperial"] as const).map((u) => (
+                      <button key={u} className={units === u ? "selected" : ""} aria-pressed={units === u} onClick={() => setGlobalUnits(u)}>
+                        {u === "metric" ? "Metric" : "Imperial"}
+                      </button>
+                    ))}
+                  </div>
                 </div>
               </details>
             )}
@@ -1423,10 +1397,25 @@ export default function App() {
                         });
                       }}
                       unit={lengthUnit}
-                      min={displayPoleLength(0.4, units)}
+                      min={0}
                       max={displayPoleLength(p.length - 1, units)}
                     />
                   </div>
+                  <button
+                    className="link-button"
+                    onClick={() => {
+                      const embedment = applyEmbedmentHeuristic(p.length, country.code);
+                      patch({
+                        embedment,
+                        geometryEstimates: p.geometryEstimates ? {...p.geometryEstimates, embedment: true} : undefined,
+                        loadHeight: Math.min(loadApplicationHeight(p), p.length - embedment),
+                      });
+                    }}
+                  >
+                    Apply {country.name} embedment starting point
+                  </button>
+                  <p className="field-note">{country.embedmentRule}</p>
+                  {p.embedment < 0.4 && <p className="field-note" role="status">Warning: embedment is below {displayPoleLength(0.4, units).toFixed(2)} {lengthUnit}. Shallow or eroded support may be outside the soil model's reliable range.{p.embedment === 0 && p.soil !== "Fixed" ? " No embedded soil restraint is available; a stable soil-supported solve cannot be assumed." : ""}</p>}
                   <div className="derived-line">
                     Above ground{" "}
                     <strong>{formatPoleLength(h, units, 1)}</strong>
@@ -1510,6 +1499,7 @@ export default function App() {
                 </div>
               </details>
             )}
+            {view === "Setup" && <IntegrationsPanel key={p.id} pole={p} preferences={preferences} onPreferences={setPreferences} onChange={update => change(c => ({...c, ...update}), {both: false})} onSection={setSection}/>}
             {view === "Setup" && (
               <details className="setup-group" open>
                 <summary>Load and break demonstration</summary>
@@ -2151,6 +2141,7 @@ export default function App() {
                   {formatPoleLength(effectiveSection, units)}
                 </span>
               </div>
+              {p.arDeconditioning && arStrengthAt(p, effectiveSection) < 1 && <p className="field-note" role="status">Deconditioning · AR = {(arStrengthAt(p,effectiveSection)*100).toFixed(0)}% · uniform fibre-strength factor {(arStrengthAt(p,effectiveSection)*100).toFixed(0)}% (illustrative)</p>}
               {resultDirection === "worst" && (
                 <p className="field-note direction-basis">
                   {awaitingDirection
