@@ -1,20 +1,28 @@
 import {roundDefaults,roundValues,type RoundDefinition,type RoundOptions} from './roundTimber.ts';
 /** Pole data are versioned references, not species-wide breaking strengths.
  * Fb is a bending criterion, never an invented direct tension/compression value. */
-export type PoleMaterial = {E:number;source?:string} & (
+export type PoleMaterial = {E:number;source?:string;coefficientOfVariation?:number} & (
   {basis:'illustrative';tension:number;compression:number;bending?:never} |
   {basis:'pole-reference'|'user-bending';bending:number;referenceId?:string;round?:RoundOptions;tension?:never;compression?:never}
 );
-export interface PoleSpecies {id:string;name:string;regions:string;botanical:string;group?:string;round?:RoundDefinition;reference?:{id:string;E:number;bending:number;title:string;url:string;scope:string}}
+export interface PoleSpecies {id:string;name:string;regions:string;botanical:string;group?:string;baseSpeciesId?:string;ownerPreset?:{fbMPa:number;cvPercent:number;source:string};round?:RoundDefinition;reference?:{id:string;E:number;bending:number;title:string;url:string;scope:string}}
 const ansi='https://woodpoles.org/wp-content/uploads/TB_Pole_MOE.pdf';
 const us=(id:string,name:string,botanical:string,E:number,bending:number,scope='') : PoleSpecies=>({id,name,botanical,regions:'US',reference:{id:'ansi-o5.1-2022-'+id,E:E*1e9,bending:bending*1e6,title:'ANSI O5.1-2022 · Table 1, p.13',url:ansi,scope:'Mean groundline pole bending fibre strength (COV 0.20) and mean MOE; Table 1 verified against the supplied ANSI standard. Some reference information was cross-checked against the Power Line Systems ANSI O5.1-2017 PLS-POLE library, supplied as-is and requiring verification. Conditioning, pole class, dimensions and standard adjustments must match the pole. No design factors or height adjustments applied. '+scope}});
 const au=(id:string,name:string,botanical:string,group?:string):PoleSpecies=>({id,name,botanical,regions:'Australia',group});
 export const SPECIES_REGIONS=['New Zealand','Australia','UK','US'];
 export function speciesForRegion(region:string){return SPECIES.filter(s=>s.regions===region);}
+export const NZ_RADIATA_SPECIES_IDS=['radiata-pine','radiata-high-green-nz','radiata-normal-green-nz','radiata-high-steamed-shaved-nz','radiata-normal-steamed-shaved-nz'];
+const ownerNZ=(id:string,name:string,botanical:string,fbMPa:number,cvPercent:number,baseSpeciesId?:string):PoleSpecies=>({id,name,botanical,regions:'New Zealand',baseSpeciesId,ownerPreset:{fbMPa,cvPercent,source:'Owner-supplied NZ pole breaking reference, 8 October 2026; Carl Rathbone reference material. Strength basis not independently qualified; not a factored design value.'}});
 export const SPECIES:PoleSpecies[]=[
  {id:'radiata-pine',name:'Radiata pine',botanical:'Pinus radiata',regions:'New Zealand'},
  {id:'douglas-fir-nz',name:'Douglas fir · NZ grown',botanical:'Pseudotsuga menziesii',regions:'New Zealand'},
  {id:'european-larch-nz',name:'European larch · NZ grown',botanical:'Larix decidua',regions:'New Zealand'},
+ ownerNZ('corsican-pine-nz','Corsican Pine','Pinus nigra',50,25),
+ ownerNZ('hardwood-unknown-nz','Hardwood - Unknown','Unknown hardwood',60,25),
+ ownerNZ('radiata-high-green-nz','Pinus Radiata - High, Green unshaved','Pinus radiata',52,23.7,'radiata-pine'),
+ ownerNZ('radiata-normal-green-nz','Pinus Radiata - Normal, Green unshaved','Pinus radiata',38,23.7,'radiata-pine'),
+ ownerNZ('radiata-high-steamed-shaved-nz','Pinus Radiata - High, Steamed shaved','Pinus radiata',37.6,23.7,'radiata-pine'),
+ ownerNZ('radiata-normal-steamed-shaved-nz','Pinus Radiata - Normal, Steamed shaved','Pinus radiata',27.56,23.7,'radiata-pine'),
  au('southern-pine-australia','Southern plantation pines','Pinus elliottii / caribaea hybrids'),
  au('hoop-pine','Hoop pine','Araucaria cunninghamii','S6'),
  au('radiata-pine-australia','Radiata pine · Australian grown','Pinus radiata','S6'),
@@ -43,12 +51,14 @@ export const SPECIES:PoleSpecies[]=[
 ];
 // NZ softwood categories are conditional on pole grade/density, not species averages.
 for(const s of SPECIES){
- if(s.regions==='New Zealand')s.round={country:'NZ',softwood:true};
+ if(s.regions==='New Zealand'&&!s.ownerPreset)s.round={country:'NZ',softwood:true};
  if(s.regions==='Australia'&&s.group&&s.id!=='grey-box')s.round={country:'AU',group:s.group,softwood:['radiata-pine-australia','hoop-pine','slash-pine-australia'].includes(s.id),groupSource:['grey-gum','gympie-messmate','red-ironbark','forest-red-gum'].includes(s.id)?'Species group from DTM Timber pole supply table; numeric grade mapping and properties from the supplied standard.':'Species group: AS 1720.1 Table H2.3 / H2.4.'};
  if(s.round){const v=roundValues(s.round)!;s.reference={id:'round-1720-v1-'+s.id,E:v.E,bending:v.bending,title:v.citation,url:s.round.country==='NZ'?'https://natlib.govt.nz/records/52113199':'https://store.standards.org.au/product/as-1720-1-2010',scope:v.scope};}
 }
+SPECIES.sort((a,b)=>SPECIES_REGIONS.indexOf(a.regions)-SPECIES_REGIONS.indexOf(b.regions)||a.name.localeCompare(b.name,'en',{sensitivity:'base'}));
 export function speciesById(id:string){return SPECIES.find(s=>s.id===id);}
-export function referenceMaterial(s:PoleSpecies,throughBored=false,options?:RoundOptions):PoleMaterial|null {
+export function referenceMaterial(s:PoleSpecies,throughBored=false,options?:RoundOptions,existingE?:number):PoleMaterial|null {
+ if(s.ownerPreset){if(existingE===undefined||!Number.isFinite(existingE)||existingE<=0)return null;const p=s.ownerPreset;return {basis:'user-bending',E:existingE,bending:p.fbMPa*1e6,coefficientOfVariation:p.cvPercent/100,source:`${p.source} Fb ${p.fbMPa} MPa; CV ${p.cvPercent}%. E retained from current pole; review stiffness. CV recorded only, no statistical strength reduction applied.`};}
  const r=s.reference;if(!r)return null;
  if(s.round){const v=roundValues(s.round,options);if(!v)return null;return {basis:'pole-reference',E:v.E,bending:v.bending,referenceId:r.id+':'+JSON.stringify(v.options),round:v.options,source:v.citation+' · '+v.grade+' · '+v.options.preparation+' · '+(v.options.steamed?'steamed':'unsteamed')+' · modified characteristic bending reference'};}
  const bored=throughBored&&s.id==='douglas-fir-coastal';return {basis:'pole-reference',E:r.E,bending:bored?52.44e6:r.bending,referenceId:r.id+(bored?'-through-bored':''),source:r.title+(bored?' · through-bored, 5% reduction':'')};
@@ -61,6 +71,7 @@ export function strengthUsage(demand:number,resistance:number){return resistance
 export function materialDescription(m:PoleMaterial){return m.basis==='illustrative'?`Teaching values · E ${(m.E/1e9).toFixed(2)} GPa · tension ${(m.tension/1e6).toFixed(1)} / compression ${(m.compression/1e6).toFixed(1)} MPa`:`${m.basis==='user-bending'?'User-entered':'Published reference'} · E ${(m.E/1e9).toFixed(3)} GPa · bending ${(m.bending/1e6).toFixed(2)} MPa`;}
 export function materialErrors(species:string,m:PoleMaterial):string[]{
  if(!speciesById(species))return ['Select a supported pole species.'];
+ if(m?.coefficientOfVariation!==undefined&&(!Number.isFinite(m.coefficientOfVariation)||m.coefficientOfVariation<0||m.coefficientOfVariation>1))return ['Enter a coefficient of variation between 0 and 100%.'];
  if(!m||!Number.isFinite(m.E)||m.E<=0)return ['Enter a positive stiffness.'];
  if(m.basis==='illustrative')return species==='radiata-pine'&&[m.tension,m.compression].every(v=>Number.isFinite(v)&&v>0)?[]:['The legacy teaching material belongs to radiata pine.'];
  if(m.E>100e9)return ['Enter a stiffness up to 100 GPa.'];

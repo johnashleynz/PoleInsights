@@ -16,7 +16,7 @@ export function matchGridSpecies(value: string | null, country: CountryCode): Po
   const input = normalize(value ?? "");
   if (!input) return null;
   const region = country === "US" ? "US" : country === "AU" ? "Australia" : "New Zealand";
-  const names = (s: PoleSpecies) => [s.id, s.name, s.name.split(" · ")[0], s.botanical, ...(aliases[s.id] ?? [])].map(normalize);
+  const names = (s: PoleSpecies) => (s.baseSpeciesId ? [s.id,s.name] : [s.id, s.name, s.name.split(" · ")[0], s.botanical, ...(aliases[s.id] ?? [])]).map(normalize);
   const unique = (items: PoleSpecies[]) => {
     const local = items.filter(s => s.regions === region);
     return local.length === 1 ? local[0] : items.length === 1 ? items[0] : null;

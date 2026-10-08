@@ -15,6 +15,7 @@ import {prepareHeightProfile,profileFromBasis} from '../src/analysis/heightProfi
 import {defectAppearance} from '../src/scene/defectAppearance.ts';
 import {COUNTRIES} from '../src/domain/countries.ts';
 import {nominalPoleClass,gridClassLengthLabel} from '../src/integrations/estimatedProfile.ts';
+import {SPECIES,SPECIES_REGIONS,speciesForRegion,speciesById,referenceMaterial,materialErrors} from '../src/domain/species.ts';
 
 let passed = 0;
 assert.equal(poleTagTone('OK'),'green');assert.equal(poleTagTone('Red Tag'),'red');assert.equal(poleTagTone('Reinspect in 5 Years'),'yellow');assert.equal(poleTagTone('Pole Not Found'),'neutral');assert.equal(poleTagTone('Custom customer assessment'),'neutral');assert.equal(poleTagTone(null),'neutral');
@@ -168,4 +169,20 @@ await check('ANSI species-specific class/length tables preserve nominal ends and
  assert.equal(gridClassLengthLabel(nz,n),'6 kN / 10 m');assert.equal(gridClassLengthLabel(nz,{...n,poleClass:'6 kN / 10 m'}),'6 kN / 10 m');
  assert.equal(nominalPoleClass(nz,{...n,poleClass:'6 kN / 10 m'},10).id,'nz-goldpine-10m-6kn');
 });
-console.log(`${passed} system integration checks passed including total-length imports, unknown AR gaps and ANSI nominal ends.`);
+await check('Regional master list is alphabetical and owner NZ Fb/CV presets preserve stiffness',()=>{
+ for(const region of SPECIES_REGIONS){const names=speciesForRegion(region).map(s=>s.name);assert.deepEqual(names,[...names].sort((a,b)=>a.localeCompare(b,'en',{sensitivity:'base'})));}
+ assert.equal(new Set(SPECIES.map(s=>s.id)).size,SPECIES.length);
+ const p={...defaultCase(),soil:'Fixed',regions:[]};let previous;
+ for(const [id,fb,cv] of [['radiata-high-green-nz',52,23.7],['radiata-normal-green-nz',38,23.7],['radiata-high-steamed-shaved-nz',37.6,23.7],['radiata-normal-steamed-shaved-nz',27.56,23.7],['corsican-pine-nz',50,25],['hardwood-unknown-nz',60,25]]){
+  const s=speciesById(id),m=referenceMaterial(s,false,undefined,p.material.E);assert.equal(m.basis,'user-bending');assert.equal(m.E,p.material.E);assert.equal(m.bending,fb*1e6);assert.equal(m.coefficientOfVariation,cv/100);assert.equal(m.round,undefined);assert.equal(s.round,undefined);assert.equal(referenceMaterial(s),null);
+  const q={...p,species:id,material:m};assert.deepEqual(validateCase(q),[]);assert.deepEqual(normaliseCase(JSON.parse(JSON.stringify(q))).material,m);
+  const result=solvePole(q);if(previous)assert.ok(Math.abs(result.timberLimitKN/previous.result.timberLimitKN-fb/previous.fb)<1e-5);previous={fb,result};
+  assert.ok(materialErrors(id,{...m,coefficientOfVariation:Infinity}).length);assert.ok(materialErrors(id,{...m,coefficientOfVariation:1.01}).length);
+ }
+ assert.equal(matchGridSpecies('Pinus radiata','NZ').id,'radiata-pine');assert.equal(matchGridSpecies('Radiata pine','NZ').id,'radiata-pine');assert.equal(matchGridSpecies('Pinus Radiata - High, Green unshaved','NZ').id,'radiata-high-green-nz');
+ assert.equal(matchGridSpecies('Corsican Pine','NZ').id,'corsican-pine-nz');
+ for(const id of ['radiata-high-green-nz','radiata-normal-green-nz','radiata-high-steamed-shaved-nz','radiata-normal-steamed-shaved-nz'])assert.equal(matchPoleClassForVariant(id),'nz-goldpine-10m-6kn');
+ const imported=applyGridInspection(p,normalizeGridPole({Id:99,Species:'Corsican Pine'},'corsican'),null);assert.equal(imported.material.E,p.material.E);assert.equal(imported.material.bending,50e6);assert.equal(imported.material.coefficientOfVariation,.25);
+});
+function matchPoleClassForVariant(id){const p={...defaultCase(),country:'NZ',species:id},s=normalizeGridPole({Id:1,PoleClass:'6 kN',Height_M:10},'variant');return nominalPoleClass(p,s,10)?.id;}
+console.log(`${passed} system integration checks passed including NZ species presets and alphabetical groups.`);

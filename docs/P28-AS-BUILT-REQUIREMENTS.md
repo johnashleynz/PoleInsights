@@ -54,6 +54,10 @@ FR-003/FR-004; no REQ4 was supplied. Integration input is recorded separately in
 | FR-026 | As a maintainer, I want a lightweight handoff. | Cumulative changelog, requirements, runbooks and source ZIP/manifest; omit media binaries, credentials and build/dependency caches. | P28 handoff |
 | FR-027 | As a reviewer, I want optional AR-derived Deconditioning for the focused pole. | Off by default; selected SR only, valid per-reading heights/AR, lowest repeat AR at each height, up to 64 stations. AR/100 directly multiplies fibre strength uniformly across the section, not stiffness or area; no strength increase above 100%. Smooth blending between valid soundings and 0.30 m soft ends. NaN/infinite AR labels show NaN, supply no degradation and interrupt interpolation at unknown-only heights; valid repeats remain usable. Pole/section tint, clickable zones and effective AR label; shared beam/section/height-capacity calculations. JSON persists the toggle and source readings. Asset edits and Reset poles clear source heights, AR and the toggle. Clearly labelled uncalibrated illustrative assumption. | Implemented |
 
+### NZ Catalogue Addition
+
+FR-028: As an assessor, I want alphabetical country-grouped species and selectable NZ grade/condition presets. Six owner-supplied Fb/CV entries apply the exact provided bending values, retain current E, save/display CV without an inferred statistical reduction, and distinguish these from standard-derived references. Generic API species do not infer density/preparation; radiata variants retain NZ class geometry eligibility. See P28-NZ-MATERIAL-PRESETS.md.
+
 ## Non-Functional Acceptance and Limits
 
 - NFR-001: Preserve P26; full-source handoff goes in a new directory, not blindly over Carl's edits.

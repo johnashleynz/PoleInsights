@@ -18,9 +18,9 @@ export function applyGridInspection(pole: PoleCase, snapshot: GridPoleSnapshot, 
   const top = lengthValid ? length - embedment : pole.length - pole.embedment;
   const stations: DiameterStation[] = [], sourceWarnings = snapshot.sourceWarnings ?? snapshot.warnings, warnings = [...sourceWarnings];
   const matched = matchGridSpecies(snapshot.species, pole.country ?? "NZ");
-  const material = matched && matched.id !== pole.species ? referenceMaterial(matched) : null;
+  const material = matched && matched.id !== pole.species ? referenceMaterial(matched,false,undefined,pole.material.E) : null;
   const speciesUpdate = matched && material ? {species: matched.id, material, poleClass: null} : {};
-  if (material && matched) warnings.push(`Source species matched to ${matched.name}; its published material preset was applied. Review grade, treatment and reference assumptions.`);
+  if (material && matched) warnings.push(`Source species matched to ${matched.name}; its ${matched.ownerPreset ? "owner-supplied" : "published"} material preset was applied. Review grade, treatment and reference assumptions.`);
   else if (snapshot.species && !matched) warnings.push(`Source species "${snapshot.species}" could not be matched uniquely; existing species/material retained.`);
   else if (matched && matched.id !== pole.species && !material) warnings.push(`Source species matched to ${matched.name}, but verified material properties are unavailable; existing species/material retained.`);
   if (length !== null && !lengthValid) warnings.push("Source total length is outside the supported model range; existing length and embedment retained.");

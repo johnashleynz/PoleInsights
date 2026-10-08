@@ -6,19 +6,21 @@ import './material.css';
 
 export default function MaterialPicker({pole,onChange}:{pole:PoleCase;onChange:(value:Pick<PoleCase,'species'|'material'>)=>void}){
  const [id,setId]=useState(pole.species),[mode,setMode]=useState('custom'),[E,setE]=useState(''),[fb,setFb]=useState(''),[ft,setFt]=useState(''),[fc,setFc]=useState(''),[source,setSource]=useState(''),[bored,setBored]=useState(false),[open,setOpen]=useState(false),[round,setRound]=useState<RoundOptions|undefined>();
+ const [cv,setCv]=useState<number|undefined>();
  function populate(speciesId:string,m:PoleMaterial){
+  setCv(m.coefficientOfVariation);
   setRound(m.basis==='pole-reference'?m.round:undefined);setId(speciesId);setMode(m.basis==='illustrative'?'teaching':m.basis==='pole-reference'?'published':'custom');
   setE(String(m.E/1e9));setFb(m.basis==='illustrative'?'':String(m.bending/1e6));setFt(m.basis==='illustrative'?String(m.tension/1e6):'');setFc(m.basis==='illustrative'?String(m.compression/1e6):'');setSource(m.source??'');setBored(m.basis==='pole-reference'&&!!m.referenceId?.endsWith('-through-bored'));
  }
  useEffect(()=>populate(pole.species,pole.material),[pole.species,pole.material]);
  const species=speciesById(id)!,pending=id!==pole.species;
- const m:PoleMaterial|null=mode==='teaching'?{basis:'illustrative',E:Number(E)*1e9,tension:Number(ft)*1e6,compression:Number(fc)*1e6}:mode==='published'?referenceMaterial(species,bored,round):{basis:'user-bending',E:Number(E)*1e9,bending:Number(fb)*1e6,source};
+ const m:PoleMaterial|null=mode==='teaching'?{basis:'illustrative',E:Number(E)*1e9,tension:Number(ft)*1e6,compression:Number(fc)*1e6}:mode==='published'?referenceMaterial(species,bored,round):{basis:'user-bending',E:Number(E)*1e9,bending:Number(fb)*1e6,source,...(cv!==undefined?{coefficientOfVariation:cv}:{})};
  const errors=m?materialErrors(id,m):['Choose a property basis.'];
  function choose(next:string){
   if(next===pole.species&&pole.material.basis!=='illustrative'){populate(pole.species,pole.material);return;}
-  const s=speciesById(next)!,preset=referenceMaterial(s)??(next==='radiata-pine'?{...MATERIAL}:null);
+  const s=speciesById(next)!,preset=referenceMaterial(s,false,undefined,pole.material.E)??(next==='radiata-pine'?{...MATERIAL}:null);
   if(preset){populate(next,preset);onChange({species:next,material:preset});}
-  else {setId(next);setMode('custom');setE('');setFb('');setSource('');setBored(false);setOpen(true);}
+  else {setId(next);setMode('custom');setE('');setFb('');setSource('');setCv(undefined);setBored(false);setOpen(true);}
  }
  function basis(next:string){
   setMode(next);if(next==='published'&&species.round)setRound(roundDefaults(species.round));
@@ -27,9 +29,11 @@ export default function MaterialPicker({pole,onChange}:{pole:PoleCase;onChange:(
  }
  function number(label:string,value:string,set:(v:string)=>void,unit:string,max:number){return <label className="number-field"><span>{label}</span><div><input aria-label={label} type="number" min="0.1" max={max} step="0.1" value={value} onChange={e=>set(e.target.value)}/><small>{unit}</small></div></label>;}
  return <div className="material-picker">
-  <label className="select-field">Species<select aria-label="Species" value={id} onChange={e=>choose(e.target.value)}>{SPECIES_REGIONS.map(region=><optgroup label={region} key={region}>{speciesForRegion(region).map(s=><option value={s.id} key={s.id}>{s.name}{!s.reference&&s.id!=='radiata-pine'?' · enter properties':''}</option>)}</optgroup>)}</select></label>
+  <label className="select-field">Species<select aria-label="Species" value={id} onChange={e=>choose(e.target.value)}>{SPECIES_REGIONS.map(region=><optgroup label={region} key={region}>{speciesForRegion(region).map(s=><option value={s.id} key={s.id}>{s.name}{!s.reference&&!s.ownerPreset&&s.id!=='radiata-pine'?' · enter properties':''}</option>)}</optgroup>)}</select></label>
+  {species.ownerPreset&&species.name.length>28&&<p className="field-note">{species.name}</p>}
   {pending&&<p className="material-pending" role="status">Enter properties to use {species.name}. Results still show {speciesById(pole.species)?.name}. <button className="inline-info" onClick={()=>{populate(pole.species,pole.material);setOpen(false);}}>Cancel</button></p>}
   <details className="material-properties" open={open} onToggle={e=>setOpen(e.currentTarget.open)}><summary>Properties{pending?' · values needed':''}</summary><div className="material-draft">
+   {cv!==undefined&&<p className="material-numbers">CV {(cv*100).toFixed(1)}% · recorded variability, not a strength reduction</p>}
    <label className="select-field">Property basis<select aria-label="Property basis" value={mode} onChange={e=>basis(e.target.value)}>{id==='radiata-pine'&&<option value="teaching">Illustrative example</option>}{species.reference&&<option value="published">Published pole reference</option>}<option value="custom">Known pole / test data</option></select></label>
    {mode==='published'&&species.round&&<div className="round-properties">
    {species.round.country==='NZ'&&<label className="select-field">Pole density category<select aria-label="Pole density category" value={(round??roundDefaults(species.round)).density} onChange={e=>setRound({...roundDefaults(species.round!),...round,density:e.target.value as RoundOptions['density']})}><option value="normal">Normal · outer zone ≥350 kg/m³</option><option value="high">High · outer zone ≥450 kg/m³</option></select></label>}

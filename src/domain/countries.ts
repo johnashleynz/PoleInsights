@@ -1,5 +1,6 @@
 import type { UnitSystem } from "./units.ts";
 import {additionalAnsiClasses} from "./ansiDimensions.ts";
+import {NZ_RADIATA_SPECIES_IDS} from "./species.ts";
 
 export type CountryCode = "NZ" | "AU" | "US";
 export interface PoleClassDefinition {
@@ -79,7 +80,7 @@ const nzClasses = goldpineRows.map(([length, load, embedment, tip, ground]) =>
     embedment,
     ground / 1000,
     tip / 1000,
-    ["radiata-pine"],
+    NZ_RADIATA_SPECIES_IDS,
     goldpineSource,
     ["length", "embedment", "groundDiameter", "tipDiameter"],
   ),
