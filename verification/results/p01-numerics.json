@@ -1,6 +1,6 @@
 {
   "version": "P01",
-  "date": "2026-09-28T21:26:39.086Z",
+  "date": "2026-10-11T22:18:35.113Z",
   "checks": 56,
   "scope": "Numerical checks only. No physical timber, soil, decay or UB1000 validation.",
   "results": [
@@ -372,19 +372,19 @@
       "nodes": 33,
       "tipMovement": 0.14636357073571335,
       "limitKN": 1.6538826875441524,
-      "elapsedMs": 13.685899999999947
+      "elapsedMs": 11.933199999999943
     },
     {
       "nodes": 57,
       "tipMovement": 0.14636365359403714,
       "limitKN": 1.6467776286018383,
-      "elapsedMs": 20.06639999999993
+      "elapsedMs": 25.248499999999922
     },
     {
       "nodes": 81,
       "tipMovement": 0.14636376739409582,
       "limitKN": 1.6283811580105294,
-      "elapsedMs": 18.711400000000026
+      "elapsedMs": 36.78150000000005
     }
   ]
 }

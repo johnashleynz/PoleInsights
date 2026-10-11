@@ -151,7 +151,7 @@
       "pass": true
     }
   ],
-  "elapsedMs": 396.8392,
+  "elapsedMs": 347.8704,
   "iterations": 185,
   "scope": "Kernel verification, not peak convergence or physical validation."
 }

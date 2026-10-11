@@ -1,6 +1,6 @@
 # P28 Requirements Input
 
-Recorded 8 October 2026 from the owner's integration spike and follow-up requests.
+Recorded 12 October 2026 from the owner's integration spike and follow-up requests.
 This supplements the original P27 source, preserved verbatim in `TODO.md`.
 
 1. Persistent System preferences: Enable Detect, Enable Axonic, Enable Grid Manager.
@@ -17,6 +17,7 @@ This supplements the original P27 source, preserved verbatim in `TODO.md`.
 12. Identify original enhancements as P27 and integrations as P28; prepare cumulative P26 changes, as-built stories, deployment/integration notes and a full source handoff without videos/secrets.
 13. Known class/length imports must use applicable species-specific nominal end dimensions from the supplied ANSI O5.1-2022 reference, not a cylinder from one girth. Preserve measured stations and a regular taper where compatible. Show Species separately from Class / Length (US Class 1/45; NZ 6 kN / 10 m).
 14. NaN/infinite AR must remain visible as NaN but must not supply degradation. Add a subtle V28.x footer marker, incremented once per published iteration.
+15. Add owner-supplied NZ material presets for four Pinus radiata grade/condition variants, Corsican Pine and Unknown Hardwood. Use the exact supplied Fb/CV values, retain current E when selecting them, save/display CV, and do not convert CV into a design reduction without a separately agreed rule.
 
 Owner reported successful Cloudflare OTP, OAuth connection and meaningful record
 retrieval. Independent user/policy audit and rotation after a dashboard screenshot

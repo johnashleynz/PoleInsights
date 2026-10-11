@@ -114,7 +114,7 @@
       "pass": true
     },
     {
-      "name": "Graded material varies at query point",
+      "name": "Graded material varies axially from the source section",
       "pass": true
     },
     {
@@ -165,8 +165,8 @@
       "name": "Quadrature graded elasticity agrees with affine volume integral",
       "pass": true,
       "data": {
-        "v": 1.0284775906501082,
-        "target": 1.0284775906502257,
+        "v": 1.028477590650302,
+        "target": 1.0284775906502237,
         "tol": 1e-11
       }
     },
@@ -184,27 +184,27 @@
       "data": {
         "nodes": 7257,
         "elements": 4800,
-        "ms": 17146.1647,
-        "energy": 14.985722919179405,
-        "residual": 9.930703703435856e-10
+        "ms": 15317.4159,
+        "energy": 14.985722919185035,
+        "residual": 8.312276695039195e-10
       }
     },
     {
       "name": "knot external force and moment balance",
       "pass": true,
       "data": {
-        "forceBalanceN": 0.000005467802918885281,
-        "momentBalanceNm": 0.0000020525711532811462,
-        "relativeWorkError": 2.1099517128304504e-14
+        "forceBalanceN": 0.0000046383798543032195,
+        "momentBalanceNm": 0.000001657144809374056,
+        "relativeWorkError": 2.910073851120895e-13
       }
     },
     {
       "name": "knot strain energy equals boundary/load work",
       "pass": true,
       "data": {
-        "forceBalanceN": 0.000005467802918885281,
-        "momentBalanceNm": 0.0000020525711532811462,
-        "relativeWorkError": 2.1099517128304504e-14
+        "forceBalanceN": 0.0000046383798543032195,
+        "momentBalanceNm": 0.000001657144809374056,
+        "relativeWorkError": 2.910073851120895e-13
       }
     },
     {
@@ -216,7 +216,7 @@
           0,
           1
         ],
-        "MPa": -0.49565420298082746
+        "MPa": -0.4956542030602411
       }
     },
     {
@@ -225,27 +225,27 @@
       "data": {
         "nodes": 7257,
         "elements": 4800,
-        "ms": 15536.808400000002,
-        "energy": 20.69155683629748,
-        "residual": 9.293001872040842e-10
+        "ms": 13968.801899999999,
+        "energy": 20.867131391961937,
+        "residual": 7.140620152192172e-10
       }
     },
     {
       "name": "graded external force and moment balance",
       "pass": true,
       "data": {
-        "forceBalanceN": 0.000003916029519744937,
-        "momentBalanceNm": 0.0000016670399013492043,
-        "relativeWorkError": 1.2578647714512429e-12
+        "forceBalanceN": 0.00000212396048387073,
+        "momentBalanceNm": 4.6500094807552023e-7,
+        "relativeWorkError": 3.3165489382725053e-12
       }
     },
     {
       "name": "graded strain energy equals boundary/load work",
       "pass": true,
       "data": {
-        "forceBalanceN": 0.000003916029519744937,
-        "momentBalanceNm": 0.0000016670399013492043,
-        "relativeWorkError": 1.2578647714512429e-12
+        "forceBalanceN": 0.00000212396048387073,
+        "momentBalanceNm": 4.6500094807552023e-7,
+        "relativeWorkError": 3.3165489382725053e-12
       }
     },
     {
@@ -257,7 +257,7 @@
           0,
           1.5
         ],
-        "MPa": -1.9487979399548438
+        "MPa": -2.041476969645019
       }
     },
     {
@@ -266,27 +266,27 @@
       "data": {
         "nodes": 4347,
         "elements": 2700,
-        "ms": 7235.654699999999,
-        "energy": 0.8360490468078704,
-        "residual": 8.879599006507827e-10
+        "ms": 6443.976600000002,
+        "energy": 0.8354614338855303,
+        "residual": 8.955939073017139e-10
       }
     },
     {
       "name": "drilling external force and moment balance",
       "pass": true,
       "data": {
-        "forceBalanceN": 0.00004713906372988093,
-        "momentBalanceNm": 0.000049655141458137865,
-        "relativeWorkError": 3.5721587718382926e-14
+        "forceBalanceN": 0.0000470159242506784,
+        "momentBalanceNm": 0.000049509795369327884,
+        "relativeWorkError": 7.571924373454308e-13
       }
     },
     {
       "name": "drilling strain energy equals boundary/load work",
       "pass": true,
       "data": {
-        "forceBalanceN": 0.00004713906372988093,
-        "momentBalanceNm": 0.000049655141458137865,
-        "relativeWorkError": 3.5721587718382926e-14
+        "forceBalanceN": 0.0000470159242506784,
+        "momentBalanceNm": 0.000049509795369327884,
+        "relativeWorkError": 7.571924373454308e-13
       }
     },
     {
@@ -298,7 +298,7 @@
           -0.06,
           1.52
         ],
-        "MPa": -1.6073013609043885
+        "MPa": -1.6065061868336552
       }
     },
     {

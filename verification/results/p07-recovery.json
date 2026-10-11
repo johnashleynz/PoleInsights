@@ -53,9 +53,9 @@
       "value": true
     }
   ],
-  "sampleMs": 45.0605000000005,
+  "sampleMs": 41.81079999999929,
   "samples": 3096,
   "nodes": 870,
   "elements": 432,
-  "solveMs": 1337.5479
+  "solveMs": 1194.138
 }

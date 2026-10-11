@@ -26,10 +26,6 @@
       "pass": true
     },
     {
-      "name": "radiata-pine reference and current geometry validate",
-      "pass": true
-    },
-    {
       "name": "douglas-fir-nz reference and current geometry validate",
       "pass": true
     },
@@ -38,31 +34,7 @@
       "pass": true
     },
     {
-      "name": "hoop-pine reference and current geometry validate",
-      "pass": true
-    },
-    {
-      "name": "radiata-pine-australia reference and current geometry validate",
-      "pass": true
-    },
-    {
-      "name": "slash-pine-australia reference and current geometry validate",
-      "pass": true
-    },
-    {
-      "name": "coast-grey-box reference and current geometry validate",
-      "pass": true
-    },
-    {
-      "name": "grey-ironbark reference and current geometry validate",
-      "pass": true
-    },
-    {
-      "name": "grey-gum reference and current geometry validate",
-      "pass": true
-    },
-    {
-      "name": "spotted-gum reference and current geometry validate",
+      "name": "radiata-pine reference and current geometry validate",
       "pass": true
     },
     {
@@ -70,19 +42,7 @@
       "pass": true
     },
     {
-      "name": "tallowwood reference and current geometry validate",
-      "pass": true
-    },
-    {
-      "name": "gympie-messmate reference and current geometry validate",
-      "pass": true
-    },
-    {
-      "name": "red-ironbark reference and current geometry validate",
-      "pass": true
-    },
-    {
-      "name": "narrow-leaved-red-ironbark reference and current geometry validate",
+      "name": "coast-grey-box reference and current geometry validate",
       "pass": true
     },
     {
@@ -90,7 +50,47 @@
       "pass": true
     },
     {
+      "name": "grey-gum reference and current geometry validate",
+      "pass": true
+    },
+    {
+      "name": "grey-ironbark reference and current geometry validate",
+      "pass": true
+    },
+    {
+      "name": "gympie-messmate reference and current geometry validate",
+      "pass": true
+    },
+    {
+      "name": "hoop-pine reference and current geometry validate",
+      "pass": true
+    },
+    {
       "name": "jarrah reference and current geometry validate",
+      "pass": true
+    },
+    {
+      "name": "narrow-leaved-red-ironbark reference and current geometry validate",
+      "pass": true
+    },
+    {
+      "name": "radiata-pine-australia reference and current geometry validate",
+      "pass": true
+    },
+    {
+      "name": "red-ironbark reference and current geometry validate",
+      "pass": true
+    },
+    {
+      "name": "slash-pine-australia reference and current geometry validate",
+      "pass": true
+    },
+    {
+      "name": "spotted-gum reference and current geometry validate",
+      "pass": true
+    },
+    {
+      "name": "tallowwood reference and current geometry validate",
       "pass": true
     },
     {

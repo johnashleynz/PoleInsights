@@ -124,8 +124,8 @@
     "lateWaveformQualified": false
   },
   "timing": {
-    "soundMs": 455.1006,
-    "cavityMs": 615.9106,
-    "decayMs": 712.6587999999999
+    "soundMs": 398.38379999999995,
+    "cavityMs": 578.1161,
+    "decayMs": 691.5196000000001
   }
 }

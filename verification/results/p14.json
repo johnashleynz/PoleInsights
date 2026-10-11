@@ -322,6 +322,10 @@
       "schemaVersion": 1,
       "id": "A",
       "name": "Pole A",
+      "assetId": "",
+      "country": "NZ",
+      "unitSystem": "metric",
+      "poleClass": null,
       "length": 11,
       "embedment": 1.8,
       "diameters": {
@@ -339,6 +343,11 @@
       "soil": "Medium",
       "loadKN": 1,
       "bearing": 90,
+      "showDetect": true,
+      "breakEnabled": false,
+      "breakCapacityPercent": 200,
+      "actualBreakHeight": null,
+      "actualBreakForceKN": null,
       "regions": []
     },
     "path": [
@@ -1826,7 +1835,7 @@
         }
       ],
       "iterations": 158,
-      "elapsedMs": 313.50839999999994
+      "elapsedMs": 245.20420000000007
     },
     "fine": {
       "basis": "research-p14-elastoplastic-soil",
@@ -2296,7 +2305,7 @@
         }
       ],
       "iterations": 37,
-      "elapsedMs": 255.32899999999995
+      "elapsedMs": 218.00710000000004
     },
     "rotation": {
       "basis": "research-p14-elastoplastic-soil",
@@ -2600,7 +2609,7 @@
         }
       ],
       "iterations": 35,
-      "elapsedMs": 66.89040000000011
+      "elapsedMs": 52.67169999999999
     }
   },
   "scope": "Display geometry, placeholder conversion, research elastoplastic foundation. No timber failure or field validation."

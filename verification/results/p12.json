@@ -118,19 +118,59 @@
       }
     },
     {
-      "name": "Probe length follows owner dimensions in metres",
+      "name": "Probe body length follows owner dimensions in metres",
       "pass": true,
       "data": {
-        "a": 0.16,
-        "b": 0.16
+        "a": 0.18,
+        "b": 0.18
+      }
+    },
+    {
+      "name": "Metal probe tip length follows owner dimensions in metres",
+      "pass": true,
+      "data": {
+        "a": 0.02,
+        "b": 0.02
+      }
+    },
+    {
+      "name": "Overall probe length follows owner dimensions in metres",
+      "pass": true,
+      "data": {
+        "a": 0.19999999999999998,
+        "b": 0.2
       }
     },
     {
       "name": "Probe diameter follows owner dimensions in metres",
       "pass": true,
       "data": {
-        "a": 0.06,
-        "b": 0.06
+        "a": 0.05,
+        "b": 0.05
+      }
+    },
+    {
+      "name": "Wave guide length follows owner dimensions in metres",
+      "pass": true,
+      "data": {
+        "a": 0.05,
+        "b": 0.05
+      }
+    },
+    {
+      "name": "Wave guide protrusion follows owner dimensions in metres",
+      "pass": true,
+      "data": {
+        "a": 0.03,
+        "b": 0.03
+      }
+    },
+    {
+      "name": "Assembly reach includes protruding guide and device",
+      "pass": true,
+      "data": {
+        "a": 0.22999999999999998,
+        "b": 0.23
       }
     }
   ]

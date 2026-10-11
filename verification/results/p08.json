@@ -197,15 +197,20 @@
       }
     },
     {
-      "name": "Severity diminishes radially",
-      "pass": true
+      "name": "Heart-rot source severity spans its prescribed section",
+      "pass": true,
+      "data": {
+        "value": 0.7,
+        "reference": 0.7,
+        "tolerance": 1e-12
+      }
     },
     {
       "name": "Severity diminishes axially",
       "pass": true
     },
     {
-      "name": "Source law reaches zero at boundary",
+      "name": "Source law reaches zero at axial boundary",
       "pass": true,
       "data": {
         "value": 0,
@@ -229,7 +234,7 @@
       "name": "Uniform shell stiffness against concentric annulus",
       "pass": true,
       "data": {
-        "value": 0.0002579329642705234,
+        "value": 0.0002579329642705235,
         "reference": 0.0002579329642705295,
         "tolerance": 0.001
       }
@@ -242,8 +247,8 @@
       "name": "Load scaling with new defects",
       "pass": true,
       "data": {
-        "value": 0.20993441614041497,
-        "reference": 0.20993441614041497,
+        "value": 0.2099344161257921,
+        "reference": 0.2099344161257921,
         "tolerance": 1e-10
       }
     },

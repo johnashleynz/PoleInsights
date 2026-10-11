@@ -6,7 +6,7 @@
       "pass": true
     },
     {
-      "name": "Radiata pine: explicit reference or no invented properties",
+      "name": "Corsican Pine: explicit reference or no invented properties",
       "pass": true
     },
     {
@@ -18,39 +18,27 @@
       "pass": true
     },
     {
-      "name": "Southern plantation pines: explicit reference or no invented properties",
+      "name": "Hardwood - Unknown: explicit reference or no invented properties",
       "pass": true
     },
     {
-      "name": "Hoop pine: explicit reference or no invented properties",
+      "name": "Pinus Radiata - High, Green unshaved: explicit reference or no invented properties",
       "pass": true
     },
     {
-      "name": "Radiata pine · Australian grown: explicit reference or no invented properties",
+      "name": "Pinus Radiata - High, Steamed shaved: explicit reference or no invented properties",
       "pass": true
     },
     {
-      "name": "Slash pine: explicit reference or no invented properties",
+      "name": "Pinus Radiata - Normal, Green unshaved: explicit reference or no invented properties",
       "pass": true
     },
     {
-      "name": "Coast grey box: explicit reference or no invented properties",
+      "name": "Pinus Radiata - Normal, Steamed shaved: explicit reference or no invented properties",
       "pass": true
     },
     {
-      "name": "Maritime pine: explicit reference or no invented properties",
-      "pass": true
-    },
-    {
-      "name": "Grey ironbark: explicit reference or no invented properties",
-      "pass": true
-    },
-    {
-      "name": "Grey gum: explicit reference or no invented properties",
-      "pass": true
-    },
-    {
-      "name": "Spotted gum: explicit reference or no invented properties",
+      "name": "Radiata pine: explicit reference or no invented properties",
       "pass": true
     },
     {
@@ -58,23 +46,7 @@
       "pass": true
     },
     {
-      "name": "Tallowwood: explicit reference or no invented properties",
-      "pass": true
-    },
-    {
-      "name": "Gympie messmate: explicit reference or no invented properties",
-      "pass": true
-    },
-    {
-      "name": "Grey box: explicit reference or no invented properties",
-      "pass": true
-    },
-    {
-      "name": "Red ironbark: explicit reference or no invented properties",
-      "pass": true
-    },
-    {
-      "name": "Narrow-leaved red ironbark: explicit reference or no invented properties",
+      "name": "Coast grey box: explicit reference or no invented properties",
       "pass": true
     },
     {
@@ -82,11 +54,59 @@
       "pass": true
     },
     {
+      "name": "Grey box: explicit reference or no invented properties",
+      "pass": true
+    },
+    {
+      "name": "Grey gum: explicit reference or no invented properties",
+      "pass": true
+    },
+    {
+      "name": "Grey ironbark: explicit reference or no invented properties",
+      "pass": true
+    },
+    {
+      "name": "Gympie messmate: explicit reference or no invented properties",
+      "pass": true
+    },
+    {
+      "name": "Hoop pine: explicit reference or no invented properties",
+      "pass": true
+    },
+    {
       "name": "Jarrah: explicit reference or no invented properties",
       "pass": true
     },
     {
-      "name": "Scots pine: explicit reference or no invented properties",
+      "name": "Maritime pine: explicit reference or no invented properties",
+      "pass": true
+    },
+    {
+      "name": "Narrow-leaved red ironbark: explicit reference or no invented properties",
+      "pass": true
+    },
+    {
+      "name": "Radiata pine · Australian grown: explicit reference or no invented properties",
+      "pass": true
+    },
+    {
+      "name": "Red ironbark: explicit reference or no invented properties",
+      "pass": true
+    },
+    {
+      "name": "Slash pine: explicit reference or no invented properties",
+      "pass": true
+    },
+    {
+      "name": "Southern plantation pines: explicit reference or no invented properties",
+      "pass": true
+    },
+    {
+      "name": "Spotted gum: explicit reference or no invented properties",
+      "pass": true
+    },
+    {
+      "name": "Tallowwood: explicit reference or no invented properties",
       "pass": true
     },
     {
@@ -94,19 +114,11 @@
       "pass": true
     },
     {
+      "name": "Scots pine: explicit reference or no invented properties",
+      "pass": true
+    },
+    {
       "name": "Douglas fir · coastal: explicit reference or no invented properties",
-      "pass": true
-    },
-    {
-      "name": "Western larch: explicit reference or no invented properties",
-      "pass": true
-    },
-    {
-      "name": "Southern pine group: explicit reference or no invented properties",
-      "pass": true
-    },
-    {
-      "name": "Western red cedar: explicit reference or no invented properties",
       "pass": true
     },
     {
@@ -115,6 +127,18 @@
     },
     {
       "name": "Red / Norway pine: explicit reference or no invented properties",
+      "pass": true
+    },
+    {
+      "name": "Southern pine group: explicit reference or no invented properties",
+      "pass": true
+    },
+    {
+      "name": "Western larch: explicit reference or no invented properties",
+      "pass": true
+    },
+    {
+      "name": "Western red cedar: explicit reference or no invented properties",
       "pass": true
     },
     {

@@ -1,6 +1,6 @@
 # Pole Insights P28: As-Built User Stories
 
-Updated 8 October 2026. Baseline: Carl Rathbone's P26, commit `5c273fe`.
+Updated 12 October 2026. Baseline: Carl Rathbone's P26, commit `5c273fe`.
 P27 delivered the original enhancement list; P28 adds integrations. This is a
 retrospective functional specification, not structural qualification evidence.
 Original requests remain verbatim in `TODO.md`. The two REQ3 entries map to
@@ -56,7 +56,9 @@ FR-003/FR-004; no REQ4 was supplied. Integration input is recorded separately in
 
 ### NZ Catalogue Addition
 
-FR-028: As an assessor, I want alphabetical country-grouped species and selectable NZ grade/condition presets. Six owner-supplied Fb/CV entries apply the exact provided bending values, retain current E, save/display CV without an inferred statistical reduction, and distinguish these from standard-derived references. Generic API species do not infer density/preparation; radiata variants retain NZ class geometry eligibility. See P28-NZ-MATERIAL-PRESETS.md.
+FR-028: As an assessor, I want alphabetical country-grouped species and selectable NZ grade/condition presets. Six owner-supplied Fb/CV entries apply the exact provided bending values, retain current E, save/display CV without an inferred statistical reduction, and distinguish these from standard-derived references. Generic API species do not infer density/preparation; radiata variants retain NZ class geometry eligibility. See P28-NZ-MATERIAL-PRESETS.md. Status: Implemented in V28.2 and covered by integration/material regressions.
+
+FR-029: As a maintainer, I want reproducible handoff evidence after V28.2. Verification reference inputs and expected result JSON are refreshed from the current implementation, including reordered/expanded material catalogue checks and small numeric changes from current solvers. Status: Packaged as regression evidence; rerun `npm test` before merge/promotion.
 
 ## Non-Functional Acceptance and Limits
 

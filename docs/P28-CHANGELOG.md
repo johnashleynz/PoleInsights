@@ -1,10 +1,10 @@
 # Pole Insights P28: Cumulative Changes Since P26
 
-Prepared 8 October 2026. Baseline: Carl Rathbone's Pole Laboratory P26,
+Prepared 12 October 2026. Baseline: Carl Rathbone's Pole Laboratory P26,
 commit `5c273fe`. Branch: dev. P27 delivered the original request set; P28 denotes
-integration and measured-geometry features. Last committed core integration:
-197d112. This document and source bundle include subsequent local work; the bundle
-manifest records the parent commit and file hashes, not an invented release SHA.
+integration and measured-geometry features. Last committed source before the
+handoff refresh: `60134b1`. The ZIP manifest generated after check-in records the
+exact packaged parent commit and file hashes.
 
 Historical P27 detail and discussion IDs remain in `P27-CHANGELOG.md`. This fresh
 record includes every P27 change reference and the later changes for Carl's review.
@@ -90,9 +90,11 @@ and future discussion items are retained, not silently promoted to certified dat
 | P28-CHG-028 | Corrected owner interpretation: Grid Manager pole Height is total length, not AGL, superseding CHG-015/023 height semantics. Apply country embedment heuristic on import, mark embedment estimated, derive AGL and migrate legacy saved imports once. NaN/infinite AR stays visible as NaN, supplies no degradation, and interrupts blending at unknown-only heights; valid repeats remain usable. |
 | P28-CHG-029 | Species-specific ANSI Tables 5/6/9 added alongside Table 8, checked against the supplied standard. Known class/length imports retain nominal tip and extrapolated butt anchors while interpolating through measured sections, rather than shifting both ends to a single girth. Conflicting estimates adjust with warnings; no class certification. Class 1/45 and NZ 6 kN / 10 m accepted. Species and Class / Length displayed on separate rows. |
 | P28-CHG-030 | Regional species master lists sorted by name. Six owner-supplied NZ Fb/CV presets added, including Corsican Pine 50 MPa fallback and Unknown Hardwood 60 MPa. Current E retained; CV saved/displayed without an inferred statistical reduction. Fixed radiata variants remain distinct from standard-derived factors and preserve NZ class geometry. See P28-NZ-MATERIAL-PRESETS.md. |
+| P28-CHG-031 | Verification fixtures/results refreshed for the V28.2 implementation. Material catalogue checks now reflect alphabetical regional ordering and the six NZ owner-supplied entries; selected solver result files capture current numeric output. These are regression artefacts, not new engineering validation. |
 
-Core integration was committed in 197d112. Follow-up source in the handoff is not
-claimed committed or deployed unless accompanied by a later release SHA.
+Core integration was committed in `197d112`; V28.2 material presets were committed
+in `60134b1`. The final handoff commit and ZIP manifest identify the exact source
+Carl receives. No deployment is implied by the source package.
 
 ## Validation and Remaining Limits
 
