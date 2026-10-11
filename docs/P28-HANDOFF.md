@@ -14,6 +14,11 @@ favicon/logo, mockups and small video metadata/thumbnails. It excludes video/aud
 binaries, .git, node_modules, dist, caches, .env.local/.dev.vars, live API payloads
 and machine secrets. No prebuilt runtime or Cloudflare settings are bundled.
 
+The email package also omits `public/video-ui` capture images and the unused
+historical `public/textures/endgrain-p03.png`. Current app textures remain intact.
+The ZIP is limited to less than 20,000,000 bytes. Windows packaging uses the .NET
+ZIP writer and reads every packaged file back to verify its manifest SHA256.
+
 Reproduce from the repo root with `node tools/package-p28.mjs`. Output is under
 ignored handoff/. The manifest lists omitted media by path for restoration.
 The script selects tracked source plus explicitly permitted P28 additions, never
@@ -42,8 +47,11 @@ per published iteration.
 ## Rebuild in a Separate Directory
 
 1. Extract the ZIP into a new P28 directory. Keep Carl's P26 checkout unchanged.
-2. Restore the omitted video/audio files from Carl's P26 media at the same relative
-   paths. Keep bundled metadata/mockup/texture changes. Do not regenerate videos.
+2. Restore the omitted video/audio files and `public/video-ui` capture images from
+   Carl's P26 media at the same relative paths before running the full build (its
+   film checks require the captures). The manifest lists every omitted path.
+   `endgrain-p03.png` is historical and unused by the current app. Keep bundled
+   metadata/mockup/current texture changes. Do not regenerate videos.
 3. Install Node 22.13 or later; run npm ci, npm test and npm run build there.
 4. Run npm run dev -- --port 5192 (use another port if occupied), then open the URL.
 5. Model-only use needs no credentials. Integrations default off. For authorised

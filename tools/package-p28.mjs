@@ -7,10 +7,10 @@ import {loadEnv} from 'vite';
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const tracked=execFileSync('git',['ls-files','-z'],{cwd:root}).toString().split('\0').filter(Boolean);
-const additions=['deployment.md','src/domain/build.ts','src/domain/ansiDimensions.ts','src/integrations/readingGroups.ts','src/integrations/estimatedProfile.ts','src/integrations/poleTag.ts','src/integrations/speciesMatch.ts','src/integrations/deconditioning.ts','src/integrations/gridRecordWindow.ts','tools/package-p28.mjs'];
+const additions=['deployment.md','src/domain/build.ts','src/domain/ansiDimensions.ts','src/integrations/readingGroups.ts','src/integrations/estimatedProfile.ts','src/integrations/poleTag.ts','src/integrations/speciesMatch.ts','src/integrations/deconditioning.ts','src/integrations/gridRecordWindow.ts','tools/package-p28.mjs','tools/package-zip.ps1'];
 for(const name of readdirSync(path.join(root,'docs')))if(name.startsWith('P28-'))additions.push(`docs/${name}`);
 const candidates=[...new Set([...tracked,...additions])].sort();
-const excluded=f=>/(^|\/)(?:\.git|node_modules|dist|handoff|\.wrangler|\.media-work|\.media-deps)(\/|$)/.test(f)||/(^|\/)\.env(?:\.|$)/.test(f)&&f!=='.env.example'||/(^|\/)\.dev\.vars(?:\.|$)/.test(f)||/\.(?:mp4|mov|webm|wav|mp3|m4a|ogg|avi)$/i.test(f);
+const excluded=f=>/(^|\/)(?:\.git|node_modules|dist|handoff|\.wrangler|\.media-work|\.media-deps)(\/|$)/.test(f)||/(^|\/)\.env(?:\.|$)/.test(f)&&f!=='.env.example'||/(^|\/)\.dev\.vars(?:\.|$)/.test(f)||/\.(?:mp4|mov|webm|wav|mp3|m4a|ogg|avi)$/i.test(f)||/^public\/video-ui\/.*\.(?:jpg|jpeg|png)$/i.test(f)||f==='public/textures/endgrain-p03.png';
 const env=loadEnv('development',root,'');
 const secrets=['GRID_MANAGER_CLIENT_ID','GRID_MANAGER_CLIENT_SECRET','GRID_MANAGER_BEARER_TOKEN'].map(k=>env[k]).filter(Boolean);
 const stamp=new Date().toISOString().replace(/[:.]/g,'-');
@@ -30,6 +30,10 @@ for(const relative of candidates){
 const manifest={release:'P28',baseline:'5c273fe',parentCommit:execFileSync('git',['rev-parse','HEAD'],{cwd:root}).toString().trim(),workingSnapshot:true,generatedUtc:new Date().toISOString(),files,omitted};
 writeFileSync(path.join(source,'HANDOFF-MANIFEST.json'),JSON.stringify(manifest,null,2));
 const archive=path.join(out,'Pole-Insights-P28-source-no-media.zip');
-if(process.platform==='win32')execFileSync('tar.exe',['-a','-c','-f',archive,'-C',source,'.']);
-else execFileSync('zip',['-qr',archive,'.'],{cwd:source});
+if(process.platform==='win32')execFileSync('powershell.exe',['-NoProfile','-NonInteractive','-ExecutionPolicy','Bypass','-File',path.join(root,'tools/package-zip.ps1'),'-Source',source,'-Archive',archive],{stdio:'inherit'});
+else {
+ execFileSync('zip',['-qr',archive,'.'],{cwd:source});
+ execFileSync('unzip',['-tq',archive]);
+}
+if(statSync(archive).size>=20_000_000)throw Error('Package exceeds the 20 MB email attachment limit.');
 console.log(JSON.stringify({archive,files:files.length,omitted:omitted.length,bytes:statSync(archive).size,credentialsIncluded:false},null,2));
